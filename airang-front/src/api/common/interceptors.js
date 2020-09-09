@@ -3,7 +3,7 @@ import cookies from 'vue-cookies';
 
 export function setInterceptors(instance) {
 	// Add a request interceptor
-	instance.request.use(
+	instance.interceptors.request.use(
 		function(config) {
 			// Do something before request is sent
 			config.headers.Authorization = cookies.isKey('auth-token')
@@ -18,7 +18,7 @@ export function setInterceptors(instance) {
 	);
 
 	// Add a response interceptor
-	instance.response.use(
+	instance.interceptors.response.use(
 		function(response) {
 			// Any status code that lie within the range of 2xx cause this function to trigger
 			// Do something with response data
