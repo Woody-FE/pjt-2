@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Application definition
 
@@ -42,6 +43,13 @@ INSTALLED_APPS = [
 
     # django settings
     'corsheaders',
+
+    # rest_framework
+    'rest_framework',
+
+
+    # project apps
+    'accounts.apps.AccountsConfig'
 ]
 
 # django cors headers setting
