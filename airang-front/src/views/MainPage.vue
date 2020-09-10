@@ -81,75 +81,136 @@
 				</figcaption>
 			</figure>
 		</section>
-		<!-- <section>
-			<button @click="btnEvent">클릭</button>
-		</section> -->
+		<section>
+			<button class="guide-btn">V</button>
+		</section>
 	</section>
 </template>
 
 <script>
 export default {
-	// mounted() {
-	// 	const guideElems = document.querySelectorAll('.guide');
-	// 	let currentItem;
-
-	// 	for (let i = 0; i < guideElems.length; i++) {
-	// 		guideElems[i].dataset.index = i;
-	// 	}
-
-	// 	window.addEventListener('scroll', () => {
-	// 		let guide;
-	// 		let boundingRect;
-	// 		for (let i = 0; i < guideElems.length; i++) {
-	// 			guide = guideElems[i];
-	// 			boundingRect = guide.getBoundingClientRect();
-	// 			if (
-	// 				boundingRect.top > window.innerHeight * 0.1 &&
-	// 				boundingRect.top < window.innerHeight * 0.8
-	// 			) {
-	// 				console.log(boundingRect.top, window.innerHeight);
-	// 				console.log(guide.dataset.index);
-	// 				if (currentItem) {
-	// 					currentItem.classList.remove('visible');
-	// 				}
-	// 				currentItem = guideElems[guide.dataset.index];
-	// 				console.log(currentItem);
-	// 				currentItem.classList.add('visible');
-	// 			}
-	// 		}
-	// 	});
-	// },
+	data() {
+		return {
+			windowTop: 0,
+		};
+	},
 	mounted() {
-		//eslint-disable-next-line
-    var controller = new ScrollMagic.Controller();
-		//eslint-disable-next-line
-		var wipeAnimation = new TimelineMax()
-			// animate to second
-			.to('.guide-box', 1, { z: -180 })
-			.to('.guide-box', 1, { x: '-20%' })
-			.to('.guide-box', 1, { z: 0 })
-			// animate to third
-			.to('.guide-box', 1, { z: -180, delay: 0.6 })
-			.to('.guide-box', 1, { x: '-40%' })
-			.to('.guide-box', 1, { z: 0 })
-			// animate to forth
-			.to('.guide-box', 1, { z: -180, delay: 0.6 })
-			.to('.guide-box', 1, { x: '-60%' })
-			.to('.guide-box', 1, { z: 0 })
-			// animate
-			.to('.guide-box', 1, { z: -180, delay: 0.6 })
-			.to('.guide-box', 1, { x: '-80%' })
-			.to('.guide-box', 1, { z: 0 });
-		//eslint-disable-next-line
-		var scene = new ScrollMagic.Scene({
-			triggerElement: '.guide-wrap',
-			triggerHook: 'onLeave',
-			duration: '400%', //이 값이 클 수록 천천히 덮어씀
-		})
-			.setPin('.guide-wrap')
-			.setTween(wipeAnimation)
-			.addIndicators()
-			.addTo(controller);
+		const guideElems = document.querySelectorAll('.guide');
+		let currentItem;
+		for (let i = 0; i < guideElems.length; i++) {
+			guideElems[i].dataset.index = i;
+		}
+		const btn = document.querySelector('.guide-btn');
+		btn.addEventListener('click', () => {
+			let guide;
+			let boundingRect;
+			if (
+				document.querySelector('body').scrollHeight <=
+				this.windowTop + window.innerHeight + 100
+			) {
+				return;
+			}
+			for (let i = 0; i < guideElems.length; i++) {
+				guide = guideElems[i];
+				boundingRect = guide.getBoundingClientRect();
+				if (boundingRect.bottom === window.innerHeight) {
+					if (
+						currentItem &&
+						currentItem !== guideElems[guideElems.length - 1]
+					) {
+						currentItem.classList.remove('visible');
+					}
+
+					currentItem = guideElems[i + 1];
+					currentItem.classList.add('visible');
+				}
+			}
+			window.scrollBy({
+				top: window.innerHeight,
+				behavior: 'smooth',
+			});
+		});
+		window.addEventListener('wheel', event => {
+			this.windowTop = window.scrollY;
+			var delta;
+			if (event.wheelDelta) {
+				delta = event.wheelDelta;
+			} else {
+				delta = -1 * event.deltaY;
+			}
+			let guide;
+			let boundingRect;
+
+			if (delta < 0) {
+				for (let i = 0; i < guideElems.length; i++) {
+					guide = guideElems[i];
+					boundingRect = guide.getBoundingClientRect();
+					if (
+						boundingRect.top > window.innerHeight * 0.1 &&
+						boundingRect.top < window.innerHeight * 0.15
+					) {
+						if (currentItem) {
+							currentItem.classList.remove('visible');
+						}
+						currentItem = guide;
+						currentItem.classList.add('visible');
+					}
+				}
+			} else if (delta > 0) {
+				for (let i = 0; i < guideElems.length; i++) {
+					guide = guideElems[i];
+					boundingRect = guide.getBoundingClientRect();
+					if (boundingRect.bottom === window.innerHeight) {
+						if (currentItem) {
+							currentItem.classList.remove('visible');
+						}
+						currentItem = guide;
+						currentItem.classList.add('visible');
+					}
+				}
+			}
+		});
+		// function findScrollDirectionOtherBrowsers(event) {
+		// 	this.windowTop = window.scrollY;
+
+		// 	var delta;
+		// 	if (event.wheelDelta) {
+		// 		delta = event.wheelDelta;
+		// 	} else {
+		// 		delta = -1 * event.deltaY;
+		// 	}
+		// 	let guide;
+		// 	let boundingRect;
+
+		// 	if (delta < 0) {
+		// 		for (let i = 0; i < guideElems.length; i++) {
+		// 			guide = guideElems[i];
+		// 			boundingRect = guide.getBoundingClientRect();
+		// 			if (
+		// 				boundingRect.top > window.innerHeight * 0.1 &&
+		// 				boundingRect.top < window.innerHeight * 0.15
+		// 			) {
+		// 				if (currentItem) {
+		// 					currentItem.classList.remove('visible');
+		// 				}
+		// 				currentItem = guide;
+		// 				currentItem.classList.add('visible');
+		// 			}
+		// 		}
+		// 	} else if (delta > 0) {
+		// 		for (let i = 0; i < guideElems.length; i++) {
+		// 			guide = guideElems[i];
+		// 			boundingRect = guide.getBoundingClientRect();
+		// 			if (boundingRect.bottom === window.innerHeight) {
+		// 				if (currentItem) {
+		// 					currentItem.classList.remove('visible');
+		// 				}
+		// 				currentItem = guide;
+		// 				currentItem.classList.add('visible');
+		// 			}
+		// 		}
+		// 	}
+		// }
 	},
 };
 </script>
@@ -157,26 +218,37 @@ export default {
 <style lang="scss">
 .guide-wrap {
 	width: 100%;
-	height: 100vh;
-	overflow: hidden;
-	-webkit-perspective: 1000;
-	perspective: 1000;
+	height: 100%;
 }
 .guide-box {
-	width: 500%; // 100*4 slides
-	height: 100vh;
+	width: 100%;
+	height: 500vh;
+	scroll-snap-type: y mandatory;
 }
 .guide {
-	float: left;
-	width: 20%; // 400/25 = 100%
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
 	height: 100vh;
 	font-size: 2rem;
 	text-align: center;
 	color: #fff;
+	opacity: 0;
 	transition: all 0.5s;
+	scroll-snap-align: start;
+	will-change: opacity;
 }
 .guide-img {
 	max-width: 100%;
 	height: auto;
+}
+.visible {
+	opacity: 1;
+}
+.guide-btn {
+	position: fixed;
+	bottom: 0;
+	right: 0;
 }
 </style>

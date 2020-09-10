@@ -32,7 +32,7 @@ export default {
 @import './assets/css/reset.css';
 @import './assets/css/common.css';
 #app {
-	/* height: 100%; */
+	height: 100%;
 }
 .app-orange {
 	background: linear-gradient(0deg, #ff922b, #faad08);
