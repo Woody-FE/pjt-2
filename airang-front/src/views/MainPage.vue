@@ -14,7 +14,7 @@
 					관현악이며, 살 보이는 우리 약동하다.
 				</figcaption>
 			</figure> -->
-			<figure class="guide">
+			<figure class="guide visible">
 				<img
 					class="guide-img"
 					src="@/assets/images/01.png"
@@ -104,9 +104,14 @@ export default {
 		btn.addEventListener('click', () => {
 			let guide;
 			let boundingRect;
+			window.scrollBy({
+				top: window.innerHeight,
+				behavior: 'smooth',
+			});
+			this.windowTop = window.scrollY;
 			if (
 				document.querySelector('body').scrollHeight <=
-				this.windowTop + window.innerHeight + 100
+				this.windowTop + window.innerHeight
 			) {
 				return;
 			}
@@ -125,10 +130,6 @@ export default {
 					currentItem.classList.add('visible');
 				}
 			}
-			window.scrollBy({
-				top: window.innerHeight,
-				behavior: 'smooth',
-			});
 		});
 		window.addEventListener('wheel', event => {
 			this.windowTop = window.scrollY;
@@ -147,7 +148,7 @@ export default {
 					boundingRect = guide.getBoundingClientRect();
 					if (
 						boundingRect.top > window.innerHeight * 0.1 &&
-						boundingRect.top < window.innerHeight * 0.15
+						boundingRect.top < window.innerHeight * 0.12
 					) {
 						if (currentItem) {
 							currentItem.classList.remove('visible');
@@ -170,47 +171,6 @@ export default {
 				}
 			}
 		});
-		// function findScrollDirectionOtherBrowsers(event) {
-		// 	this.windowTop = window.scrollY;
-
-		// 	var delta;
-		// 	if (event.wheelDelta) {
-		// 		delta = event.wheelDelta;
-		// 	} else {
-		// 		delta = -1 * event.deltaY;
-		// 	}
-		// 	let guide;
-		// 	let boundingRect;
-
-		// 	if (delta < 0) {
-		// 		for (let i = 0; i < guideElems.length; i++) {
-		// 			guide = guideElems[i];
-		// 			boundingRect = guide.getBoundingClientRect();
-		// 			if (
-		// 				boundingRect.top > window.innerHeight * 0.1 &&
-		// 				boundingRect.top < window.innerHeight * 0.15
-		// 			) {
-		// 				if (currentItem) {
-		// 					currentItem.classList.remove('visible');
-		// 				}
-		// 				currentItem = guide;
-		// 				currentItem.classList.add('visible');
-		// 			}
-		// 		}
-		// 	} else if (delta > 0) {
-		// 		for (let i = 0; i < guideElems.length; i++) {
-		// 			guide = guideElems[i];
-		// 			boundingRect = guide.getBoundingClientRect();
-		// 			if (boundingRect.bottom === window.innerHeight) {
-		// 				if (currentItem) {
-		// 					currentItem.classList.remove('visible');
-		// 				}
-		// 				currentItem = guide;
-		// 				currentItem.classList.add('visible');
-		// 			}
-		// 		}
-		// 	}
-		// }
 	},
 };
 </script>
@@ -223,9 +183,11 @@ export default {
 .guide-box {
 	width: 100%;
 	height: 500vh;
-	scroll-snap-type: y mandatory;
 }
 .guide {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 	position: sticky;
 	top: 0;
 	left: 0;
@@ -235,12 +197,11 @@ export default {
 	text-align: center;
 	color: #fff;
 	opacity: 0;
-	transition: all 0.5s;
-	scroll-snap-align: start;
+	transition: all 1s;
 	will-change: opacity;
 }
 .guide-img {
-	max-width: 100%;
+	max-width: 50%;
 	height: auto;
 }
 .visible {
