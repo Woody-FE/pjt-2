@@ -8,10 +8,9 @@
 					alt="두번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					않는 눈이 그들의 전인 약동하다. 얼마나 안고, 이 구하지 미인을 모래뿐일
-					그들의 뼈 이것이다. 피는 있는 우리 수 말이다. 되려니와, 가진 원질이
-					우는 열매를 청춘은 끝에 부패뿐이다. 얼마나 없으면 노래하며 수 그들을
-					관현악이며, 살 보이는 우리 약동하다.
+					<p>저는 지금 커피를 갈고있어요</p>
+					<p>오늘은 더우니까</p>
+					<p>아이스 아메리카노를 먹어보겠습니다~</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
@@ -21,10 +20,10 @@
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					않는 눈이 그들의 전인 약동하다. 얼마나 안고, 이 구하지 미인을 모래뿐일
-					그들의 뼈 이것이다. 피는 있는 우리 수 말이다. 되려니와, 가진 원질이
-					우는 열매를 청춘은 끝에 부패뿐이다. 얼마나 없으면 노래하며 수 그들을
-					관현악이며, 살 보이는 우리 약동하다.
+					<p>운동은 중요해요</p>
+					<p>저는 앱등이라서</p>
+					<p>애플워치를 끼고 운동해요</p>
+					<p>끝나고 맥주나 한잔 해야겠어요</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
@@ -34,10 +33,9 @@
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					않는 눈이 그들의 전인 약동하다. 얼마나 안고, 이 구하지 미인을 모래뿐일
-					그들의 뼈 이것이다. 피는 있는 우리 수 말이다. 되려니와, 가진 원질이
-					우는 열매를 청춘은 끝에 부패뿐이다. 얼마나 없으면 노래하며 수 그들을
-					관현악이며, 살 보이는 우리 약동하다.
+					<p>제가 갈았던 원두가 별로에요</p>
+					<p>그래서 스타벅스에 왔답니다</p>
+					<p>입장권도 들고왔어요 ㅋㅋ</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
@@ -47,10 +45,8 @@
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					않는 눈이 그들의 전인 약동하다. 얼마나 안고, 이 구하지 미인을 모래뿐일
-					그들의 뼈 이것이다. 피는 있는 우리 수 말이다. 되려니와, 가진 원질이
-					우는 열매를 청춘은 끝에 부패뿐이다. 얼마나 없으면 노래하며 수 그들을
-					관현악이며, 살 보이는 우리 약동하다.
+					<p>크~</p>
+					<p>바다를 보면서 한잔!</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
@@ -61,10 +57,8 @@
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					않는 눈이 그들의 전인 약동하다. 얼마나 안고, 이 구하지 미인을 모래뿐일
-					그들의 뼈 이것이다. 피는 있는 우리 수 말이다. 되려니와, 가진 원질이
-					우는 열매를 청춘은 끝에 부패뿐이다. 얼마나 없으면 노래하며 수 그들을
-					관현악이며, 살 보이는 우리 약동하다.
+					<p>똑같은 사진</p>
+					<p>왜있노?</p>
 				</figcaption>
 			</figure>
 		</section>
@@ -87,13 +81,6 @@ export default {
 	},
 	methods: {
 		topScroll() {
-			// const guideElems = document.querySelectorAll('.guide');
-			// console.log(guideElems[0].getBoundingClientRect().top);
-			// window.scrollTo({
-			// 	top: guideElems[0].getBoundingClientRect().top,
-			// 	behavior: 'smooth',
-			// });
-			// guideElems[0].classList.add('visible');
 			this.currentItem.classList.remove('visible');
 			setTimeout(() => {
 				scrollTo({
@@ -114,11 +101,17 @@ export default {
 		});
 		const guideElems = document.querySelectorAll('.guide');
 		this.currentItem = guideElems[0];
+		let ioIndex;
+		const io = new IntersectionObserver((entries, observer) => {
+			ioIndex = entries[0].target.dataset.index * 1;
+			console.log(observer);
+		});
 		for (let i = 0; i < guideElems.length; i++) {
+			io.observe(guideElems[i]);
 			guideElems[i].dataset.index = i;
 		}
-		const btn = document.querySelector('.guide-btn__down');
-		btn.addEventListener('click', () => {
+		const downbtn = document.querySelector('.guide-btn__down');
+		downbtn.addEventListener('click', () => {
 			let guide;
 			let boundingRect;
 			window.scrollBy({
@@ -132,17 +125,12 @@ export default {
 			) {
 				return;
 			}
-			for (let i = 0; i < guideElems.length; i++) {
+			for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
 				guide = guideElems[i];
+				if (!guide) continue;
 				boundingRect = guide.getBoundingClientRect();
 				if (boundingRect.bottom === window.innerHeight) {
-					if (
-						this.currentItem &&
-						this.currentItem !== guideElems[guideElems.length - 1]
-					) {
-						this.currentItem.classList.remove('visible');
-					}
-
+					this.currentItem.classList.remove('visible');
 					this.currentItem = guideElems[i + 1];
 					this.currentItem.classList.add('visible');
 				}
@@ -160,16 +148,15 @@ export default {
 			let boundingRect;
 
 			if (delta < 0) {
-				for (let i = 0; i < guideElems.length; i++) {
+				for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
 					guide = guideElems[i];
+					if (!guide) continue;
 					boundingRect = guide.getBoundingClientRect();
 					if (
 						boundingRect.top > window.innerHeight * 0.1 &&
 						boundingRect.top < window.innerHeight * 0.2
 					) {
-						if (this.currentItem) {
-							this.currentItem.classList.remove('visible');
-						}
+						this.currentItem.classList.remove('visible');
 						this.currentItem = guide;
 						this.currentItem.classList.add('visible');
 					}
@@ -179,9 +166,7 @@ export default {
 					guide = guideElems[i];
 					boundingRect = guide.getBoundingClientRect();
 					if (boundingRect.bottom === window.innerHeight) {
-						if (this.currentItem) {
-							this.currentItem.classList.remove('visible');
-						}
+						this.currentItem.classList.remove('visible');
 						this.currentItem = guide;
 						this.currentItem.classList.add('visible');
 					}
