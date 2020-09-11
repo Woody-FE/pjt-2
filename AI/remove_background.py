@@ -4,7 +4,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-image = face_recognition.load_image_file("./images/91.jpg")
+# 얼굴 인식
+image = face_recognition.load_image_file("./images/white.jpg")
 face_locations = face_recognition.face_locations(image)
 
 print("I found {} face(s) in this photograph.".format(len(face_locations)))
@@ -19,29 +20,20 @@ for face_location in face_locations:
     face_image = image[top:bottom, left:right]
     pil_image = Image.fromarray(face_image)
     pil_image.show()
-    pil_image.save("./images/baby.jpg")
+    pil_image.save('./images/face.jpg')
 
-# 얼굴에서 배경제거 코드 구현
-# 얼굴 동화풍으로 transfer 코드 구현
+# # 누끼컷으로 변경할 이미지(흰색 배경)
+img = Image.open('./images/trans.jpg')
+img = img.convert("RGBA")
+datas = img.getdata()
+newData = []
+for item in datas:
+    if 245 <= item[0] <= 255 and 245 <= item[1] <= 255 and 245 <= item[2] <= 255:
+        newData.append((255,255,255,0))
 
-# im = cv2.imread("./images/baby.jpg")
-# cv2.imshow('original',im)
-# mask = np.zeros(im.shape[:2],np.uint8)
-# rect = (box[0][0], box[0][1], box[0][2]-box[0][0], box[0][3]-box[0][1])
-# bgdModel = np.zeros((1,65),np.float64)
-# fgdModel = np.zeros((1,65),np.float64)
-# cv2.grabCut(im,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
-# if len(np.where((mask==3)|(mask==1))[0])>0:
-#     mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
-#     mask2 = np.repeat(mask2[:,:,np.newaxis],3,axis=2)
-# else:
-#     mask2 = np.zeros_like(im)
-#     mask2[box[0][1]:box[0][3],box[0][0]:box[0][2],:] = 1
-# im2 = im*mask2
-# cv2.imshow('post-grabcut',im2)
-# minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(mask)
-# flag, mask = cv2.threshold(mask, maxVal-1, 255, cv2.cv.CV_THRESH_BINARY)
-# cv2.imshow("mask", mask)
-# b, g, r = cv2.split(im2)
-# img_RGBA = cv2.merge((b, g, r, mask))
-# cv2.imshow("final",img_RGBA)
+    else:
+        newData.append(item)
+img.putdata(newData)
+
+# png 확장자로 저장
+img.save("Transparent.png", "PNG")
