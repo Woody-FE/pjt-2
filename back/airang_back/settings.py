@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Application definition
 
@@ -42,6 +43,13 @@ INSTALLED_APPS = [
 
     # django settings
     'corsheaders',
+
+    # rest_framework
+    'rest_framework',
+
+
+    # project apps
+    'accounts.apps.AccountsConfig'
 ]
 
 # django cors headers setting
@@ -129,3 +137,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# media setting
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
