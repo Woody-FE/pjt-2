@@ -1,28 +1,25 @@
-import cv2
-import os
+# import cv2
+# import os
 import face_recognition
-from PIL import Image, ImageDraw
+import numpy
+from PIL import Image
+# from PIL import Image, ImageDraw
 # from IPython.display import Image, display
-from matplotlib import pyplot
+# from matplotlib import pyplot
 
 image = face_recognition.load_image_file(
     "AIrang/images/family2.jpg")
 face_locations = face_recognition.face_locations(image)
-face_landmarks_list = face_recognition.face_landmarks(image)
-
-pil_image = Image.fromarray(image)
-for face_landmarks in face_landmarks_list:
-    d = ImageDraw.Draw(pil_image, 'RGBA')
-    # 이미지 색칠
-
-
-# pil_image.show()
+PIL_image = Image.open("AIrang/images/family2.jpg")
 
 # 얼굴인식 확인
-# for (top, right, bottom, left) in face_locations:
-#     cv2.rectangle(image, (left, top), (right, bottom), (0, 255, 0), 1)
+face_index = 0
+for face in face_locations:
+    top, right, bottom, left = face[0], face[1], face[2], face[3]
+    cropFace = PIL_image.crop((left, top, right, bottom))
+    cropFaceName = "face" + str(face_index) + ".jpg"
+    face_index += 1
+    cropFace.save(cropFaceName)
 
 # pyplot.rcParams["figure.figsize"] = (16, 16)
 # pyplot.imshow(image)
-pyplot.imshow(pil_image)
-pyplot.show()
