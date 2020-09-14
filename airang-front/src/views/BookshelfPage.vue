@@ -35,6 +35,7 @@ export default {};
 	position: absolute;
 	top: 140px;
 }
+
 .book {
 	width: 180px;
 	height: 255px;
