@@ -1,6 +1,6 @@
 <template>
-	<div id="app" :class="[AuthRoute ? 'app-white' : 'app-orange']">
-		<div class="nav">
+	<div id="app" :class="[AuthRoute || StoryRoute ? 'app-white' : 'app-orange']">
+		<div class="nav" v-if="!StoryRoute">
 			<router-link v-if="AuthRoute" class="nav-logo" to="/"
 				><img src="@/assets/images/orange.png" alt=""
 			/></router-link>
@@ -14,7 +14,7 @@
 				>로그인</router-link
 			>
 		</div>
-		<main class="container">
+		<main :class="[StoryRoute ? 'container-story' : 'container']">
 			<router-view />
 		</main>
 	</div>
@@ -24,6 +24,9 @@ export default {
 	computed: {
 		AuthRoute() {
 			return this.$route.name === 'login' || this.$route.name === 'signup';
+		},
+		StoryRoute() {
+			return this.$route.name === 'story';
 		},
 	},
 };
@@ -68,5 +71,9 @@ export default {
 
 .nav-orange {
 	color: white;
+}
+.container-story {
+	width: 100%;
+	height: 100%;
 }
 </style>
