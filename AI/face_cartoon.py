@@ -37,3 +37,12 @@ img.putdata(newData)
 
 # png 확장자로 저장
 img.save("Transparent.png", "PNG")
+
+# cartoonizer 이미지
+
+cv_img = cv2.imread('.images/baby.jpg', cv2.IMREAD_COLOR)
+
+cartoon_img = cv2.stylization(cv_img, sigma_s=100, sigma_r=0.5)
+
+cv2.imshow('original', cv_img)
+cv2.imshow('cartoon1', cartoon_img)
