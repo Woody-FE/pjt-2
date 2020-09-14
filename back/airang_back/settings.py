@@ -27,7 +27,7 @@ SECRET_KEY = get_setting("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://j3d105.p.ssafy.io', 'https://j3d105.p.ssafy.io']
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
