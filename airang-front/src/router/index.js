@@ -19,6 +19,11 @@ const routes = [
 		name: 'story',
 		component: () => import('@/views/StoryPage.vue'),
 	},
+	{
+		path: '/bookshelf',
+		name: 'bookshelf',
+		component: () => import('@/views/BookshelfPage.vue'),
+	},
 ];
 const router = new VueRouter({
 	mode: 'history',
