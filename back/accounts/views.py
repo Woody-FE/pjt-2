@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.parsers import FormParser
 
-# Create your views here.
+from .serializers import CreateUserSerializer
+
+
+class CreateUserView(APIView):
+    parser_classes = (FormParser, )
+    serializer_class = CreateUserSerializer
