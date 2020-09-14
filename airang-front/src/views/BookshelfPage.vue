@@ -2,9 +2,9 @@
 	<section class="bookshelf-wrap">
 		<h2>아이랑 도서관</h2>
 		<div class="box-out">
-			<div class="book books-1"></div>
-			<div class="book books-2"></div>
-			<div class="book books-3"></div>
+			<router-link to="/story"><div class="book books-1"></div></router-link>
+			<router-link to="/story"><div class="book books-2"></div></router-link>
+			<router-link to="/story"><div class="book books-3"></div></router-link>
 		</div>
 	</section>
 </template>
