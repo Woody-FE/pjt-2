@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\envs\\AIrang\\python.exe",
+    "python.pythonPath": "C:\\Python36\\python.exe",
     "python.testing.pytestArgs": [
         "venv"
     ],
