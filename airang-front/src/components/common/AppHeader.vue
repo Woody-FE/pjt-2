@@ -43,7 +43,7 @@ export default {
 <style lang="scss">
 .nav {
 	position: relative;
-	padding-top: 1rem;
+	padding-top: 2rem;
 	height: 100px;
 	width: 80%;
 	margin: 0 auto;
