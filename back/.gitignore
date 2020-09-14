@@ -1,5 +1,6 @@
 # myproject
 settings.json
+staticfiles
 
 # local virtual env setting for vscode
 .vscode
