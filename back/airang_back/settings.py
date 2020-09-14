@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = get_setting("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -136,6 +136,19 @@ DATABASES = {
     }
 }
 
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': get_setting('DATABASE_ENGINE'),
+            'NAME': get_setting('DATABASE_NAME'),
+            'USER': get_setting('DATABASE_USER'),
+            'PASSWORD': get_setting('DATABASE_PASSWORD'),
+            'DATABASE_HOST': get_setting('DATABASE_HOST'),
+            'DATABASE_PORT': get_setting('DATABASE_PORT')
+        }
+    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -175,7 +188,7 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 # static file setting
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # media setting
