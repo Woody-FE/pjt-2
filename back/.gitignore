@@ -1,6 +1,10 @@
 # myproject
 settings.json
 
+# local virtual env setting for vscode
+.vscode
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,venv,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,venv,visualstudiocode
 
