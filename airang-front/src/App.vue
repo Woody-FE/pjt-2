@@ -1,32 +1,31 @@
 <template>
-	<div id="app" :class="[AuthRoute || StoryRoute ? 'app-white' : 'app-orange']">
-		<div class="nav" v-if="!StoryRoute">
-			<router-link v-if="AuthRoute" class="nav-logo" to="/"
-				><img src="@/assets/images/orange.png" alt=""
-			/></router-link>
-			<router-link v-else class="nav-logo" to="/"
-				><img src="@/assets/images/white.png" alt=""
-			/></router-link>
-			<router-link
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
-				to="/login"
-				>로그인</router-link
-			>
-		</div>
+	<div
+		id="app"
+		:class="[
+			AuthRoute || StoryRoute || GuideRoute ? 'app-white' : 'app-orange',
+		]"
+	>
+		<AppHeader />
 		<main :class="[StoryRoute ? 'container-story' : 'container']">
 			<router-view />
 		</main>
 	</div>
 </template>
 <script>
+import AppHeader from '@/components/common/AppHeader.vue';
 export default {
+	components: {
+		AppHeader,
+	},
 	computed: {
 		AuthRoute() {
 			return this.$route.name === 'login' || this.$route.name === 'signup';
 		},
 		StoryRoute() {
 			return this.$route.name === 'story';
+		},
+		GuideRoute() {
+			return this.$route.name === 'guide';
 		},
 	},
 };
@@ -40,6 +39,7 @@ export default {
 .app-orange {
 	background: linear-gradient(0deg, #ff922b, #faad08);
 	color: white;
+	height: 100%;
 }
 .app-white {
 	background: white;
@@ -47,31 +47,6 @@ export default {
 	height: 100%;
 }
 
-.nav {
-	padding-top: 1rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	a {
-		text-decoration: none;
-	}
-	.nav-logo {
-		height: 6rem;
-		img {
-			height: 100%;
-		}
-	}
-	.nav-login {
-		font-size: 2rem;
-	}
-}
-.nav-white {
-	color: black;
-}
-
-.nav-orange {
-	color: white;
-}
 .container-story {
 	width: 100%;
 	height: 100%;

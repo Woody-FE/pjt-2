@@ -197,7 +197,7 @@ export default {
 	height: 100vh;
 	font-size: 2rem;
 	text-align: center;
-	color: #fff;
+	color: black;
 	opacity: 0;
 	transition: all 1s;
 	will-change: opacity;
@@ -219,7 +219,8 @@ export default {
 	border: none;
 	cursor: pointer;
 	border-radius: 50%;
-	background: white;
+	background: linear-gradient(0deg, #ff922b, #faad08);
+	color: white;
 	outline: none;
 	margin-left: -1rem;
 }
@@ -233,7 +234,8 @@ export default {
 	border: none;
 	cursor: pointer;
 	border-radius: 50%;
-	background: white;
+	background: linear-gradient(0deg, #ff922b, #faad08);
+	color: white;
 	outline: none;
 }
 </style>
