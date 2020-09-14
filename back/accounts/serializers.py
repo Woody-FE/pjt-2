@@ -5,12 +5,15 @@ from rest_framework import serializers
 
 User = get_user_model()
 
-class CreateUserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(required=False)
+
+class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username',
+            'id',
             'email',
-            'password',
+            'username',
+            'child_name',
+            'child_image',
+            'child_gender',
         )
