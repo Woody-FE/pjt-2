@@ -67,10 +67,10 @@ INSTALLED_APPS = [
 # for debugging
 
 CORS_ORIGIN_WHITELIST = [
+    'https://j3d105.p.ssafy.io:8001',
+    'https://j3d105.p.ssafy.io',
     'http://j3d105.p.ssafy.io:8001',
     'http://j3d105.p.ssafy.io',
-    'localhost',
-    '127.0.0.1',
 ]
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
@@ -87,9 +87,14 @@ REST_FRAMEWORK = {
     ),
 }
 
-
 # authentication setting
 REST_USE_JWT = True
+
+AUTHENTICATION_BACKENDS = (
+   "django.contrib.auth.backends.ModelBackend",
+   "allauth.account.auth_backends.AuthenticationBackend"
+)
+
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True   
 ACCOUNT_USERNAME_REQUIRED = False
@@ -101,6 +106,10 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7)
 }
 
+# drf yasg setting
+SWAGGER_SETTINGS = {
+    'DEFAULT_API_URL': 'https://j3d105.p.ssafy.io',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
