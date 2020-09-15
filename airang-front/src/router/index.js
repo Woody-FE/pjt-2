@@ -24,7 +24,13 @@ const routes = [
 		name: 'bookshelf',
 		component: () => import('@/views/BookshelfPage.vue'),
 	},
+	{
+		path: '/profile/:userName',
+		name: 'profile',
+		component: () => import('@/views/ProfilePage.vue'),
+	}
 ];
+
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
