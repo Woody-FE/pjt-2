@@ -69,6 +69,8 @@ INSTALLED_APPS = [
 CORS_ORIGIN_WHITELIST = [
     'http://j3d105.p.ssafy.io:8001',
     'http://j3d105.p.ssafy.io',
+    'localhost',
+    '127.0.0.1',
 ]
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
