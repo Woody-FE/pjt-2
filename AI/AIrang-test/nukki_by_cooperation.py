@@ -7,6 +7,7 @@ newData = []
 
 
 for item in datas:
+    print(item)
     # 여기에 face_recognition 좌표로 조건
     if item[0] == 255 and item[1] == 255 and item[2] == 255:
         newData.append((255, 255, 255, 0))
