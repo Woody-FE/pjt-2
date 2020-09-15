@@ -5,6 +5,11 @@ Vue.use(VueRouter);
 
 const routes = [
 	{
+		path: '/',
+		name: 'main',
+		component: () => import('@/views/MainPage.vue'),
+	},
+	{
 		path: '/guide',
 		name: 'guide',
 		component: () => import('@/views/GuidePage.vue'),
