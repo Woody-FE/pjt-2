@@ -25,10 +25,21 @@ const routes = [
 		component: () => import('@/views/BookshelfPage.vue'),
 	},
 	{
-		path: '/profile/:userName',
+		path: '/profile/:userid',
 		name: 'profile',
-		component: () => import('@/views/ProfilePage.vue'),
-	}
+		component: () => import('@/views/profile/ProfilePage.vue'),
+		props: route => ({
+			userId: Number(route.params.userid),
+		}),
+	},
+	{
+		path: '/profile/:userid/modifyinfo',
+		name: 'modifyinfo',
+		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+		props: route => ({
+			userId: Number(route.params.userid),
+		}),
+	},
 ];
 
 const router = new VueRouter({
