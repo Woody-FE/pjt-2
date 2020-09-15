@@ -26,14 +26,15 @@ min_chin_idx = np.argmax(chin_y)
 chin_x = np_fr_chin[min_chin_idx]
 # print(np_fr_chin[min_chin_idx])
 
-for px in np_fr_chin:
-    print(BGRA_img[px[0]][px[1]])
-    BGRA_img[px[0]][px[1]][3] = 0
+# for px in np_fr_chin:
+#     print(BGRA_img[px[0]][px[1]])
+#     BGRA_img[px[0]][px[1]][3] = 0
 
-for px in np_fr_chin:
-    print(BGRA_img[px[0]][px[1]])
+# for px in np_fr_chin:
+#     print(BGRA_img[px[0]][px[1]])
 
-np.where()
+for px in np.array(BGRA_img):
+    print(px)
 
 Nukkied_img = BGRA_img
 
