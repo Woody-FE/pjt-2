@@ -23,7 +23,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('accounts/', include('rest_auth.urls')),
     path('accounts/signup/', include('rest_auth.registration.urls')),
+
     path('accounts/', include('accounts.urls')),
 ]
 
@@ -34,12 +36,12 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-    title="AIrang API",
-    default_version='v1',
-    description="Only For Develop",
-    terms_of_service="https://www.google.com/policies/terms/",
-    contact=openapi.Contact(email="contact@snippets.local"),
-    license=openapi.License(name="BSD License"),
+        title="AIrang API",
+        default_version='v1',
+        description="Only For Develop",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@snippets.local"),
+        license=openapi.License(name="BSD License"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
