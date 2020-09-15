@@ -33,8 +33,8 @@ chin_x = np_fr_chin[min_chin_idx]
 # for px in np_fr_chin:
 #     print(BGRA_img[px[0]][px[1]])
 
-for px in np.array(BGRA_img):
-    print(px)
+for x in range(100):
+    BGRA_img[x][1] = 0
 
 Nukkied_img = BGRA_img
 
