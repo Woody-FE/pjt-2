@@ -65,13 +65,13 @@ INSTALLED_APPS = [
 
 # django cors headers setting
 # for debugging
-# CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ORIGIN_WHITELIST = [
     'http://j3d105.p.ssafy.io:8001',
     'http://j3d105.p.ssafy.io',
 ]
-
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 # drf setting
 REST_FRAMEWORK = {
