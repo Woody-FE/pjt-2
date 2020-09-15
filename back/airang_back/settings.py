@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = get_setting("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
     # project apps
     'accounts.apps.AccountsConfig',
+    'stories.apps.StoriesConfig',
 
     # documentation
     'drf_yasg',
@@ -109,6 +110,13 @@ JWT_AUTH = {
 # drf yasg setting
 SWAGGER_SETTINGS = {
     'DEFAULT_API_URL': 'https://j3d105.p.ssafy.io',
+    'SECURITY_DEFINITIONS': {
+         'DRF Token': {
+               'type': 'apiKey',
+               'name': 'Authorization',
+               'in': 'header'
+        }
+    }
 }
 
 MIDDLEWARE = [
