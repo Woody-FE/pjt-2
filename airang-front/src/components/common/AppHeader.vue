@@ -14,12 +14,14 @@
 				>가이드</router-link
 			>
 			<router-link
+				v-if="!isLogin"
 				class="nav-login"
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/login"
 				>로그인</router-link
 			>
 			<router-link
+				v-if="!isLogin"
 				class="nav-login"
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/signup"
@@ -30,8 +32,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
 	computed: {
+		...mapGetters(['getToken']),
 		AuthRoute() {
 			return (
 				this.$route.name === 'login' ||
@@ -41,6 +45,9 @@ export default {
 		},
 		StoryRoute() {
 			return this.$route.name === 'story';
+		},
+		isLogin() {
+			return !!this.getToken;
 		},
 	},
 };

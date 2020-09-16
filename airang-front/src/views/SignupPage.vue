@@ -52,7 +52,6 @@ export default {
 				};
 				await this.SIGNUP(userInfo);
 				this.$router.push('/');
-
 			} catch (error) {
 				console.log(error);
 			}
