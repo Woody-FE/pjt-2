@@ -37,6 +37,7 @@ export default {
 			try {
 				const userInfo = { email: this.email, password: this.password };
 				await this.LOGIN(userInfo);
+				this.$router.push('/');
 			} catch (error) {
 				console.log(error);
 			}

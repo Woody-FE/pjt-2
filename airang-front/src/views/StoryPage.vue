@@ -118,7 +118,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 export default {
-	created() {
+	mounted() {
 		var Page = (function() {
 			var config = {
 					$bookBlock: $('#bb-bookblock'),
