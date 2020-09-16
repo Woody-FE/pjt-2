@@ -7,7 +7,9 @@
 		/>
 		<p class="profileInfo-name">황영준</p>
 		<section class="btn-box">
-			<button class="btn-update__img btn">정보수정</button>
+			<router-link to="/profile/1/modifyinfo">
+				<button class="btn-update__img btn">정보수정</button>
+			</router-link>
 			<button class="btn-update__info btn">사진수정</button>
 		</section>
 	</section>
