@@ -34,12 +34,13 @@ export default {
 @import './assets/css/reset.css';
 @import './assets/css/common.css';
 #app {
-	height: 100%;
+	/* height: 100%; */
+	min-height: 100vh;
 }
 .app-orange {
 	background: linear-gradient(0deg, #ff922b, #faad08);
 	color: white;
-	height: 100%;
+	/* height: 100%; */
 }
 .app-white {
 	background: white;

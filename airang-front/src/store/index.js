@@ -22,10 +22,10 @@ export default new Vuex.Store({
 			state.token = token;
 		},
 		clearUsername(state) {
-			state.username = null;
+			state.username = '';
 		},
 		clearToken(state) {
-			state.token = null;
+			state.token = '';
 		},
 	},
 	actions: {

@@ -95,7 +95,6 @@ export default {
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
-
 		.login-box {
 			position: relative;
 			width: 100%;
@@ -113,7 +112,7 @@ export default {
 			width: 100%;
 			max-width: 400px;
 			height: 2.5rem;
-			padding: 1rem 2rem 1rem;
+			padding: 0 2rem;
 			font-size: 1rem;
 			border: 1px solid black;
 			border-top-left-radius: 3rem;
@@ -131,7 +130,6 @@ export default {
 			width: 100%;
 			max-width: 400px;
 			height: 2.5rem;
-			padding: 1rem;
 			border-top-left-radius: 1rem;
 			border-bottom-left-radius: 1rem;
 			border-top-right-radius: 1rem;
