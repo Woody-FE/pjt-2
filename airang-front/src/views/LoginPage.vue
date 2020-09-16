@@ -47,6 +47,7 @@ export default {
 
 <style lang="scss">
 .login-wrap {
+	position: relative;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -55,7 +56,7 @@ export default {
 		width: 25px;
 		height: 100px;
 		position: absolute;
-		top: 150px;
+		top: 50px;
 		left: 50%;
 		border-top-left-radius: 1rem;
 		border-top-right-radius: 1rem;
@@ -77,14 +78,17 @@ export default {
 		z-index: 1;
 	}
 	.login-form {
-		position: relative;
+		position: absolute;
+		top: 100px;
+		left: 50%;
+		transform: translateX(-50%);
 		width: 550px;
 		height: 550px;
 		background: #ff922b;
 		border-top-left-radius: 15%;
 		border-top-right-radius: 15%;
-		border-bottom-left-radius: 40%;
-		border-bottom-right-radius: 40%;
+		border-bottom-left-radius: 55%;
+		border-bottom-right-radius: 55%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -106,7 +110,7 @@ export default {
 		}
 		.login-item {
 			width: 100%;
-			max-width: 450px;
+			max-width: 400px;
 			height: 2.5rem;
 			padding: 1rem 2rem 1rem;
 			font-size: 1rem;
@@ -124,7 +128,7 @@ export default {
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-			max-width: 450px;
+			max-width: 400px;
 			height: 2.5rem;
 			padding: 1rem;
 			border-top-left-radius: 1rem;
