@@ -27,12 +27,20 @@
 				to="/signup"
 				>회원가입</router-link
 			>
+			<a
+				v-if="isLogin"
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				href="javascript:;"
+				@click="logoutUser"
+				>로그아웃</a
+			>
 		</section>
 	</div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {
 		...mapGetters(['getToken']),
@@ -48,6 +56,16 @@ export default {
 		},
 		isLogin() {
 			return !!this.getToken;
+		},
+	},
+	methods: {
+		...mapMutations(['clearUsername, clearToken']),
+		logoutUser() {
+			this.clearUsername();
+			this.clearToken();
+			this.$cookies.remove('auth-token');
+			this.$cookies.remove('username');
+			this.$router.push('/');
 		},
 	},
 };
