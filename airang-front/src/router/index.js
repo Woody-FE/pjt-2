@@ -5,6 +5,11 @@ Vue.use(VueRouter);
 
 const routes = [
 	{
+		path: '/',
+		name: 'main',
+		component: () => import('@/views/MainPage.vue'),
+	},
+	{
 		path: '/guide',
 		name: 'guide',
 		component: () => import('@/views/GuidePage.vue'),
@@ -13,6 +18,11 @@ const routes = [
 		path: '/login',
 		name: 'login',
 		component: () => import('@/views/LoginPage.vue'),
+	},
+	{
+		path: '/signup',
+		name: 'signup',
+		component: () => import('@/views/SignupPage.vue'),
 	},
 	{
 		path: '/story',
@@ -24,7 +34,24 @@ const routes = [
 		name: 'bookshelf',
 		component: () => import('@/views/BookshelfPage.vue'),
 	},
+	{
+		path: '/profile/:userid',
+		name: 'profile',
+		component: () => import('@/views/profile/ProfilePage.vue'),
+		props: route => ({
+			userId: Number(route.params.userid),
+		}),
+	},
+	{
+		path: '/profile/:userid/modifyinfo',
+		name: 'modifyinfo',
+		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+		props: route => ({
+			userId: Number(route.params.userid),
+		}),
+	},
 ];
+
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,

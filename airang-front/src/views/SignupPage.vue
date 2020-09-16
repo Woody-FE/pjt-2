@@ -1,23 +1,32 @@
 <template>
-	<section class="login-wrap">
-		<div class="login-grass grass-1"></div>
-		<div class="login-grass grass-2"></div>
-		<div class="login-grass grass-3"></div>
-		<form class="login-form" @submit.prevent="submitForm">
-			<div class="login-box">
-				<label class="login-label" for="email">이메일</label>
-				<input id="email" class="login-item" type="email" v-model="email" />
+	<section class="signup-wrap">
+		<div class="signup-grass grass-1"></div>
+		<div class="signup-grass grass-2"></div>
+		<div class="signup-grass grass-3"></div>
+		<form class="signup-form" @submit.prevent="submitForm">
+			<div class="signup-box">
+				<label class="signup-label" for="email">이메일</label>
+				<input id="email" class="signup-item" type="email" v-model="email" />
 			</div>
-			<div class="login-box">
-				<label class="login-label" for="password">패스워드</label>
+			<div class="signup-box">
+				<label class="signup-label" for="password1">비밀번호</label>
 				<input
-					id="password"
-					class="login-item"
+					id="password1"
+					class="signup-item"
 					type="password"
-					v-model="password"
+					v-model="password1"
 				/>
 			</div>
-			<button class="login-btn" type="submit">로그인</button>
+			<div class="signup-box">
+				<label class="signup-label" for="password2">비밀번호 확인</label>
+				<input
+					id="password2"
+					class="signup-item"
+					type="password"
+					v-model="password2"
+				/>
+			</div>
+			<button class="signup-btn" type="submit">회원가입</button>
 		</form>
 	</section>
 </template>
@@ -28,15 +37,20 @@ export default {
 	data() {
 		return {
 			email: '',
-			password: '',
+			password1: '',
+			password2: '',
 		};
 	},
 	methods: {
-		...mapActions(['LOGIN']),
+		...mapActions(['SIGNUP']),
 		async submitForm() {
 			try {
-				const userInfo = { email: this.email, password: this.password };
-				await this.LOGIN(userInfo);
+				const userInfo = {
+					email: this.email,
+					password1: this.password1,
+					password2: this.password2,
+				};
+				await this.SIGNUP(userInfo);
 			} catch (error) {
 				console.log(error);
 			}
@@ -46,13 +60,13 @@ export default {
 </script>
 
 <style lang="scss">
-.login-wrap {
+.signup-wrap {
 	position: relative;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	.login-grass {
+	.signup-grass {
 		width: 25px;
 		height: 100px;
 		position: absolute;
@@ -77,7 +91,7 @@ export default {
 		transform: rotate(0deg);
 		z-index: 1;
 	}
-	.login-form {
+	.signup-form {
 		position: absolute;
 		top: 100px;
 		left: 50%;
@@ -95,20 +109,20 @@ export default {
 		align-items: center;
 		z-index: 2;
 
-		.login-box {
+		.signup-box {
 			position: relative;
 			width: 100%;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 		}
-		.login-label {
+		.signup-label {
 			position: absolute;
-			top: -1.3rem;
-			left: 6rem;
+			top: -24px;
+			left: 5rem;
 			color: white;
 		}
-		.login-item {
+		.signup-item {
 			width: 100%;
 			max-width: 400px;
 			height: 2.5rem;
@@ -123,7 +137,7 @@ export default {
 			outline: none;
 			margin-bottom: 2rem;
 		}
-		.login-btn {
+		.signup-btn {
 			display: flex;
 			justify-content: center;
 			align-items: center;

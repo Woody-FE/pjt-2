@@ -19,6 +19,12 @@
 				to="/login"
 				>로그인</router-link
 			>
+			<router-link
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				to="/signup"
+				>회원가입</router-link
+			>
 		</section>
 	</div>
 </template>
@@ -60,6 +66,9 @@ export default {
 		right: 0;
 	}
 	.nav-btn .nav-login:nth-child(2) {
+		margin-left: 10px;
+	}
+	.nav-btn .nav-login:nth-child(3) {
 		margin-left: 10px;
 	}
 	.nav-logo {
