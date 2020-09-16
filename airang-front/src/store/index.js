@@ -8,33 +8,36 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		token: cookies.isKey('auth-token') ? cookies.get('auth-token') : null,
-		childName: cookies.isKey('childName') ? cookies.get('childName') : null,
+		username: cookies.isKey('username') ? cookies.get('username') : null,
 	},
 	getters: {
 		getToken: state => state.token,
-		getChildName: state => state.childName,
+		getUsername: state => state.username,
 	},
 	mutations: {
-		setChildName(state, childName) {
-			state.childName = childName;
+		setUsername(state, username) {
+			state.username = username;
 		},
 		setToken(state, token) {
 			state.token = token;
 		},
 	},
 	actions: {
-		SETUP_USER({ commit }, { childName, token }) {
-			cookies.set('childName', childName);
+		SETUP_USER({ commit }, { user, token }) {
+			const { username } = user;
+			cookies.set('username', username);
 			cookies.set('auth-token', token);
-			commit('setChildName', childName);
+			commit('setUsername', username);
 			commit('setToken', token);
 		},
 		async LOGIN({ dispatch }, userData) {
 			const { data } = await loginUser(userData);
+			console.log(data);
 			dispatch('SETUP_USER', data);
 		},
 		async SIGNUP({ dispatch }, userData) {
 			const { data } = await registerUser(userData);
+			console.log(data);
 			dispatch('SETUP_USER', data);
 		},
 	},
