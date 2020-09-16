@@ -61,7 +61,7 @@ export default {
 	}
 	.nav-btn {
 		position: absolute;
-		top: 50%;
+		top: 75%;
 		transform: translateY(-50%);
 		right: 0;
 	}
@@ -78,7 +78,7 @@ export default {
 		}
 	}
 	.nav-login {
-		font-size: 1.5rem;
+		font-size: 1.2rem;
 	}
 	.nav-white {
 		color: black;
