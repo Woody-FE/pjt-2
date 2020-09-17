@@ -60,7 +60,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations(['clearUsername, clearToken']),
+		...mapMutations(['clearUsername', 'clearToken']),
 		logoutUser() {
 			this.clearUsername();
 			this.clearToken();
