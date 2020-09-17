@@ -40,7 +40,6 @@
 </template>
 
 <script>
-// import cookies from 'vue-cookies';
 import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {

@@ -2,9 +2,9 @@
 	<section class="bookshelf-wrap">
 		<h2>아이랑 도서관</h2>
 		<div class="box-out">
-			<router-link to="/story"><div class="book books-1"></div></router-link>
-			<router-link to="/story"><div class="book books-2"></div></router-link>
-			<router-link to="/story"><div class="book books-3"></div></router-link>
+			<router-link to="/story/1"><div class="book books-1"></div></router-link>
+			<router-link to="/story/2"><div class="book books-2"></div></router-link>
+			<router-link to="/story/3"><div class="book books-3"></div></router-link>
 		</div>
 	</section>
 </template>
@@ -79,12 +79,12 @@ export default {};
 /*------ background-pic ------*/
 
 .books-1 {
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/3433202-d2a1bea8a58cd447.png');
+	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140716_200%2F500farm_1405513399454S2F1z_PNG%2F%25B5%25BF%25C8%25AD%25C3%25A51%25B8%25E9.png&type=sc960_832');
 	background-size: 180px 255px;
 }
 
 .books-2 {
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/3433202-6b51313cfc447314.png');
+	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2Fdata44%2F2009%2F3%2F29%2F9%2Fprog_13842_1_limpia1.jpg&type=sc960_832');
 	background-size: 180px 255px;
 }
 

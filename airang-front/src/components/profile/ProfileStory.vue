@@ -132,7 +132,7 @@ export default {};
 			opacity: 1;
 		}
 		.book1 {
-			background: url('http://appdata.hungryapp.co.kr/data_file/data_img/201510/15/W144490210671105197.jpg');
+			background: url('https://image.yes24.com/Goods/30586134/L');
 			background-size: 180px 255px;
 		}
 	}
