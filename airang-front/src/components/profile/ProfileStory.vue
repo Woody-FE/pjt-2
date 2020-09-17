@@ -7,7 +7,6 @@
 		<div class="box-out">
 			<router-link to="/story"><div class="book books-1"></div></router-link>
 			<router-link to="/story"><div class="book books-2"></div></router-link>
-			<router-link to="/story"><div class="book books-3"></div></router-link>
 		</div>
 		<footer class="profileStory-footer"></footer>
 	</section>
@@ -37,6 +36,8 @@ export default {};
 			font-size: 2rem;
 		}
 	}
+	.profileStory-footer {
+	}
 }
 .box-out {
 	z-index: 10;
@@ -44,8 +45,8 @@ export default {};
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	position: absolute;
-	top: 140px;
+	// position: absolute;
+	// top: 140px;
 }
 
 .book {
@@ -135,6 +136,6 @@ export default {};
 	opacity: 1;
 }
 .profileStory-footer {
-	margin-bottom: 3rem;
+	margin-bottom: 10rem;
 }
 </style>
