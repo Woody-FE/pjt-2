@@ -11,6 +11,7 @@ export default new Vuex.Store({
 		username: cookies.isKey('username') ? cookies.get('username') : null,
 	},
 	getters: {
+		isLogined: state => !!state.token,
 		getToken: state => state.token,
 		getUsername: state => state.username,
 	},
@@ -22,10 +23,10 @@ export default new Vuex.Store({
 			state.token = token;
 		},
 		clearUsername(state) {
-			state.username = '';
+			state.username = null;
 		},
 		clearToken(state) {
-			state.token = '';
+			state.token = null;
 		},
 	},
 	actions: {
