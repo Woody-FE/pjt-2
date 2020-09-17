@@ -25,7 +25,7 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/5.jpg" alt="img" />
+					<img src="@/assets/images/temp/44.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
@@ -44,7 +44,7 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/5.jpg" alt="img" />
+					<img src="@/assets/images/temp/44.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
@@ -60,7 +60,7 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/5.jpg" alt="img" />
+					<img src="@/assets/images/temp/44.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
@@ -79,7 +79,7 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/5.jpg" alt="img" />
+					<img src="@/assets/images/crossroad.jpg" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
@@ -93,6 +93,77 @@
 					<p>
 						얼마 정도 갔을까<br />길의 한쪽에는 여우가 <br />한쪽에는 토끼가
 						있는걸 발견했어요.
+					</p>
+				</div>
+			</div>
+			<div class="bb-item">
+				<div class="bb-custom-side img-side">
+					<button class="btn btn-1" @click="status = 1">여우</button>
+				</div>
+				<div class="bb-custom-side">
+					<button class="btn btn-2" @click="status = 2">토끼</button>
+				</div>
+			</div>
+			<div class="bb-item">
+				<div class="bb-custom-side img-side">
+					<img
+						v-if="status === 1"
+						src="@/assets/images/changes.jpg"
+						alt="img"
+					/>
+					<img v-else src="@/assets/images/small.jpg" alt="img" />
+				</div>
+				<div class="bb-custom-side">
+					<div class="portrait-box">
+						<img
+							class="portrait-img"
+							src="@/assets/images/temp/po.png"
+							alt=""
+						/>
+						<p class="portrait-p">나레이션</p>
+					</div>
+					<p v-if="status === 2">
+						토끼는 나무둥지 앞에 멈춰섰어요<br />
+						그런데! 갑자기 토끼의 크기가 개미같이 줄어들었어요
+					</p>
+					<p v-else>
+						여우는 할머니 모습으로 산을 내려갔어요.<br />그리고 혼례가 열리는
+						잔칫집으로 쏙 들어갔어요!
+					</p>
+				</div>
+			</div>
+			<div class="bb-item">
+				<div class="bb-custom-side img-side">
+					<img
+						v-if="status === 1"
+						src="@/assets/images/changes.jpg"
+						alt="img"
+					/>
+					<img v-else src="@/assets/images/small.jpg" alt="img" />
+				</div>
+				<div class="bb-custom-side">
+					<div class="portrait-box">
+						<img
+							v-if="status === 2"
+							class="portrait-img"
+							src="@/assets/images/temp/12345.png"
+							alt=""
+						/>
+						<img
+							v-else
+							class="portrait-img"
+							src="@/assets/images/temp/po.png"
+							alt=""
+						/>
+						<p v-if="status === 2" class="portrait-p">영준</p>
+						<p v-else class="portrait-p">나레이션</p>
+					</div>
+					<p v-if="status === 2">
+						어떻게 저렇게 줄어들었지?
+					</p>
+					<p v-else>
+						여우는 할머니 모습으로 산을 내려갔어요.\n그리고 혼례가 열리는
+						잔칫집으로 쏙 들어갔어요!
 					</p>
 				</div>
 			</div>
@@ -125,6 +196,7 @@
 export default {
 	data() {
 		return {
+			status: 0,
 			cnt: 2,
 			bookData: {
 				leftData: [],
@@ -232,3 +304,52 @@ export default {
 	},
 };
 </script>
+<style lang="scss">
+.bb-custom-side {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.portrait-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	.portrait-img {
+		width: 30%;
+		border-radius: 50%;
+		border: 1px solid black;
+	}
+	.portrait-p {
+		text-align: center;
+	}
+}
+.img-side {
+	height: 100%;
+	width: 50%;
+	img {
+		width: 500px;
+	}
+}
+.btn {
+	width: 250px;
+	height: 120px;
+	color: white;
+	font-size: 3rem;
+	border-radius: 45px;
+	border: none;
+	&:hover {
+		cursor: pointer;
+		background: $green;
+	}
+}
+.btn-1 {
+	background: $lightGreen !important;
+}
+.btn-2 {
+	background: $orange !important;
+
+	margin-right: 0rem;
+}
+</style>
