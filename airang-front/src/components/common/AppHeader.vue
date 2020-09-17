@@ -14,24 +14,37 @@
 				>가이드</router-link
 			>
 			<router-link
+				v-if="!isLogin"
 				class="nav-login"
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/login"
 				>로그인</router-link
 			>
 			<router-link
+				v-if="!isLogin"
 				class="nav-login"
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/signup"
 				>회원가입</router-link
+			>
+			<a
+				v-if="isLogin"
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				href="javascript:;"
+				@click="logoutUser"
+				>로그아웃</a
 			>
 		</section>
 	</div>
 </template>
 
 <script>
+// import cookies from 'vue-cookies';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {
+		...mapGetters(['getToken']),
 		AuthRoute() {
 			return (
 				this.$route.name === 'login' ||
@@ -41,6 +54,19 @@ export default {
 		},
 		StoryRoute() {
 			return this.$route.name === 'story';
+		},
+		isLogin() {
+			return this.$cookies.isKey('auth-token');
+		},
+	},
+	methods: {
+		...mapMutations(['clearUsername, clearToken']),
+		logoutUser() {
+			this.clearUsername();
+			this.clearToken();
+			this.$cookies.remove('auth-token');
+			this.$cookies.remove('username');
+			this.$router.push('/');
 		},
 	},
 };
@@ -61,7 +87,7 @@ export default {
 	}
 	.nav-btn {
 		position: absolute;
-		top: 50%;
+		top: 75%;
 		transform: translateY(-50%);
 		right: 0;
 	}
@@ -78,7 +104,7 @@ export default {
 		}
 	}
 	.nav-login {
-		font-size: 1.5rem;
+		font-size: 1.2rem;
 	}
 	.nav-white {
 		color: black;

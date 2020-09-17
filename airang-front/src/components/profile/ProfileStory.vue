@@ -26,7 +26,7 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .profileStory-wrap {
 	display: flex;
 	flex-direction: column;

@@ -51,6 +51,7 @@ export default {
 					password2: this.password2,
 				};
 				await this.SIGNUP(userInfo);
+				this.$router.push('/');
 			} catch (error) {
 				console.log(error);
 			}
