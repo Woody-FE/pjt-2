@@ -58,7 +58,7 @@
 import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {
-		...mapGetters(['getToken']),
+		...mapGetters(['isLogined']),
 		AuthRoute() {
 			return (
 				this.$route.name === 'login' ||
@@ -70,7 +70,7 @@ export default {
 			return this.$route.name === 'story';
 		},
 		isLogin() {
-			return this.$cookies.isKey('auth-token');
+			return this.isLogined;
 		},
 	},
 	methods: {
@@ -80,8 +80,20 @@ export default {
 			this.clearToken();
 			this.$cookies.remove('auth-token');
 			this.$cookies.remove('username');
-			this.$router.push('/');
+			// this.$router.push('/');
 		},
+	},
+	watch: {
+		$route() {
+			if (!this.$cookies.isKey('auth-token')) {
+				this.logoutUser();
+			}
+		},
+	},
+	created() {
+		if (!this.$cookies.isKey('auth-token')) {
+			this.logoutUser();
+		}
 	},
 };
 </script>
