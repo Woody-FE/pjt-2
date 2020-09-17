@@ -40,6 +40,7 @@
 </template>
 
 <script>
+// import cookies from 'vue-cookies';
 import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {
@@ -55,7 +56,7 @@ export default {
 			return this.$route.name === 'story';
 		},
 		isLogin() {
-			return !!this.getToken;
+			return this.$cookies.isKey('auth-token');
 		},
 	},
 	methods: {
