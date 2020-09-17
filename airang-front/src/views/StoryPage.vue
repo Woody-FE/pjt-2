@@ -232,30 +232,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss">
-.first-side {
-	font-size: 4rem;
-}
-.bb-custom-side {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	.portrait-box {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 30%;
-		.portrait-img {
-			border-radius: 50%;
-			border: 1px solid black;
-			height: 100px;
-			width: 100px;
-		}
-		.portrait-p {
-			text-align: center;
-		}
-	}
-}
-</style>

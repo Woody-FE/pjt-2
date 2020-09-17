@@ -2,7 +2,7 @@ import axios from 'axios';
 import { setInterceptors } from '@/api/common/interceptors';
 
 function create(url, options) {
-	const instance = axios.create(Object.assign({ baseUrl: url }, options));
+	const instance = axios.create(Object.assign({ baseURL: url }, options));
 	return instance;
 }
 

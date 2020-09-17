@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, datetime
 
 from settings_json import get_setting
 
@@ -25,11 +25,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = get_setting("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 # Application definition
 
@@ -40,22 +42,84 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # django settings
     'corsheaders',
 
     # rest_framework
     'rest_framework',
-
+    'rest_framework.authtoken',
+    # rest_framework - authentication
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
 
     # project apps
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
+    'stories.apps.StoriesConfig',
+
+    # documentation
+    'drf_yasg',
 ]
 
 # django cors headers setting
 # for debugging
-CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ORIGIN_WHITELIST = [
+    'localhost',
+    'localhost:8080',
+    'https://j3d105.p.ssafy.io:8001',
+    'https://j3d105.p.ssafy.io',
+    'http://j3d105.p.ssafy.io:8001',
+    'http://j3d105.p.ssafy.io',
+]
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+
+# drf setting
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+# authentication setting
+REST_USE_JWT = True
+
+AUTHENTICATION_BACKENDS = (
+   "django.contrib.auth.backends.ModelBackend",
+   "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True   
+ACCOUNT_USERNAME_REQUIRED = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7)
+}
+
+# drf yasg setting
+SWAGGER_SETTINGS = {
+    'DEFAULT_API_URL': 'https://j3d105.p.ssafy.io',
+    'SECURITY_DEFINITIONS': {
+         'DRF Token': {
+               'type': 'apiKey',
+               'name': 'Authorization',
+               'in': 'header'
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -99,6 +163,19 @@ DATABASES = {
     }
 }
 
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': get_setting('DATABASE_ENGINE'),
+            'NAME': get_setting('DATABASE_NAME'),
+            'USER': get_setting('DATABASE_USER'),
+            'PASSWORD': get_setting('DATABASE_PASSWORD'),
+            'DATABASE_HOST': get_setting('DATABASE_HOST'),
+            'DATABASE_PORT': get_setting('DATABASE_PORT')
+        }
+    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -132,8 +209,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# static file setting
+STATIC_URL = '/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# media setting
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
