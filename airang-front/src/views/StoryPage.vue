@@ -137,7 +137,6 @@ export default {
 				},
 				initEvents = function() {
 					var $slides = config.$bookBlock.children();
-
 					// add navigation events
 					config.$navNext.on('click touchstart', function() {
 						config.$bookBlock.bookblock('next');
@@ -170,7 +169,6 @@ export default {
 							return false;
 						},
 					});
-
 					// add keyboard events
 					$(document).keydown(function(e) {
 						var keyCode = e.keyCode || e.which,
