@@ -8,6 +8,7 @@
 		/></router-link>
 		<section class="nav-btn">
 			<router-link
+				v-if="!isLogin"
 				class="nav-login"
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/guide"
@@ -26,6 +27,20 @@
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/signup"
 				>회원가입</router-link
+			>
+			<router-link
+				v-if="isLogin"
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				to="/bookshelf"
+				>책장</router-link
+			>
+			<router-link
+				v-if="isLogin"
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				to="/profile"
+				>프로필</router-link
 			>
 			<a
 				v-if="isLogin"
