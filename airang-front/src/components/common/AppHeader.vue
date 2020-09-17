@@ -8,6 +8,7 @@
 		/></router-link>
 		<section class="nav-btn">
 			<router-link
+				v-if="!isLogin"
 				class="nav-login"
 				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
 				to="/guide"
@@ -27,6 +28,20 @@
 				to="/signup"
 				>회원가입</router-link
 			>
+			<router-link
+				v-if="isLogin"
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				to="/bookshelf"
+				>책장</router-link
+			>
+			<router-link
+				v-if="isLogin"
+				class="nav-login"
+				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				to="/profile"
+				>프로필</router-link
+			>
 			<a
 				v-if="isLogin"
 				class="nav-login"
@@ -40,7 +55,6 @@
 </template>
 
 <script>
-// import cookies from 'vue-cookies';
 import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {
@@ -60,7 +74,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations(['clearUsername, clearToken']),
+		...mapMutations(['clearUsername', 'clearToken']),
 		logoutUser() {
 			this.clearUsername();
 			this.clearToken();
