@@ -40,7 +40,6 @@
 </template>
 
 <script>
-// import cookies from 'vue-cookies';
 import { mapGetters, mapMutations } from 'vuex';
 export default {
 	computed: {
@@ -60,7 +59,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations(['clearUsername, clearToken']),
+		...mapMutations(['clearUsername', 'clearToken']),
 		logoutUser() {
 			this.clearUsername();
 			this.clearToken();
