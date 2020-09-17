@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import UserUpdateSerializer, UserDetailSerializer, UserChildImageUpdateSerializer
+from .serializers import UserUpdateSerializer, UserDetailSerializer, UserChildImageUpdateSerializer, FamilyCreateSerializer
 
 
 User = get_user_model()
@@ -60,3 +60,21 @@ class UserImageUpdateView(APIView):
                 serializer.save()
                 return Response(UserDetailSerializer(instance=user).data ,status=status.HTTP_200_OK)
         return Response(status=status.HTTP_403_FORBIDDEN)
+
+class UserFamilyView(APIView):
+
+    permission_classes = (IsAuthenticated, )
+    parser_classes = (FormParser, MultiPartParser, )
+
+    def get_user(self, user_id):
+        return get_object_or_404(User, pk=user_id)
+
+    @swagger_auto_schema()
+    def post(self, request, user_id):
+        user = self.get_user(user_id)
+        serializer = FamilyCreateSerializer(request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=user)
+            return Response(status=status.HTTP_201_CREATED)
+        
+        
