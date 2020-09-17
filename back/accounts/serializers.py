@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
+from .models import Family
+
 
 User = get_user_model()
 
@@ -29,4 +31,24 @@ class UserChildImageUpdateSerializer(UserUpdateSerializer):
         model = User
         fields = (
             'child_image',
+        )
+
+
+class FamilyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Family
+        fields = (
+            'name',
+            'image',
+            'gender',
+        )
+
+
+class FamilyBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Family
+        fields = (
+            'name',
+            'image',
+            'gender',
         )
