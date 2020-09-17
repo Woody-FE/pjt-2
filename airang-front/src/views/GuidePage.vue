@@ -129,7 +129,7 @@ export default {
 				guide = guideElems[i];
 				if (!guide) continue;
 				boundingRect = guide.getBoundingClientRect();
-				if (boundingRect.bottom === window.innerHeight) {
+				if (boundingRect.bottom <= window.innerHeight) {
 					this.currentItem.classList.remove('visible');
 					this.currentItem = guideElems[i + 1];
 					this.currentItem.classList.add('visible');
