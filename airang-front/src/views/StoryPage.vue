@@ -3,17 +3,17 @@
 		<div id="bb-bookblock" ref="book" class="bb-bookblock">
 			<div class="bb-item">
 				<div class="bb-custom-firstpage">
-					<h1>BookBlock <span>A Content Flip Plugin</span></h1>
+					<img
+						class="first-cover"
+						src="@/assets/images/아랑이3.jpg"
+						alt="img"
+					/>
 					<nav class="codrops-nav">
-						<a
-							class="codrops-icon codrops-icon-prev"
-							href="http://tympanus.net/codrops/2012/08/29/multiple-area-charts-with-d3-js/"
-							><span>Previous Demo</span></a
+						<router-link to="/" class="codrops-icon codrops-icon-prev"
+							><span>메인으로</span></router-link
 						>
-						<a
-							class="codrops-icon codrops-icon-drop"
-							href="http://tympanus.net/codrops/2012/09/03/bookblock-a-content-flip-plugin/"
-							><span>Back to the Codrops Article</span></a
+						<router-link to="/bookshelf" class="codrops-icon codrops-icon-prev"
+							><span>책장으로</span></router-link
 						>
 					</nav>
 				</div>
@@ -334,6 +334,9 @@ export default {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+.first-cover {
+	width: 50%;
 }
 .portrait-box {
 	display: flex;
