@@ -102,9 +102,10 @@ export default {
 		const guideElems = document.querySelectorAll('.guide');
 		this.currentItem = guideElems[0];
 		let ioIndex;
+		//eslint-disable-next-line
 		const io = new IntersectionObserver((entries, observer) => {
 			ioIndex = entries[0].target.dataset.index * 1;
-			console.log(observer);
+			// console.log(observer);
 		});
 		for (let i = 0; i < guideElems.length; i++) {
 			io.observe(guideElems[i]);
@@ -129,7 +130,7 @@ export default {
 				guide = guideElems[i];
 				if (!guide) continue;
 				boundingRect = guide.getBoundingClientRect();
-				if (boundingRect.bottom === window.innerHeight) {
+				if (parseInt(boundingRect.bottom) === window.innerHeight) {
 					this.currentItem.classList.remove('visible');
 					this.currentItem = guideElems[i + 1];
 					this.currentItem.classList.add('visible');
@@ -165,7 +166,7 @@ export default {
 				for (let i = 0; i < guideElems.length; i++) {
 					guide = guideElems[i];
 					boundingRect = guide.getBoundingClientRect();
-					if (boundingRect.bottom === window.innerHeight) {
+					if (parseInt(boundingRect.bottom) === window.innerHeight) {
 						this.currentItem.classList.remove('visible');
 						this.currentItem = guide;
 						this.currentItem.classList.add('visible');

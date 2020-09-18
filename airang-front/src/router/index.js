@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import StoryPage from '@/views/StoryPage.vue';
 
 Vue.use(VueRouter);
 
@@ -25,9 +26,13 @@ const routes = [
 		component: () => import('@/views/SignupPage.vue'),
 	},
 	{
-		path: '/story',
+		path: '/story/:pk',
 		name: 'story',
-		component: () => import('@/views/StoryPage.vue'),
+		props: route => ({
+			pk: Number(route.params.pk),
+		}),
+		// component: () => import('@/views/StoryPage.vue'),
+		component: StoryPage,
 	},
 	{
 		path: '/bookshelf',
@@ -35,20 +40,14 @@ const routes = [
 		component: () => import('@/views/BookshelfPage.vue'),
 	},
 	{
-		path: '/profile/:userid',
+		path: '/profile',
 		name: 'profile',
 		component: () => import('@/views/profile/ProfilePage.vue'),
-		props: route => ({
-			userId: Number(route.params.userid),
-		}),
 	},
 	{
-		path: '/profile/:userid/modifyinfo',
+		path: '/profile/modifyinfo',
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
-		props: route => ({
-			userId: Number(route.params.userid),
-		}),
 	},
 ];
 
