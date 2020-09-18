@@ -62,6 +62,9 @@ INSTALLED_APPS = [
 
     # documentation
     'drf_yasg',
+
+    # utils
+    'django_extensions',
 ]
 
 # django cors headers setting
