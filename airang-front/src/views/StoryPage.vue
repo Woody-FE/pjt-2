@@ -1,6 +1,6 @@
 <template>
 	<div class="bb-custom-wrapper">
-		<div id="bb-bookblock" class="bb-bookblock">
+		<div id="bb-bookblock" ref="book" class="bb-bookblock">
 			<div class="bb-item">
 				<div class="bb-custom-firstpage">
 					<h1>BookBlock <span>A Content Flip Plugin</span></h1>
@@ -98,10 +98,12 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<button class="btn btn-1" @click="status = 1">여우</button>
+					<button class="btn btn-1" @click="firstChoice">
+						여우
+					</button>
 				</div>
 				<div class="bb-custom-side">
-					<button class="btn btn-2" @click="status = 2">토끼</button>
+					<button class="btn btn-2" @click="secondChoice">토끼</button>
 				</div>
 			</div>
 			<div class="bb-item">
@@ -215,6 +217,20 @@ export default {
 		};
 	},
 	methods: {
+		firstChoice() {
+			this.status = 1;
+			setTimeout(function() {
+				console.log('선택1!');
+				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
+			}, 500);
+		},
+		secondChoice() {
+			this.status = 2;
+			setTimeout(function() {
+				console.log('선택2!');
+				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
+			}, 500);
+		},
 		fetchNextPage() {
 			console.log(this.bookData.rightData.length);
 			this.bookData.rightData.push({
@@ -290,6 +306,7 @@ export default {
 									break;
 								case arrow.right:
 									config.$bookBlock.bookblock('next');
+									// console.log(arrow.right);
 									break;
 							}
 						});
@@ -300,6 +317,13 @@ export default {
 		},
 	},
 	mounted() {
+		document.addEventListener('keypress', event => {
+			if (event.keyCode === 39) {
+				$('#bb-bookblock').bookblock('next');
+			} else if (event.keyCode === 37) {
+				$('#bb-bookblock').bookblock('prev');
+			}
+		});
 		this.fetchConfig();
 	},
 };

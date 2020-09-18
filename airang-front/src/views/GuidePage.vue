@@ -105,7 +105,6 @@ export default {
 		//eslint-disable-next-line
 		const io = new IntersectionObserver((entries, observer) => {
 			ioIndex = entries[0].target.dataset.index * 1;
-			// console.log(observer);
 		});
 		for (let i = 0; i < guideElems.length; i++) {
 			io.observe(guideElems[i]);
