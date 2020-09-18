@@ -13,7 +13,7 @@
 }
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
+/* body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;} */
 
 /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
 .clearfix:before, .clearfix:after { content: " "; display: table; }
@@ -40,10 +40,6 @@ a img {
 .container > header {
 	margin: 0 auto;
 	padding: 2em;
-}
-
-.container {
-	height: 100%;
 }
 
 .container > header {

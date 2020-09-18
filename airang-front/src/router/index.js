@@ -1,9 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import StoryPage from '@/views/StoryPage.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+	{
+		path: '/',
+		name: 'main',
+		component: () => import('@/views/MainPage.vue'),
+	},
 	{
 		path: '/guide',
 		name: 'guide',
@@ -15,16 +21,36 @@ const routes = [
 		component: () => import('@/views/LoginPage.vue'),
 	},
 	{
-		path: '/story',
+		path: '/signup',
+		name: 'signup',
+		component: () => import('@/views/SignupPage.vue'),
+	},
+	{
+		path: '/story/:pk',
 		name: 'story',
-		component: () => import('@/views/StoryPage.vue'),
+		props: route => ({
+			pk: Number(route.params.pk),
+		}),
+		// component: () => import('@/views/StoryPage.vue'),
+		component: StoryPage,
 	},
 	{
 		path: '/bookshelf',
 		name: 'bookshelf',
 		component: () => import('@/views/BookshelfPage.vue'),
 	},
+	{
+		path: '/profile',
+		name: 'profile',
+		component: () => import('@/views/profile/ProfilePage.vue'),
+	},
+	{
+		path: '/profile/modifyinfo',
+		name: 'modifyinfo',
+		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+	},
 ];
+
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
