@@ -172,7 +172,10 @@ if not DEBUG:
             'USER': get_setting('DATABASE_USER'),
             'PASSWORD': get_setting('DATABASE_PASSWORD'),
             'DATABASE_HOST': get_setting('DATABASE_HOST'),
-            'DATABASE_PORT': get_setting('DATABASE_PORT')
+            'DATABASE_PORT': get_setting('DATABASE_PORT'),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+            }
         }
     }
 
