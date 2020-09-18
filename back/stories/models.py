@@ -34,6 +34,7 @@ class Character(models.Model):
     thumbnail = models.ImageField()
     family_ability = models.BooleanField()
     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='characters')
+    gender = models.CharField(max_length=2)
 
 
 class MySubstory(models.Model):

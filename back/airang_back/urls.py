@@ -27,6 +27,8 @@ urlpatterns = [
     path('accounts/signup/', include('rest_auth.registration.urls')),
 
     path('accounts/', include('accounts.urls')),
+
+    path('stories/', include('stories.urls')),
 ]
 
 # if settings.DEBUG:
