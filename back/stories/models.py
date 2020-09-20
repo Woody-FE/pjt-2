@@ -48,7 +48,7 @@ class MyStory(models.Model):
     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='mystories')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mystories')
     story_name = models.CharField(max_length=30)
-    mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories')
+    mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories', null=True, blank=True)
     
 
 class MyCharacter(models.Model):
