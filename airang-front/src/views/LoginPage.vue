@@ -4,6 +4,9 @@
 		<div class="login-grass grass-2"></div>
 		<div class="login-grass grass-3"></div>
 		<form class="login-form" @submit.prevent="submitForm">
+			<div class="login-brown-1"></div>
+			<div class="login-brown-2"></div>
+			<div class="login-brown-3"></div>
 			<div class="login-box">
 				<label class="login-label" for="email">이메일</label>
 				<input id="email" class="login-item" type="email" v-model="email" />
@@ -69,14 +72,40 @@ export default {
 	.grass-1 {
 		transform: rotate(-45deg);
 		z-index: 1;
+		animation: grass-1 2s infinite alternate;
+		animation-timing-function: 2s;
 	}
 	.grass-2 {
 		transform: rotate(45deg);
 		z-index: 1;
+		animation: grass-2 2s infinite alternate;
+		animation-timing-function: 2s;
 	}
 	.grass-3 {
 		transform: rotate(0deg);
 		z-index: 1;
+	}
+	@-webkit-keyframes grass-1 {
+		0% {
+			transform: rotate(-60deg);
+		}
+		50% {
+			transform: rotate(-45deg);
+		}
+		100% {
+			transform: rotate(-60deg);
+		}
+	}
+	@-webkit-keyframes grass-2 {
+		0% {
+			transform: rotate(60deg);
+		}
+		50% {
+			transform: rotate(45deg);
+		}
+		100% {
+			transform: rotate(60deg);
+		}
 	}
 	.login-form {
 		position: absolute;
@@ -95,6 +124,36 @@ export default {
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
+		.login-brown-1 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			transform: translateX(-50%);
+			width: 30px;
+			height: 2px;
+			top: 100px;
+			left: 20%;
+		}
+		.login-brown-2 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			transform: translateX(-50%);
+			width: 30px;
+			height: 2px;
+			top: 50px;
+			left: 80%;
+		}
+		.login-brown-3 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			transform: translateX(-50%);
+			width: 30px;
+			height: 2px;
+			top: 450px;
+			left: 40%;
+		}
 		.login-box {
 			position: relative;
 			width: 100%;
