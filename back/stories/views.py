@@ -124,8 +124,10 @@ class SubstoryDetailView(APIViewWithAuthentication):
         for value in data['scripts']:
             mycharacter = mystory.mycharacters.filter(mystory=mystory_id, character=value['character']['id'])
             if mycharacter:
-                value['mycharacter'] = MyChara(instance=mycharacter[0]).data
+                value['mycharacter'] = MyCharacterBasicSerializer(instance=mycharacter[0]).data
             else:
                 value['mycharacter'] = {}
         return Response(result, status=status.HTTP_200_OK)
-    
+
+
+# 스토리 최종 만드는 로직 추가필요
