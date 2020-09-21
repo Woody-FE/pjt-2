@@ -20,7 +20,7 @@ class StoryImage(models.Model):
 
 class Story(models.Model):
     name = models.CharField(max_length=20)
-    cover_image = models.ImageField()
+    cover_image = models.ImageField(null=True, blank=True)
     substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='story')
 
 
@@ -31,7 +31,7 @@ class Branch(models.Model):
 
 class Character(models.Model):
     name = models.CharField(max_length=20)
-    thumbnail = models.ImageField()
+    thumbnail = models.ImageField(null=True, blank=True)
     family_ability = models.BooleanField()
     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='characters')
     gender = models.CharField(max_length=2)
@@ -48,7 +48,7 @@ class MyStory(models.Model):
     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='mystories')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mystories')
     story_name = models.CharField(max_length=30)
-    mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories')
+    mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories', null=True, blank=True)
     
 
 class MyCharacter(models.Model):

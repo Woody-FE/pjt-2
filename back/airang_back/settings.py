@@ -71,6 +71,10 @@ INSTALLED_APPS = [
 # for debugging
 
 CORS_ORIGIN_WHITELIST = [
+    # test
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+
     'https://j3d105.p.ssafy.io:8001',
     'https://j3d105.p.ssafy.io',
     'http://j3d105.p.ssafy.io:8001',
@@ -172,7 +176,10 @@ if not DEBUG:
             'USER': get_setting('DATABASE_USER'),
             'PASSWORD': get_setting('DATABASE_PASSWORD'),
             'DATABASE_HOST': get_setting('DATABASE_HOST'),
-            'DATABASE_PORT': get_setting('DATABASE_PORT')
+            'DATABASE_PORT': get_setting('DATABASE_PORT'),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+            }
         }
     }
 

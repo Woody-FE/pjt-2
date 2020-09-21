@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "아들",
+    "thumbnail": "",
+    "family_ability": true,
+    "story": 1,
+    "gender": "M"
+  },
+  {
+    "id": 2,
+    "name": "나레이션",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "F"
+  },
+  {
+    "id": 3,
+    "name": "아버지",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "M"
+  },
+  {
+    "id": 4,
+    "name": "사람들",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "N"
+  },
+  {
+    "id": 5,
+    "name": "토끼",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "M"
+  },
+  {
+    "id": 6,
+    "name": "신부",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "M"
+  },
+  {
+    "id": 7,
+    "name": "다람쥐",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "F"
+  },
+  {
+    "id": 8,
+    "name": "곰",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "M"
+  },
+  {
+    "id": 9,
+    "name": "동물들",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "N"
+  },
+  {
+    "id": 10,
+    "name": "프로듀서",
+    "thumbnail": "",
+    "family_ability": false,
+    "story": 1,
+    "gender": "F"
+  }
+]
