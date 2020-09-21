@@ -4,7 +4,7 @@
 			<span>
 				<img
 					class="decoration"
-					src="@/assets/images/sp.png"
+					src="@/assets/images/background/sp.png"
 					alt="sprout"
 				/>이메일
 			</span>
@@ -17,7 +17,11 @@
 		</div>
 		<div class="input-box">
 			<span class="">
-				<img class="decoration" src="@/assets/images/sp.png" alt="sprout" />이름
+				<img
+					class="decoration"
+					src="@/assets/images/background/sp.png"
+					alt="sprout"
+				/>이름
 			</span>
 			<input class="input-form" type="text" v-model="userData.name" />
 		</div>
@@ -25,7 +29,7 @@
 			<span class="">
 				<img
 					class="decoration"
-					src="@/assets/images/sp.png"
+					src="@/assets/images/background/sp.png"
 					alt="sprout"
 				/>비밀번호
 			</span>
@@ -35,7 +39,7 @@
 			<span class="">
 				<img
 					class="decoration"
-					src="@/assets/images/sp.png"
+					src="@/assets/images/background/sp.png"
 					alt="sprout"
 				/>비밀번호 확인
 			</span>

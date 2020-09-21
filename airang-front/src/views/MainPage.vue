@@ -4,7 +4,7 @@
 			<div class="main">
 				<div class="main-img">
 					<img
-						src="@/assets/images/아랑이6.png"
+						src="@/assets/images/character/nukkied_arang1.png"
 						class="arang alone"
 						alt="아랑이1"
 					/>
@@ -15,7 +15,11 @@
 			</div>
 			<div class="main">
 				<div class="main-img">
-					<img src="@/assets/images/아랑이4.png" class="arang" alt="아랑이2" />
+					<img
+						src="@/assets/images/character/nukkied_arang2.png"
+						class="arang"
+						alt="아랑이2"
+					/>
 				</div>
 				<div class="main-description">
 					<p>선택가능</p>
@@ -23,7 +27,11 @@
 			</div>
 			<div class="main">
 				<div class="main-img">
-					<img src="@/assets/images/아랑이5.png" class="arang" alt="아랑이3" />
+					<img
+						src="@/assets/images/character/nukkied_arang3.png"
+						class="arang"
+						alt="아랑이3"
+					/>
 				</div>
 				<div class="main-description">
 					<p>멀티 엔딩</p>
