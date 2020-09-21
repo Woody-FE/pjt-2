@@ -91,6 +91,8 @@ export default {
 			const guideElems = document.querySelectorAll('.guide');
 			this.currentItem = guideElems[0];
 			this.currentItem.classList.add('visible');
+			const downbtn = document.querySelector('.guide-btn__down');
+			downbtn.style.display = 'inline';
 		},
 	},
 	mounted() {
@@ -103,7 +105,7 @@ export default {
 		this.currentItem = guideElems[0];
 		let ioIndex;
 		//eslint-disable-next-line
-		const io = new IntersectionObserver((entries, observer) => {
+        const io = new IntersectionObserver((entries, observer) => {
 			ioIndex = entries[0].target.dataset.index * 1;
 		});
 		for (let i = 0; i < guideElems.length; i++) {
@@ -123,8 +125,10 @@ export default {
 				document.querySelector('body').scrollHeight <=
 				this.windowTop + window.innerHeight
 			) {
+				downbtn.style.display = 'none';
 				return;
 			}
+			downbtn.style.display = 'inline';
 			for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
 				guide = guideElems[i];
 				if (!guide) continue;
@@ -146,7 +150,6 @@ export default {
 			}
 			let guide;
 			let boundingRect;
-
 			if (delta < 0) {
 				for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
 					guide = guideElems[i];
@@ -171,6 +174,7 @@ export default {
 						this.currentItem.classList.add('visible');
 					}
 				}
+				downbtn.style.display = 'inline';
 			}
 		});
 	},
