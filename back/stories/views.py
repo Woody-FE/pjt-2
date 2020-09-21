@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from drf_yasg.utils import swagger_auto_schema
+
 from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer
 from .models import *
 
@@ -20,7 +22,9 @@ class MyStoryView(APIViewWithAuthentication):
         serializer = MyStorySerializer(instance=mystories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    # @swagger_auto_schema(request_body=)
     # def post(self, request):
+        
 
 
 class MyStoryDetailView(APIViewWithAuthentication):
@@ -64,6 +68,7 @@ class BranchDetailView(APIViewWithAuthentication):
 
 class SubstoryDetailView(APIViewWithAuthentication):
 
+    # substory 줄때 Mycharacter를 넣어서 줄 수 있는 방법???
     def get(self, request, substory_id):
         substory = get_object_or_404(Substory, pk=substory_id)
         serializer = SubstorySerializer(instance=substory)
