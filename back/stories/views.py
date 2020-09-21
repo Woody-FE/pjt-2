@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer
+from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer
 from .models import *
 
 
@@ -22,9 +22,22 @@ class MyStoryView(APIViewWithAuthentication):
         serializer = MyStorySerializer(instance=mystories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # @swagger_auto_schema(request_body=)
-    # def post(self, request):
-        
+    @swagger_auto_schema(request_body=MyStoryCreateRequestSerializer)
+    def post(self, request):
+        user = request.user
+        story_id = request.data.get('story_id')
+        story_name = request.data.get('story_name')
+
+        data = {
+           'story': story_id,
+           'user': user,
+           'story_name': story_name,
+        }
+       
+        mystory = MyStoryCreateSerializer(data=data)
+        if mystory.is_valid(raise_exception=True):
+            mystory.save(user=user)
+            return Response(mystory.data, status=status.HTTP_201_CREATED)
 
 
 class MyStoryDetailView(APIViewWithAuthentication):

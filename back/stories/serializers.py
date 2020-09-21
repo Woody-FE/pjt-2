@@ -22,12 +22,23 @@ class MyStorySerializer(serializers.ModelSerializer):
         )
 
 
+class MyStoryCreateRequestSerializer(serializers.Serializer):
+    story_id = serializers.IntegerField()
+    story_name = serializers.CharField()
+
+
 class MyStoryCreateSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    created = serializers.DateTimeField(read_only=True)
+    user = serializers.RelatedField(read_only=True)
     class Meta:
         model = MyStory
         fields = (
-            'story',
+            'id',
+            'created',
             'story_name',
+            'story',
+            'user',
         )
 
         
