@@ -22,6 +22,15 @@ class MyStorySerializer(serializers.ModelSerializer):
         )
 
 
+class MyStoryCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyStory
+        fields = (
+            'story',
+            'story_name',
+        )
+
+        
 class CharacterOfScriptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
