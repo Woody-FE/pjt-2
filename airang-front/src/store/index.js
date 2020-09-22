@@ -35,13 +35,13 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		SETUP_USER({ commit }, { user: { username, pk }, token }) {
-			cookies.set('id', pk);
+		SETUP_USER({ commit }, { user: { username, id }, key }) {
+			cookies.set('id', id);
 			cookies.set('username', username);
-			cookies.set('auth-token', token);
+			cookies.set('auth-token', key);
 			commit('setUsername', username);
-			commit('setToken', token);
-			commit('setId', pk);
+			commit('setToken', key);
+			commit('setId', id);
 		},
 		async LOGIN({ dispatch }, userData) {
 			const { data } = await loginUser(userData);

@@ -11,4 +11,8 @@ function patchUserName(userId, userData) {
 function changePassword(userData) {
 	return auth.post(`accounts/password/change/`, userData);
 }
-export { getUserProfile, patchUserName, changePassword };
+
+function changeImage(userId, userData) {
+	return auth.patch(`accounts/${userId}/child/image`, userData);
+}
+export { getUserProfile, patchUserName, changePassword, changeImage };
