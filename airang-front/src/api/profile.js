@@ -1,11 +1,14 @@
-import auth from './index';
+import { auth } from './index';
 
 function getUserProfile(userId) {
 	return auth.get(`accounts/${userId}`);
 }
 
-function patchUserProfile(userId) {
-	return auth.patch(`account/${userId}`);
+function patchUserName(userId, userData) {
+	return auth.patch(`accounts/${userId}`, userData);
 }
 
-export { getUserProfile, patchUserProfile };
+function changePassword(userData) {
+	return auth.post(`accounts/password/change/`, userData);
+}
+export { getUserProfile, patchUserName, changePassword };

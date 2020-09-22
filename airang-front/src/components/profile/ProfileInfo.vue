@@ -1,22 +1,17 @@
 <template>
 	<section class="profileInfo-wrap">
-		<img
-			class="profileInfo-img"
-			src="@/assets/images/character/rabbit3.png"
-			alt="profileImg"
-		/>
+		<img class="profileInfo-img" :src="profileImageSrc" alt="profileImg" />
 		<p class="profileInfo-name">{{ userData.name }}</p>
 		<section class="btn-box">
 			<router-link to="/profile/modifyinfo">
 				<button class="btn-update__img btn">정보수정</button>
 			</router-link>
-			<button class="btn-update__info btn">사진수정</button>
+			<button type="file" class="btn-update__info btn">사진수정</button>
 		</section>
 	</section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import { getUserProfile } from '@/api/profile';
 export default {
 	data() {
@@ -28,8 +23,26 @@ export default {
 		};
 	},
 	methods: {
-		// ...mapGetters([])
-		// fetchData() {},
+		async fetchData() {
+			try {
+				const id = this.$store.getters.getId;
+				const { data } = await getUserProfile(id);
+				this.userData.name = data.username;
+				this.userData.imgPath = data.child_image;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+	},
+	computed: {
+		profileImageSrc() {
+			return this.userData.imgPath !== null
+				? this.userData.imgPath
+				: '@/assets/images/character/arang1.png';
+		},
+	},
+	created() {
+		this.fetchData();
 	},
 };
 </script>

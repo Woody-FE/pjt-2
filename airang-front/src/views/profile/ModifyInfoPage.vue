@@ -23,7 +23,8 @@
 					alt="sprout"
 				/>이름
 			</span>
-			<input class="input-form" type="text" v-model="userData.name" />
+			<input class="input-form" type="text" v-model="userData.username" />
+			<button class="name-btn" @click="changeName">ㄷㅈ</button>
 		</div>
 		<div class="input-box">
 			<span class="">
@@ -33,7 +34,11 @@
 					alt="sprout"
 				/>비밀번호
 			</span>
-			<input class="input-form" type="text" v-model="userData.password" />
+			<input
+				class="input-form"
+				type="text"
+				v-model="userPassword.new_password1"
+			/>
 		</div>
 		<div class="input-box">
 			<span class="">
@@ -43,29 +48,77 @@
 					alt="sprout"
 				/>비밀번호 확인
 			</span>
-			<input class="input-form" type="text" v-model="userData.password2" />
+			<input
+				class="input-form"
+				type="text"
+				v-model="userPassword.new_password2"
+			/>
 		</div>
 		<section class="btn-box">
 			<router-link to="/profile/1">
 				<button class="btn btn-cancle">취소</button>
 			</router-link>
-			<button class="btn btn-update">수정</button>
+			<button class="btn btn-update" @click="patchData">수정</button>
 		</section>
 		<footer class="modify-footer"></footer>
 	</section>
 </template>
 
 <script>
+import { getUserProfile, patchUserName, changePassword } from '@/api/profile';
+// import cookies from 'vue-cookies';
+// import { mapMutations } from 'vuex';
+
 export default {
 	data() {
 		return {
 			userData: {
-				email: 'ssafy@ssafy.com',
-				name: null,
+				email: null,
+				username: null,
 				password: null,
-				password2: null,
+			},
+			userPassword: {
+				new_password1: null,
+				new_password2: null,
 			},
 		};
+	},
+	methods: {
+		// ...mapMutations(['setId']),
+		async fetchData() {
+			try {
+				const id = this.$store.getters.getId;
+				const { data } = await getUserProfile(id);
+				this.userData.email = data.email;
+				this.userData.username = data.username;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async patchData() {
+			try {
+				const content = this.userPassword;
+				await changePassword(content);
+				this.$router.push('/profile/');
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async changeName() {
+			try {
+				const content = {
+					username: this.userData.username,
+				};
+				const id = this.$store.getters.getId;
+				const temp = await patchUserName(id, content);
+				console.log(temp);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+	},
+	created() {
+		this.fetchData();
 	},
 };
 </script>

@@ -15,6 +15,7 @@ export default new Vuex.Store({
 		isLogined: state => !!state.token,
 		getToken: state => state.token,
 		getUsername: state => state.username,
+		getId: state => state.id,
 	},
 	mutations: {
 		setUsername(state, username) {
@@ -34,13 +35,13 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		SETUP_USER({ commit }, { user: { username }, token }) {
-			// const { username } = user;
-			cookies.set('id', id);
+		SETUP_USER({ commit }, { user: { username, pk }, token }) {
+			cookies.set('id', pk);
 			cookies.set('username', username);
 			cookies.set('auth-token', token);
 			commit('setUsername', username);
 			commit('setToken', token);
+			commit('setId', pk);
 		},
 		async LOGIN({ dispatch }, userData) {
 			const { data } = await loginUser(userData);
