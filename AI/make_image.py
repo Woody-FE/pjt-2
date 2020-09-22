@@ -1,15 +1,14 @@
 import cv2
 import numpy as np
 import face_recognition as fr
-from Cartoonization import test as Cartoonization
+from Cartoonization.test import Cartoonize
 
 
 # 1. 이미지 받기
 original_image_path = "./images/input_images/KTI.jpg"
 original_image_name = original_image_path[22:]
-# print(original_image_name)
-origin_img = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
-BGRA_img = cv2.cvtColor(origin_img, cv2.COLOR_BGR2BGRA)
+origin_image = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
+BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
 
 
 # 2-1. Face Recognition으로 Nukki에 쓸 좌표 구하기
@@ -20,7 +19,8 @@ fr_chin = fr_landmarks_list[0]['chin']
 np_fr_chin = np.array(fr_chin)
 fr_chin_bottom = np.max(np_fr_chin, axis=0)[1]
 
-chin_x, chin_y = np_fr_chin[np.argmax(chin_y)], np_fr_chin[:, 1:]
+chin_y = np_fr_chin[:, 1:]
+chin_x = np_fr_chin[np.argmax(chin_y)]
 chin_start, chin_end = np_fr_chin[0], np_fr_chin[-1]
 
 upper_head = []
@@ -51,7 +51,7 @@ nukki_coordinate.append(eyelash_right_end)
 
 
 # 2-2. 얼굴 이미지 자르기
-image = BGRA_img
+image = BGRA_image
 mask = np.zeros(image.shape, dtype=np.uint8)
 roi_corners = np.array([nukki_coordinate], dtype=np.int32)
 
@@ -70,17 +70,19 @@ Resized_image = cv2.resize(Trimmed_image, (180, 200),
 
 # cv2.imwrite('Nukkied_image.png', Nukkied_image)
 # cv2.imwrite('Trimmed_image.png', Trimmed_image)
-cv2.imwrite('Resized_image.png', Resized_image)
+# cv2.imwrite('Resized_image.png', Resized_image)
 
 
 # 2-3. Cartoonization 이미지 변환
-Cartoonization()
+baby_face = Cartoonize(Resized_image)
 
 
 # 3. 몸에 합성
-baby_face = cv2.imread('./Resized_image.png', cv2.IMREAD_UNCHANGED)
-baby_body = cv2.imread('./images/Remove_white_body.png', cv2.IMREAD_UNCHANGED)
-baby_hat = cv2.imread('./images/Remove_white_hat.png', cv2.IMREAD_UNCHANGED)
+# baby_face = cv2.imread('./Resized_image.png', cv2.IMREAD_UNCHANGED)
+baby_body = cv2.imread(
+    './images/body_and_hat/white_removed_body.png', cv2.IMREAD_UNCHANGED)
+baby_hat = cv2.imread(
+    './images/body_and_hat/white_removed_hat.png', cv2.IMREAD_UNCHANGED)
 
 component = [baby_face, baby_body, baby_hat]
 for i in range(3):
@@ -121,7 +123,7 @@ for c in range(0, 3):
                                                    x_offset:x_offset + baby_hat.shape[1], c] * (1.0 - baby_hat[:, :, 3]/255.0)
 
 # Result
-result = baby_face_body.copy()
+result = baby_face_body
 
 cv2.imshow('Face_to_body', result)
 cv2.imwrite('result.png', result)
