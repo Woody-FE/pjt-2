@@ -1,6 +1,6 @@
 <template>
 	<div class="bb-custom-wrapper">
-		<div id="bb-bookblock" ref="book" class="bb-bookblock">
+		<div id="bb-bookblock" class="bb-bookblock">
 			<div class="bb-item">
 				<div class="bb-custom-firstpage">
 					<img
@@ -96,7 +96,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="bb-item">
+			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<button class="btn btn-1" @click="firstChoice">
 						여우
@@ -106,7 +106,7 @@
 					<button class="btn btn-2" @click="secondChoice">토끼</button>
 				</div>
 			</div>
-			<div class="bb-item">
+			<div class="bb-item after-select">
 				<div class="bb-custom-side img-side">
 					<img
 						v-if="status === 1"
@@ -170,7 +170,7 @@
 				</div>
 			</div>
 		</div>
-		<nav>
+		<nav class="story-btn">
 			<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first"
 				>First page</a
 			>
@@ -198,6 +198,7 @@
 export default {
 	data() {
 		return {
+			currentItem: null,
 			status: 0,
 			cnt: 2,
 			bookData: {
@@ -217,11 +218,21 @@ export default {
 		};
 	},
 	methods: {
+		hideButton() {
+			const btns = document.querySelector('.story-btn');
+			btns.style.display = 'none';
+		},
+		openButton() {
+			const btns = document.querySelector('.story-btn');
+			btns.style.display = 'inline';
+		},
 		firstChoice() {
 			this.status = 1;
 			setTimeout(function() {
 				console.log('선택1!');
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
+				const btns = document.querySelector('.story-btn');
+				btns.style.display = 'none';
 			}, 500);
 		},
 		secondChoice() {
@@ -229,6 +240,8 @@ export default {
 			setTimeout(function() {
 				console.log('선택2!');
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
+				const btns = document.querySelector('.story-btn');
+				btns.style.display = 'none';
 			}, 500);
 		},
 		fetchNextPage() {
@@ -317,6 +330,24 @@ export default {
 		},
 	},
 	mounted() {
+		const storyElems = document.querySelectorAll('.bb-item');
+		this.currentItem = storyElems[0];
+		let ioIndex;
+		//eslint-disable-next-line
+		const io = new IntersectionObserver((entries, observer) => {
+			entries.map(entry => {
+				if (entry.isIntersecting) {
+					if (entry.target.classList.contains('before-select')) {
+						this.hideButton();
+					} else if (entry.target.classList.contains('after-select')) {
+						this.openButton();
+					}
+				}
+			});
+		});
+		for (let i = 0; i < storyElems.length; i++) {
+			io.observe(storyElems[i]);
+		}
 		document.addEventListener('keypress', event => {
 			if (event.keyCode === 39) {
 				$('#bb-bookblock').bookblock('next');
