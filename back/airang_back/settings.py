@@ -80,8 +80,10 @@ CORS_ORIGIN_WHITELIST = [
     'http://j3d105.p.ssafy.io:8001',
     'http://j3d105.p.ssafy.io',
 ]
+
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
+    ALLOWED_HOSTS = ['*']
 
 # drf setting
 REST_FRAMEWORK = {

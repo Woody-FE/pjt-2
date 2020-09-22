@@ -36,6 +36,7 @@ class UserDetailView(APIView):
 
     @swagger_auto_schema(request_body=UserDetailSerializer)
     def patch(self, request, user_id):
+        print(request.user)
         user = self.get_object(user_id)
         serializer = UserUpdateSerializer(instance=user, data=request.data)
         if serializer.is_valid(raise_exception=True):
