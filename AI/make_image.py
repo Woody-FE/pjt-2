@@ -74,6 +74,7 @@ Resized_image = cv2.resize(Trimmed_image, (180, 200),
 
 
 # 2-3. Cartoonization 이미지 변환
+input_image = Resized_image.convert
 baby_face = Cartoonize(Resized_image)
 
 
