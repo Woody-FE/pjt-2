@@ -77,7 +77,7 @@ class UserFamilyView(APIView):
         serializer = FamilyCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user)
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserFamilyDetailView(APIView):

@@ -71,6 +71,10 @@ INSTALLED_APPS = [
 # for debugging
 
 CORS_ORIGIN_WHITELIST = [
+    # test
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+
     'https://j3d105.p.ssafy.io:8001',
     'https://j3d105.p.ssafy.io',
     'http://j3d105.p.ssafy.io:8001',
