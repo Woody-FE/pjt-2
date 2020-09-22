@@ -96,8 +96,8 @@ cartooned_RGBA_image.putdata(newData)
 
 
 # 2-4-2. resize
-cartooned_RGBA_image.resize((180, 200), resample=3,
-                            box=None, reducing_gap=None)
+cartooned_RGBA_image = cartooned_RGBA_image.resize((180, 200), resample=3,
+                                                   box=None, reducing_gap=None)
 save_path = './images/re_nukkied_images/' + cartooned_image_name
 cartooned_RGBA_image.save(save_path, 'PNG')
 
