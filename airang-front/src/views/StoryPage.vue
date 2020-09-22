@@ -5,7 +5,7 @@
 				<div class="bb-custom-firstpage">
 					<img
 						class="first-cover"
-						src="@/assets/images/아랑이3.jpg"
+						src="@/assets/images/character/arang3.jpg"
 						alt="img"
 					/>
 					<nav class="codrops-nav">
@@ -25,13 +25,13 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/44.png" alt="img" />
+					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							class="portrait-img"
-							src="@/assets/images/temp/po.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<p class="portrait-p">나레이션</p>
@@ -44,13 +44,13 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/44.png" alt="img" />
+					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							class="portrait-img"
-							src="@/assets/images/temp/zoo.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<p class="portrait-p">아버지</p>
@@ -60,13 +60,13 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/temp/44.png" alt="img" />
+					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							class="portrait-img"
-							src="@/assets/images/temp/po.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<p class="portrait-p">나레이션</p>
@@ -79,13 +79,13 @@
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/crossroad.jpg" alt="img" />
+					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							class="portrait-img"
-							src="@/assets/images/temp/po.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<p class="portrait-p">나레이션</p>
@@ -110,16 +110,16 @@
 				<div class="bb-custom-side img-side">
 					<img
 						v-if="status === 1"
-						src="@/assets/images/changes.jpg"
+						src="@/assets/images/character/arang1.png"
 						alt="img"
 					/>
-					<img v-else src="@/assets/images/small.jpg" alt="img" />
+					<img v-else src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							class="portrait-img"
-							src="@/assets/images/temp/po.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<p class="portrait-p">나레이션</p>
@@ -138,23 +138,23 @@
 				<div class="bb-custom-side img-side">
 					<img
 						v-if="status === 1"
-						src="@/assets/images/changes.jpg"
+						src="@/assets/images/character/arang1.png"
 						alt="img"
 					/>
-					<img v-else src="@/assets/images/small.jpg" alt="img" />
+					<img v-else src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							v-if="status === 2"
 							class="portrait-img"
-							src="@/assets/images/temp/12345.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<img
 							v-else
 							class="portrait-img"
-							src="@/assets/images/temp/po.png"
+							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<p v-if="status === 2" class="portrait-p">영준</p>

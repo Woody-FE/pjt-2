@@ -1,10 +1,10 @@
 <template>
 	<div class="nav" v-if="!StoryRoute">
 		<router-link v-if="AuthRoute" class="nav-logo" to="/"
-			><img src="@/assets/images/orange.png" alt=""
+			><img src="@/assets/images/logo/orange.png" alt=""
 		/></router-link>
 		<router-link v-else class="nav-logo" to="/"
-			><img src="@/assets/images/white.png" alt=""
+			><img src="@/assets/images/logo/white.png" alt=""
 		/></router-link>
 		<section class="nav-btn">
 			<router-link

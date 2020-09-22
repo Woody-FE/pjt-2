@@ -4,7 +4,7 @@
 			<figure class="guide visible">
 				<img
 					class="guide-img"
-					src="@/assets/images/01.png"
+					src="@/assets/images/character/arang1.png"
 					alt="두번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -16,7 +16,7 @@
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/02.png"
+					src="@/assets/images/character/arang2.jpg"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -29,7 +29,7 @@
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/03.png"
+					src="@/assets/images/character/arang3.jpg"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -41,7 +41,7 @@
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/04.png"
+					src="@/assets/images/character/arang1.png"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -53,7 +53,7 @@
 				<img
 					class="guide-img"
 					s
-					src="@/assets/images/05.png"
+					src="@/assets/images/character/arang2.jpg"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">

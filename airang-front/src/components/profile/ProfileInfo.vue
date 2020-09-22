@@ -2,7 +2,7 @@
 	<section class="profileInfo-wrap">
 		<img
 			class="profileInfo-img"
-			src="@/assets/images/demo_profile.gif"
+			src="@/assets/images/character/rabbit3.png"
 			alt="profileImg"
 		/>
 		<p class="profileInfo-name">황영준</p>
