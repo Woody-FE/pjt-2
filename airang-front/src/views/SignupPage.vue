@@ -142,21 +142,21 @@ export default {
 			position: absolute;
 			background: brown;
 			border-radius: 4px;
-			transform: translateX(-50%);
-			width: 30px;
+			/* transform: translateX(-50%); */
+			width: 60px;
 			height: 2px;
-			top: 100px;
-			left: 20%;
+			top: 50px;
+			left: 15%;
 		}
 		.signup-brown-2 {
 			position: absolute;
 			background: brown;
 			border-radius: 4px;
-			transform: translateX(-50%);
-			width: 30px;
+			/* transform: translateX(-50%); */
+			width: 90px;
 			height: 2px;
-			top: 50px;
-			left: 80%;
+			top: 80px;
+			left: 17%;
 		}
 		.signup-brown-3 {
 			position: absolute;
@@ -166,7 +166,7 @@ export default {
 			width: 30px;
 			height: 2px;
 			top: 450px;
-			left: 40%;
+			left: 60%;
 		}
 		.signup-box {
 			position: relative;

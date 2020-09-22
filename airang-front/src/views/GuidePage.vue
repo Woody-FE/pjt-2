@@ -130,6 +130,9 @@ export default {
 			}
 			downbtn.style.display = 'inline';
 			for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
+				if (i === guideElems.length - 1) {
+					break;
+				}
 				guide = guideElems[i];
 				if (!guide) continue;
 				boundingRect = guide.getBoundingClientRect();
