@@ -2,6 +2,9 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
+from rest_auth.models import TokenModel
+from rest_auth.utils import import_callable
+
 from .models import Family
 
 
@@ -88,5 +91,15 @@ class FamilyUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'name',
             'image',
-            'gender'
+            'gender',
+        )
+
+
+class CustomTokenSerializer(serializers.ModelSerializer):
+    user = UserDetailSerializer()
+    class Meta:
+        model = TokenModel
+        fields = (
+            'key',
+            'user',
         )
