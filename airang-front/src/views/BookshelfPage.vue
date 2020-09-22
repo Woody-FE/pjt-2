@@ -2,15 +2,56 @@
 	<section class="bookshelf-wrap">
 		<h2>아이랑 도서관</h2>
 		<div class="box-out">
-			<router-link to="/story/1"><div class="book books-1"></div></router-link>
-			<router-link to="/story/2"><div class="book books-2"></div></router-link>
-			<router-link to="/story/3"><div class="book books-3"></div></router-link>
+			<router-link
+				:key="book.id"
+				v-for="book in books"
+				:to="`/story/${book.id}/${book.story.substory}`"
+				><div class="book books-1"></div
+			></router-link>
+			<!-- <router-link to="/story/2"><div class="book books-2"></div></router-link> -->
+			<!-- <router-link to="/story/3"><div class="book books-3"></div></router-link> -->
+		</div>
+		<div class="book-add__btn">
+			<button @click="createBook">책 생성</button>
 		</div>
 	</section>
 </template>
 
 <script>
-export default {};
+import { createMyStory, fetchMyStories } from '@/api/story';
+export default {
+	created() {
+		this.fetchBooks();
+	},
+	data() {
+		return {
+			books: [],
+		};
+	},
+	methods: {
+		async fetchBooks() {
+			try {
+				const { data } = await fetchMyStories();
+				this.books = data;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		async createBook() {
+			try {
+				const { data } = await createMyStory({
+					story_id: 1,
+					story_name: '세가지 선물',
+				});
+				this.fetchBooks;
+				console.log(data);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+	},
+};
 </script>
 
 <style lang="scss">

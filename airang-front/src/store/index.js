@@ -30,7 +30,7 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		SETUP_USER({ commit }, { user: { username }, token }) {
+		SETUP_USER({ commit }, { user: { username }, key: token }) {
 			// const { username } = user;
 			cookies.set('username', username);
 			cookies.set('auth-token', token);
