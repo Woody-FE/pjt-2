@@ -9,14 +9,14 @@ import torchvision.utils as vutils
 from .network.Transformer import Transformer
 
 
-def Cartoonize(Resized_image):
+def cartoonize(Resized_image_path):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_dir', default='./images/input_images')
+    parser.add_argument('--input_dir', default=Resized_image_path)
     parser.add_argument('--load_size', default=450)
     parser.add_argument(
         '--model_path', default='./Cartoonization/pretrained_model')
     parser.add_argument('--style', default='Shinkai')
-    parser.add_argument('--output_dir', default='./images/output_images')
+    parser.add_argument('--output_dir', default='./images/cartooned_images')
     parser.add_argument('--gpu', type=int, default=0)
 
     opt = parser.parse_args()
@@ -45,9 +45,8 @@ def Cartoonize(Resized_image):
             continue
 
         # load image
-        input_image = Image.open(Resized_image).convert("RGB")
-        # input_image = Image.open(os.path.join(
-        #     opt.input_dir, files)).convert("RGB")
+        input_image = Image.open(os.path.join(
+            opt.input_dir, files)).convert("RGB")
 
         # resize image, keep aspect ratio
         h = input_image.size[0]
@@ -78,9 +77,9 @@ def Cartoonize(Resized_image):
         # deprocess, (0, 1)
         output_image = output_image.data.cpu().float() * 0.5 + 0.5
         # save
+        file_name = files[:-4] + '_' + opt.style + '.png'
         vutils.save_image(output_image, os.path.join(
-            opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
+            opt.output_dir, files[:-4] + '_' + opt.style + '.png'))
 
     print('Done!')
-
-    return output_image
+    return file_name

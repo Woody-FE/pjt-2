@@ -1,12 +1,13 @@
+import os
 import cv2
 import numpy as np
 import face_recognition as fr
-from Cartoonization.test import Cartoonize
-
+from PIL import Image
+from Cartoonization import test
 
 # 1. 이미지 받기
 original_image_path = "./images/input_images/KTI.jpg"
-original_image_name = original_image_path[22:]
+original_image_name = original_image_path[22:-4]
 origin_image = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
 BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
 
@@ -65,32 +66,55 @@ Trim_x, Trim_y = (int(chin_start[0]), int(
     chin_end[0])), (int(min_y), int(fr_chin_bottom))
 Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
 
-Resized_image = cv2.resize(Trimmed_image, (180, 200),
+Nukkied_image = cv2.resize(Trimmed_image, (180, 200),
                            fx=1, fy=1, interpolation=cv2.INTER_AREA)
 
-# cv2.imwrite('Nukkied_image.png', Nukkied_image)
-# cv2.imwrite('Trimmed_image.png', Trimmed_image)
-# cv2.imwrite('Resized_image.png', Resized_image)
+Nukkied_image_path = './images/nukkied_images'
+cv2.imwrite(os.path.join(Nukkied_image_path,
+                         'Nukkied_' + original_image_name + '.png'), Nukkied_image)
 
 
 # 2-3. Cartoonization 이미지 변환
-input_image = Resized_image.convert
-baby_face = Cartoonize(Resized_image)
+cartooned_image_name = test.cartoonize(Nukkied_image_path)
+cartooned_image_path = './images/cartooned_images/' + cartooned_image_name
+
+
+# 2-4-1. 검은부분 Nukki
+cartooned_image = Image.open(cartooned_image_path)
+cartooned_RGBA_image = cartooned_image.convert('RGBA')
+
+datas = cartooned_RGBA_image.getdata()
+
+newData = []
+cutOff = 30
+for item in datas:
+    if item[0] <= cutOff and item[1] <= cutOff and item[2] <= cutOff:
+        newData.append((255, 255, 255, 0))
+    else:
+        newData.append(item)
+cartooned_RGBA_image.putdata(newData)
+
+
+# 2-4-2. resize
+cartooned_RGBA_image.resize((180, 200), resample=3,
+                            box=None, reducing_gap=None)
+save_path = './images/re_nukkied_images/' + cartooned_image_name
+cartooned_RGBA_image.save(save_path, 'PNG')
 
 
 # 3. 몸에 합성
-# baby_face = cv2.imread('./Resized_image.png', cv2.IMREAD_UNCHANGED)
+baby_face = cv2.imread('./Resized_image.png', cv2.IMREAD_UNCHANGED)
 baby_body = cv2.imread(
     './images/body_and_hat/white_removed_body.png', cv2.IMREAD_UNCHANGED)
 baby_hat = cv2.imread(
     './images/body_and_hat/white_removed_hat.png', cv2.IMREAD_UNCHANGED)
 
 component = [baby_face, baby_body, baby_hat]
-for i in range(3):
-    if component[i].shape[2] != 4:
-        # -1 loads as-is so if it will be 3 or 4 channel as the original
-        BGRA_img = cv2.cvtColor(component[i], cv2.COLOR_BGR2BGRA)
-        component[i] = BGRA_img
+# for i in range(3):
+#     if component[i].shape[2] != 4:
+#         # -1 loads as-is so if it will be 3 or 4 channel as the original
+#         BGRA_img = cv2.cvtColor(component[i], cv2.COLOR_BGR2BGRA)
+#         component[i] = BGRA_img
 
 # baby_hat image resize
 component[2] = cv2.resize(baby_hat, (300, 200), fx=1,
@@ -98,9 +122,9 @@ component[2] = cv2.resize(baby_hat, (300, 200), fx=1,
 
 baby_face, baby_body, baby_hat = component[0], component[1], component[2]
 
-# print('baby_face', baby_face.shape)
-# print('baby_body', baby_body.shape)
-# print('baby_hat', baby_hat.shape)
+print('baby_face', baby_face.shape)
+print('baby_body', baby_body.shape)
+print('baby_hat', baby_hat.shape)
 
 # tilt
 face_body_tilt = (-10, 92)
@@ -129,5 +153,5 @@ result = baby_face_body
 cv2.imshow('Face_to_body', result)
 cv2.imwrite('result.png', result)
 
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
