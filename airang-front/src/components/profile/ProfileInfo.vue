@@ -5,7 +5,7 @@
 			src="@/assets/images/character/rabbit3.png"
 			alt="profileImg"
 		/>
-		<p class="profileInfo-name">황영준</p>
+		<p class="profileInfo-name">{{ userData.name }}</p>
 		<section class="btn-box">
 			<router-link to="/profile/modifyinfo">
 				<button class="btn-update__img btn">정보수정</button>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { getUserProfile } from '@/api/profile';
 export default {
 	data() {
 		return {
@@ -25,7 +27,10 @@ export default {
 			},
 		};
 	},
-	methods: {},
+	methods: {
+		// ...mapGetters([])
+		// fetchData() {},
+	},
 };
 </script>
 
