@@ -26,10 +26,11 @@ const routes = [
 		component: () => import('@/views/SignupPage.vue'),
 	},
 	{
-		path: '/story/:pk',
+		path: '/story/:myStoryId/:subStoryId',
 		name: 'story',
 		props: route => ({
-			pk: Number(route.params.pk),
+			myStoryId: Number(route.params.myStoryId),
+			subStoryId: Number(route.params.subStoryId),
 		}),
 		// component: () => import('@/views/StoryPage.vue'),
 		component: StoryPage,
