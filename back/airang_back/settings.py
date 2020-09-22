@@ -97,8 +97,12 @@ REST_FRAMEWORK = {
     ),
 }
 
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
+}
+
 # authentication setting
-REST_USE_JWT = True
+# REST_USE_JWT = True
 
 AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
@@ -111,10 +115,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
-JWT_AUTH = {
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7)
-}
+# JWT_AUTH = {
+#     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7)
+# }
 
 # drf yasg setting
 SWAGGER_SETTINGS = {
