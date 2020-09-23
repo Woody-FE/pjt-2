@@ -6,10 +6,12 @@ from PIL import Image
 from Cartoonization import test
 
 # 1. 이미지 받기
-original_image_path = "./images/input_images/KTI.jpg"
+original_image_path = "./images/input_images/NY.jpg"
 original_image_name = original_image_path[22:-4]
 origin_image = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
 BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
+
+# 1-1. 얼굴 정렬 / face_alignment
 
 
 # 2-1. Face Recognition으로 Nukki에 쓸 좌표 구하기
@@ -134,12 +136,28 @@ for c in range(0, 3):
         (baby_hat[:, :, 3]/255.0) + baby_body[y_offset:y_offset+baby_hat.shape[0],
                                               x_offset:x_offset + baby_hat.shape[1], c] * (1.0 - baby_hat[:, :, 3]/255.0)
 
+sub_result_image = baby_body
+cv2.imshow('sub_result_image', sub_result_image)
+cv2.imwrite('sub_result_image.jpg', sub_result_image)
 
-# 4. Result
-result = baby_body
 
-cv2.imshow('result_image', result)
-cv2.imwrite('result.png', result)
+# # 4. Nukki the result
+# result_path = 'sub_result_image.jpg'
+# result_image = Image.open(result_path)
+# result_RGBA_image = result_image.convert('RGBA')
+
+# datas = result_RGBA_image.getdata()
+# newData = []
+# cutOff = 255
+# for item in datas:
+#     if item[0] == cutOff and item[1] == cutOff and item[2] == cutOff:
+#         newData.append((255, 255, 255, 0))
+#     else:
+#         newData.append(item)
+# result_RGBA_image.putdata(newData)
+
+# cv2.imshow('result_RGBA_image', result_RGBA_image)
+# cv2.imwrite('result_RGBA_image.png', result_RGBA_image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
