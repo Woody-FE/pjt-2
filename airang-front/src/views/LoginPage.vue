@@ -4,6 +4,11 @@
 		<div class="login-grass grass-2"></div>
 		<div class="login-grass grass-3"></div>
 		<form class="login-form" @submit.prevent="submitForm">
+			<img
+				class="login-logo"
+				src="@/assets/images/accounts/login.png"
+				alt="loginlogo"
+			/>
 			<div class="login-brown-1"></div>
 			<div class="login-brown-2"></div>
 			<div class="login-brown-3"></div>
@@ -124,6 +129,13 @@ export default {
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
+		.login-logo {
+			position: absolute;
+			top: 6%;
+			left: 65%;
+			z-index: 999;
+			width: 110px;
+		}
 		.login-brown-1 {
 			position: absolute;
 			background: brown;
