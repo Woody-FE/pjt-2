@@ -9,6 +9,7 @@
 							class="arang arang1"
 							alt="아랑이1"
 						/>
+						<span class="arang1-shadow"></span>
 					</div>
 					<div class="main-description">
 						<p class="sign1">
@@ -86,7 +87,7 @@ export default {};
 			.arang {
 				width: 250px;
 				transform-style: preserve-3d;
-				box-shadow: 3px 0 10px rgba(27, 27, 27, 0.3);
+				box-shadow: -3.5px 15px 5px rgba(27, 27, 27, 0.3);
 				@media screen and (max-width: 1024px) {
 					width: 220px;
 				}
@@ -104,6 +105,14 @@ export default {};
 					width: 70px;
 					transform: translateY(-20px) rotateX(-85deg);
 				}
+			}
+			.arang1-shadow {
+				position: absolute;
+				top: 100px;
+				right: -70px;
+				padding: 40px;
+				border-radius: 50%;
+				background: rgba(189, 92, 24, 0.3);
 			}
 			.arang2 {
 				transform: translateY(-50px) rotateX(-85deg);
