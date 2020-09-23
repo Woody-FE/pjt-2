@@ -15,4 +15,15 @@ function changePassword(userData) {
 function changeImage(userId, userData) {
 	return auth.patch(`accounts/${userId}/child/image`, userData);
 }
-export { getUserProfile, patchUserName, changePassword, changeImage };
+
+function resetImage(userId) {
+	return auth.delete(`accounts/${userId}/child/image`);
+}
+
+export {
+	getUserProfile,
+	patchUserName,
+	changePassword,
+	changeImage,
+	resetImage,
+};
