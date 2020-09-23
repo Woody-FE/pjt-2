@@ -11,6 +11,7 @@ class Substory(models.Model):
     back_image = models.ImageField(blank=True, null=True)
     next_id = models.IntegerField(blank=True, null=True)
     has_branch = models.BooleanField()
+    story = models.ForeignKey('Story', on_delete=models.CASCADE, related_name='substories')
 
 
 class StoryImage(models.Model):
@@ -21,7 +22,7 @@ class StoryImage(models.Model):
 class Story(models.Model):
     name = models.CharField(max_length=20)
     cover_image = models.ImageField(null=True, blank=True)
-    substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='story')
+    substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='original_story')
 
 
 class Branch(models.Model):
