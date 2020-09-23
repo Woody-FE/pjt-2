@@ -1,7 +1,7 @@
 <template>
 	<div class="bb-custom-wrapper">
-		<div id="bb-bookblock" ref="book" class="bb-bookblock">
-			<div class="bb-item">
+		<div id="bb-bookblock" class="bb-bookblock">
+			<div class="bb-item after-select">
 				<div class="bb-custom-firstpage">
 					<img
 						class="first-cover"
@@ -23,80 +23,36 @@
 					</p>
 				</div>
 			</div>
-			<div class="bb-item">
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+					<img
+						class="bb-img-character"
+						src="https://j3d105.p.ssafy.io:8001/images/character/nukkied_girl.png"
+						alt=""
+					/>
+				</div>
+				<StoryTextItem :scripts="scripts" />
+			</div>
+			<div class="bb-item befor-select">
 				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<div class="bb-custom-side">
-					<div class="portrait-box">
-						<img
-							class="portrait-img"
-							src="@/assets/images/character/arang1.png"
-							alt=""
-						/>
-						<p class="portrait-p">나레이션</p>
-					</div>
-					<p>
-						넓은 세상을 보고싶은 영준이는<br />
-						어른이 된날 아버지에게 여행을 떠나겠다고 말했어요
-					</p>
-				</div>
+				<StoryTextItem />
 			</div>
-			<div class="bb-item">
+			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<div class="bb-custom-side">
-					<div class="portrait-box">
-						<img
-							class="portrait-img"
-							src="@/assets/images/character/arang1.png"
-							alt=""
-						/>
-						<p class="portrait-p">아버지</p>
-					</div>
-					<p>그래, 잘 갔다 와라<br />잘 갔다 와라는 의미로 3가지 선물을 주마</p>
-				</div>
+				<StoryTextItem />
 			</div>
-			<div class="bb-item">
+			<div class="bb-item after-select">
 				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<div class="bb-custom-side">
-					<div class="portrait-box">
-						<img
-							class="portrait-img"
-							src="@/assets/images/character/arang1.png"
-							alt=""
-						/>
-						<p class="portrait-p">나레이션</p>
-					</div>
-					<p>
-						아버지에게 3가지 선물을 받은 영준(이)는<br />여행을 떠나기
-						시작했어요.
-					</p>
-				</div>
+				<StoryTextItem />
 			</div>
-			<div class="bb-item">
-				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/character/arang1.png" alt="img" />
-				</div>
-				<div class="bb-custom-side">
-					<div class="portrait-box">
-						<img
-							class="portrait-img"
-							src="@/assets/images/character/arang1.png"
-							alt=""
-						/>
-						<p class="portrait-p">나레이션</p>
-					</div>
-					<p>
-						얼마 정도 갔을까<br />길의 한쪽에는 여우가 <br />한쪽에는 토끼가
-						있는걸 발견했어요.
-					</p>
-				</div>
-			</div>
-			<div class="bb-item">
+			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<button class="btn btn-1" @click="firstChoice">
 						여우
@@ -106,7 +62,7 @@
 					<button class="btn btn-2" @click="secondChoice">토끼</button>
 				</div>
 			</div>
-			<div class="bb-item">
+			<div class="bb-item after-select">
 				<div class="bb-custom-side img-side">
 					<img
 						v-if="status === 1"
@@ -170,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-		<nav>
+		<nav class="story-btn">
 			<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first"
 				>First page</a
 			>
@@ -195,33 +151,51 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+import { fetchSubStory } from '@/api/story';
+import StoryTextItem from '@/components/story/StoryTextItem.vue';
 export default {
+	props: {
+		myStoryId: Number,
+		subStoryId: Number,
+	},
+	components: {
+		StoryTextItem,
+	},
 	data() {
 		return {
+			scripts: null,
+			currentItem: null,
 			status: 0,
-			cnt: 2,
-			bookData: {
-				leftData: [],
-				rightData: [
-					{
-						content:
-							'넓은 세상을 보고싶은 {child_name}(이)는\n어른이 된 날 아버지에게 여행을 떠나겠다고 말했어요',
-						id: 1,
-					},
-					{
-						content: '나는 외안될까요?',
-						id: 2,
-					},
-				],
-			},
 		};
 	},
 	methods: {
+		async createSubStory() {
+			try {
+				const { data } = await fetchSubStory({
+					mystory_id: this.myStoryId,
+					substory_id: this.subStoryId,
+				});
+				console.log(data);
+				this.scripts = data.scripts;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		hideButton() {
+			const btns = document.querySelector('.story-btn');
+			btns.style.display = 'none';
+		},
+		openButton() {
+			const btns = document.querySelector('.story-btn');
+			btns.style.display = 'inline';
+		},
 		firstChoice() {
 			this.status = 1;
 			setTimeout(function() {
 				console.log('선택1!');
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
+				const btns = document.querySelector('.story-btn');
+				btns.style.display = 'none';
 			}, 500);
 		},
 		secondChoice() {
@@ -229,15 +203,9 @@ export default {
 			setTimeout(function() {
 				console.log('선택2!');
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
+				const btns = document.querySelector('.story-btn');
+				btns.style.display = 'none';
 			}, 500);
-		},
-		fetchNextPage() {
-			console.log(this.bookData.rightData.length);
-			this.bookData.rightData.push({
-				content: '다음페이지를 불러왔어요 잘 되나요???',
-				id: ++this.cnt,
-			});
-			this.fetchConfig();
 		},
 		fetchConfig() {
 			var Page = (function() {
@@ -316,7 +284,32 @@ export default {
 			Page.init();
 		},
 	},
+	created() {
+		this.createSubStory();
+	},
 	mounted() {
+		const textbtn = document.querySelector('.text-btn');
+		textbtn.style.display = 'none';
+		const storyElems = document.querySelectorAll('.bb-item');
+		this.currentItem = storyElems[0];
+		let ioIndex;
+		//eslint-disable-next-line
+		const io = new IntersectionObserver((entries, observer) => {
+			entries.map(entry => {
+				if (entry.isIntersecting) {
+					if (entry.target.classList.contains('before-select')) {
+						this.hideButton();
+						textbtn.style.display = 'inline';
+					} else if (entry.target.classList.contains('after-select')) {
+						this.openButton();
+						textbtn.style.display = 'none';
+					}
+				}
+			});
+		});
+		for (let i = 0; i < storyElems.length; i++) {
+			io.observe(storyElems[i]);
+		}
 		document.addEventListener('keypress', event => {
 			if (event.keyCode === 39) {
 				$('#bb-bookblock').bookblock('next');
@@ -353,6 +346,7 @@ export default {
 	}
 }
 .img-side {
+	position: relative;
 	height: 100%;
 	width: 50%;
 	img {
@@ -378,5 +372,14 @@ export default {
 	background: $orange !important;
 
 	margin-right: 0rem;
+}
+.bb-black {
+	background-color: black !important;
+}
+.bb-img-character {
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	z-index: 10;
 }
 </style>
