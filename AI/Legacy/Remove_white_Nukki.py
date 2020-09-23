@@ -1,6 +1,6 @@
 from PIL import Image
 
-img = Image.open('./images/hat.jpg')
+img = Image.open('./baby_body copy.png')
 img = img.convert('RGBA')
 datas = img.getdata()
 

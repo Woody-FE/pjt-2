@@ -86,7 +86,7 @@ cartooned_RGBA_image = cartooned_image.convert('RGBA')
 datas = cartooned_RGBA_image.getdata()
 
 newData = []
-cutOff = 30
+cutOff = 36
 for item in datas:
     if item[0] <= cutOff and item[1] <= cutOff and item[2] <= cutOff:
         newData.append((255, 255, 255, 0))
@@ -96,61 +96,49 @@ cartooned_RGBA_image.putdata(newData)
 
 
 # 2-4-2. resize
-cartooned_RGBA_image = cartooned_RGBA_image.resize((180, 200), resample=3,
+cartooned_RGBA_image = cartooned_RGBA_image.resize((190, 200), resample=3,
                                                    box=None, reducing_gap=None)
 save_path = './images/re_nukkied_images/' + cartooned_image_name
 cartooned_RGBA_image.save(save_path, 'PNG')
 
 
 # 3. 몸에 합성
-baby_face = cv2.imread('./Resized_image.png', cv2.IMREAD_UNCHANGED)
+baby_face = cv2.imread(save_path, cv2.IMREAD_UNCHANGED)
 baby_body = cv2.imread(
     './images/body_and_hat/white_removed_body.png', cv2.IMREAD_UNCHANGED)
 baby_hat = cv2.imread(
     './images/body_and_hat/white_removed_hat.png', cv2.IMREAD_UNCHANGED)
 
-component = [baby_face, baby_body, baby_hat]
-# for i in range(3):
-#     if component[i].shape[2] != 4:
-#         # -1 loads as-is so if it will be 3 or 4 channel as the original
-#         BGRA_img = cv2.cvtColor(component[i], cv2.COLOR_BGR2BGRA)
-#         component[i] = BGRA_img
 
-# baby_hat image resize
-component[2] = cv2.resize(baby_hat, (300, 200), fx=1,
-                          fy=1, interpolation=cv2.INTER_AREA)
+# # 3-1.tilt
+face_body_tilt = (-8, 120)
+face_hat_tilt = (-8, 20)
 
-baby_face, baby_body, baby_hat = component[0], component[1], component[2]
 
-print('baby_face', baby_face.shape)
-print('baby_body', baby_body.shape)
-print('baby_hat', baby_hat.shape)
-
-# tilt
-face_body_tilt = (-10, 92)
-face_hat_tilt = (-10, 0)
-
-# +body
+# 3-2-1. +body
 x_offset, y_offset = int(
     0.5 * baby_body.shape[1] - 0.5 * baby_face.shape[1] + face_body_tilt[0]), face_body_tilt[1]
+
 for c in range(0, 3):
     baby_body[y_offset:y_offset+baby_face.shape[0], x_offset:x_offset+baby_face.shape[1], c] = baby_face[:, :, c] * \
         (baby_face[:, :, 3]/255.0) + baby_body[y_offset:y_offset+baby_face.shape[0],
                                                x_offset:x_offset + baby_face.shape[1], c] * (1.0 - baby_face[:, :, 3]/255.0)
-baby_face_body = baby_body.copy()
 
-# +hat
+
+# 3-2-2. +hat
 x_offset, y_offset = int(
-    0.5 * baby_face_body.shape[1] - 0.5 * baby_hat.shape[1] + face_hat_tilt[0]), face_hat_tilt[1]
+    0.5 * baby_body.shape[1] - 0.5 * baby_hat.shape[1] + face_hat_tilt[0]), face_hat_tilt[1]
+
 for c in range(0, 3):
-    baby_face_body[y_offset:y_offset+baby_hat.shape[0], x_offset:x_offset+baby_hat.shape[1], c] = baby_hat[:, :, c] * \
-        (baby_hat[:, :, 3]/255.0) + baby_face_body[y_offset:y_offset+baby_hat.shape[0],
-                                                   x_offset:x_offset + baby_hat.shape[1], c] * (1.0 - baby_hat[:, :, 3]/255.0)
+    baby_body[y_offset:y_offset+baby_hat.shape[0], x_offset:x_offset+baby_hat.shape[1], c] = baby_hat[:, :, c] * \
+        (baby_hat[:, :, 3]/255.0) + baby_body[y_offset:y_offset+baby_hat.shape[0],
+                                              x_offset:x_offset + baby_hat.shape[1], c] * (1.0 - baby_hat[:, :, 3]/255.0)
 
-# Result
-result = baby_face_body
 
-cv2.imshow('Face_to_body', result)
+# 4. Result
+result = baby_body
+
+cv2.imshow('result_image', result)
 cv2.imwrite('result.png', result)
 
 cv2.waitKey(0)
