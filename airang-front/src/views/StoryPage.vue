@@ -32,25 +32,29 @@
 						alt=""
 					/>
 				</div>
+				<!-- <StoryTextItem :scripts="stories[0]" /> -->
 				<StoryTextItem :scripts="scripts" />
-			</div>
-			<div class="bb-item befor-select">
-				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/character/arang1.png" alt="img" />
-				</div>
-				<StoryTextItem />
 			</div>
 			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<StoryTextItem />
+				<!-- <StoryTextItem :scripts="stories[1]" /> -->
+				<StoryTextItem :scripts="scripts" />
 			</div>
-			<div class="bb-item after-select">
+			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<StoryTextItem />
+				<!-- <StoryTextItem :scripts="stories[2]" /> -->
+				<StoryTextItem :scripts="scripts" />
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<!-- <StoryTextItem :script="stories[3]" /> -->
+				<StoryTextItem :scripts="scripts" />
 			</div>
 			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
@@ -62,16 +66,16 @@
 					<button class="btn btn-2" @click="secondChoice">토끼</button>
 				</div>
 			</div>
-			<div class="bb-item after-select">
+			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<img
-						v-if="status === 1"
+						v-if="1 in status"
 						src="@/assets/images/character/arang1.png"
 						alt="img"
 					/>
 					<img v-else src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<div class="bb-custom-side">
+				<!-- <div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
 							class="portrait-img"
@@ -80,46 +84,51 @@
 						/>
 						<p class="portrait-p">나레이션</p>
 					</div>
-					<p v-if="status === 2">
+					<p v-if="2 in status">
 						토끼는 나무둥지 앞에 멈춰섰어요<br />
 						그런데! 갑자기 토끼의 크기가 개미같이 줄어들었어요
 					</p>
-					<p v-else>
+					<p v-else-if="1 in status">
 						여우는 할머니 모습으로 산을 내려갔어요.<br />그리고 혼례가 열리는
 						잔칫집으로 쏙 들어갔어요!
 					</p>
-				</div>
+				</div> -->
+				<StoryTextItem :scripts="scripts" />
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
 					<img
-						v-if="status === 1"
+						v-if="1 in status"
 						src="@/assets/images/character/arang1.png"
 						alt="img"
 					/>
-					<img v-else src="@/assets/images/character/arang1.png" alt="img" />
+					<img
+						v-else-if="2 in status"
+						src="@/assets/images/character/arang1.png"
+						alt="img"
+					/>
 				</div>
 				<div class="bb-custom-side">
 					<div class="portrait-box">
 						<img
-							v-if="status === 2"
+							v-if="2 in status"
 							class="portrait-img"
 							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
 						<img
-							v-else
+							v-else-if="1 in status"
 							class="portrait-img"
 							src="@/assets/images/character/arang1.png"
 							alt=""
 						/>
-						<p v-if="status === 2" class="portrait-p">영준</p>
+						<p v-if="2 in status" class="portrait-p">영준</p>
 						<p v-else class="portrait-p">나레이션</p>
 					</div>
-					<p v-if="status === 2">
+					<p v-if="2 in status">
 						어떻게 저렇게 줄어들었지?
 					</p>
-					<p v-else>
+					<p v-else-if="1 in status">
 						여우는 할머니 모습으로 산을 내려갔어요.\n그리고 혼례가 열리는
 						잔칫집으로 쏙 들어갔어요!
 					</p>
@@ -127,7 +136,7 @@
 			</div>
 		</div>
 		<nav class="story-btn">
-			<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first"
+			<!-- <a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first"
 				>First page</a
 			>
 			<a
@@ -135,16 +144,16 @@
 				href="#"
 				class="bb-custom-icon bb-custom-icon-arrow-left"
 				>Previous</a
-			>
+			> -->
 			<a
 				id="bb-nav-next"
 				href="#"
 				class="bb-custom-icon bb-custom-icon-arrow-right"
 				>Next</a
 			>
-			<a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last"
+			<!-- <a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last"
 				>Last page</a
-			>
+			> -->
 		</nav>
 	</div>
 </template>
@@ -163,9 +172,10 @@ export default {
 	},
 	data() {
 		return {
+			stories: [],
 			scripts: null,
 			currentItem: null,
-			status: 0,
+			status: [],
 		};
 	},
 	methods: {
@@ -190,7 +200,7 @@ export default {
 			btns.style.display = 'inline';
 		},
 		firstChoice() {
-			this.status = 1;
+			this.status.push(1);
 			setTimeout(function() {
 				console.log('선택1!');
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
@@ -199,7 +209,7 @@ export default {
 			}, 500);
 		},
 		secondChoice() {
-			this.status = 2;
+			this.status.push(2);
 			setTimeout(function() {
 				console.log('선택2!');
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
