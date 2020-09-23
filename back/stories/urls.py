@@ -13,6 +13,8 @@ urlpatterns = [
 
     path('branches/<int:branch_id>/', views.BranchDetailView.as_view()),
 
+    path('<int:story_id>/substories', views.SubStoryListView.as_view()),
     path('<int:story_id>/', views.StoryDetailView.as_view()),
+    
     path('', views.StoryView.as_view()),
 ]
