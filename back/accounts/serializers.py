@@ -37,6 +37,7 @@ class FamilyDetailSerializer(serializers.ModelSerializer):
 
 
 class UserDetailSerializer(UserUpdateSerializer):
+    username = serializers.CharField(required=False)
     class Meta:
         model = User
         depth = 1
