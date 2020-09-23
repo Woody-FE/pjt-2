@@ -130,4 +130,12 @@ class SubstoryDetailView(APIViewWithAuthentication):
         return Response(result, status=status.HTTP_200_OK)
 
 
+class SubStoryListView(APIViewWithAuthentication):
+
+    def get(self, request, story_id):
+        story = get_object_or_404(Story, pk=story_id)
+        substories = story.substories
+        serializer = SubstorySerializer(instance=substories, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 # 스토리 최종 만드는 로직 추가필요
