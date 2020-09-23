@@ -9,7 +9,7 @@
 							class="arang arang1"
 							alt="아랑이1"
 						/>
-						<span class="arang1-shadow"></span>
+						<span class="arang-shadow arang1-shadow"></span>
 					</div>
 					<div class="main-description">
 						<p class="sign1">
@@ -25,6 +25,7 @@
 							class="arang arang2"
 							alt="아랑이2"
 						/>
+						<span class="arang-shadow arang2-shadow"></span>
 					</div>
 					<div class="main-description">
 						<p class="sign2">
@@ -40,10 +41,11 @@
 							class="arang arang3"
 							alt="아랑이3"
 						/>
+						<span class="arang-shadow arang3-shadow"></span>
 					</div>
 					<div class="main-description">
 						<p class="sign3">
-							<span class="sign">멀티 엔딩</span>
+							<span class="sign multi-sign">멀티 엔딩</span>
 							<span class="stick"></span>
 						</p>
 					</div>
@@ -87,7 +89,8 @@ export default {};
 			.arang {
 				width: 250px;
 				transform-style: preserve-3d;
-				box-shadow: -3.5px 15px 5px rgba(27, 27, 27, 0.3);
+				position: relative;
+				z-index: 999;
 				@media screen and (max-width: 1024px) {
 					width: 220px;
 				}
@@ -97,33 +100,72 @@ export default {};
 			}
 			.arang1 {
 				width: 100px;
+				transform-style: preserve-3d;
 				transform: translateY(-220px) rotateX(-85deg);
 				@media screen and (max-width: 1024px) {
 					width: 90px;
+					margin: 0 10px;
 				}
 				@media screen and (max-width: 768px) {
 					width: 70px;
-					transform: translateY(-20px) rotateX(-85deg);
+					margin: 0 20px;
+					transform: translateY(-150px) rotateX(-85deg);
 				}
-			}
-			.arang1-shadow {
-				position: absolute;
-				top: 100px;
-				right: -70px;
-				padding: 40px;
-				border-radius: 50%;
-				background: rgba(189, 92, 24, 0.3);
 			}
 			.arang2 {
 				transform: translateY(-50px) rotateX(-85deg);
-				@media screen and (max-width: 768px) {
-					transform: translateY(130px) rotateX(-85deg);
-				}
 			}
 			.arang3 {
-				transform: translateY(-400px) rotateX(-85deg);
+				transform: translateY(-200px) rotateX(-85deg);
 				@media screen and (max-width: 768px) {
-					transform: translateY(-320px) rotateX(-85deg);
+					transform: translate(-30px, -210px) rotateX(-85deg);
+				}
+			}
+			.arang-shadow {
+				position: absolute;
+				border-radius: 50%;
+				background: rgba(189, 92, 24, 0.3);
+				box-shadow: 0 0 15px rgba(189, 92, 24, 0.5);
+			}
+			.arang1-shadow {
+				top: 110px;
+				right: -62px;
+				padding: 20px 30px;
+				@media screen and (max-width: 1024px) {
+					right: -45px;
+				}
+				@media screen and (max-width: 768px) {
+					top: 100px;
+					right: -15px;
+					padding: 10px 30px;
+				}
+			}
+			.arang2-shadow {
+				top: 220px;
+				right: 30px;
+				padding: 20px 100px;
+				@media screen and (max-width: 1024px) {
+					top: 200px;
+					padding: 20px 80px;
+				}
+				@media screen and (max-width: 768px) {
+					top: 170px;
+					right: -10px;
+					padding: 20px 100px;
+				}
+			}
+			.arang3-shadow {
+				top: 50px;
+				right: 10px;
+				padding: 30px 150px;
+				@media screen and (max-width: 1024px) {
+					right: 23px;
+					padding: 20px 120px;
+				}
+				@media screen and (max-width: 768px) {
+					top: 10px;
+					right: 40px;
+					padding: 20px 100px;
 				}
 			}
 		}
@@ -138,6 +180,14 @@ export default {};
 					font-size: 12px;
 					background: #2f9e44;
 					border-radius: 40px 10px 30px;
+					@media screen and (max-width: 1024px) {
+						padding: 4px 9px;
+						font-size: 12px;
+					}
+				}
+				.multi-sign {
+					padding: 5px 18px;
+					font-size: 16px;
 				}
 				.stick {
 					padding: 5px 3px;
@@ -146,6 +196,12 @@ export default {};
 					top: 20px;
 					right: 225px;
 					border-radius: 4px;
+					@media screen and (max-width: 1024px) {
+						right: 200px;
+					}
+					@media screen and (max-width: 768px) {
+						right: 120px;
+					}
 				}
 				.stick1 {
 					right: 55px;
@@ -158,7 +214,7 @@ export default {};
 				transform: translateY(0px) rotateX(-70deg);
 			}
 			.sign3 {
-				transform: translate(-50px, -250px) rotateX(-85deg) rotateY(-15deg);
+				transform: translate(-60px, -170px) rotateX(-85deg) rotateY(-15deg);
 			}
 		}
 	}
