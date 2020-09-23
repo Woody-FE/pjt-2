@@ -16,12 +16,15 @@
 					class="fake-btn"
 				/>
 			</button>
+			<button type="file" class="btn-update__info btn" @click="resetProfile">
+				사진초기화
+			</button>
 		</section>
 	</section>
 </template>
 
 <script>
-import { getUserProfile, changeImage } from '@/api/profile';
+import { getUserProfile, changeImage, resetImage } from '@/api/profile';
 export default {
 	data() {
 		return {
@@ -54,9 +57,24 @@ export default {
 			}
 		},
 		async onChangeFile() {
-			const changeImage = this.$refs.inputFile.files[0];
-			await this.patchImage(changeImage);
-			this.fetchData();
+			try {
+				const changeImage = this.$refs.inputFile.files[0];
+				await this.patchImage(changeImage);
+				this.fetchData();
+				alert('프로필이 변경 되었어요');
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async resetProfile() {
+			try {
+				const id = this.$store.getters.getId;
+				await resetImage(id);
+				this.fetchData();
+				alert('프로필이 초기화 되었어요');
+			} catch (error) {
+				console.log(error);
+			}
 		},
 	},
 	computed: {
@@ -66,7 +84,7 @@ export default {
 		profileImageSrc() {
 			return this.userData.imgPath
 				? `${this.baseURL}${this.userData.imgPath}`
-				: `${this.baseURL}media/image/child/noProfile.png`;
+				: `${this.baseURL}media/image/child/noProfile.jpg`;
 		},
 	},
 	created() {
@@ -101,7 +119,7 @@ export default {
 			height: 40px;
 			color: white;
 			font-size: 1rem;
-			background: $lightGreen;
+			background: $carrotGreen;
 			border-radius: 15px;
 			border: none;
 			&:hover {
@@ -113,7 +131,7 @@ export default {
 			margin-right: 0.5rem;
 		}
 		.btn-update__info {
-			margin-right: 0rem;
+			margin-right: 0.5rem;
 			position: relative;
 			.fake-btn {
 				cursor: pointer;
