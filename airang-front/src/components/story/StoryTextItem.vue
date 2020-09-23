@@ -11,9 +11,9 @@
 					src="@/assets/images/character/arang1.png"
 					alt=""
 				/>
-				<p class="portrait-p">나레이션</p>
+				<p class="portrait-p"></p>
 			</div>
-			<p v-html="script.content"></p>
+			<p v-html="filterName(script.content)"></p>
 		</div>
 		<div class="text-btn">
 			<button class="bb-left-btn" @click="beforePage">
@@ -28,6 +28,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+import store from '@/store/index';
 export default {
 	methods: {
 		beforePage() {
@@ -43,6 +44,12 @@ export default {
 				return;
 			}
 			this.count++;
+		},
+		filterName(string) {
+			if (string.includes('{child_name}')) {
+				return string.replace('{child_name}', store.getters['getUsername']);
+			}
+			return string;
 		},
 	},
 	props: {
