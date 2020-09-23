@@ -11,7 +11,10 @@
 						/>
 					</div>
 					<div class="main-description">
-						<p class="arang1">내가 주인공?!</p>
+						<p class="sign1">
+							<span class="sign">내가 주인공?!</span>
+							<span class="stick stick1"></span>
+						</p>
 					</div>
 				</div>
 				<div class="main">
@@ -23,7 +26,10 @@
 						/>
 					</div>
 					<div class="main-description">
-						<p class="arang2">선택가능</p>
+						<p class="sign2">
+							<span class="sign">선택가능</span>
+							<span class="stick"></span>
+						</p>
 					</div>
 				</div>
 				<div class="main">
@@ -35,7 +41,10 @@
 						/>
 					</div>
 					<div class="main-description">
-						<p class="arang3">멀티 엔딩</p>
+						<p class="sign3">
+							<span class="sign">멀티 엔딩</span>
+							<span class="stick"></span>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -113,8 +122,34 @@ export default {};
 			margin-top: 10px;
 			transform-style: preserve-3d;
 			p {
+				position: relative;
 				transform-style: preserve-3d;
-				transform: rotateX(-85deg);
+				.sign {
+					padding: 5px 12px;
+					font-size: 12px;
+					background: #2f9e44;
+					border-radius: 40px 10px 30px;
+				}
+				.stick {
+					padding: 5px 3px;
+					background: #2f9e44;
+					position: absolute;
+					top: 20px;
+					right: 225px;
+					border-radius: 4px;
+				}
+				.stick1 {
+					right: 55px;
+				}
+			}
+			.sign1 {
+				transform: translateY(-100px) rotateX(-55deg);
+			}
+			.sign2 {
+				transform: translateY(0px) rotateX(-70deg);
+			}
+			.sign3 {
+				transform: translate(-50px, -250px) rotateX(-85deg) rotateY(-15deg);
 			}
 		}
 	}
