@@ -1,21 +1,27 @@
 <template>
 	<section class="profileInfo-wrap">
-		<img
-			class="profileInfo-img"
-			src="@/assets/images/character/rabbit3.png"
-			alt="profileImg"
-		/>
-		<p class="profileInfo-name">황영준</p>
+		<img class="profileInfo-img" :src="profileImageSrc" alt="profileImg" />
+		<p class="profileInfo-name">{{ userData.name }}</p>
 		<section class="btn-box">
 			<router-link to="/profile/modifyinfo">
 				<button class="btn-update__img btn">정보수정</button>
 			</router-link>
-			<button class="btn-update__info btn">사진수정</button>
+			<button type="file" class="btn-update__info btn">
+				사진수정<input
+					ref="inputFile"
+					id=""
+					type="file"
+					accept="image/*"
+					@change="onChangeFile"
+					class="fake-btn"
+				/>
+			</button>
 		</section>
 	</section>
 </template>
 
 <script>
+import { getUserProfile, changeImage } from '@/api/profile';
 export default {
 	data() {
 		return {
@@ -25,7 +31,47 @@ export default {
 			},
 		};
 	},
-	methods: {},
+	methods: {
+		async fetchData() {
+			try {
+				const id = this.$store.getters.getId;
+				const { data } = await getUserProfile(id);
+				console.log(data);
+				this.userData.name = data.username;
+				this.userData.imgPath = data.child_image;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async patchImage(img) {
+			try {
+				const id = this.$store.getters.getId;
+				const formdata = new FormData();
+				formdata.append('child_image', img);
+				await changeImage(id, formdata);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async onChangeFile() {
+			const changeImage = this.$refs.inputFile.files[0];
+			await this.patchImage(changeImage);
+			this.fetchData();
+		},
+	},
+	computed: {
+		baseURL() {
+			return process.env.VUE_APP_API_URL;
+		},
+		profileImageSrc() {
+			return this.userData.imgPath
+				? `${this.baseURL}${this.userData.imgPath}`
+				: `${this.baseURL}media/image/child/noProfile.png`;
+		},
+	},
+	created() {
+		this.fetchData();
+	},
 };
 </script>
 
@@ -68,6 +114,16 @@ export default {
 		}
 		.btn-update__info {
 			margin-right: 0rem;
+			position: relative;
+			.fake-btn {
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+			}
 		}
 	}
 }
