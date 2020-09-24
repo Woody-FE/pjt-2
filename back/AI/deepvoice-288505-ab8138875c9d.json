@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "deepvoice-288505",
+  "private_key_id": "ab8138875c9d9c70995c1e5e96449c30a79096d3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCr7qVomukNQn1g\n8pxBOZQ6vGOgRUnNlVtADJTHfEw7lpEGvCTHlNie9626YXAoOdZ1F2to7wMhv3Dp\nqA19pKfFlRmiAvlEoxWxeVWGGcWeeF4HTwb2uaEx6A981K+66IdZXau3iJbJ6zjD\n5x+i/QwMCeXf7R4FOHNrn4EyZ0Uu8UkxFHcCJ8E3pabFWY2bWLby8IbI3Btl/QyV\nOf5y20Y6CnUkWUSrdmuXf9MVBU7ozobv4zCBiAxK/J9dZrv5uuDDwVQNBDXtnjbG\n19ukEd8355dLLcgXd8gWMalcwEyqfGBMlHe6dO3tQgkOiu1Ou7oOaHBDwPUEBeLk\nd2U8nCubAgMBAAECggEAIsFbLooiEkwejDp+27CIBleOzBc1lBldGNVyPeEih+kn\n5/SgerfcEkZ/F+4afgczEvho/g1S1L+eU51lHMDsKUS6qcVwHi/ZcsbUQwdyq1Yp\nq9CN19Iug6gleVaFL4NR2P7Wd4Nk9+xUzUUrYAdHKCfYECwepW+D5X2Y4Fd/5L0M\n1BXPtkKy4EZQ6/8sTm8HgneISAyNhlrHYyhfem/jpdkQfD7kjLtOBsiKxe1PRHZU\nrb6cR1CbgNd9x+CiTH0FttiQNNa7SPMrkyTbdND3Genpidtb1KIrlkfUSIQSk6wN\nXyIZUhWXpNAdTrj8U+rXeiDv9Bhk8Ya1P7rruMzKAQKBgQDfBWBA07zxL1PcgeSt\nYTDNzoZv3ROVMY837zL8+14L9tTokY3D9JvcY8DJX+1T/XricCsm1mFzQjmf9pCN\nJIv9fOAtb/tBZ3/fkHqd0kZ5yM15A11lHS3kgW1SrJu/Sl+FydiiFKY8djMVgz3g\nRfhjbD5ObfMCD7MHj3lvt+nb9QKBgQDFW0Q3L0xWKJsK1lCKoYMA64tF7J4PHWOr\n4Hd+8GPpdL3GSYgWIdUYb+i/OZM9+g8jLvWuCYKtuKBlcWEd4i6JOyn7EcU+HVY2\n743PQXopPjtxYHQkNu0hkBAxRVCM6qa6I9N6W+9HNze40pmDgnDgbl5/a0ki/pxP\ndXPYExA/TwKBgQDDJa8dyqkv2hvlfXueAsdzrt2QEMDL8bvCU/onx8R5b5jJkGOe\nLfIcHOVa0CeZMNpQPZpkt346Hp7RzCycdHhSbOy0laIjju8jrwa8Bn1In168Hyeg\nDLJVmrMQfp0h+3AuX3rCCJOVoE/+6QJBtrgsN1Ely6uyCA699Ntr2GA36QKBgQCh\n5QFrh5hGYV72H+LIJj/yBEcmoDj0yzYVK7i63/YF76cxvuYsyaomNr8mBtP7lmLO\niNou30xct8SUEtMJEZ79IhSJCgXUs3oi7JZW+y58ILnggrAjeQ9DZgtyb5rpTiBh\nN7xmdn4t3GUQb2pREDMKWF+ahOblFxogsIfMK687TwKBgGjBQV8Uq9Pe2cuDIH++\nsjwM+M3zlIa5OMOuAkQC3LihPvk/0ObbJcdC6pwkKUpYZrQhxcKbLXyd1z0IfkfV\nC10urSDH8pukb2OlI+/rxKdPNIw3jn70QUZ1eJTe9eCRXy6ycNyvltA9K/3HD/1P\n5oCGi1mMxZ17YMnFTPg3OTz9\n-----END PRIVATE KEY-----\n",
+  "client_email": "tts-531@deepvoice-288505.iam.gserviceaccount.com",
+  "client_id": "108483434517116346764",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tts-531%40deepvoice-288505.iam.gserviceaccount.com"
+}
