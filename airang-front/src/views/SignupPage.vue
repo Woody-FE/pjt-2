@@ -13,6 +13,15 @@
 			<div class="signup-brown-2"></div>
 			<div class="signup-brown-3"></div>
 			<div class="signup-box">
+				<label class="signup-label" for="text">아이 이름</label>
+				<input
+					id="username"
+					class="signup-item"
+					type="text"
+					v-model="username"
+				/>
+			</div>
+			<div class="signup-box">
 				<label class="signup-label" for="email">이메일</label>
 				<input id="email" class="signup-item" type="email" v-model="email" />
 			</div>
@@ -47,6 +56,7 @@ export default {
 			email: '',
 			password1: '',
 			password2: '',
+			username: '',
 		};
 	},
 	methods: {
@@ -54,6 +64,7 @@ export default {
 		async submitForm() {
 			try {
 				const userInfo = {
+					username: this.username,
 					email: this.email,
 					password1: this.password1,
 					password2: this.password2,
@@ -195,9 +206,9 @@ export default {
 		}
 		.signup-item {
 			width: 100%;
-			max-width: 400px;
-			height: 2.5rem;
-			padding: 1rem 2rem 1rem;
+			max-width: 368px;
+			height: 2rem;
+			padding: 0 1rem;
 			font-size: 1rem;
 			border: 1px solid black;
 			border-top-left-radius: 3rem;
