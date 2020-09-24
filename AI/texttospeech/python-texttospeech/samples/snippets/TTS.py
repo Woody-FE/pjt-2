@@ -37,5 +37,5 @@ def TTS(sentence,output):
     
     return os.path.abspath(output)
 
-path = TTS('목요일 점심입니다. 오늘 하루도 파이팅하시고 즐겁게 코딩합시다.', 'fighting.mp3')
+path = TTS('남북경협주 저가매수타이밍입니다. 주주님들 다들 화이팅합시다.', 'fighting.mp3')
 print(path)
