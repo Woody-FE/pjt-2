@@ -155,7 +155,6 @@ export default {
 					console.log('끝', this.nextStoryId);
 					// await finishedMyStory(this.myStoryId, this.selectStories);
 					this.$router.push({ name: 'bookshelf' });
-					return;
 				} else {
 					if (this.nextStoryId) {
 						this.selectStories.push(this.nextStoryId);
@@ -177,7 +176,7 @@ export default {
 							this.nextStoryId = 0;
 						}
 						this.stories.push(data);
-					} else {
+					} else if (this.nextBranchId) {
 						const { data } = await fetchBranch(this.nextBranchId);
 						console.log(data);
 						this.stories.push(data);
