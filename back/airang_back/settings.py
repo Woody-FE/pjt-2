@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     # project apps
     'accounts.apps.AccountsConfig',
     'stories.apps.StoriesConfig',
+    'tts.apps.TtsConfig',
 
     # documentation
     'drf_yasg',

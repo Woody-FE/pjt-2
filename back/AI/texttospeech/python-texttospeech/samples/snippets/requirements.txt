@@ -121,7 +121,7 @@ PySocks==1.7.1
 pytest==6.0.1
 python-dateutil==2.8.1
 pytz==2020.1
-pywin32==228
+# pywin32==228
 pywinpty==0.5.7
 pyworld==0.2.11.post0
 PyYAML==5.3.1
@@ -146,9 +146,9 @@ tensorboard-plugin-wit==1.7.0
 tensorflow==2.3.0
 tensorflow-addons==0.11.2
 tensorflow-estimator==2.3.0
-tensorflow-gpu==2.3.0
+# tensorflow-gpu==2.3.0
 tensorflow-gpu-estimator==2.3.0
-TensorFlowTTS @ file:///C:/Users/JJS/%ED%8A%B9%ED%99%94%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/s03p23d105/AI/TensorFlowTTS
+# TensorFlowTTS @ file:///C:/Users/JJS/%ED%8A%B9%ED%99%94%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/s03p23d105/AI/TensorFlowTTS
 termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
