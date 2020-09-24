@@ -48,13 +48,21 @@ class UserImageUpdateView(APIView):
     permission_classes = (IsAuthenticated,)
     parser_classes = (FormParser, MultiPartParser, )
 
+    def get_object(self, user_id):
+        return get_object_or_404(User, pk=user_id)
+
     @swagger_auto_schema(request_body=UserChildImageUpdateSerializer)
     def patch(self, request, user_id):
-        user = get_object_or_404(User, pk=user_id)
+        user = self.get_object(user_id)
         serializer = UserChildImageUpdateSerializer(instance=user, data=request.FILES)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(UserDetailSerializer(instance=user).data ,status=status.HTTP_200_OK)
+    
+    def delete(self, request, user_id):
+        user = self.get_object(user_id)
+        user.child_image.delete(save=True)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserFamilyView(APIView):
@@ -77,7 +85,7 @@ class UserFamilyView(APIView):
         serializer = FamilyCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user)
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserFamilyDetailView(APIView):
