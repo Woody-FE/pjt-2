@@ -179,9 +179,9 @@ export default {
 		}
 		.login-item {
 			width: 100%;
-			max-width: 400px;
-			height: 2.5rem;
-			padding: 0 2rem;
+			max-width: 368px;
+			height: 2rem;
+			padding: 0 1rem;
 			font-size: 1rem;
 			border: 1px solid black;
 			border-top-left-radius: 3rem;
