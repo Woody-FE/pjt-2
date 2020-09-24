@@ -29,6 +29,8 @@ class Branch(models.Model):
     question = models.TextField()
     back_image = models.ImageField()
     story_id = models.IntegerField()
+    left_image = models.ImageField(null=True)
+    right_image = models.ImageField(null=True)
 
 
 class Character(models.Model):
