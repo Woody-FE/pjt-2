@@ -28,6 +28,7 @@ class Story(models.Model):
 class Branch(models.Model):
     question = models.TextField()
     back_image = models.ImageField()
+    story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='branches')
 
 
 class Character(models.Model):
