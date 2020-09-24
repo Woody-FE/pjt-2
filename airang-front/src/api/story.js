@@ -9,6 +9,9 @@ export function fetchStory(storyId) {
 export function fetchMyStories() {
 	return stories.get('/mystories/');
 }
+export function fetchSubStories(storyId) {
+	return stories.get(`/${storyId}/substories/`);
+}
 export function createMyStory({ story_id, story_name }) {
 	return stories.post('/mystories/', { story_id, story_name });
 }

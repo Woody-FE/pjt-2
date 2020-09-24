@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import StoryPage from '@/views/StoryPage.vue';
+// import StoryPage from '@/views/StoryPage.vue';
 
 Vue.use(VueRouter);
 
@@ -32,8 +32,8 @@ const routes = [
 			myStoryId: Number(route.params.myStoryId),
 			subStoryId: Number(route.params.subStoryId),
 		}),
-		// component: () => import('@/views/StoryPage.vue'),
-		component: StoryPage,
+		component: () => import('@/views/StoryPage.vue'),
+		// component: StoryPage,
 	},
 	{
 		path: '/bookshelf',
@@ -49,6 +49,14 @@ const routes = [
 		path: '/profile/modifyinfo',
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+	},
+	{
+		path: '*',
+		redirect: '/404',
+	},
+	{
+		path: '/404',
+		component: () => import('@/views/NotFoundPage.vue'),
 	},
 ];
 

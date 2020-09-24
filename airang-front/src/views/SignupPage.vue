@@ -4,6 +4,11 @@
 		<div class="signup-grass grass-2"></div>
 		<div class="signup-grass grass-3"></div>
 		<form class="signup-form" @submit.prevent="submitForm">
+			<img
+				class="signup-logo"
+				src="@/assets/images/accounts/signin.png"
+				alt="signuplogo"
+			/>
 			<div class="signup-brown-1"></div>
 			<div class="signup-brown-2"></div>
 			<div class="signup-brown-3"></div>
@@ -138,6 +143,13 @@ export default {
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
+		.signup-logo {
+			position: absolute;
+			top: 5%;
+			left: 60%;
+			z-index: 999;
+			width: 150px;
+		}
 		.signup-brown-1 {
 			position: absolute;
 			background: brown;
