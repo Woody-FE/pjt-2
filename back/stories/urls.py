@@ -8,6 +8,7 @@ urlpatterns = [
 
     path('mystories/<int:mystory_id>/substories/<int:substory_id>/', views.SubstoryDetailView.as_view()),
     path('mystories/<int:mystory_id>/mycharacter/', views.MyCharacterView.as_view()),
+    path('mystories/<int:mystory_id>/mysubstories/<int:mysubstory_id>/', views.MySubStoryDetailView.as_view()),
     path('mystories/<int:mystory_id>/', views.MyStoryDetailView.as_view()),
     path('mystories/', views.MyStoryView.as_view()),
 

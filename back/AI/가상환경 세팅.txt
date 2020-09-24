@@ -1,0 +1,8 @@
+cd (texttospeech 위치)
+.\tts\Scripts\activate
+
+set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\JJS\특화프로젝트\s03p23d105\AI\deepvoice-288505-ab8138875c9d.json
+gcloud auth activate-service-account --key-file="C:\Users\JJS\특화프로젝트\s03p23d105\AI\deepvoice-288505-ab8138875c9d.json"
+
+cd python-texttospeech\samples\snippets
+python quickstart.py
