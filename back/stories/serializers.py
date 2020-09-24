@@ -132,3 +132,15 @@ class MyCharacterSerializer(serializers.ModelSerializer):
     class Meta(MyCharacterCreateSerializer.Meta):
         depth = 1
         fields = MyCharacterCreateSerializer.Meta.fields + ('id',)
+
+
+class MySubstoryDetailSerializer(serializers.ModelSerializer):
+    substory = SubstorySerializer()
+    class Meta:
+        model = MySubstory
+        fields = (
+            'id',
+            'next_id',
+            'is_end',
+            'substory'
+        )
