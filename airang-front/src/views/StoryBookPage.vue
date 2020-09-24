@@ -18,7 +18,7 @@
 			:class="[currentItem === index ? 'story-abled' : 'story-disabled']"
 		>
 			<section v-if="!story.question" class="story-left">
-				왼쪽
+				사진
 			</section>
 			<section v-else class="story-left story-select">
 				<button
