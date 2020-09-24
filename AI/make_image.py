@@ -6,7 +6,7 @@ from PIL import Image
 from Cartoonization import test
 
 # 1. 이미지 받기
-original_image_path = "./images/input_images/NY.jpg"
+original_image_path = "./images/input_images/KTI2.jpeg"
 original_image_name = original_image_path[22:-4]
 origin_image = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
 BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
