@@ -104,8 +104,9 @@ class BranchDetailSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'question',
-            'back_image',
             'selects',
+            'left_image',
+            'right_image',
         )
 
 class MyCharacterCreateSerializer(serializers.ModelSerializer):
