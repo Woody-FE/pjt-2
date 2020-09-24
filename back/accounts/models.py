@@ -11,12 +11,8 @@ User = settings.AUTH_USER_MODEL
 class CustomUser(AbstractUser):
     child_name = models.CharField(max_length=20, blank=True, null=True)
     child_image = ProcessedImageField(
-        upload_to='image/child',
-        processors=[Thumbnail(100, 100)],
+        upload_to='image/child/%Y/%m/%d',
         format='JPEG',
-        options={
-            'quality': 50
-        },
         blank=True,
         null=True
     )

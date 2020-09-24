@@ -18,16 +18,23 @@ class MyStorySerializer(serializers.ModelSerializer):
             'created',
             'story',
             'story_name',
-            'mysubstory'
+            'mystory',
+            'mycharacters'
         )
+
+
+class MyStoryCreateRequestSerializer(serializers.Serializer):
+    story_id = serializers.IntegerField()
+    story_name = serializers.CharField()
 
 
 class MyStoryCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyStory
         fields = (
-            'story',
             'story_name',
+            'story',
+            'user',
         )
 
         
@@ -84,3 +91,27 @@ class BranchDetailSerializer(serializers.ModelSerializer):
             'back_image',
             'selects',
         )
+
+class MyCharacterCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyCharacter
+        fields = (
+            'character',
+            'family',
+        )
+
+
+class MyCharacterBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyCharacter
+        depth = 1
+        fields = (
+            'id',
+            'family'
+        )
+
+
+class MyCharacterSerializer(serializers.ModelSerializer):
+    class Meta(MyCharacterCreateSerializer.Meta):
+        depth = 1
+        fields = MyCharacterCreateSerializer.Meta.fields + ('id',)
