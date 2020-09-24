@@ -4,7 +4,7 @@
 			<span>
 				<img
 					class="decoration"
-					src="@/assets/images/background/sp.png"
+					src="@/assets/images/character/sp.png"
 					alt="sprout"
 				/>이메일
 			</span>
@@ -20,7 +20,7 @@
 			<span class="">
 				<img
 					class="decoration"
-					src="@/assets/images/background/sp.png"
+					src="@/assets/images/character/sp.png"
 					alt="sprout"
 				/>이름
 			</span>
@@ -31,7 +31,7 @@
 			<span class="">
 				<img
 					class="decoration"
-					src="@/assets/images/background/sp.png"
+					src="@/assets/images/character/sp.png"
 					alt="sprout"
 				/>비밀번호
 			</span>
@@ -51,7 +51,7 @@
 			<span class="">
 				<img
 					class="decoration"
-					src="@/assets/images/background/sp.png"
+					src="@/assets/images/character/sp.png"
 					alt="sprout"
 				/>비밀번호 확인
 			</span>

@@ -32,8 +32,7 @@ const routes = [
 			myStoryId: Number(route.params.myStoryId),
 			subStoryId: Number(route.params.subStoryId),
 		}),
-		component: () => import('@/views/StoryPage.vue'),
-		// component: StoryPage,
+		component: () => import('@/views/StoryBookPage.vue'),
 	},
 	{
 		path: '/bookshelf',
