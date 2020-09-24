@@ -6,7 +6,7 @@ from PIL import Image
 from Cartoonization import test
 
 # 1. 이미지 받기
-original_image_path = "./images/input_images/KTI2.jpeg"
+original_image_path = "./images/input_images/KTI2.jpg"
 original_image_name = original_image_path[22:-4]
 origin_image = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
 BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
@@ -77,7 +77,8 @@ cv2.imwrite(os.path.join(Nukkied_image_path,
 
 
 # 2-3. Cartoonization 이미지 변환
-cartooned_image_name = test.cartoonize(Nukkied_image_path)
+target_image = 'Nukkied_' + original_image_name + '.png'
+cartooned_image_name = test.cartoonize(Nukkied_image_path, target_image)
 cartooned_image_path = './images/cartooned_images/' + cartooned_image_name
 
 
@@ -136,9 +137,24 @@ for c in range(0, 3):
         (baby_hat[:, :, 3]/255.0) + baby_body[y_offset:y_offset+baby_hat.shape[0],
                                               x_offset:x_offset + baby_hat.shape[1], c] * (1.0 - baby_hat[:, :, 3]/255.0)
 
-sub_result_image = baby_body
-cv2.imshow('sub_result_image', sub_result_image)
-cv2.imwrite('sub_result_image.jpg', sub_result_image)
+# sub_result_image = baby_body
+# cv2.imshow('sub_result_image', sub_result_image)
+# cv2.imwrite('sub_result_image.jpg', sub_result_image)
+
+# 3-2-(a). for HYJ, only face + hat
+# print(baby_hat.shape)
+# print(baby_face.shape)
+# print(baby_body.shape)
+# face_and_hat = cv2.bitwise_and(baby_body, mask)
+
+# Trim_x, Trim_y = (int(baby_hat.shape), int(
+#     baby_face.shape)), (int(baby_hat.shape), int(baby_face.shape))
+# Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
+
+
+result_image = baby_body
+cv2.imshow('result_image', result_image)
+cv2.imwrite('result_image_' + original_image_name +'.jpg', result_image)
 
 
 # # 4. Nukki the result
