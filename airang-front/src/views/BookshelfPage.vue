@@ -44,7 +44,7 @@ export default {
 					story_id: 1,
 					story_name: '세가지 선물',
 				});
-				this.fetchBooks;
+				this.fetchBooks();
 				console.log(data);
 			} catch (error) {
 				console.log(error);

@@ -1,8 +1,9 @@
 <template>
-	<div class="bb-custom-side">
+	<div class="story-right">
 		<div
 			:key="script.id"
 			v-for="(script, index) in scripts"
+			class="story-portrait"
 			:class="[count === index ? 'bb-abled' : 'bb-disabled']"
 		>
 			<div class="portrait-box">
@@ -11,14 +12,14 @@
 					src="@/assets/images/character/arang1.png"
 					alt=""
 				/>
-				<p class="portrait-p"></p>
+				<p class="portrait-name">{{ script.character.name }}</p>
+				<p class="portrait-content" v-html="filterName(script.content)"></p>
 			</div>
-			<p v-html="filterName(script.content)"></p>
 		</div>
 		<div class="text-btn">
-			<button class="bb-left-btn" @click="beforePage">
+			<!-- <button class="bb-left-btn" @click="beforePage">
 				<i class="icon ion-md-arrow-round-back"></i>
-			</button>
+			</button> -->
 			<button class="bb-right-btn" @click="afterPage">
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
@@ -26,24 +27,29 @@
 	</div>
 </template>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 import store from '@/store/index';
+import bus from '@/utils/bus';
 export default {
 	methods: {
-		beforePage() {
-			if (this.count <= 0) {
-				$('#bb-bookblock').bookblock('prev');
-				return;
-			}
-			this.count--;
-		},
+		// beforePage() {
+		// 	if (this.count <= 0) {
+		// 		bus.$emit('page-decrease');
+		// 		bus.$emit('script-reset');
+		// 		return;
+		// 	}
+		// 	this.count--;
+		// 	bus.$emit('script-decrease');
+		// },
 		afterPage() {
 			if (this.count >= this.scripts.length - 1) {
-				$('#bb-bookblock').bookblock('next');
+				bus.$emit('page-increase');
+				bus.$emit('script-reset');
+				bus.$emit('next-page');
 				return;
 			}
 			this.count++;
+			bus.$emit('script-increase');
 		},
 		filterName(string) {
 			if (string.includes('{child_name}')) {
@@ -60,39 +66,27 @@ export default {
 			count: 0,
 		};
 	},
+	created() {
+		console.log(this.scripts);
+	},
 };
 </script>
 
 <style lang="scss">
-.bb-right-side {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
 .text-btn {
 	position: absolute;
 	bottom: 2rem;
-	left: 75%;
-	width: 6.5rem;
-	height: 6.5rem;
-	margin-left: -3.25rem;
+	left: 50%;
+	width: 4rem;
+	height: 4rem;
+	margin-left: -2rem;
 }
-.bb-left-btn {
-	border: none;
-	border-radius: 50%;
-	width: 3rem;
-	height: 3rem;
-	margin-right: 0.5rem;
-	font-size: 1.5rem;
-	background: black;
-	color: white;
-	cursor: pointer;
-}
+
 .bb-right-btn {
 	border: none;
 	border-radius: 50%;
-	width: 3rem;
-	height: 3rem;
+	width: 4rem;
+	height: 4rem;
 	font-size: 1.5rem;
 	background: black;
 	color: white;
@@ -103,5 +97,26 @@ export default {
 }
 .bb-abled {
 	display: block;
+}
+.portrait-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	.portrait-img {
+		width: 30%;
+		border-radius: 50%;
+		border: 1px solid black;
+		margin-bottom: 1rem;
+	}
+	.portrait-name {
+		font-size: 1rem;
+		margin-bottom: 3rem;
+	}
+	.portrait-content {
+		text-align: center;
+		line-height: 1.5;
+		font-size: 1.5rem;
+	}
 }
 </style>

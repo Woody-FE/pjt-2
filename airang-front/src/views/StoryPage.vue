@@ -36,60 +36,109 @@
 			</div>
 			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
-					<button class="btn btn-1" @click="firstChoice">
-						여우
-					</button>
-				</div>
-				<div class="bb-custom-side">
-					<button class="btn btn-2" @click="secondChoice">토끼</button>
-				</div>
-			</div>
-			<div class="bb-item before-select">
-				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
 				<StoryTextItem v-if="stories.length" :scripts="stories[1].scripts" />
 			</div>
 			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
-					<img src="@/assets/images/character/arang1.png" alt="img" />
+					<button class="btn btn-1" @click="Choices(1)">
+						여우
+					</button>
 				</div>
-				<StoryTextItem v-if="stories.length" :scripts="stories[2].scripts" />
+				<div class="bb-custom-side">
+					<button class="btn btn-2" @click="Choices(2)">토끼</button>
+				</div>
 			</div>
 			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
 					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<StoryTextItem v-if="stories.length" :scripts="stories[3].scripts" />
+				<StoryTextItem
+					v-if="stories.length && status.includes(1)"
+					:scripts="stories[2].scripts"
+				/>
 			</div>
 			<div class="bb-item before-select">
 				<div class="bb-custom-side img-side">
-					<img
-						v-if="1 in status"
-						src="@/assets/images/character/arang1.png"
-						alt="img"
-					/>
-					<img v-else src="@/assets/images/character/arang1.png" alt="img" />
+					<img src="@/assets/images/character/arang1.png" alt="img" />
 				</div>
-				<!-- <div class="bb-custom-side">
-					<div class="portrait-box">
-						<img
-							class="portrait-img"
-							src="@/assets/images/character/arang1.png"
-							alt=""
-						/>
-						<p class="portrait-p">나레이션</p>
-					</div>
-					<p v-if="2 in status">
-						토끼는 나무둥지 앞에 멈춰섰어요<br />
-						그런데! 갑자기 토끼의 크기가 개미같이 줄어들었어요
-					</p>
-					<p v-else-if="1 in status">
-						여우는 할머니 모습으로 산을 내려갔어요.<br />그리고 혼례가 열리는
-						잔칫집으로 쏙 들어갔어요!
-					</p>
-				</div> -->
-				<StoryTextItem v-if="stories.length" :scripts="stories[4].scripts" />
+				<StoryTextItem
+					v-if="stories.length && status.includes(1)"
+					:scripts="stories[3].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(1)"
+					:scripts="stories[4].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(1)"
+					:scripts="stories[5].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(1)"
+					:scripts="stories[6].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(1)"
+					:scripts="stories[7].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(2)"
+					:scripts="stories[8].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(2)"
+					:scripts="stories[8].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(2)"
+					:scripts="stories[9].scripts"
+				/>
+			</div>
+			<div class="bb-item before-select">
+				<div class="bb-custom-side img-side">
+					<img src="@/assets/images/character/arang1.png" alt="img" />
+				</div>
+				<StoryTextItem
+					v-if="stories.length && status.includes(2)"
+					:scripts="stories[10].scripts"
+				/>
 			</div>
 			<div class="bb-item">
 				<div class="bb-custom-side img-side">
@@ -168,114 +217,119 @@ export default {
 	},
 	data() {
 		return {
-			stories: {},
+			stories: [],
 			branch: [
 				{
 					id: 1,
 					question: '여우를 따라갈까? 토끼를 따라갈까?',
-					back_image: ' ',
+					back_image: '',
+					story_id: 1,
 				},
 				{
 					id: 2,
 					question: '마을 안 쪽으로갈까? 여행을 계속할까?',
-					back_image: ' ',
+					back_image: '',
+					story_id: 1,
 				},
 				{
 					id: 3,
 					question: '토끼랑 함께갈까? 여행을 계속할까?',
-					back_image: ' ',
+					back_image: '',
+					story_id: 1,
 				},
 				{
 					id: 4,
 					question: '다음은 어디로 가지?',
-					back_image: ' ',
+					back_image: '',
+					story_id: 1,
 				},
 				{
 					id: 5,
 					question: '큰 나무가 있는곳? 빌딩이 있는곳?',
-					back_image: ' ',
+					back_image: '',
+					story_id: 1,
 				},
 				{
 					id: 6,
 					question: '피리? 기타?',
-					back_image: ' ',
+					back_image: '',
+					story_id: 1,
 				},
 			],
 			select: [
 				{
 					id: 1,
-					select: '여우를 따라간다',
+					select: '수상한 여우를 따라간다',
 					substory_id: 3,
 					branch_id: 1,
 				},
 				{
 					id: 2,
-					select: '토끼를 따라간다',
-					substory_id: 5,
+					select: '급한 토끼를 쫓아간다',
+					substory_id: 8,
 					branch_id: 1,
 				},
 				{
 					id: 3,
 					select: '마을 안 쪽으로 간다',
-					substory_id: 8,
+					substory_id: 11,
 					branch_id: 2,
 				},
 				{
 					id: 4,
 					select: '여행을 계속한다',
-					substory_id: 10,
+					substory_id: 14,
 					branch_id: 2,
 				},
 				{
 					id: 5,
 					select: '토끼랑 함께한다',
-					substory_id: 13,
+					substory_id: 17,
 					branch_id: 3,
 				},
 				{
 					id: 6,
 					select: '여행을 계속한다',
-					substory_id: 10,
+					substory_id: 14,
 					branch_id: 3,
 				},
 				{
 					id: 7,
 					select: '마을을 좀 더 구경한다',
-					substory_id: 17,
+					substory_id: 20,
 					branch_id: 4,
 				},
 				{
 					id: 8,
 					select: '강이 보이는쪽으로 간다',
-					substory_id: 19,
+					substory_id: 23,
 					branch_id: 4,
 				},
 				{
 					id: 9,
 					select: '큰 나무 쪽으로 간다',
-					substory_id: 20,
+					substory_id: 26,
 					branch_id: 5,
 				},
 				{
 					id: 10,
 					select: '빌딩 쪽으로 간다',
-					substory_id: 24,
+					substory_id: 34,
 					branch_id: 5,
 				},
 				{
 					id: 11,
 					select: '피리',
-					substory_id: 25,
+					substory_id: 30,
 					branch_id: 6,
 				},
 				{
 					id: 12,
 					select: '기타',
-					substory_id: 27,
+					substory_id: 32,
 					branch_id: 6,
 				},
 			],
-
 			status: [],
 		};
 	},
@@ -297,16 +351,8 @@ export default {
 			const btns = document.querySelector('.story-btn');
 			btns.style.display = 'inline';
 		},
-		firstChoice() {
-			this.status.push(1);
-			setTimeout(function() {
-				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
-				const btns = document.querySelector('.story-btn');
-				btns.style.display = 'none';
-			}, 500);
-		},
-		secondChoice() {
-			this.status.push(2);
+		Choices(num) {
+			this.status.push(num);
 			setTimeout(function() {
 				document.dispatchEvent(new KeyboardEvent('keypress', { keyCode: 39 }));
 				const btns = document.querySelector('.story-btn');
