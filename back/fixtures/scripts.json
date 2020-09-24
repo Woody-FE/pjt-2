@@ -245,364 +245,364 @@
     "substory_id": 17
   },
   {
-    "id": 35,
+    "id": 36,
     "character_id": 1,
     "order": 5,
     "content": "자느라 아무것도 못 봤어요",
     "substory_id": 17
   },
   {
-    "id": 36,
+    "id": 37,
     "character_id": 2,
     "order": 6,
     "content": "독수리들은 그 말을 듣고 멀리 떠나갔어요",
     "substory_id": 17
   },
   {
-    "id": 37,
+    "id": 38,
     "character_id": 7,
     "order": 7,
     "content": "살려주셔서 너무 감사합니다.",
     "substory_id": 17
   },
   {
-    "id": 38,
+    "id": 39,
     "character_id": 2,
     "order": 1,
     "content": "다람쥐를 구해준 뒤 여행을 계속하게 되었어요",
     "substory_id": 18
   },
   {
-    "id": 39,
+    "id": 40,
     "character_id": 2,
     "order": 2,
     "content": "길을 가는 중 갈림길이 나타났어요<br> 한쪽은 큰 나무가 보였고 한쪽은 큰 빌딩이 보였어요",
     "substory_id": 19
   },
   {
-    "id": 40,
+    "id": 41,
     "character_id": 2,
     "order": 1,
     "content": "토끼랑 한참을 걷고 나니<br>다과회가 열리는 곳에 도착했어요",
     "substory_id": 20
   },
   {
-    "id": 41,
+    "id": 42,
     "character_id": 5,
     "order": 2,
     "content": "다과회에 참여하려면<br>귀중한 물품을 보여줘야돼!<br>보여줄래?",
     "substory_id": 20
   },
   {
-    "id": 42,
+    "id": 43,
     "character_id": 2,
     "order": 3,
     "content": "곰곰이 생각한뒤<br>두 번째 선물로 받은 궤짝을 선물로 주기로 했어요",
     "substory_id": 20
   },
   {
-    "id": 43,
+    "id": 44,
     "character_id": 5,
     "order": 4,
     "content": "오호! 처음보는 물품이야<br>너는 우리 다과회에 참여할 수 있겠어",
     "substory_id": 20
   },
   {
-    "id": 44,
+    "id": 45,
     "character_id": 2,
     "order": 5,
     "content": "토끼와 다괴회를 신나게 가진 뒤 토끼랑 헤어지게 되었어요",
     "substory_id": 20
   },
   {
-    "id": 45,
+    "id": 46,
     "character_id": 1,
     "order": 1,
     "content": "다시 돌아가 볼까?",
     "substory_id": 21
   },
   {
-    "id": 46,
+    "id": 47,
     "character_id": 2,
     "order": 1,
     "content": "구멍을 통해 나가니<br>갈림길이 나타났어요",
     "substory_id": 22
   },
   {
-    "id": 47,
+    "id": 48,
     "character_id": 2,
     "order": 2,
     "content": "한 쪽에는 큰 나무가 보였고<br>한 쪽은 큰 빌딩이 보였어요",
     "substory_id": 22
   },
   {
-    "id": 48,
+    "id": 49,
     "character_id": 2,
     "order": 1,
     "content": "마을 안쪽으로 들어가니 마을 잔치가 성대하게 이뤄지고 있었어요",
     "substory_id": 23
   },
   {
-    "id": 49,
+    "id": 50,
     "character_id": 1,
     "order": 2,
     "content": "내가 3번째 선물로 받은<br>피리를 멋지게 불어야겠어",
     "substory_id": 23
   },
   {
-    "id": 50,
+    "id": 51,
     "character_id": 2,
     "order": 1,
     "content": "그때, 음식 냄새를 맡은<br>크고 끔찍한 쥐들이 나타났어요",
     "substory_id": 24
   },
   {
-    "id": 51,
+    "id": 52,
     "character_id": 2,
     "order": 2,
     "content": "마을사람들이 쥐들을 없애려고 애를 썼지만<br>쥐들은 도망가지 않았어요",
     "substory_id": 24
   },
   {
-    "id": 52,
+    "id": 53,
     "character_id": 2,
     "order": 1,
     "content": "그런데 쥐들이 피리소리를 들으니<br>놀라운 일이 일어났어요",
     "substory_id": 25
   },
   {
-    "id": 53,
+    "id": 54,
     "character_id": 2,
     "order": 2,
     "content": "모든 쥐들이 피리를 따라 다니기 시작했어요",
     "substory_id": 25
   },
   {
-    "id": 54,
+    "id": 55,
     "character_id": 1,
     "order": 3,
     "content": "이 쥐들을 마을 밖으로 쫓아내야지!",
     "substory_id": 25
   },
   {
-    "id": 55,
+    "id": 56,
     "character_id": 2,
     "order": 4,
     "content": "이렇게 쥐들을 무사히 쫓아 내었어요<br>그리고 마을에는 평화가 찾아왔답니다.",
     "substory_id": 25
   },
   {
-    "id": 56,
+    "id": 57,
     "character_id": 2,
     "order": 1,
     "content": "강에 다가서니 다리에 큰 곰이 누워 있었어요",
     "substory_id": 26
   },
   {
-    "id": 57,
+    "id": 58,
     "character_id": 8,
     "order": 2,
     "content": "쿠울 쿨쿨",
     "substory_id": 26
   },
   {
-    "id": 58,
+    "id": 59,
     "character_id": 1,
     "order": 3,
     "content": "어떻게 지나가지…<br>아 맞다! 피리로 곰을 깨워볼까?",
     "substory_id": 26
   },
   {
-    "id": 59,
+    "id": 60,
     "character_id": 2,
     "order": 4,
     "content": "{child_name}(은)는 피리를 불기 시작했어요",
     "substory_id": 26
   },
   {
-    "id": 60,
+    "id": 61,
     "character_id": 2,
     "order": 1,
     "content": "휠릴리 휠릴리 피리를 불다보니<br>잠들어 있던 곰이 일어났어요",
     "substory_id": 27
   },
   {
-    "id": 61,
+    "id": 62,
     "character_id": 8,
     "order": 2,
     "content": "어디서 신나는 소리가 들리네<br>어디서 들리는거지?",
     "substory_id": 27
   },
   {
-    "id": 62,
+    "id": 63,
     "character_id": 8,
     "order": 3,
     "content": "내가 깜빡 잠이 들어서 길을 막아버렸네<br>미안해, 금방 비켜줄께",
     "substory_id": 28
   },
   {
-    "id": 63,
+    "id": 64,
     "character_id": 2,
     "order": 1,
     "content": "곰은 사과를 한 뒤 산으로 올라갔어요",
     "substory_id": 29
   },
   {
-    "id": 64,
+    "id": 65,
     "character_id": 2,
     "order": 1,
     "content": "큰 나무에 도착하게 된 {child_name}은 나무 밑에서 잠을 자려고 했어요",
     "substory_id": 30
   },
   {
-    "id": 65,
+    "id": 66,
     "character_id": 2,
     "order": 1,
     "content": "그런데! 멀리서 시커먼 그림자가 몰려왔어요<br>눈을 비비고 다시보니, 세상에!",
     "substory_id": 31
   },
   {
-    "id": 66,
+    "id": 67,
     "character_id": 2,
     "order": 1,
     "content": "무서운 호랑이들이 어흥어흥 울부짖고<br>날름날름 입맛을 다시며 오고 있었어요",
     "substory_id": 32
   },
   {
-    "id": 67,
+    "id": 68,
     "character_id": 2,
     "order": 1,
     "content": "재빠르게 나무 위로 올라갔지만<br>호랑이들도 하나 둘씩 올라오기 시작했어요",
     "substory_id": 33
   },
   {
-    "id": 68,
+    "id": 69,
     "character_id": 1,
     "order": 2,
     "content": "마지막 선물을 꺼내봐야겠어",
     "substory_id": 33
   },
   {
-    "id": 69,
+    "id": 70,
     "character_id": 2,
     "order": 1,
     "content": "눈을 딱 감고 기타를 띵가띵가 쳤어요<br>그런데 이게 웬일이야?",
     "substory_id": 34
   },
   {
-    "id": 70,
+    "id": 71,
     "character_id": 2,
     "order": 2,
     "content": "호랑이들이 기타소리에 흥이 나서<br>어깨를 들썩들썩, 궁둥이를 움찍움찔\\춤을 추기 시작했어요",
     "substory_id": 34
   },
   {
-    "id": 71,
+    "id": 72,
     "character_id": 2,
     "order": 1,
     "content": "그 바람에 높은 호랑이 탑이 와르르 무너져 버렸어요",
     "substory_id": 35
   },
   {
-    "id": 72,
+    "id": 73,
     "character_id": 2,
     "order": 2,
     "content": "호랑이들은 철퍼덕 철퍼덕 떨어져<br>모두 죽고 말았어요",
     "substory_id": 35
   },
   {
-    "id": 73,
+    "id": 74,
     "character_id": 1,
     "order": 1,
     "content": "잠깐! 피리로 소리를 내어 호랑이들을 겁먹게 해야겠어",
     "substory_id": 36
   },
   {
-    "id": 74,
+    "id": 75,
     "character_id": 2,
     "order": 2,
     "content": "피리를 불어 천둥같이 큰 소리를 냈어요<br>호랑이들은 철퍼덕 철퍼덕 떨어졌어요",
     "substory_id": 37
   },
   {
-    "id": 75,
+    "id": 76,
     "character_id": 1,
     "order": 1,
     "content": "바보 같은 호랑이들<br>피리 소리에 깜짝 놀라서 도망갔구나",
     "substory_id": 38
   },
   {
-    "id": 76,
+    "id": 77,
     "character_id": 9,
     "order": 1,
     "content": "못된 호랑이들을 쫓아 주셔서 감사합니다.<br>모두 만세",
     "substory_id": 39
   },
   {
-    "id": 77,
+    "id": 78,
     "character_id": 2,
     "order": 1,
     "content": "도시로 갔더니 한참 오디션이 진행중에 있었어요",
     "substory_id": 40
   },
   {
-    "id": 78,
+    "id": 79,
     "character_id": 10,
     "order": 2,
     "content": "최고의 가수를 뽑고 있어요~",
     "substory_id": 40
   },
   {
-    "id": 79,
+    "id": 80,
     "character_id": 2,
     "order": 1,
     "content": "{child_name}(이)는 3번째 선물로 받은 기타로 놀라운 솜씨를 뽐내었어요",
     "substory_id": 41
   },
   {
-    "id": 80,
+    "id": 81,
     "character_id": 10,
     "order": 2,
     "content": "너무 훌륭한 솜씨군!<br>나랑 함께 최고의 가수가 되지 않겠나?",
     "substory_id": 41
   },
   {
-    "id": 81,
+    "id": 82,
     "character_id": 2,
     "order": 1,
     "content": "{child_name}(이)는 프로듀서와 함께 가수가 되기로 했답니다.",
     "substory_id": 42
   },
   {
-    "id": 82,
+    "id": 83,
     "character_id": 2,
     "order": 1,
     "content": "여행을 마친 {child_name}은<br>우리나라를 지키는 경찰이 되었습니다.",
     "substory_id": 43
   },
   {
-    "id": 83,
+    "id": 84,
     "character_id": 2,
     "order": 1,
     "content": "여행을 마친 {child_name}은<br>크리에이터가 되었습니다.",
     "substory_id": 44
   },
   {
-    "id": 84,
+    "id": 85,
     "character_id": 2,
     "order": 1,
     "content": "여행을 마친 {child_name}은<br>세계를 대표하는 작곡가가 되었습니다.",
     "substory_id": 45
   },
   {
-    "id": 85,
+    "id": 86,
     "character_id": 2,
     "order": 1,
     "content": "여행을 마친 {child_name}은<br>동물친구들과 함께 행복하게 지낼 수 있는 사육사가 되었습니다.",
     "substory_id": 46
   },
   {
-    "id": 86,
+    "id": 87,
     "character_id": 2,
     "order": 1,
     "content": "여행을 마친 {child_name}은<br>세계를 대표하는 가수가 되었습니다.",

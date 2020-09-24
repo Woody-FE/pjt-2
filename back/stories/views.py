@@ -80,7 +80,14 @@ class MyStoryDetailView(APIViewWithAuthentication):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         
-        before_sub = mysubstory
+        serializer = MySubstoryCreateSerializer(
+            data={
+                'substory': Substory.objects.get(pk=mysubstory),
+                'is_end': False
+            }
+        )
+        if serializer.is_valid(raise_exception=True):
+            before_sub = serializer.save()
 
         for idx, mystory_idx in enumerate(substory_list):
             data = {
