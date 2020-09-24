@@ -69,10 +69,12 @@ export default {
 
 .box-out {
 	z-index: 10;
-	width: 720px;
+	width: 100%;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-wrap: wrap;
+	/* margin: 0 -1rem; */
+	/* justify-content: space-between; */
+	/* align-items: center; */
 	position: absolute;
 	top: 140px;
 }
@@ -80,6 +82,9 @@ export default {
 .book {
 	width: 180px;
 	height: 255px;
+	/* flex: 1 1 auto; */
+	/* padding: 0 1rem; */
+	/* margin: 0 1rem; */
 	background-color: rgb(62, 71, 152);
 	transition: all 0.3s ease-in-out;
 	transform-origin: left center 0px;
@@ -121,10 +126,10 @@ export default {
 
 .books-1 {
 	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140716_200%2F500farm_1405513399454S2F1z_PNG%2F%25B5%25BF%25C8%25AD%25C3%25A51%25B8%25E9.png&type=sc960_832');
-	background-size: 180px 255px;
+	background-size: 100% 255px;
 }
 
-.books-2 {
+/* .books-2 {
 	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2Fdata44%2F2009%2F3%2F29%2F9%2Fprog_13842_1_limpia1.jpg&type=sc960_832');
 	background-size: 180px 255px;
 }
@@ -132,7 +137,7 @@ export default {
 .books-3 {
 	background: url('https://upload-images.jianshu.io/upload_images/3433202-564e196e8b409f16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240');
 	background-size: 180px 255px;
-}
+} */
 
 /* ----- hover ----- */
 
