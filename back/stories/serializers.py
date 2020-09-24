@@ -81,6 +81,7 @@ class SubstorySerializer(serializers.ModelSerializer):
             'has_branch',
             'scripts',
             'images',
+            'back_image',
         )
 
 
