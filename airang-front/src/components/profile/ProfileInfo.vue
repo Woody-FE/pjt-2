@@ -56,12 +56,22 @@ export default {
 				console.log(error);
 			}
 		},
+		validateFile(file) {
+			const imageArray = ['image/png', 'image/jpg', 'image/jpeg'];
+			if (imageArray.includes(file.type)) return true;
+			return false;
+		},
 		async onChangeFile() {
 			try {
 				const changeImage = this.$refs.inputFile.files[0];
-				await this.patchImage(changeImage);
-				this.fetchData();
-				alert('프로필이 변경 되었어요');
+				const isValidate = await this.validateFile(changeImage);
+				if (isValidate) {
+					await this.patchImage(changeImage);
+					this.fetchData();
+					alert('프로필이 변경 되었어요');
+				} else {
+					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
+				}
 			} catch (error) {
 				console.log(error);
 			}

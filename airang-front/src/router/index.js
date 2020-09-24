@@ -49,6 +49,14 @@ const routes = [
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
 	},
+	{
+		path: '*',
+		redirect: '/404',
+	},
+	{
+		path: '/404',
+		component: () => import('@/views/NotFoundPage.vue'),
+	},
 ];
 
 const router = new VueRouter({
