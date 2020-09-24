@@ -22,7 +22,7 @@ class StoryImage(models.Model):
 class Story(models.Model):
     name = models.CharField(max_length=20)
     cover_image = models.ImageField(null=True, blank=True)
-    substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='original_story')
+    substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='original_story', null=True)
 
 
 class Branch(models.Model):
