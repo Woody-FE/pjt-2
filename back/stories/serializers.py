@@ -37,6 +37,16 @@ class MyStoryCreateSerializer(serializers.ModelSerializer):
             'user',
         )
 
+
+class MyStoryAddMyStorySerializer(serializers.Serializer):
+    class Meta:
+        model = MyStory
+        fields = ('mystory')
+
+
+class MyStoryAddRequestSerializer(serializers.Serializer):
+    substory_list = serializers.ListField()
+    
         
 class CharacterOfScriptSerializer(serializers.ModelSerializer):
     class Meta:
@@ -76,6 +86,12 @@ class SubstorySerializer(serializers.ModelSerializer):
 
 class MySubstorySerializer(serializers.ModelSerializer):
     substory = SubstorySerializer()
+    class Meta:
+        model = MySubstory
+        fields = '__all__'
+
+
+class MySubstoryCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MySubstory
         fields = '__all__'

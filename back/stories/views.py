@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer
+from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer, MySubstoryCreateSerializer, MyStoryAddRequestSerializer
 from .models import *
 
 
@@ -60,6 +60,48 @@ class MyStoryDetailView(APIViewWithAuthentication):
         mystory.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    # 최종 제출
+    @swagger_auto_schema(request_body=MyStoryAddRequestSerializer)
+    def post(self, request, mystory_id):
+        mystory = self.get_object(mystory_id)
+        try:
+            substory_list = request.data['substory_list']
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        # 첫 서브스토리
+        mysubstory = substory_list.pop(0)
+        # 마이스토리의 story를 첫 서브스토리로 수정
+        serializer = MyStoryCreateSerializer(
+            instance=mystory,
+            data={
+                'story': mysubstory,
+            })
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+        
+        before_sub = mysubstory
+
+        for idx, mystory_idx in enumerate(substory_list):
+            data = {
+                'substory': get_object_or_404(Substory, pk=mystory_idx),
+                'is_end': True if idx == len(substory_list)-1 else False
+            }
+            serializer = MySubstoryCreateSerializer(data=data)
+            if serializer.is_valid():
+                next_sub = serializer.save()
+            
+            serializer = MySubstoryCreateSerializer(
+                instance=before_sub,
+                data={
+                    'next_id': next_sub.id
+                })
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            
+            before_sub = next_sub
+        return Response(status=status.HTTP_201_CREATED)
+
 
 class StoryView(APIView):
 
@@ -78,6 +120,7 @@ class StoryDetailView(APIViewWithAuthentication):
         story = self.get_object(story_id)
         serializer = StoryDetailSerializer(instance=story)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class BranchDetailView(APIViewWithAuthentication):
 
@@ -138,4 +181,3 @@ class SubStoryListView(APIViewWithAuthentication):
         serializer = SubstorySerializer(instance=substories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-# 스토리 최종 만드는 로직 추가필요
