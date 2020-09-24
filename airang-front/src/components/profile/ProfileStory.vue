@@ -43,7 +43,7 @@ export default {};
 	z-index: 10;
 	width: 720px;
 	display: flex;
-	justify-content: space-between;
+	// justify-content: space-between;
 	align-items: center;
 	// position: absolute;
 	// top: 140px;
@@ -52,6 +52,7 @@ export default {};
 .book {
 	width: 180px;
 	height: 255px;
+	margin-right: 30px;
 	background-color: rgb(62, 71, 152);
 	transition: all 0.3s ease-in-out;
 	transform-origin: left center 0px;

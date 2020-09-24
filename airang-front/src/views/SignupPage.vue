@@ -4,6 +4,14 @@
 		<div class="signup-grass grass-2"></div>
 		<div class="signup-grass grass-3"></div>
 		<form class="signup-form" @submit.prevent="submitForm">
+			<img
+				class="signup-logo"
+				src="@/assets/images/accounts/signin.png"
+				alt="signuplogo"
+			/>
+			<div class="signup-brown-1"></div>
+			<div class="signup-brown-2"></div>
+			<div class="signup-brown-3"></div>
 			<div class="signup-box">
 				<label class="signup-label" for="email">이메일</label>
 				<input id="email" class="signup-item" type="email" v-model="email" />
@@ -80,13 +88,39 @@ export default {
 		background-color: #2f9e44;
 		transform: translateX(-50%);
 	}
+	@-webkit-keyframes grass-1 {
+		0% {
+			transform: rotate(-60deg);
+		}
+		50% {
+			transform: rotate(-45deg);
+		}
+		100% {
+			transform: rotate(-60deg);
+		}
+	}
+	@-webkit-keyframes grass-2 {
+		0% {
+			transform: rotate(60deg);
+		}
+		50% {
+			transform: rotate(45deg);
+		}
+		100% {
+			transform: rotate(60deg);
+		}
+	}
 	.grass-1 {
 		transform: rotate(-45deg);
 		z-index: 1;
+		animation: grass-1 1s infinite alternate;
+		animation-timing-function: 2s;
 	}
 	.grass-2 {
 		transform: rotate(45deg);
 		z-index: 1;
+		animation: grass-2 1s infinite alternate;
+		animation-timing-function: 2s;
 	}
 	.grass-3 {
 		transform: rotate(0deg);
@@ -109,7 +143,43 @@ export default {
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
-
+		.signup-logo {
+			position: absolute;
+			top: 5%;
+			left: 60%;
+			z-index: 999;
+			width: 150px;
+		}
+		.signup-brown-1 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			/* transform: translateX(-50%); */
+			width: 60px;
+			height: 2px;
+			top: 50px;
+			left: 15%;
+		}
+		.signup-brown-2 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			/* transform: translateX(-50%); */
+			width: 90px;
+			height: 2px;
+			top: 80px;
+			left: 17%;
+		}
+		.signup-brown-3 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			transform: translateX(-50%);
+			width: 30px;
+			height: 2px;
+			top: 450px;
+			left: 60%;
+		}
 		.signup-box {
 			position: relative;
 			width: 100%;
