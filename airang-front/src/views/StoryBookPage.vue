@@ -85,7 +85,26 @@ export default {
 		};
 	},
 	created() {
-		this.createSubStory(this.subStoryId);
+		console.log('크리에이티드');
+		this.currentItem = -1;
+		this.scriptNumber = 0;
+		this.stories = [];
+		this.nextStoryId = null;
+		this.nextBranchId = null;
+		this.hasBranch = null;
+		this.finish = false;
+		this.selectStories = [];
+	},
+	destroyed() {
+		console.log('디스트로이');
+		this.currentItem = -1;
+		this.scriptNumber = 0;
+		this.stories = [];
+		this.nextStoryId = null;
+		this.nextBranchId = null;
+		this.hasBranch = null;
+		this.finish = false;
+		this.selectStories = [];
 	},
 	methods: {
 		resetScript() {
@@ -110,14 +129,17 @@ export default {
 					mystory_id: this.myStoryId,
 					substory_id: num,
 				});
-				console.log(data);
+				console.log(data.next_id);
+				console.log(this.stories);
+
 				this.hasBranch = data.has_branch;
+				console.log(this.hasBranch);
 				if (!this.hasBranch) {
 					this.nextStoryId = data.next_id;
-					this.nextBranchId = null;
+					this.nextBranchId = 0;
 				} else {
 					this.nextBranchId = data.next_id;
-					this.nextStoryId = null;
+					this.nextStoryId = 0;
 				}
 				this.stories.push(data);
 				if (this.currentItem !== -1) {
@@ -130,35 +152,36 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
+					console.log('끝', this.nextStoryId);
 					// await finishedMyStory(this.myStoryId, this.selectStories);
 					this.$router.push({ name: 'bookshelf' });
 					return;
-				}
-				if (this.nextStoryId) {
-					this.selectStories.push(this.nextStoryId);
-					const { data } = await fetchSubStory({
-						mystory_id: this.myStoryId,
-						substory_id: this.nextStoryId,
-					});
-					console.log(data);
-					if (data.next_id === -1) {
-						this.finish = true;
-					}
-					this.hasBranch = data.has_branch;
-					if (!this.hasBranch) {
-						this.nextStoryId = data.next_id;
-						this.nextBranchId = null;
-					} else {
-						this.nextBranchId = data.next_id;
-						this.nextStoryId = null;
-					}
-					this.stories.push(data);
-					return;
 				} else {
-					const { data } = await fetchBranch(this.nextBranchId);
-					console.log(data);
-					this.stories.push(data);
-					return;
+					if (this.nextStoryId) {
+						this.selectStories.push(this.nextStoryId);
+						const { data } = await fetchSubStory({
+							mystory_id: this.myStoryId,
+							substory_id: this.nextStoryId,
+						});
+						console.log(data.next_id);
+						console.log(this.stories);
+						if (data.next_id === -1) {
+							this.finish = true;
+						}
+						this.hasBranch = data.has_branch;
+						if (!this.hasBranch) {
+							this.nextStoryId = data.next_id;
+							this.nextBranchId = 0;
+						} else {
+							this.nextBranchId = data.next_id;
+							this.nextStoryId = 0;
+						}
+						this.stories.push(data);
+					} else {
+						const { data } = await fetchBranch(this.nextBranchId);
+						console.log(data);
+						this.stories.push(data);
+					}
 				}
 			} catch (error) {
 				console.log(error);
@@ -184,12 +207,28 @@ export default {
 		},
 	},
 	mounted() {
+		console.log('마운티드');
 		bus.$on('page-increase', this.currentIncrease);
 		// bus.$on('page-decrease', this.currentDecrease);
 		bus.$on('script-increase', this.scriptIncrease);
 		// bus.$on('script-decrease', this.scriptDecrease);
 		bus.$on('script-reset', this.resetScript);
 		bus.$on('next-page', this.updateStory);
+		this.createSubStory(this.subStoryId);
+	},
+	watch: {
+		$route() {
+			console.log('왓치드');
+			this.currentItem = -1;
+			this.scriptNumber = 0;
+			this.stories = [];
+			this.nextStoryId = 0;
+			this.nextBranchId = null;
+			this.hasBranch = null;
+			this.finish = false;
+			this.selectStories = [];
+			this.createSubStory(this.subStoryId);
+		},
 	},
 };
 </script>
