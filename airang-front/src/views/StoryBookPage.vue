@@ -18,7 +18,7 @@
 			:class="[currentItem === index ? 'story-abled' : 'story-disabled']"
 		>
 			<section v-if="!story.question" class="story-left">
-				왼쪽
+				사진
 			</section>
 			<section v-else class="story-left story-select">
 				<button
@@ -44,13 +44,13 @@
 			</section>
 		</article>
 		<!-- <article class="story-page story-finish">
-			끝
-		</article> -->
+            끝
+        </article> -->
 		<!-- <section class="story-btn">
-			<button @click="nextPage" class="story-right-btn">
-				<i class="icon ion-md-arrow-round-forward"></i>
-			</button>
-		</section> -->
+            <button @click="nextPage" class="story-right-btn">
+                <i class="icon ion-md-arrow-round-forward"></i>
+            </button>
+        </section> -->
 	</section>
 </template>
 
@@ -171,23 +171,14 @@ export default {
 		nextPage() {
 			this.currentItem += 1;
 		},
-		// hideButton() {
-		// 	const btns = document.querySelector('.story-btn');
-		// 	btns.style.display = 'none';
-		// },
-		// openButton() {
-		// 	const btns = document.querySelector('.story-btn');
-		// 	btns.style.display = 'inline';
-		// },
 	},
 	mounted() {
 		bus.$on('page-increase', this.currentIncrease);
-		bus.$on('page-decrease', this.currentDecrease);
+		// bus.$on('page-decrease', this.currentDecrease);
 		bus.$on('script-increase', this.scriptIncrease);
-		bus.$on('script-decrease', this.scriptDecrease);
+		// bus.$on('script-decrease', this.scriptDecrease);
 		bus.$on('script-reset', this.resetScript);
 		bus.$on('next-page', this.updateStory);
-		// this.hideButton();
 	},
 };
 </script>
@@ -198,7 +189,6 @@ export default {
 	height: 100vh;
 	position: relative;
 	perspective: 1000px;
-	transform-style: preserve-3d;
 	.story-start {
 		position: absolute;
 		bottom: 2rem;
@@ -238,8 +228,8 @@ export default {
 }
 .story-disabled {
 	/* opacity: 0;
-	position: absolute;
-	top: -100vh;
+    position: absolute;
+    top: -100vh;
     left: -100vw; */
 	animation: fade-out 1s;
 	animation-fill-mode: forwards;
@@ -250,11 +240,7 @@ export default {
 	height: 100vh;
 	display: flex;
 	flex-wrap: wrap;
-	transform-style: preserve-3d;
 	transition: 1s;
-	backface-visibility: hidden;
-	transform-origin: left;
-	outline: 1px solid black;
 	.story-left {
 		width: 50%;
 		height: 100%;
@@ -277,6 +263,16 @@ export default {
 	.story-main {
 		width: 100%;
 		height: 100%;
+		box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+	}
+	.stroy-main::before {
+		background: linear-gradient(
+			to right,
+			rgba(0, 0, 0, 0.2) 0px,
+			transparent 5%,
+			transparent 95%,
+			rgba(0, 0, 0, 0.2) 100%
+		);
 	}
 	.story-cover {
 		display: flex;
@@ -300,10 +296,6 @@ export default {
 	animation-fill-mode: forwards;
 	display: flex !important;
 }
-
-/* .page-flipped {
-	transform: rotateY(-180deg);
-} */
 
 .hidden {
 	display: none;
