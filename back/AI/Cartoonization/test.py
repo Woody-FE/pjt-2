@@ -9,7 +9,7 @@ import torchvision.utils as vutils
 from .network.Transformer import Transformer
 
 
-def cartoonize(Resized_image_path):
+def cartoonize(Resized_image_path, target_image):
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_dir', default=Resized_image_path)
     parser.add_argument('--load_size', default=450)
@@ -40,6 +40,11 @@ def cartoonize(Resized_image_path):
         model.float()
 
     for files in os.listdir(opt.input_dir):
+        if files == target_image:
+            pass
+        else:
+            continue
+
         ext = os.path.splitext(files)[1]
         if ext not in valid_ext:
             continue
