@@ -93,12 +93,12 @@ export default {};
 /*------ background-pic ------*/
 
 .books-1 {
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/3433202-d2a1bea8a58cd447.png');
+	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140716_200%2F500farm_1405513399454S2F1z_PNG%2F%25B5%25BF%25C8%25AD%25C3%25A51%25B8%25E9.png&type=sc960_832');
 	background-size: 180px 255px;
 }
 
 .books-2 {
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/3433202-6b51313cfc447314.png');
+	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140716_200%2F500farm_1405513399454S2F1z_PNG%2F%25B5%25BF%25C8%25AD%25C3%25A51%25B8%25E9.png&type=sc960_832');
 	background-size: 180px 255px;
 }
 
