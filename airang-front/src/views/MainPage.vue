@@ -78,6 +78,7 @@ export default {};
 	.main-board {
 		width: 60vw;
 		height: 55vh;
+		margin-top: 80px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
