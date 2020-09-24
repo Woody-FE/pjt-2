@@ -17,7 +17,7 @@ def cartoonize(Resized_image_path):
         '--model_path', default='./Cartoonization/pretrained_model')
     parser.add_argument('--style', default='Shinkai')
     parser.add_argument('--output_dir', default='./images/cartooned_images')
-    parser.add_argument('--gpu', type=int, default=0)
+    parser.add_argument('--gpu', type=int, default=-1)
 
     opt = parser.parse_args()
 
