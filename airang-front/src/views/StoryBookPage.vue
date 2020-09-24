@@ -18,7 +18,7 @@
 			:class="[currentItem === index ? 'story-abled' : 'story-disabled']"
 		>
 			<section v-if="!story.question" class="story-left">
-				사진
+				<img :src="`${imgSrc}${filterMedia(story.back_image)}`" alt="" />
 			</section>
 			<section v-else class="story-left story-select">
 				<button
@@ -66,6 +66,11 @@ export default {
 	props: {
 		myStoryId: Number,
 		subStoryId: Number,
+	},
+	computed: {
+		imgSrc() {
+			return process.env.VUE_APP_API_URL;
+		},
 	},
 	data() {
 		return {
@@ -158,6 +163,12 @@ export default {
 			} catch (error) {
 				console.log(error);
 			}
+		},
+		filterMedia(string) {
+			if (string.includes('/media/')) {
+				return string.replace('/media/', '');
+			}
+			return string;
 		},
 		startPage() {
 			const startBtn = document.querySelector('.story-start-btn');
