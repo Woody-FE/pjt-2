@@ -64,6 +64,7 @@ class MyStoryDetailView(APIViewWithAuthentication):
     @swagger_auto_schema(request_body=MyStoryAddRequestSerializer)
     def post(self, request, mystory_id):
         mystory = self.get_object(mystory_id)
+
         try:
             substory_list = request.data['substory_list']
         except:
@@ -71,37 +72,44 @@ class MyStoryDetailView(APIViewWithAuthentication):
         
         # 첫 서브스토리
         mysubstory = substory_list.pop(0)
-        # 마이스토리의 story를 첫 서브스토리로 수정
-        serializer = MyStoryCreateSerializer(
-            instance=mystory,
-            data={
-                'story': mysubstory,
-            })
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-        
         serializer = MySubstoryCreateSerializer(
             data={
-                'substory': Substory.objects.get(pk=mysubstory),
+                'substory': mysubstory,
                 'is_end': False
             }
         )
         if serializer.is_valid(raise_exception=True):
             before_sub = serializer.save()
 
+        # 마이스토리의 story를 첫 서브스토리로 수정
+        serializer = MyStoryCreateSerializer(
+            instance=mystory,
+            data={
+                'mystory': before_sub.id,
+                'user': mystory.user.id,
+                'story_name': mystory.story_name,
+                'story': mystory.story_id,
+            })
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(mystory=before_sub)
+
+        
+
         for idx, mystory_idx in enumerate(substory_list):
             data = {
-                'substory': get_object_or_404(Substory, pk=mystory_idx),
+                'substory': mystory_idx,
                 'is_end': True if idx == len(substory_list)-1 else False
             }
             serializer = MySubstoryCreateSerializer(data=data)
-            if serializer.is_valid():
+            if serializer.is_valid(raise_exception=True):
                 next_sub = serializer.save()
             
             serializer = MySubstoryCreateSerializer(
                 instance=before_sub,
                 data={
-                    'next_id': next_sub.id
+                    'next_id': next_sub.id,
+                    'is_end': before_sub.is_end,
+                    'substory': before_sub.substory_id,
                 })
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
@@ -149,8 +157,8 @@ class MyCharacterView(APIViewWithAuthentication):
         serializer = MyCharacterCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             mystory = get_object_or_404(MyStory, pk=mystory_id)
-            serializer.save(mystory=mystory)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            mycharacter = serializer.save(mystory=mystory)
+            return Response(MyCharacterSerializer(instance=mycharacter).data, status=status.HTTP_201_CREATED)
 
 
 class MyCharacterDetailView(APIViewWithAuthentication):
@@ -174,7 +182,7 @@ class SubstoryDetailView(APIViewWithAuthentication):
         for value in data['scripts']:
             mycharacter = mystory.mycharacters.filter(mystory=mystory_id, character=value['character']['id'])
             if mycharacter:
-                value['mycharacter'] = MyCharacterBasicSerializer(instance=mycharacter[0]).data
+                value['mycharacter'] = MyCharacterBasicSerializer(instance=mycharacter,many=True).data
             else:
                 value['mycharacter'] = {}
         return Response(result, status=status.HTTP_200_OK)
