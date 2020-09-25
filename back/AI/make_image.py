@@ -7,7 +7,7 @@ from Cartoonization import test
 
 def make_image(user_id):
     # 1. 이미지 받기
-    original_image_path = "./images/input_images/KTI2.jpg"
+    original_image_path = "./images/input_images/HYJ.jpg"
     original_image_name = original_image_path[22:-4]
     origin_image = cv2.imread(original_image_path, cv2.IMREAD_UNCHANGED)
     BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
@@ -69,7 +69,7 @@ def make_image(user_id):
         chin_end[0])), (int(min_y), int(fr_chin_bottom))
     Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
 
-    Nukkied_image = cv2.resize(Trimmed_image, (180, 200),
+    Nukkied_image = cv2.resize(Trimmed_image, (175, 210),
                             fx=1, fy=1, interpolation=cv2.INTER_AREA)
 
     Nukkied_image_path = './images/nukkied_images'
@@ -86,7 +86,7 @@ def make_image(user_id):
     # 2-3-1. resize
     cartooned_image = Image.open(cartooned_image_path)
     cartooned_RGBA_image = cartooned_image.convert('RGBA')
-    cartooned_RGBA_image = cartooned_RGBA_image.resize((180, 200), resample=3,
+    cartooned_RGBA_image = cartooned_RGBA_image.resize((175, 210), resample=3,
                                                     box=None, reducing_gap=None)
     resized_cartooned_path = './images/cartooned_images/' + 'resized_' + cartooned_image_name
     cartooned_RGBA_image.save(resized_cartooned_path, 'PNG')
@@ -104,7 +104,7 @@ def make_image(user_id):
     chin_x = np_fr_chin[np.argmax(chin_y)]
     chin_start, chin_end = np_fr_chin[0], np_fr_chin[-1]
 
-    left_start, right_end = (0, 0), (200, 0)
+    left_start, right_end = (0, 0), (210, 0)
 
     nukki_coordinate = []
     nukki_coordinate.append(left_start)
@@ -162,7 +162,7 @@ def make_image(user_id):
 
     # 4. 결과 출력
 
-    Trim_y = (0, int(fr_chin_bottom) + 118)
+    Trim_y = (0, int(fr_chin_bottom) + 120)
     Trimmed_image = baby_body[Trim_y[0]: Trim_y[1], :]
 
     Trimmed_path = os.path.join('./images/my_image/' , 'baby_' + str(user_id) + '.jpg')
