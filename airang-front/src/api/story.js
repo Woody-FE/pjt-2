@@ -9,6 +9,9 @@ export function fetchStory(storyId) {
 export function fetchMyStories() {
 	return stories.get('/mystories/');
 }
+export function deleteMyStories(storyId) {
+	return stories.delete(`/mystories/${storyId}/`);
+}
 export function fetchSubStories(storyId) {
 	return stories.get(`/${storyId}/substories/`);
 }
