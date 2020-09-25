@@ -106,12 +106,12 @@ export default {
 			return validatePassword(password);
 		},
 		isEqualPassword() {
-			const password1 = this.passsword1;
+			const password1 = this.password1;
 			const password2 = this.password2;
 			if (!password1 && !password2) {
 				return true;
 			}
-			return password1 == password2;
+			return password1 === password2;
 		},
 	},
 };
