@@ -9,9 +9,9 @@
 				src="@/assets/images/accounts/signin.png"
 				alt="signuplogo"
 			/>
-			<div class="signup-brown-1"></div>
-			<div class="signup-brown-2"></div>
-			<div class="signup-brown-3"></div>
+			<!-- <div class="signup-brown-1"></div> -->
+			<!-- <div class="signup-brown-2"></div> -->
+			<!-- <div class="signup-brown-3"></div> -->
 			<div class="signup-box">
 				<label class="signup-label" for="text">아이 이름</label>
 				<input
@@ -208,7 +208,7 @@ export default {
 			width: 100%;
 			max-width: 368px;
 			height: 2rem;
-			padding: 0 1rem;
+			padding: 0.25rem 1rem;
 			font-size: 1rem;
 			border: 1px solid black;
 			border-top-left-radius: 3rem;
