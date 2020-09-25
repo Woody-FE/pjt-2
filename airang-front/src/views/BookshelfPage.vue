@@ -11,8 +11,8 @@
 			<!-- <router-link to="/story/2"><div class="book books-2"></div></router-link> -->
 			<!-- <router-link to="/story/3"><div class="book books-3"></div></router-link> -->
 		</div>
-		<div class="book-add__btn">
-			<button @click="createBook">책 생성</button>
+		<div>
+			<button class="book-add__btn" @click="createBook">책 생성</button>
 		</div>
 	</section>
 </template>
@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .bookshelf-wrap {
 	margin: 0 auto;
 	position: relative;
@@ -129,16 +129,6 @@ export default {
 	background-size: 100% 255px;
 }
 
-/* .books-2 {
-	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2Fdata44%2F2009%2F3%2F29%2F9%2Fprog_13842_1_limpia1.jpg&type=sc960_832');
-	background-size: 180px 255px;
-}
-
-.books-3 {
-	background: url('https://upload-images.jianshu.io/upload_images/3433202-564e196e8b409f16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240');
-	background-size: 180px 255px;
-} */
-
 /* ----- hover ----- */
 
 .book:hover {
@@ -146,7 +136,6 @@ export default {
 	transform: rotateY(-28deg) rotateZ(-2deg) scale(1.02);
 	-webkit-backface-visibility: hidden;
 	box-shadow: 1px 3px 2px #353d85, 20px 8px 0 #525dc4;
-	/* transform: scale(1.02); */
 }
 
 .book:hover::after {
@@ -167,5 +156,17 @@ export default {
 .book:hover::before {
 	transform: translateY(9px);
 	opacity: 1;
+}
+.book-add__btn {
+	width: 60px;
+	height: 35px;
+	background-color: rgba(20, 148, 33, 0.8);
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	&:hover {
+		background-color: rgba(20, 148, 33, 1);
+	}
 }
 </style>

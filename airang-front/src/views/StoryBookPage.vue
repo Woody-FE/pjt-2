@@ -84,19 +84,18 @@ export default {
 			selectStories: [],
 		};
 	},
-	created() {
-		console.log('크리에이티드');
-		this.currentItem = -1;
-		this.scriptNumber = 0;
-		this.stories = [];
-		this.nextStoryId = null;
-		this.nextBranchId = null;
-		this.hasBranch = null;
-		this.finish = false;
-		this.selectStories = [];
-	},
+	// created() {
+	// 	console.log('크리에이티드');
+	// 	this.currentItem = -1;
+	// 	this.scriptNumber = 0;
+	// 	this.stories = [];
+	// 	this.nextStoryId = null;
+	// 	this.nextBranchId = null;
+	// 	this.hasBranch = null;
+	// 	this.finish = false;
+	// 	this.selectStories = [];
+	// },
 	destroyed() {
-		console.log('디스트로이');
 		this.currentItem = -1;
 		this.scriptNumber = 0;
 		this.stories = [];
@@ -129,11 +128,7 @@ export default {
 					mystory_id: this.myStoryId,
 					substory_id: num,
 				});
-				console.log(data.next_id);
-				console.log(this.stories);
-
 				this.hasBranch = data.has_branch;
-				console.log(this.hasBranch);
 				if (!this.hasBranch) {
 					this.nextStoryId = data.next_id;
 					this.nextBranchId = 0;
@@ -152,7 +147,6 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
-					console.log('끝', this.nextStoryId);
 					// await finishedMyStory(this.myStoryId, this.selectStories);
 					this.$router.push({ name: 'bookshelf' });
 				} else {
@@ -162,8 +156,6 @@ export default {
 							mystory_id: this.myStoryId,
 							substory_id: this.nextStoryId,
 						});
-						console.log(data.next_id);
-						console.log(this.stories);
 						if (data.next_id === -1) {
 							this.finish = true;
 						}
@@ -178,7 +170,6 @@ export default {
 						this.stories.push(data);
 					} else if (this.nextBranchId) {
 						const { data } = await fetchBranch(this.nextBranchId);
-						console.log(data);
 						this.stories.push(data);
 					}
 				}
@@ -206,7 +197,6 @@ export default {
 		},
 	},
 	mounted() {
-		console.log('마운티드');
 		bus.$on('page-increase', this.currentIncrease);
 		// bus.$on('page-decrease', this.currentDecrease);
 		bus.$on('script-increase', this.scriptIncrease);
@@ -217,7 +207,6 @@ export default {
 	},
 	watch: {
 		$route() {
-			console.log('왓치드');
 			this.currentItem = -1;
 			this.scriptNumber = 0;
 			this.stories = [];
