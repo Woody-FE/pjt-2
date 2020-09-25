@@ -25,7 +25,11 @@
 				/>이름
 			</span>
 			<input class="input-form" type="text" v-model="userData.username" />
-			<div class="msg-box"></div>
+			<div class="msg-box">
+				<p v-if="!isVaildateName" class="hidden-msg1 msg">
+					※ 이름은 공백제외 2~5자 한글입니다.
+				</p>
+			</div>
 		</div>
 		<div class="input-box">
 			<span class="">
@@ -71,8 +75,20 @@
 			<router-link to="/profile/">
 				<button class="btn btn-cancle">취소</button>
 			</router-link>
-			<button class="btn btn-update" @click="patchData">비밀번호수정</button>
-			<button class="name-btn btn" @click="changeName">이름수정</button>
+			<button
+				:disabled="!isValidatePassword1 || !isEqualPassword"
+				class="btn btn-update"
+				@click="patchData"
+			>
+				비밀번호수정
+			</button>
+			<button
+				:disabled="!isVaildateName"
+				class="name-btn btn"
+				@click="changeName"
+			>
+				이름수정
+			</button>
 		</section>
 		<footer class="modify-footer"></footer>
 	</section>
@@ -80,7 +96,7 @@
 
 <script>
 import { getUserProfile, patchUserName, changePassword } from '@/api/profile';
-import { validatePassword } from '@/utils/validation';
+import { validatePassword, validationName } from '@/utils/validation';
 
 export default {
 	data() {
@@ -130,6 +146,13 @@ export default {
 		},
 	},
 	computed: {
+		isVaildateName() {
+			const name = this.userData.username;
+			if (name.length === 0) {
+				return false;
+			}
+			return validationName(name);
+		},
 		isValidatePassword1() {
 			const password = this.userPassword.new_password1;
 			if (!password) {
