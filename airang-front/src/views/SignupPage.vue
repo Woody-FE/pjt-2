@@ -50,6 +50,8 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { validatePassword, validationName } from '@/utils/validation';
+
 export default {
 	data() {
 		return {
@@ -63,6 +65,18 @@ export default {
 		...mapActions(['SIGNUP']),
 		async submitForm() {
 			try {
+				if (!this.isVaildateName) {
+					alert('※ 이름은 공백제외 2~5자 한글입니다.');
+					return;
+				}
+				if (!this.isValidatePassword1) {
+					alert('※ 비밀번호는 공백제외 8자 이상 15자 이하입니다.');
+					return;
+				}
+				if (!this.isEqualPassword) {
+					alert('※ 비밀번호를 한번 더 확인해주세요!');
+					return;
+				}
 				const userInfo = {
 					username: this.username,
 					email: this.email,
@@ -74,6 +88,30 @@ export default {
 			} catch (error) {
 				console.log(error);
 			}
+		},
+	},
+	computed: {
+		isVaildateName() {
+			const name = this.username;
+			if (name.length === 0) {
+				return false;
+			}
+			return validationName(name);
+		},
+		isValidatePassword1() {
+			const password = this.password1;
+			if (!password) {
+				return true;
+			}
+			return validatePassword(password);
+		},
+		isEqualPassword() {
+			const password1 = this.passsword1;
+			const password2 = this.password2;
+			if (!password1 && !password2) {
+				return true;
+			}
+			return password1 == password2;
 		},
 	},
 };
