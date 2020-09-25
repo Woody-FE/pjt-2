@@ -5,15 +5,59 @@
 			<p class="profileStory-header__name">나의 이야기</p>
 		</header>
 		<div class="box-out">
-			<router-link to="/story/1"><div class="book books-1"></div></router-link>
-			<router-link to="/story/2"><div class="book books-2"></div></router-link>
+			<router-link
+				:key="book.id"
+				v-for="book in books"
+				:to="`/story/${book.id}/${book.story.substory}`"
+				><div
+					class="book books-1"
+					v-bind:style="{
+						backgroundImage: `url('${imgSrc}${filterMedia(
+							book.story.cover_image,
+						)}')`,
+					}"
+				></div
+			></router-link>
 		</div>
 		<footer class="profileStory-footer"></footer>
 	</section>
 </template>
 
 <script>
-export default {};
+import { fetchMyStories } from '@/api/story';
+
+export default {
+	created() {
+		this.fetchBooks();
+	},
+	data() {
+		return {
+			books: [],
+		};
+	},
+	computed: {
+		imgSrc() {
+			return process.env.VUE_APP_API_URL;
+		},
+	},
+
+	methods: {
+		async fetchBooks() {
+			try {
+				const { data } = await fetchMyStories();
+				this.books = data;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		filterMedia(string) {
+			if (string.includes('/media/')) {
+				return string.replace('/media/', '');
+			}
+			return string;
+		},
+	},
+};
 </script>
 
 <style lang="scss">
@@ -85,7 +129,7 @@ export default {};
 	top: -12px;
 	right: 8px;
 	transition: all 0.25s;
-	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAABhCAYAAABh23lYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHCSURBVHgB7dxPTsJAHMXxN7Xu3UhigobxJHACvQFwAr2BcgO8AZxE7uGiDZiQyEIW7oSOUyKbKgLS8u+9b9JNF818fum0XdWUhy9VEDZBGIdBGD6DsFM3bQYgTnjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNZ2hR/7o+UcmnCIsaNCbLcU/RR8oB1bO/4+17l8ixoGeIBBBVvMXI0ih+L7Df2j8iiqnvgh+AVVUXDOTZvF4tNb2qC7DJ1tNgSDO78tblFQxeE92l+0NSjZDjaoMowqyYl7hDF15JzL+x+YHtxLgFq/ZO2m8LT4wsb90nUjmMD61XaRc7ng5+jBua29ntsecq6oIWyELxqdLe8h/GvPp+h0T28D/FezZ8Ip7pHgZt3X5NoPvH1BZ5sNIUTDL7C+6hBWxxt0gk+00tsOe96qH0zL8GO4pBtMg/YhoLMtG8Ii/EpfY4fSoiFk8UeFzpYdwhz/jiNGZ0uHEBjUEzftohJFZyAsdX8BM0/amLC3spYAAAAASUVORK5CYII=');
+	// background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAABhCAYAAABh23lYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHCSURBVHgB7dxPTsJAHMXxN7Xu3UhigobxJHACvQFwAr2BcgO8AZxE7uGiDZiQyEIW7oSOUyKbKgLS8u+9b9JNF818fum0XdWUhy9VEDZBGIdBGD6DsFM3bQYgTnjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNZ2hR/7o+UcmnCIsaNCbLcU/RR8oB1bO/4+17l8ixoGeIBBBVvMXI0ih+L7Df2j8iiqnvgh+AVVUXDOTZvF4tNb2qC7DJ1tNgSDO78tblFQxeE92l+0NSjZDjaoMowqyYl7hDF15JzL+x+YHtxLgFq/ZO2m8LT4wsb90nUjmMD61XaRc7ng5+jBua29ntsecq6oIWyELxqdLe8h/GvPp+h0T28D/FezZ8Ip7pHgZt3X5NoPvH1BZ5sNIUTDL7C+6hBWxxt0gk+00tsOe96qH0zL8GO4pBtMg/YhoLMtG8Ii/EpfY4fSoiFk8UeFzpYdwhz/jiNGZ0uHEBjUEzftohJFZyAsdX8BM0/amLC3spYAAAAASUVORK5CYII=');
 	background-size: 16px;
 	background-repeat: no-repeat;
 }
