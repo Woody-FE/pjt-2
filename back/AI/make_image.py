@@ -83,31 +83,53 @@ def make_image(user_id):
     cartooned_image_path = './images/cartooned_images/' + cartooned_image_name
 
 
-    # 2-4-1. 검은부분 Nukki
+    # 2-3-1. resize
     cartooned_image = Image.open(cartooned_image_path)
     cartooned_RGBA_image = cartooned_image.convert('RGBA')
-
-    datas = cartooned_RGBA_image.getdata()
-
-    newData = []
-    cutOff = 36
-    for item in datas:
-        if item[0] <= cutOff and item[1] <= cutOff and item[2] <= cutOff:
-            newData.append((255, 255, 255, 0))
-        else:
-            newData.append(item)
-    cartooned_RGBA_image.putdata(newData)
-
-
-    # 2-4-2. resize
-    cartooned_RGBA_image = cartooned_RGBA_image.resize((190, 200), resample=3,
+    cartooned_RGBA_image = cartooned_RGBA_image.resize((180, 200), resample=3,
                                                     box=None, reducing_gap=None)
-    save_path = './images/re_nukkied_images/' + cartooned_image_name
-    cartooned_RGBA_image.save(save_path, 'PNG')
+    resized_cartooned_path = './images/cartooned_images/' + 'resized_' + cartooned_image_name
+    cartooned_RGBA_image.save(resized_cartooned_path, 'PNG')
+
+
+    # 2-4. re-Nukki
+    fr_image = fr.load_image_file(resized_cartooned_path)
+    fr_landmarks_list = fr.face_landmarks(fr_image)
+    fr_chin = fr_landmarks_list[0]['chin']
+
+    np_fr_chin = np.array(fr_chin)
+    fr_chin_bottom = np.max(np_fr_chin, axis=0)[1]
+
+    chin_y = np_fr_chin[:, 1:]
+    chin_x = np_fr_chin[np.argmax(chin_y)]
+    chin_start, chin_end = np_fr_chin[0], np_fr_chin[-1]
+
+    left_start, right_end = (0, 0), (200, 0)
+
+    nukki_coordinate = []
+    nukki_coordinate.append(left_start)
+    nukki_coordinate.extend(fr_chin)
+    nukki_coordinate.append(right_end)
+
+
+    image = cv2.imread(resized_cartooned_path, cv2.IMREAD_UNCHANGED)
+
+    mask = np.zeros(image.shape, dtype=np.uint8)
+    roi_corners = np.array([nukki_coordinate], dtype=np.int32)
+
+    channel_count = image.shape[2]
+    ignore_mask_color = (255, ) * channel_count
+    cv2.fillPoly(mask, roi_corners, ignore_mask_color)
+
+    re_Nukkied_image = cv2.bitwise_and(image, mask)
+
+    re_Nukkied_image_path = os.path.join('./images/re_nukkied_images',
+                            're_Nukkied_' + original_image_name + '.png')
+    cv2.imwrite(re_Nukkied_image_path, re_Nukkied_image)
 
 
     # 3. 몸에 합성
-    baby_face = cv2.imread(save_path, cv2.IMREAD_UNCHANGED)
+    baby_face = cv2.imread(re_Nukkied_image_path, cv2.IMREAD_UNCHANGED)
     baby_body = cv2.imread(
         './images/body_and_hat/white_removed_body.png', cv2.IMREAD_UNCHANGED)
     baby_hat = cv2.imread(
@@ -138,47 +160,31 @@ def make_image(user_id):
             (baby_hat[:, :, 3]/255.0) + baby_body[y_offset:y_offset+baby_hat.shape[0],
                                                 x_offset:x_offset + baby_hat.shape[1], c] * (1.0 - baby_hat[:, :, 3]/255.0)
 
-    # sub_result_image = baby_body
-    # cv2.imshow('sub_result_image', sub_result_image)
-    # cv2.imwrite('sub_result_image.jpg', sub_result_image)
+    # 4. 결과 출력
 
-    # 3-2-(a). for HYJ, only face + hat
-    # print(baby_hat.shape)
-    # print(baby_face.shape)
-    # print(baby_body.shape)
-    # face_and_hat = cv2.bitwise_and(baby_body, mask)
+    Trim_y = (0, int(fr_chin_bottom) + 118)
+    Trimmed_image = baby_body[Trim_y[0]: Trim_y[1], :]
 
-    # Trim_x, Trim_y = (int(baby_hat.shape), int(
-    #     baby_face.shape)), (int(baby_hat.shape), int(baby_face.shape))
-    # Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
+    Trimmed_path = os.path.join('./images/my_image/' , 'baby_' + str(user_id) + '.jpg')
+    cv2.imwrite(Trimmed_path, Trimmed_image)
 
-    result_image = baby_body
-    result_path = os.path.join('./images/my_image/' , 'baby_' + str(user_id) +'.jpg')
-    print(type(result_path))
+    result_path = os.path.join('./images/my_image/' , 'baby_' + str(user_id) + '.png')
 
-    cv2.imwrite(result_path, result_image)
-    # cv2.imshow('result_image', result_image)
-    # cv2.imwrite('result_image_' + original_image_name +'.jpg', result_image)
+    result_image = Image.open(Trimmed_path)
+    result_image = result_image.convert('RGBA')
+    datas = result_image.getdata()
+
+    newData = []
+    cutOff = 10
+
+    for item in datas:
+        if item[0] <= cutOff and item[1] <= cutOff and item[2] <= cutOff:
+            newData.append((255, 255, 255, 0))
+        else:
+            newData.append(item)
+
+    result_image.putdata(newData)
+    result_image.save(result_path, "PNG")
 
 
-    # # 4. Nukki the result
-    # result_path = 'sub_result_image.jpg'
-    # result_image = Image.open(result_path)
-    # result_RGBA_image = result_image.convert('RGBA')
-
-    # datas = result_RGBA_image.getdata()
-    # newData = []
-    # cutOff = 255
-    # for item in datas:
-    #     if item[0] == cutOff and item[1] == cutOff and item[2] == cutOff:
-    #         newData.append((255, 255, 255, 0))
-    #     else:
-    #         newData.append(item)
-    # result_RGBA_image.putdata(newData)
-
-    # cv2.imshow('result_RGBA_image', result_RGBA_image)
-    # cv2.imwrite('result_RGBA_image.png', result_RGBA_image)
-
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
     return result_path
