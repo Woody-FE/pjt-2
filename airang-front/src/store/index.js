@@ -45,12 +45,10 @@ export default new Vuex.Store({
 		},
 		async LOGIN({ dispatch }, userData) {
 			const { data } = await loginUser(userData);
-			console.log(data);
 			dispatch('SETUP_USER', data);
 		},
 		async SIGNUP({ dispatch }, userData) {
 			const { data } = await registerUser(userData);
-			console.log(data);
 			dispatch('SETUP_USER', data);
 		},
 	},

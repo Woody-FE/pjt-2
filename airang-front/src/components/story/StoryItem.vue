@@ -12,14 +12,11 @@
 					src="@/assets/images/character/arang1.png"
 					alt=""
 				/>
-				<p class="portrait-name">{{ script.character.name }}</p>
+				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
 			</div>
 		</div>
 		<div class="text-btn">
-			<!-- <button class="bb-left-btn" @click="beforePage">
-				<i class="icon ion-md-arrow-round-back"></i>
-			</button> -->
 			<button class="bb-right-btn" @click="afterPage">
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
@@ -51,6 +48,12 @@ export default {
 			this.count++;
 			bus.$emit('script-increase');
 		},
+		filterUsername(string) {
+			if (string.includes('아들')) {
+				return string.replace('아들', store.getters['getUsername']);
+			}
+			return string;
+		},
 		filterName(string) {
 			if (string.includes('{child_name}')) {
 				return string.replace('{child_name}', store.getters['getUsername']);
@@ -67,7 +70,7 @@ export default {
 		};
 	},
 	created() {
-		console.log(this.scripts);
+		// console.log(this.scripts);
 	},
 };
 </script>
