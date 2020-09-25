@@ -23,9 +23,21 @@
 			:class="[currentItem === index ? 'story-abled' : 'story-disabled']"
 		>
 			<section v-if="!story.question" class="story-left">
-				<img :src="`${imgSrc}${filterMedia(story.back_image)}`" alt="" />
+				<div class="story-left-box">
+					<img
+						class="story-left__bg"
+						:src="`${imgSrc}${filterMedia(story.back_image)}`"
+						alt=""
+					/>
+					<img
+						class="story-left__user"
+						v-if="currentItem === 1"
+						src="@/assets/images/user/baby_default.png"
+						alt=""
+					/>
+				</div>
 			</section>
-			<section v-else class="story-left story-select-left">
+			<section v-else class="story-left story-select">
 				<button
 					class="story-select__btn"
 					@click="createSubStory(story.selects[0].substory)"
@@ -39,7 +51,7 @@
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 			/>
-			<section v-else class="story-right story-select-right">
+			<section v-else class="story-right story-select">
 				<button
 					class="story-select__btn"
 					@click="createSubStory(story.selects[1].substory)"
@@ -75,6 +87,9 @@ export default {
 	computed: {
 		imgSrc() {
 			return process.env.VUE_APP_API_URL;
+		},
+		userSrc() {
+			return '@/assets/images/user/baby_default.png';
 		},
 	},
 	data() {
@@ -297,9 +312,35 @@ export default {
 	flex-wrap: wrap;
 	transition: 1s;
 	.story-left {
+		/* position: relative; */
 		width: 50%;
 		height: 100%;
 		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.story-left-box {
+			position: relative;
+		}
+		.story-left__bg {
+			z-index: 1;
+			/* position: absolute; */
+			/* top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0; */
+			/* height: 100%; */
+			/* width: 100%; */
+			/* object-fit: cover; */
+		}
+		.story-left__user {
+			z-index: 2;
+			position: absolute;
+			width: 50%;
+			bottom: 29%;
+			left: 47%;
+			transform: translateX(-50%);
+		}
 	}
 	.story-right {
 		width: 50%;
@@ -310,13 +351,7 @@ export default {
 		justify-content: center;
 		align-items: center;
 	}
-	.story-select-left {
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.story-select-right {
+	.story-select {
 		position: relative;
 		display: flex;
 		justify-content: center;
