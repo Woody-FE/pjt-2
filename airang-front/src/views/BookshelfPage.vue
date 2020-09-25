@@ -43,7 +43,6 @@ export default {
 			try {
 				const { data } = await fetchMyStories();
 				this.books = data;
-				console.log(data);
 			} catch (error) {
 				console.log(error);
 			}
@@ -104,7 +103,7 @@ export default {
 	height: 255px;
 	/* flex: 1 1 auto; */
 	/* padding: 0 1rem; */
-	/* margin: 0 1rem; */
+	margin-right: auto;
 	background-color: rgb(62, 71, 152);
 	transition: all 0.3s ease-in-out;
 	transform-origin: left center 0px;

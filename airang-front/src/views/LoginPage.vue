@@ -181,7 +181,7 @@ export default {
 			width: 100%;
 			max-width: 368px;
 			height: 2rem;
-			padding: 0 1rem;
+			padding: 0.25rem 1rem;
 			font-size: 1rem;
 			border: 1px solid black;
 			border-top-left-radius: 3rem;
