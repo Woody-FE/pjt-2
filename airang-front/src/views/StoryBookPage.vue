@@ -63,18 +63,23 @@
 		<!-- <article class="story-page story-finish">
             끝
         </article> -->
-		<!-- <section class="story-btn">
-            <button @click="nextPage" class="story-right-btn">
-                <i class="icon ion-md-arrow-round-forward"></i>
-            </button>
-        </section> -->
+		<section class="story-delete__btn">
+			<button @click="deleteStory" class="story-delete-btn">
+				<i class="icon ion-md-close"></i>
+			</button>
+		</section>
 	</section>
 </template>
 
 <script>
 import bus from '@/utils/bus';
 import StoryItem from '@/components/story/StoryItem.vue';
-import { fetchSubStory, fetchBranch, fetchStory } from '@/api/story';
+import {
+	fetchSubStory,
+	fetchBranch,
+	fetchStory,
+	deleteMyStories,
+} from '@/api/story';
 // import { finishedMyStory } from '@/api/story';
 export default {
 	components: {
@@ -226,6 +231,14 @@ export default {
 		nextPage() {
 			this.currentItem += 1;
 		},
+		async deleteStory() {
+			try {
+				await deleteMyStories(this.myStoryId);
+				this.$router.push({ name: 'bookshelf' });
+			} catch (error) {
+				console.log(error);
+			}
+		},
 	},
 	mounted() {
 		bus.$on('page-increase', this.currentIncrease);
@@ -278,21 +291,21 @@ export default {
 		}
 	}
 }
-.story-btn {
+.story-delete__btn {
 	position: absolute;
-	bottom: 2rem;
-	left: 50%;
+	top: 3rem;
+	right: 3rem;
 	width: 3rem;
 	height: 3rem;
-	transform: translateX(-50%);
-	.story-right-btn {
+	/* transform: translateX(-50%); */
+	.story-delete-btn {
 		border: none;
 		border-radius: 50%;
 		width: 3rem;
 		height: 3rem;
 		font-size: 1.5rem;
-		background: black;
-		color: white;
+		background: white;
+		color: black;
 		cursor: pointer;
 	}
 }
