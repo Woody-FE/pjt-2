@@ -6,10 +6,15 @@
 				:key="book.id"
 				v-for="book in books"
 				:to="`/story/${book.id}/${book.story.substory}`"
-				><div class="book books-1"></div
-			></router-link>
-			<!-- <router-link to="/story/2"><div class="book books-2"></div></router-link> -->
-			<!-- <router-link to="/story/3"><div class="book books-3"></div></router-link> -->
+				><div
+					class="book books-1"
+					v-bind:style="{
+						backgroundImage: `url('${imgSrc}${filterMedia(
+							book.story.cover_image,
+						)}')`,
+					}"
+				></div>
+			</router-link>
 		</div>
 		<div>
 			<button class="book-add__btn" @click="createBook">책 생성</button>
@@ -28,24 +33,39 @@ export default {
 			books: [],
 		};
 	},
+	computed: {
+		imgSrc() {
+			return process.env.VUE_APP_API_URL;
+		},
+	},
 	methods: {
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
 				this.books = data;
+				console.log(data);
 			} catch (error) {
 				console.log(error);
 			}
 		},
+		filterMedia(string) {
+			if (string.includes('/media/')) {
+				return string.replace('/media/', '');
+			}
+			return string;
+		},
 
 		async createBook() {
 			try {
-				const { data } = await createMyStory({
-					story_id: 1,
-					story_name: '세가지 선물',
-				});
-				this.fetchBooks();
-				console.log(data);
+				if (this.books.length < 4) {
+					await createMyStory({
+						story_id: 1,
+						story_name: '세가지 선물',
+					});
+					this.fetchBooks();
+				} else {
+					alert('생성하신 책이 많습니다');
+				}
 			} catch (error) {
 				console.log(error);
 			}

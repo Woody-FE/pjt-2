@@ -2,7 +2,12 @@
 	<section class="story-wrap">
 		<article v-if="currentItem === -1" class="story-page story-current">
 			<section class="story-main story-cover">
-				왼쪽
+				<img
+					class="story-cover__img"
+					v-if="this.coverImage"
+					:src="`${imgSrc}${filterMedia(this.coverImage)}`"
+					:alt="`${this.bookName}`"
+				/>
 			</section>
 			<section class="story-start">
 				<button @click="startPage" class="story-start-btn">
@@ -20,7 +25,7 @@
 			<section v-if="!story.question" class="story-left">
 				<img :src="`${imgSrc}${filterMedia(story.back_image)}`" alt="" />
 			</section>
-			<section v-else class="story-left story-select">
+			<section v-else class="story-left story-select-left">
 				<button
 					class="story-select__btn"
 					@click="createSubStory(story.selects[0].substory)"
@@ -34,7 +39,7 @@
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 			/>
-			<section v-else class="story-right">
+			<section v-else class="story-right story-select-right">
 				<button
 					class="story-select__btn"
 					@click="createSubStory(story.selects[1].substory)"
@@ -57,7 +62,7 @@
 <script>
 import bus from '@/utils/bus';
 import StoryItem from '@/components/story/StoryItem.vue';
-import { fetchSubStory, fetchBranch } from '@/api/story';
+import { fetchSubStory, fetchBranch, fetchStory } from '@/api/story';
 // import { finishedMyStory } from '@/api/story';
 export default {
 	components: {
@@ -82,6 +87,8 @@ export default {
 			hasBranch: null,
 			finish: false,
 			selectStories: [],
+			coverImage: null,
+			bookName: null,
 		};
 	},
 	// created() {
@@ -120,6 +127,15 @@ export default {
 		},
 		scriptIncrease() {
 			this.scriptNumber += 1;
+		},
+		async fetchCover() {
+			try {
+				const { data } = await fetchStory(1);
+				this.coverImage = data.cover_image;
+				this.bookName = data.name;
+			} catch (error) {
+				console.log(error);
+			}
 		},
 		async createSubStory(num) {
 			try {
@@ -204,6 +220,7 @@ export default {
 		bus.$on('script-reset', this.resetScript);
 		bus.$on('next-page', this.updateStory);
 		this.createSubStory(this.subStoryId);
+		this.fetchCover();
 	},
 	watch: {
 		$route() {
@@ -231,15 +248,15 @@ export default {
 		position: absolute;
 		bottom: 2rem;
 		left: 50%;
-		width: 4rem;
+		width: 10rem;
 		height: 4rem;
 		transform: translateX(-50%);
 		.story-start-btn {
 			border: none;
-			border-radius: 50%;
-			width: 4rem;
+			border-radius: 8px;
+			width: 10rem;
 			height: 4rem;
-			font-size: 0.5rem;
+			font-size: 1.5rem;
 			background: black;
 			color: white;
 			cursor: pointer;
@@ -293,7 +310,14 @@ export default {
 		justify-content: center;
 		align-items: center;
 	}
-	.story-select {
+	.story-select-left {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.story-select-right {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -316,13 +340,22 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		.story-cover__img {
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 	.story-select__btn {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, 50%);
 		background: black;
 		color: white;
 		border: none;
 		width: 300px;
 		height: 50px;
+		font-size: 1rem;
 		border-radius: 8px;
 		cursor: pointer;
 	}
