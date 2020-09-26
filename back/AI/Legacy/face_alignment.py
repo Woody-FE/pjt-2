@@ -13,16 +13,15 @@ BGRA_image = cv2.cvtColor(origin_image, cv2.COLOR_BGR2BGRA)
 # 1-1. 얼굴 정렬 / face_alignment
 fr_image = fr.load_image_file(original_image_path)
 fr_landmarks_list = fr.face_landmarks(fr_image)
-fr_left_eye= fr_landmarks_list[0]['left_eye']
-fr_right_eye= fr_landmarks_list[0]['right_eye']
+
+fr_left_eye, fr_right_eye= fr_landmarks_list[0]['left_eye'], fr_landmarks_list[0]['right_eye']
 np_left_eye, np_right_eye = np.array(fr_left_eye), np.array(fr_right_eye)
 left_eye_sum, right_eye_sum = np_left_eye.sum(axis=0), np_right_eye.sum(axis=0)
 left_eye_center = (round(left_eye_sum[0]/len(np_left_eye), 2), round(left_eye_sum[1]/len(np_left_eye), 2))
 right_eye_center = (round(right_eye_sum[0]/len(np_right_eye), 2), round(right_eye_sum[1]/len(np_right_eye), 2))
-print(left_eye_center, right_eye_center)
 
-left_eye_x = left_eye_center[0]; left_eye_y = left_eye_center[1]
-right_eye_x = right_eye_center[0]; right_eye_y = right_eye_center[1]
+left_eye_x, left_eye_y = left_eye_center
+right_eye_x, right_eye_y = right_eye_center
 
 
 if left_eye_y < right_eye_y:
@@ -62,11 +61,12 @@ new_image = Image.fromarray(BGRA_image)
 
 rotated_image= np.array(new_image.rotate(direction * angle))
 
-red, green, blue, alpha= rotated_image.T 
+red, green, blue, alpha= rotated_image.T
 rotated_image = np.array([blue, green, red, alpha])
 rotated_image = rotated_image.transpose()
 
 rotated_image = Image.fromarray(rotated_image)
 
-rotated_image.save('rotated_img.png')
+rotated_image_path = './images/rotated_images/' + 'rotated_' + 'test.png'
+rotated_image.save(rotated_image_path, 'PNG')
 
