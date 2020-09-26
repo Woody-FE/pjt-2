@@ -134,6 +134,7 @@ class MyStorySerializer(serializers.ModelSerializer):
             'mystory',
             'mycharacters',
             'finished',
+        )
 
 
 class MySubstoryDetailSerializer(serializers.ModelSerializer):
