@@ -89,6 +89,7 @@ class MyStoryDetailView(APIViewWithAuthentication):
                 'user': mystory.user.id,
                 'story_name': mystory.story_name,
                 'story': mystory.story_id,
+                'finished': True,
             })
         if serializer.is_valid(raise_exception=True):
             serializer.save(mystory=before_sub)
