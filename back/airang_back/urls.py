@@ -29,6 +29,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('stories/', include('stories.urls')),
+
+    path('test/', include('tts.urls')),
 ]
 
 # if settings.DEBUG:
