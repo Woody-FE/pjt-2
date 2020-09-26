@@ -64,6 +64,7 @@
 						</p>
 					</div>
 				</div>
+				<router-link class="start-btn btn" to="/bookshelf">START</router-link>
 			</div>
 		</div>
 	</section>
@@ -74,6 +75,7 @@ export default {};
 </script>
 
 <style lang="scss">
+@include common-btn();
 .main-wrap {
 	width: 100%;
 	height: 100%;
@@ -260,7 +262,7 @@ export default {};
 				.sign {
 					padding: 5px 12px;
 					font-size: 12px;
-					background: #2f9e44;
+					background: #77411d;
 					border-radius: 40px 10px 30px;
 					@media screen and (max-width: 1024px) {
 						padding: 4px 9px;
@@ -273,7 +275,7 @@ export default {};
 				}
 				.stick {
 					padding: 5px 3px;
-					background: #2f9e44;
+					background: #77411d;
 					position: absolute;
 					top: 20px;
 					right: 225px;
@@ -298,6 +300,22 @@ export default {};
 			.sign3 {
 				transform: translate(-60px, -170px) rotateX(-85deg) rotateY(-15deg);
 			}
+		}
+	}
+	.start-btn {
+		position: absolute;
+		bottom: 50px;
+		right: 10px;
+		padding: 20px 30px;
+		font-size: 2rem;
+		background-color: $carrotGreen;
+		box-shadow: 0 10px $green;
+		cursor: pointer;
+		transform: rotateX(-5deg);
+		&:active {
+			background-color: $green;
+			box-shadow: 0 3px $green;
+			transform: translateY(6px);
 		}
 	}
 }

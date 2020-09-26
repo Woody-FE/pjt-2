@@ -7,45 +7,24 @@
 			><img src="@/assets/images/logo/white.png" alt=""
 		/></router-link>
 		<section class="nav-btn">
-			<router-link
-				v-if="!isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
-				to="/guide"
+			<router-link v-if="!isLogin" class="nav-login btn" to="/guide"
 				>가이드</router-link
 			>
-			<router-link
-				v-if="!isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
-				to="/login"
+			<router-link v-if="!isLogin" class="nav-login btn" to="/login"
 				>로그인</router-link
 			>
-			<router-link
-				v-if="!isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
-				to="/signup"
+			<router-link v-if="!isLogin" class="nav-login btn" to="/signup"
 				>회원가입</router-link
 			>
-			<router-link
-				v-if="isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
-				to="/bookshelf"
+			<router-link v-if="isLogin" class="nav-login btn" to="/bookshelf"
 				>책장</router-link
 			>
-			<router-link
-				v-if="isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
-				to="/profile"
+			<router-link v-if="isLogin" class="nav-login btn" to="/profile"
 				>프로필</router-link
 			>
 			<a
 				v-if="isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
 				href="javascript:;"
 				@click="logoutUser"
 				>로그아웃</a
@@ -99,6 +78,7 @@ export default {
 </script>
 
 <style lang="scss">
+@include common-btn();
 .nav {
 	position: relative;
 	padding-top: 2rem;
@@ -130,14 +110,7 @@ export default {
 		}
 	}
 	.nav-login {
-		font-size: 1.2rem;
-	}
-	.nav-white {
-		color: black;
-	}
-
-	.nav-orange {
-		color: white;
+		font-size: 1rem;
 	}
 }
 </style>
