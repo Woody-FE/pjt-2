@@ -9,9 +9,6 @@
 				src="@/assets/images/accounts/signin.png"
 				alt="signuplogo"
 			/>
-			<!-- <div class="signup-brown-1"></div> -->
-			<!-- <div class="signup-brown-2"></div> -->
-			<!-- <div class="signup-brown-3"></div> -->
 			<div class="signup-box">
 				<label class="signup-label" for="text">아이 이름</label>
 				<input
@@ -160,36 +157,6 @@ export default {
 			left: 60%;
 			z-index: 999;
 			width: 150px;
-		}
-		.signup-brown-1 {
-			position: absolute;
-			background: brown;
-			border-radius: 4px;
-			/* transform: translateX(-50%); */
-			width: 60px;
-			height: 2px;
-			top: 50px;
-			left: 15%;
-		}
-		.signup-brown-2 {
-			position: absolute;
-			background: brown;
-			border-radius: 4px;
-			/* transform: translateX(-50%); */
-			width: 90px;
-			height: 2px;
-			top: 80px;
-			left: 17%;
-		}
-		.signup-brown-3 {
-			position: absolute;
-			background: brown;
-			border-radius: 4px;
-			transform: translateX(-50%);
-			width: 30px;
-			height: 2px;
-			top: 450px;
-			left: 60%;
 		}
 		.signup-box {
 			position: relative;

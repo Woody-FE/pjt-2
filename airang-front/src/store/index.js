@@ -44,12 +44,20 @@ export default new Vuex.Store({
 			commit('setId', id);
 		},
 		async LOGIN({ dispatch }, userData) {
-			const { data } = await loginUser(userData);
-			dispatch('SETUP_USER', data);
+			try {
+				const { data } = await loginUser(userData);
+				dispatch('SETUP_USER', data);
+			} catch (error) {
+				console.log(error.response.data.detail);
+			}
 		},
 		async SIGNUP({ dispatch }, userData) {
-			const { data } = await registerUser(userData);
-			dispatch('SETUP_USER', data);
+			try {
+				const { data } = await registerUser(userData);
+				dispatch('SETUP_USER', data);
+			} catch (error) {
+				console.log(error.response.data.detail);
+			}
 		},
 	},
 	modules: {},

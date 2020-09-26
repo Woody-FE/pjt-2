@@ -29,24 +29,15 @@ import store from '@/store/index';
 import bus from '@/utils/bus';
 export default {
 	methods: {
-		// beforePage() {
-		// 	if (this.count <= 0) {
-		// 		bus.$emit('page-decrease');
-		// 		bus.$emit('script-reset');
-		// 		return;
-		// 	}
-		// 	this.count--;
-		// 	bus.$emit('script-decrease');
-		// },
 		afterPage() {
 			if (this.count >= this.scripts.length - 1) {
-				bus.$emit('page-increase');
-				bus.$emit('script-reset');
-				bus.$emit('next-page');
+				bus.$emit('finished:page-increase');
+				bus.$emit('finished:script-reset');
+				bus.$emit('finished:next-page');
 				return;
 			}
 			this.count++;
-			bus.$emit('script-increase');
+			bus.$emit('finished:script-increase');
 		},
 		filterUsername(string) {
 			if (string.includes('아들')) {
@@ -70,9 +61,7 @@ export default {
 			count: 0,
 		};
 	},
-	created() {
-		// console.log(this.subId);
-	},
+	created() {},
 };
 </script>
 
