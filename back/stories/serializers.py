@@ -15,12 +15,14 @@ class MyStoryCreateRequestSerializer(serializers.Serializer):
 
 
 class MyStoryCreateSerializer(serializers.ModelSerializer):
+    finished = serializers.BooleanField(required=False)
     class Meta:
         model = MyStory
         fields = (
             'story_name',
             'story',
             'user',
+            'finished',
         )
 
 
