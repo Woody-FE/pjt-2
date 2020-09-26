@@ -1,5 +1,19 @@
+from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
-from AI.texttospeech.samples.snippets.TTS import TTS
+from stories.models import Script
 
-print(TTS('남북경협주 저가매수타이밍입니다. 주주님들 다들 화이팅합시다.', 'fighting.mp3'))
+from .tts import TTS
+
+
+@api_view(['POST'])
+def create_voice(request):
+    scripts = Script.objects.all()
+    for script in scripts:
+        s = script.content
+        s = s.replace('<br>','')
+        if not '{child_name}' in s:
+            TTS(s,f'script_{script.id}_voice.mp3')
+    
+    return Response(status=status.HTTP_200_OK)
