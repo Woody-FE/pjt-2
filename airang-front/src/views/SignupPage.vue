@@ -4,6 +4,23 @@
 		<div class="signup-grass grass-2"></div>
 		<div class="signup-grass grass-3"></div>
 		<form class="signup-form" @submit.prevent="submitForm">
+			<img
+				class="signup-logo"
+				src="@/assets/images/accounts/signin.png"
+				alt="signuplogo"
+			/>
+			<!-- <div class="signup-brown-1"></div> -->
+			<!-- <div class="signup-brown-2"></div> -->
+			<!-- <div class="signup-brown-3"></div> -->
+			<div class="signup-box">
+				<label class="signup-label" for="text">아이 이름</label>
+				<input
+					id="username"
+					class="signup-item"
+					type="text"
+					v-model="username"
+				/>
+			</div>
 			<div class="signup-box">
 				<label class="signup-label" for="email">이메일</label>
 				<input id="email" class="signup-item" type="email" v-model="email" />
@@ -33,19 +50,35 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { validatePassword, validationName } from '@/utils/validation';
+
 export default {
 	data() {
 		return {
 			email: '',
 			password1: '',
 			password2: '',
+			username: '',
 		};
 	},
 	methods: {
 		...mapActions(['SIGNUP']),
 		async submitForm() {
 			try {
+				if (!this.isVaildateName) {
+					alert('※ 이름은 공백제외 2~5자 한글입니다.');
+					return;
+				}
+				if (!this.isValidatePassword1) {
+					alert('※ 비밀번호는 공백제외 8자 이상 15자 이하입니다.');
+					return;
+				}
+				if (!this.isEqualPassword) {
+					alert('※ 비밀번호를 한번 더 확인해주세요!');
+					return;
+				}
 				const userInfo = {
+					username: this.username,
 					email: this.email,
 					password1: this.password1,
 					password2: this.password2,
@@ -55,6 +88,30 @@ export default {
 			} catch (error) {
 				console.log(error);
 			}
+		},
+	},
+	computed: {
+		isVaildateName() {
+			const name = this.username;
+			if (name.length === 0) {
+				return false;
+			}
+			return validationName(name);
+		},
+		isValidatePassword1() {
+			const password = this.password1;
+			if (!password) {
+				return true;
+			}
+			return validatePassword(password);
+		},
+		isEqualPassword() {
+			const password1 = this.password1;
+			const password2 = this.password2;
+			if (!password1 && !password2) {
+				return true;
+			}
+			return password1 === password2;
 		},
 	},
 };
@@ -80,13 +137,39 @@ export default {
 		background-color: #2f9e44;
 		transform: translateX(-50%);
 	}
+	@-webkit-keyframes grass-1 {
+		0% {
+			transform: rotate(-60deg);
+		}
+		50% {
+			transform: rotate(-45deg);
+		}
+		100% {
+			transform: rotate(-60deg);
+		}
+	}
+	@-webkit-keyframes grass-2 {
+		0% {
+			transform: rotate(60deg);
+		}
+		50% {
+			transform: rotate(45deg);
+		}
+		100% {
+			transform: rotate(60deg);
+		}
+	}
 	.grass-1 {
 		transform: rotate(-45deg);
 		z-index: 1;
+		animation: grass-1 1s infinite alternate;
+		animation-timing-function: 2s;
 	}
 	.grass-2 {
 		transform: rotate(45deg);
 		z-index: 1;
+		animation: grass-2 1s infinite alternate;
+		animation-timing-function: 2s;
 	}
 	.grass-3 {
 		transform: rotate(0deg);
@@ -109,7 +192,43 @@ export default {
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
-
+		.signup-logo {
+			position: absolute;
+			top: 5%;
+			left: 60%;
+			z-index: 999;
+			width: 150px;
+		}
+		.signup-brown-1 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			/* transform: translateX(-50%); */
+			width: 60px;
+			height: 2px;
+			top: 50px;
+			left: 15%;
+		}
+		.signup-brown-2 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			/* transform: translateX(-50%); */
+			width: 90px;
+			height: 2px;
+			top: 80px;
+			left: 17%;
+		}
+		.signup-brown-3 {
+			position: absolute;
+			background: brown;
+			border-radius: 4px;
+			transform: translateX(-50%);
+			width: 30px;
+			height: 2px;
+			top: 450px;
+			left: 60%;
+		}
 		.signup-box {
 			position: relative;
 			width: 100%;
@@ -125,9 +244,9 @@ export default {
 		}
 		.signup-item {
 			width: 100%;
-			max-width: 400px;
-			height: 2.5rem;
-			padding: 1rem 2rem 1rem;
+			max-width: 368px;
+			height: 2rem;
+			padding: 0.25rem 1rem;
 			font-size: 1rem;
 			border: 1px solid black;
 			border-top-left-radius: 3rem;

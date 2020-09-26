@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer, MySubstoryCreateSerializer, MyStoryAddRequestSerializer
+from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer, MySubstoryCreateSerializer, MyStoryAddRequestSerializer, MySubstoryDetailSerializer
 from .models import *
 
 
@@ -195,5 +195,18 @@ class SubStoryListView(APIViewWithAuthentication):
         story = get_object_or_404(Story, pk=story_id)
         substories = story.substories
         serializer = SubstorySerializer(instance=substories, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class MySubStoryDetailView(APIViewWithAuthentication):
+
+    def get_object(self, mystory_id, mysubstory_id):
+        mystory = get_object_or_404(MyStory, pk=mystory_id)
+        mysubstory = get_object_or_404(MySubstory, pk=mysubstory_id)
+        return mysubstory
+
+    def get(self, request, mystory_id, mysubstory_id):
+        mysubstory = self.get_object(mystory_id, mysubstory_id)
+        serializer = MySubstoryDetailSerializer(instance=mysubstory)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
