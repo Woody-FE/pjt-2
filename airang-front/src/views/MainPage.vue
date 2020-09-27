@@ -262,7 +262,7 @@ export default {};
 				.sign {
 					padding: 5px 12px;
 					font-size: 12px;
-					background: #77411d;
+					background: #9e5321;
 					border-radius: 40px 10px 30px;
 					@media screen and (max-width: 1024px) {
 						padding: 4px 9px;
