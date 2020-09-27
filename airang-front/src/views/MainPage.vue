@@ -1,18 +1,22 @@
 <template>
 	<section>
 		<div class="main-wrap">
-			<img src="@/assets/images/bg/grass2.png" class="grass2" alt="잔디" />
-			<img
-				src="@/assets/images/bg/grass_flower1.png"
-				class="grass-flower1"
-				alt="잔디"
-			/>
-			<img
-				src="@/assets/images/bg/grass_flower2.png"
-				class="grass-flower2"
-				alt="잔디"
-			/>
 			<div class="main-board">
+				<img
+					src="@/assets/images/bg/grass2.png"
+					class="grass grass2"
+					alt="잔디"
+				/>
+				<img
+					src="@/assets/images/bg/grass_flower1.png"
+					class="grass grass-flower1"
+					alt="잔디"
+				/>
+				<img
+					src="@/assets/images/bg/grass_flower2.png"
+					class="grass grass-flower2"
+					alt="잔디"
+				/>
 				<img
 					src="@/assets/images/bg/roller.png"
 					class="roller"
@@ -112,9 +116,31 @@ export default {
 	@media screen and (max-width: 768px) {
 		perspective: 1100px;
 	}
+	.grass {
+		transform: rotate3d(1, 0, 0, -65deg);
+	}
+	.grass2 {
+		width: 170px;
+		position: absolute;
+		top: 70%;
+		left: 0%;
+	}
+	.grass-flower1 {
+		width: 100px;
+		position: absolute;
+		top: 69%;
+		left: 12%;
+	}
+	.grass-flower2 {
+		width: 120px;
+		position: absolute;
+		top: 3%;
+		left: 20%;
+	}
 	.wheel {
 		position: absolute;
-		top: -400px;
+		top: -500px;
+		left: -140px;
 		transform: rotate3d(1, 0, 0, -65deg);
 	}
 	.main-board {
@@ -127,17 +153,6 @@ export default {
 		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
-		// .wheel-board {
-		// 	position: relative;
-		// 	.wheel-bg {
-		// 		width: 250px;
-		// 		transform-style: flat;
-		// 		transform: translateY(-700px) rotateX(-65deg);
-		// 		position: absolute;
-		// 		top: 0;
-		// 		left: -160px;
-		// 	}
-		// }
 		.roller {
 			width: 650px;
 			position: absolute;
@@ -280,24 +295,7 @@ export default {
 			}
 		}
 	}
-	.grass2 {
-		width: 170px;
-		position: absolute;
-		bottom: 100px;
-		left: 50px;
-	}
-	.grass-flower1 {
-		width: 100px;
-		position: absolute;
-		bottom: 100px;
-		left: 160px;
-	}
-	.grass-flower2 {
-		width: 120px;
-		position: absolute;
-		top: 160px;
-		left: 350px;
-	}
+
 	.start-btn {
 		position: absolute;
 		bottom: 50px;
