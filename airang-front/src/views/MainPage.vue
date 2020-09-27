@@ -2,20 +2,29 @@
 	<section>
 		<div class="main-wrap">
 			<div class="main-board">
-				<div class="wheel-board">
-					<img
-						src="@/assets/images/bg/wheelBg.png"
-						class="wheel-bg"
-						alt="관람차"
-					/>
-					<img
-						src="@/assets/images/bg/wheel1.png"
-						class="wheel1"
-						alt="관람차"
-					/>
+				<img
+					src="@/assets/images/bg/grass2.png"
+					class="grass grass2"
+					alt="잔디"
+				/>
+				<img
+					src="@/assets/images/bg/grass_flower1.png"
+					class="grass grass-flower1"
+					alt="잔디"
+				/>
+				<img
+					src="@/assets/images/bg/grass_flower2.png"
+					class="grass grass-flower2"
+					alt="잔디"
+				/>
+				<img
+					src="@/assets/images/bg/roller.png"
+					class="roller"
+					alt="롤러코스터"
+				/>
+				<div class="wheel">
+					<BigWheel />
 				</div>
-				<!-- <img src="@/assets/images/bg/wheel.png" class="wheel" alt="관람차" /> -->
-
 				<div class="main">
 					<div class="main-img">
 						<img
@@ -64,14 +73,30 @@
 						</p>
 					</div>
 				</div>
-				<router-link class="start-btn btn" to="/bookshelf">START</router-link>
+				<span class="start-btn btn" @click="moveBookshelf">START</span>
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
-export default {};
+import BigWheel from '@/components/main/BigWheel.vue';
+import { mapGetters } from 'vuex';
+export default {
+	components: {
+		BigWheel,
+	},
+	methods: {
+		...mapGetters(['getToken']),
+		moveBookshelf() {
+			if (this.$store.state.token) {
+				this.$router.push('/bookshelf');
+			} else {
+				this.$router.push({ name: 'login' });
+			}
+		},
+	},
+};
 </script>
 
 <style lang="scss">
@@ -91,83 +116,51 @@ export default {};
 	@media screen and (max-width: 768px) {
 		perspective: 1100px;
 	}
+	.grass {
+		transform: rotate3d(1, 0, 0, -65deg);
+	}
+	.grass2 {
+		width: 170px;
+		position: absolute;
+		top: 70%;
+		left: 0%;
+	}
+	.grass-flower1 {
+		width: 100px;
+		position: absolute;
+		top: 69%;
+		left: 12%;
+	}
+	.grass-flower2 {
+		width: 120px;
+		position: absolute;
+		top: 3%;
+		left: 20%;
+	}
+	.wheel {
+		position: absolute;
+		top: -500px;
+		left: -140px;
+		transform: rotate3d(1, 0, 0, -65deg);
+	}
 	.main-board {
 		width: 60vw;
 		height: 55vh;
 		margin-top: 80px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
-		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
+		box-shadow: 3px 20px 15px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
-		.wheel-board {
-			position: relative;
-			.wheel1 {
-				width: 120px;
-				position: absolute;
-				top: -800px;
-				left: -100px;
-				animation: reverseRotating 15s linear infinite;
-			}
-			.wheel-bg {
-				width: 250px;
-				transform-style: flat;
-				transform: translateY(-600px) rotateX(-65deg);
-				position: absolute;
-				top: 0;
-				left: -160px;
-			}
-			@keyframes rotating {
-				from {
-					-ms-transform: rotate(0deg);
-					-moz-transform: rotate(0deg);
-					-webkit-transform: rotate(0deg);
-					-o-transform: rotate(0deg);
-					transform-style: preserve-3d;
-					transform: translateY(-400px) rotateX(-65deg) rotate(0deg);
-				}
-				to {
-					-ms-transform: rotate(360deg);
-					-moz-transform: rotate(360deg);
-					-webkit-transform: rotate(360deg);
-					-o-transform: rotate(360deg);
-					transform-style: preserve-3d;
-					transform: translateY(-400px) rotateX(-65deg) rotate(360deg);
-				}
-			}
-			@keyframes reverseRotating {
-				0% {
-					transform: translate3d(-200px, 0, 150px) rotateX(-65deg);
-				}
-				17% {
-					transform: translate3d(-150px, 0, -100px) rotateX(-65deg);
-				}
-				34% {
-					transform: translate3d(-100px, 0, -50px) rotateX(-65deg);
-				}
-				51% {
-					transform: translate3d(10px, 0, 0) rotateX(-65deg);
-				}
-				69% {
-					transform: translate3d(100px, 0, 50px) rotateX(-65deg);
-				}
-				85% {
-					transform: translate3d(150px, 0, 100px) rotateX(-65deg);
-				}
-				100% {
-					transform: translate3d(200px, 0, 150px) rotateX(-65deg);
-				}
-			}
-		}
-		.wheel {
-			width: 250px;
+		.roller {
+			width: 650px;
 			position: absolute;
-			top: 0;
-			left: -150px;
-			// animation: rotating 25s linear infinite;
+			right: -50px;
+			top: 40px;
+			transform-style: preserve-3d;
+			transform: translateY(-450px) rotateX(-65deg);
 		}
-
 		.main-img {
 			transform-style: preserve-3d;
 			.arang {
@@ -200,7 +193,7 @@ export default {};
 				transform: translateY(-50px) rotateX(-85deg);
 			}
 			.arang3 {
-				transform: translateY(-200px) rotateX(-85deg);
+				transform: translateY(-100px) rotateX(-85deg);
 				@media screen and (max-width: 768px) {
 					transform: translate(-30px, -210px) rotateX(-85deg);
 				}
@@ -239,7 +232,7 @@ export default {};
 				}
 			}
 			.arang3-shadow {
-				top: 50px;
+				top: 110px;
 				right: 10px;
 				padding: 30px 150px;
 				@media screen and (max-width: 1024px) {
@@ -262,7 +255,7 @@ export default {};
 				.sign {
 					padding: 5px 12px;
 					font-size: 12px;
-					background: #77411d;
+					background: #9e5321;
 					border-radius: 40px 10px 30px;
 					@media screen and (max-width: 1024px) {
 						padding: 4px 9px;
@@ -298,10 +291,11 @@ export default {};
 				transform: translateY(0px) rotateX(-70deg);
 			}
 			.sign3 {
-				transform: translate(-60px, -170px) rotateX(-85deg) rotateY(-15deg);
+				transform: translate(-60px, -80px) rotateX(-85deg) rotateY(-15deg);
 			}
 		}
 	}
+
 	.start-btn {
 		position: absolute;
 		bottom: 50px;

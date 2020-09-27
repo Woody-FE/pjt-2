@@ -22,21 +22,6 @@
 					class="decoration"
 					src="@/assets/images/character/sp.png"
 					alt="sprout"
-				/>이름
-			</span>
-			<input class="input-form" type="text" v-model="userData.username" />
-			<div class="msg-box">
-				<p v-if="!isVaildateName" class="hidden-msg1 msg">
-					※ 이름은 공백제외 2~5자 한글입니다.
-				</p>
-			</div>
-		</div>
-		<div class="input-box">
-			<span class="">
-				<img
-					class="decoration"
-					src="@/assets/images/character/sp.png"
-					alt="sprout"
 				/>비밀번호
 			</span>
 			<input
@@ -82,28 +67,19 @@
 			>
 				비밀번호수정
 			</button>
-			<button
-				:disabled="!isVaildateName"
-				class="name-btn btn"
-				@click="changeName"
-			>
-				이름수정
-			</button>
 		</section>
-		<footer class="modify-footer"></footer>
 	</section>
 </template>
 
 <script>
-import { getUserProfile, patchUserName, changePassword } from '@/api/profile';
-import { validatePassword, validationName } from '@/utils/validation';
+import { getUserProfile, changePassword } from '@/api/profile';
+import { validatePassword } from '@/utils/validation';
 
 export default {
 	data() {
 		return {
 			userData: {
 				email: null,
-				username: null,
 				password: null,
 			},
 			userPassword: {
@@ -128,31 +104,13 @@ export default {
 				const content = this.userPassword;
 				await changePassword(content);
 				this.$router.push('/profile/');
-			} catch (error) {
-				console.log(error);
-			}
-		},
-		async changeName() {
-			try {
-				const content = {
-					username: this.userData.username,
-				};
-				const id = this.$store.getters.getId;
-				await patchUserName(id, content);
-				this.$router.push('/profile/');
+				alert('비밀번호가 수정 되었어요!');
 			} catch (error) {
 				console.log(error);
 			}
 		},
 	},
 	computed: {
-		isVaildateName() {
-			const name = this.userData.username;
-			if (name.length === 0) {
-				return false;
-			}
-			return validationName(name);
-		},
 		isValidatePassword1() {
 			const password = this.userPassword.new_password1;
 			if (!password) {

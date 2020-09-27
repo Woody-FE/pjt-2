@@ -2,10 +2,13 @@
 	<section class="mystory-wrap">
 		<div class="mystory-bookcover">
 			<section class="mystory-page">
-				<div class="mystory-inputbox"></div>
+				<div class="mystory-face mystory-cover">
+					<img v-if="cover" class="mystory-cover__img" :src="coverSrc" alt="" />
+				</div>
+				<div class="mystory-face mystory-inputbox"></div>
 			</section>
 			<section class="mystory-page mystory-bookpage">
-				<div class="box-out">
+				<div class="mystory-face mystory-books">
 					<div class="mystory-book" :key="book.id" v-for="book in books">
 						<router-link
 							v-if="book.finished"
@@ -27,19 +30,27 @@
 </template>
 
 <script>
-import { createMyStory, fetchMyStories } from '@/api/story';
+import { createMyStory, fetchMyStories, fetchStory } from '@/api/story';
 export default {
 	created() {
+		this.fetchStoryBook();
 		this.fetchBooks();
+	},
+	props: {
+		storyId: Number,
 	},
 	data() {
 		return {
 			books: [],
+			cover: null,
 		};
 	},
 	computed: {
 		imgSrc() {
 			return process.env.VUE_APP_API_URL;
+		},
+		coverSrc() {
+			return `${process.env.VUE_APP_API_URL}${this.filterMedia(this.cover)}`;
 		},
 	},
 	watch: {
@@ -47,7 +58,22 @@ export default {
 			this.fetchBooks();
 		},
 	},
+	mounted() {
+		const page = document.querySelectorAll('.mystory-page');
+		setTimeout(function() {
+			page[0].classList.add('flipped');
+		}, 1000);
+	},
 	methods: {
+		async fetchStoryBook() {
+			try {
+				const { data } = await fetchStory(this.storyId);
+				console.log(data);
+				this.cover = data.cover_image;
+			} catch (error) {
+				console.log(error);
+			}
+		},
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
@@ -84,39 +110,91 @@ export default {
 
 <style lang="scss">
 .mystory-wrap {
+	position: relative;
 	width: 100%;
-	height: 100vh;
+	min-height: 100vh;
+	.mystory-bookcover {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 80vw;
+		height: 90vh;
+		transform-style: preserve-3d;
+		margin: auto;
+		.mystory-face:nth-child(2) {
+			transform: rotateY(180deg);
+		}
+		.mystory-page {
+			position: absolute;
+			left: 50%;
+			top: 0;
+			width: 50%;
+			height: 100%;
+			transform-style: preserve-3d;
+			transition: 1.5s;
+			box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.5);
+
+			&:nth-child(1) {
+				z-index: 2;
+				transform-origin: left;
+			}
+			&:nth-child(2) {
+				z-index: 1;
+			}
+			&:nth-child(1).flipped {
+				transform: rotateY(-180deg);
+			}
+			.mystory-face {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(#fff8dc, 0.8);
+				backface-visibility: hidden;
+			}
+			.mystory-books {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				.mystory-book {
+					width: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 0;
+				}
+			}
+			.mystory-inputbox {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+}
+@-webkit-keyframes bookBlock {
+	from {
+		transform: rotateY(180deg);
+	}
+	to {
+		transform: rotateY(-180deg);
+	}
+}
+.mystory-cover {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	.mystory-bookcover {
-		background: white;
-		width: 80vw;
-		height: 80vh;
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.mystory-page {
-		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.5);
-		width: 50%;
+	.mystory-cover__img {
+		width: 100%;
 		height: 100%;
-	}
-	.mystory-bookpage {
+		object-fit: fill;
 	}
 }
 @include Book();
-.box-out {
-	width: 100%;
-	padding-top: 1rem;
-	position: static;
-	display: flex;
-	flex-wrap: wrap;
-	.mystory-book:nth-child(2n + 1) {
-		width: 50%;
-		padding: 0 0 0 1rem;
-	}
-	.mystory-book:nth-child(2n) {
-		padding: 0 1rem 0 0;
-	}
-}
 </style>
