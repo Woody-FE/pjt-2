@@ -1,5 +1,4 @@
-import make_image
-import test_one_file
+import make_hat_and_face_image
 
-input_image_path = "./images/input_images/rotate_right.jpg"
-print(test_one_file.hat_and_face(input_image_path, 1234))
+input_image_path = './images/input_images/KTI.jpg'
+print(make_hat_and_face_image.hat_and_face(input_image_path, 4321))
