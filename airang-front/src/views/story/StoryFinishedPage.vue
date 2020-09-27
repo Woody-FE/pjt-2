@@ -286,6 +286,7 @@ export default {
 		.story-left__character {
 			z-index: 2;
 			position: absolute;
+			transform: translate(-50%, 50%);
 		}
 		.story-left__bg {
 			z-index: 1;
