@@ -9,32 +9,20 @@ class StoryDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MyStorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MyStory
-        depth = 1
-        fields = (
-            'id',
-            'created',
-            'story',
-            'story_name',
-            'mystory',
-            'mycharacters'
-        )
-
-
 class MyStoryCreateRequestSerializer(serializers.Serializer):
     story_id = serializers.IntegerField()
     story_name = serializers.CharField()
 
 
 class MyStoryCreateSerializer(serializers.ModelSerializer):
+    finished = serializers.BooleanField(required=False)
     class Meta:
         model = MyStory
         fields = (
             'story_name',
             'story',
             'user',
+            'finished',
         )
 
 
@@ -140,6 +128,22 @@ class MyCharacterSerializer(serializers.ModelSerializer):
     class Meta(MyCharacterCreateSerializer.Meta):
         depth = 1
         fields = MyCharacterCreateSerializer.Meta.fields + ('id',)
+
+
+class MyStorySerializer(serializers.ModelSerializer):
+    mystory = MySubstorySerializer()
+    class Meta:
+        model = MyStory
+        depth = 1
+        fields = (
+            'id',
+            'created',
+            'story',
+            'story_name',
+            'mystory',
+            'mycharacters',
+            'finished',
+        )
 
 
 class MySubstoryDetailSerializer(serializers.ModelSerializer):
