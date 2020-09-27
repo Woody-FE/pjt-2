@@ -6,7 +6,13 @@
 		]"
 	>
 		<AppHeader />
-		<main :class="[StoryRoute ? 'container-story' : 'container']">
+		<main
+			:class="[
+				StoryRoute || $route.name === 'storybook'
+					? 'container-story'
+					: 'container',
+			]"
+		>
 			<router-view />
 		</main>
 	</div>
@@ -22,7 +28,9 @@ export default {
 			return this.$route.name === 'login' || this.$route.name === 'signup';
 		},
 		StoryRoute() {
-			return this.$route.name === 'story';
+			return (
+				this.$route.name === 'story' || this.$route.name === 'finishedStory'
+			);
 		},
 		GuideRoute() {
 			return this.$route.name === 'guide';
@@ -50,6 +58,6 @@ export default {
 
 .container-story {
 	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 }
 </style>

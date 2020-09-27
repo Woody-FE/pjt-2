@@ -26,18 +26,32 @@ const routes = [
 		component: () => import('@/views/SignupPage.vue'),
 	},
 	{
-		path: '/story/:myStoryId/:subStoryId',
+		path: '/story/:storyId/review/:myStoryId',
+		name: 'finishedStory',
+		props: route => ({
+			storyId: Number(route.params.storyId),
+			myStoryId: Number(route.params.myStoryId),
+		}),
+		component: () => import('@/views/story/StoryFinishedPage.vue'),
+	},
+	{
+		path: '/story/:storyId/:myStoryId',
 		name: 'story',
 		props: route => ({
+			storyId: Number(route.params.storyId),
 			myStoryId: Number(route.params.myStoryId),
-			subStoryId: Number(route.params.subStoryId),
 		}),
-		component: () => import('@/views/StoryBookPage.vue'),
+		component: () => import('@/views/story/StoryPage.vue'),
 	},
 	{
 		path: '/bookshelf',
 		name: 'bookshelf',
 		component: () => import('@/views/BookshelfPage.vue'),
+	},
+	{
+		path: '/bookshelf/:storyId',
+		name: 'storybook',
+		component: () => import('@/views/story/StoryBookPage.vue'),
 	},
 	{
 		path: '/profile',
