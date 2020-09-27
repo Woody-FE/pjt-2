@@ -34,21 +34,25 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="
-							image.order === scriptNumber + 1 && image.isMainCharacter === 0
-						"
+						v-if="image.order === scriptNumber + 1 && !image.isMainCharacter"
 						:src="`${imgSrc}${filterMedia(image.path)}`"
-						:class="[`order${image.order}`, `sub${story.id}-${image.id}`]"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
 						alt=""
 					/>
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="
-							image.order === scriptNumber + 1 && image.isMainCharacter === 1
-						"
+						v-if="image.order === scriptNumber + 1 && image.isMainCharacter"
 						:src="`${imgSrc}${filterMedia(image.path)}`"
-						:class="[`order${image.order}`, `sub${story.id}-${image.id}`]"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
 						alt=""
 					/>
 					<!-- <img
@@ -284,10 +288,14 @@ export default {
 		.story-left-box {
 			position: relative;
 		}
+		.story-left__character {
+			z-index: 2;
+			position: absolute;
+		}
 		.story-left__bg {
 			z-index: 1;
 		}
-		.story-left__user1 {
+		/* .story-left__user1 {
 			z-index: 2;
 			position: absolute;
 			width: 50%;
@@ -302,7 +310,7 @@ export default {
 			bottom: 29%;
 			left: 35%;
 			transform: rotatetranslateX(-50%);
-		}
+		} */
 	}
 	.story-right {
 		width: 50%;
