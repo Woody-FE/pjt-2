@@ -30,8 +30,14 @@
 						alt=""
 					/>
 					<img
-						class="story-left__user"
+						class="story-left__user1"
 						v-if="currentItem === 1"
+						src="@/assets/images/user/baby_default.png"
+						alt=""
+					/>
+					<img
+						v-if="story.id === 4"
+						class="story-left__user2"
 						src="@/assets/images/user/baby_default.png"
 						alt=""
 					/>
@@ -45,11 +51,12 @@
 					{{ story.selects[0].select }}
 				</button>
 			</section>
-			<StoryItem
+			<StoryFinishItem
 				v-if="!story.question"
 				@page-decrease="currentDecrease"
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
+				:subId="story.id"
 			/>
 			<section v-else class="story-right story-select">
 				<button
@@ -60,11 +67,8 @@
 				</button>
 			</section>
 		</article>
-		<!-- <article class="story-page story-finish">
-            끝
-        </article> -->
 		<section class="story-delete__btn">
-			<button @click="deleteStory" class="story-delete-btn">
+			<button @click="exitStory" class="story-delete-btn">
 				<i class="icon ion-md-close"></i>
 			</button>
 		</section>
@@ -73,21 +77,15 @@
 
 <script>
 import bus from '@/utils/bus';
-import StoryItem from '@/components/story/StoryItem.vue';
-import {
-	fetchSubStory,
-	fetchBranch,
-	fetchStory,
-	deleteMyStories,
-} from '@/api/story';
-// import { finishedMyStory } from '@/api/story';
+import StoryFinishItem from '@/components/story/StoryFinishItem.vue';
+import { fetchMyStory, fetchMySubStory } from '@/api/story';
 export default {
 	components: {
-		StoryItem,
+		StoryFinishItem,
 	},
 	props: {
+		storyId: Number,
 		myStoryId: Number,
-		subStoryId: Number,
 	},
 	computed: {
 		imgSrc() {
@@ -103,34 +101,19 @@ export default {
 			scriptNumber: 0,
 			stories: [],
 			nextStoryId: null,
-			nextBranchId: null,
-			hasBranch: null,
 			finish: false,
-			selectStories: [],
 			coverImage: null,
 			bookName: null,
 		};
 	},
-	// created() {
-	// 	console.log('크리에이티드');
-	// 	this.currentItem = -1;
-	// 	this.scriptNumber = 0;
-	// 	this.stories = [];
-	// 	this.nextStoryId = null;
-	// 	this.nextBranchId = null;
-	// 	this.hasBranch = null;
-	// 	this.finish = false;
-	// 	this.selectStories = [];
-	// },
 	destroyed() {
 		this.currentItem = -1;
 		this.scriptNumber = 0;
 		this.stories = [];
 		this.nextStoryId = null;
-		this.nextBranchId = null;
-		this.hasBranch = null;
 		this.finish = false;
-		this.selectStories = [];
+		this.coverImage = null;
+		this.bookName = null;
 	},
 	methods: {
 		resetScript() {
@@ -148,34 +131,14 @@ export default {
 		scriptIncrease() {
 			this.scriptNumber += 1;
 		},
-		async fetchCover() {
+		async createStory(mystoryId) {
 			try {
-				const { data } = await fetchStory(1);
-				this.coverImage = data.cover_image;
-				this.bookName = data.name;
-			} catch (error) {
-				console.log(error);
-			}
-		},
-		async createSubStory(num) {
-			try {
-				this.selectStories.push(num);
-				const { data } = await fetchSubStory({
-					mystory_id: this.myStoryId,
-					substory_id: num,
-				});
-				this.hasBranch = data.has_branch;
-				if (!this.hasBranch) {
-					this.nextStoryId = data.next_id;
-					this.nextBranchId = 0;
-				} else {
-					this.nextBranchId = data.next_id;
-					this.nextStoryId = 0;
-				}
-				this.stories.push(data);
-				if (this.currentItem !== -1) {
-					this.currentItem += 1;
-				}
+				const { data } = await fetchMyStory(mystoryId);
+				console.log(data);
+				this.coverImage = data.story.cover_image;
+				this.bookName = data.story.name;
+				this.nextStoryId = data.mystory.next_id;
+				this.stories.push(data.mystory.substory);
 			} catch (error) {
 				console.log(error);
 			}
@@ -183,30 +146,18 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
-					// await finishedMyStory(this.myStoryId, this.selectStories);
 					this.$router.push({ name: 'bookshelf' });
 				} else {
 					if (this.nextStoryId) {
-						this.selectStories.push(this.nextStoryId);
-						const { data } = await fetchSubStory({
-							mystory_id: this.myStoryId,
-							substory_id: this.nextStoryId,
-						});
-						if (data.next_id === -1) {
+						const { data } = await fetchMySubStory(
+							this.myStoryId,
+							this.nextStoryId,
+						);
+						if (data.next_id === null) {
 							this.finish = true;
 						}
-						this.hasBranch = data.has_branch;
-						if (!this.hasBranch) {
-							this.nextStoryId = data.next_id;
-							this.nextBranchId = 0;
-						} else {
-							this.nextBranchId = data.next_id;
-							this.nextStoryId = 0;
-						}
-						this.stories.push(data);
-					} else if (this.nextBranchId) {
-						const { data } = await fetchBranch(this.nextBranchId);
-						this.stories.push(data);
+						this.nextStoryId = data.next_id;
+						this.stories.push(data.substory);
 					}
 				}
 			} catch (error) {
@@ -231,37 +182,16 @@ export default {
 		nextPage() {
 			this.currentItem += 1;
 		},
-		async deleteStory() {
-			try {
-				await deleteMyStories(this.myStoryId);
-				this.$router.push({ name: 'bookshelf' });
-			} catch (error) {
-				console.log(error);
-			}
+		exitStory() {
+			this.$router.push({ name: 'bookshelf' });
 		},
 	},
 	mounted() {
-		bus.$on('page-increase', this.currentIncrease);
-		// bus.$on('page-decrease', this.currentDecrease);
-		bus.$on('script-increase', this.scriptIncrease);
-		// bus.$on('script-decrease', this.scriptDecrease);
-		bus.$on('script-reset', this.resetScript);
-		bus.$on('next-page', this.updateStory);
-		this.createSubStory(this.subStoryId);
-		this.fetchCover();
-	},
-	watch: {
-		$route() {
-			this.currentItem = -1;
-			this.scriptNumber = 0;
-			this.stories = [];
-			this.nextStoryId = 0;
-			this.nextBranchId = null;
-			this.hasBranch = null;
-			this.finish = false;
-			this.selectStories = [];
-			this.createSubStory(this.subStoryId);
-		},
+		bus.$on('finished:page-increase', this.currentIncrease);
+		bus.$on('finished:script-increase', this.scriptIncrease);
+		bus.$on('finished:script-reset', this.resetScript);
+		bus.$on('finished:next-page', this.updateStory);
+		this.createStory(this.myStoryId);
 	},
 };
 </script>
@@ -337,22 +267,22 @@ export default {
 		}
 		.story-left__bg {
 			z-index: 1;
-			/* position: absolute; */
-			/* top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0; */
-			/* height: 100%; */
-			/* width: 100%; */
-			/* object-fit: cover; */
 		}
-		.story-left__user {
+		.story-left__user1 {
 			z-index: 2;
 			position: absolute;
 			width: 50%;
 			bottom: 29%;
 			left: 47%;
 			transform: translateX(-50%);
+		}
+		.story-left__user2 {
+			z-index: 2;
+			position: absolute;
+			width: 50%;
+			bottom: 29%;
+			left: 35%;
+			transform: rotatetranslateX(-50%);
 		}
 	}
 	.story-right {

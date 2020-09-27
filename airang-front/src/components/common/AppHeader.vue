@@ -46,7 +46,11 @@ export default {
 			);
 		},
 		StoryRoute() {
-			return this.$route.name === 'story';
+			return (
+				this.$route.name === 'story' ||
+				this.$route.name === 'finishedStory' ||
+				this.$route.name === 'storybook'
+			);
 		},
 		isLogin() {
 			return this.isLogined;
