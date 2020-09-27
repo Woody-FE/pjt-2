@@ -2,20 +2,9 @@
 	<section>
 		<div class="main-wrap">
 			<div class="main-board">
-				<div class="wheel-board">
-					<img
-						src="@/assets/images/bg/wheelBg.png"
-						class="wheel-bg"
-						alt="관람차"
-					/>
-					<img
-						src="@/assets/images/bg/wheel1.png"
-						class="wheel1"
-						alt="관람차"
-					/>
+				<div class="wheel">
+					<BigWheel />
 				</div>
-				<!-- <img src="@/assets/images/bg/wheel.png" class="wheel" alt="관람차" /> -->
-
 				<div class="main">
 					<div class="main-img">
 						<img
@@ -71,7 +60,12 @@
 </template>
 
 <script>
-export default {};
+import BigWheel from '@/components/main/BigWheel.vue';
+export default {
+	components: {
+		BigWheel,
+	},
+};
 </script>
 
 <style lang="scss">
@@ -91,6 +85,11 @@ export default {};
 	@media screen and (max-width: 768px) {
 		perspective: 1100px;
 	}
+	.wheel {
+		position: absolute;
+		top: -400px;
+		transform: rotate3d(1, 0, 0, -65deg);
+	}
 	.main-board {
 		width: 60vw;
 		height: 55vh;
@@ -101,73 +100,6 @@ export default {};
 		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
-		.wheel-board {
-			position: relative;
-			.wheel1 {
-				width: 120px;
-				position: absolute;
-				top: -800px;
-				left: -100px;
-				animation: reverseRotating 15s linear infinite;
-			}
-			.wheel-bg {
-				width: 250px;
-				transform-style: flat;
-				transform: translateY(-600px) rotateX(-65deg);
-				position: absolute;
-				top: 0;
-				left: -160px;
-			}
-			@keyframes rotating {
-				from {
-					-ms-transform: rotate(0deg);
-					-moz-transform: rotate(0deg);
-					-webkit-transform: rotate(0deg);
-					-o-transform: rotate(0deg);
-					transform-style: preserve-3d;
-					transform: translateY(-400px) rotateX(-65deg) rotate(0deg);
-				}
-				to {
-					-ms-transform: rotate(360deg);
-					-moz-transform: rotate(360deg);
-					-webkit-transform: rotate(360deg);
-					-o-transform: rotate(360deg);
-					transform-style: preserve-3d;
-					transform: translateY(-400px) rotateX(-65deg) rotate(360deg);
-				}
-			}
-			@keyframes reverseRotating {
-				0% {
-					transform: translate3d(-200px, 0, 150px) rotateX(-65deg);
-				}
-				17% {
-					transform: translate3d(-150px, 0, -100px) rotateX(-65deg);
-				}
-				34% {
-					transform: translate3d(-100px, 0, -50px) rotateX(-65deg);
-				}
-				51% {
-					transform: translate3d(10px, 0, 0) rotateX(-65deg);
-				}
-				69% {
-					transform: translate3d(100px, 0, 50px) rotateX(-65deg);
-				}
-				85% {
-					transform: translate3d(150px, 0, 100px) rotateX(-65deg);
-				}
-				100% {
-					transform: translate3d(200px, 0, 150px) rotateX(-65deg);
-				}
-			}
-		}
-		.wheel {
-			width: 250px;
-			position: absolute;
-			top: 0;
-			left: -150px;
-			// animation: rotating 25s linear infinite;
-		}
-
 		.main-img {
 			transform-style: preserve-3d;
 			.arang {
