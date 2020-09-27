@@ -207,16 +207,6 @@ export default {
 		bus.$on('finished:next-page', this.updateStory);
 		this.createStory(this.myStoryId);
 	},
-	// updated() {
-	// 	console.log('업뎃');
-	// 	var storyLeftBox;
-	// 	storyLeftBox = document.querySelectorAll('.story-left-box');
-	// 	console.log(storyLeftBox);
-	// 	this.stories[this.currentItem].images.forEach(image => {
-	// 		console.log(image);
-	// 		storyLeftBox[this.currentItem].innerHTML += `${image.tag}`;
-	// 	});
-	// },
 };
 </script>
 
@@ -286,6 +276,7 @@ export default {
 		.story-left__character {
 			z-index: 2;
 			position: absolute;
+			transform: translate(-50%, 50%);
 		}
 		.story-left__bg {
 			z-index: 1;
