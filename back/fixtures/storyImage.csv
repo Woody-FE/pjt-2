@@ -1,4 +1,4 @@
-﻿id,path,story_id,is_mane_character,order
+﻿id,path,substory_id,is_main_character,order
 1,images/character/nukkied_father2.png,1,0,1
 2,images/character/nukkied_fox_laugh.png,2,0,1
 3,images/character/nukkied_rabbit2.png,2,0,1
