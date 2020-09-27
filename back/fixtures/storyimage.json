@@ -2,708 +2,708 @@
     {
       "id": 1,
       "path": "images/character/nukkied_father2.png",
-      "story_id": 1,
-      "is_mane_character": 0,
+      "substory_id": 1,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 2,
       "path": "images/character/nukkied_fox_laugh.png",
-      "story_id": 2,
-      "is_mane_character": 0,
+      "substory_id": 2,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 3,
       "path": "images/character/nukkied_rabbit2.png",
-      "story_id": 2,
-      "is_mane_character": 0,
+      "substory_id": 2,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 4,
       "path": "images/character/nukkied_fox_grandmother.png",
-      "story_id": 5,
-      "is_mane_character": 0,
+      "substory_id": 5,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 5,
       "path": "images/character/nukkied_girl.png",
-      "story_id": 5,
-      "is_mane_character": 0,
+      "substory_id": 5,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 6,
       "path": "",
-      "story_id": 6,
-      "is_mane_character": 1,
+      "substory_id": 6,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 7,
       "path": "",
-      "story_id": 6,
-      "is_mane_character": 1,
+      "substory_id": 6,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 8,
       "path": "images/items/nukkied_wand.png",
-      "story_id": 7,
-      "is_mane_character": 0,
+      "substory_id": 7,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 9,
       "path": "images/character/nukkied_attacked_fox.png",
-      "story_id": 7,
-      "is_mane_character": 0,
+      "substory_id": 7,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 10,
       "path": "images/items/nukkied_wand.png",
-      "story_id": 7,
-      "is_mane_character": 0,
+      "substory_id": 7,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 11,
       "path": "images/character/nukkied_sick_rabbit.png",
-      "story_id": 10,
-      "is_mane_character": 0,
+      "substory_id": 10,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 12,
       "path": "images/character/nukkied_queen.png",
-      "story_id": 11,
-      "is_mane_character": 0,
+      "substory_id": 11,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 13,
       "path": "images/items/nukkied_wand.png",
-      "story_id": 11,
-      "is_mane_character": 0,
+      "substory_id": 11,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 14,
       "path": "images/character/nukkied_queen.png",
-      "story_id": 11,
-      "is_mane_character": 0,
+      "substory_id": 11,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 15,
       "path": "images/items/nukkied_wand.png",
-      "story_id": 11,
-      "is_mane_character": 0,
+      "substory_id": 11,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 16,
       "path": "images/character/nukkied_happy_rabbit.png",
-      "story_id": 11,
-      "is_mane_character": 0,
+      "substory_id": 11,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 17,
       "path": "images/character/nukkied_happy_rabbit.png",
-      "story_id": 12,
-      "is_mane_character": 0,
+      "substory_id": 12,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 18,
       "path": "",
-      "story_id": 12,
-      "is_mane_character": 1,
+      "substory_id": 12,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 19,
       "path": "",
-      "story_id": 14,
-      "is_mane_character": 1,
+      "substory_id": 14,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 20,
       "path": "images/items/nukkied_box3.png",
-      "story_id": 14,
-      "is_mane_character": 0,
+      "substory_id": 14,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 21,
       "path": "",
-      "story_id": 14,
-      "is_mane_character": 1,
+      "substory_id": 14,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 22,
       "path": "images/items/nukkied_box2.png",
-      "story_id": 14,
-      "is_mane_character": 0,
+      "substory_id": 14,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 23,
       "path": "",
-      "story_id": 15,
-      "is_mane_character": 1,
+      "substory_id": 15,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 24,
       "path": "images/character/nukkied_girl.png",
-      "story_id": 15,
-      "is_mane_character": 0,
+      "substory_id": 15,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 25,
       "path": "",
-      "story_id": 15,
-      "is_mane_character": 1,
+      "substory_id": 15,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 26,
       "path": "images/character/nukkied_girl.png",
-      "story_id": 15,
-      "is_mane_character": 0,
+      "substory_id": 15,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 27,
       "path": "",
-      "story_id": 16,
-      "is_mane_character": 1,
+      "substory_id": 16,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 28,
       "path": "",
-      "story_id": 16,
-      "is_mane_character": 1,
+      "substory_id": 16,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 29,
       "path": "images/character/nukkied_squirrel.png",
-      "story_id": 16,
-      "is_mane_character": 0,
+      "substory_id": 16,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 30,
       "path": "",
-      "story_id": 16,
-      "is_mane_character": 1,
+      "substory_id": 16,
+      "is_main_character": 1,
       "order": 3
     },
     {
       "id": 31,
       "path": "images/character/nukkied_squirrel3.png",
-      "story_id": 16,
-      "is_mane_character": 0,
+      "substory_id": 16,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 32,
       "path": "",
-      "story_id": 16,
-      "is_mane_character": 1,
+      "substory_id": 16,
+      "is_main_character": 1,
       "order": 4
     },
     {
       "id": 33,
       "path": "images/items/nukkied_box3.png",
-      "story_id": 16,
-      "is_mane_character": 0,
+      "substory_id": 16,
+      "is_main_character": 0,
       "order": 4
     },
     {
       "id": 34,
       "path": "",
-      "story_id": 17,
-      "is_mane_character": 1,
+      "substory_id": 17,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 35,
       "path": "images/items/nukkied_box.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 36,
       "path": "",
-      "story_id": 17,
-      "is_mane_character": 1,
+      "substory_id": 17,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 37,
       "path": "images/items/nukkied_box.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 38,
       "path": "images/character/nukkied_eagle.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 39,
       "path": "",
-      "story_id": 17,
-      "is_mane_character": 1,
+      "substory_id": 17,
+      "is_main_character": 1,
       "order": 3
     },
     {
       "id": 40,
       "path": "images/items/nukkied_box.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 41,
       "path": "images/character/nukkied_eagle.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 42,
       "path": "",
-      "story_id": 17,
-      "is_mane_character": 1,
+      "substory_id": 17,
+      "is_main_character": 1,
       "order": 4
     },
     {
       "id": 43,
       "path": "",
-      "story_id": 17,
-      "is_mane_character": 1,
+      "substory_id": 17,
+      "is_main_character": 1,
       "order": 5
     },
     {
       "id": 44,
       "path": "images/character/nukkied_eagle.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 5
     },
     {
       "id": 45,
       "path": "",
-      "story_id": 17,
-      "is_mane_character": 1,
+      "substory_id": 17,
+      "is_main_character": 1,
       "order": 6
     },
     {
       "id": 46,
       "path": "images/character/nukkied_squirrel2.png",
-      "story_id": 17,
-      "is_mane_character": 0,
+      "substory_id": 17,
+      "is_main_character": 0,
       "order": 6
     },
     {
       "id": 47,
       "path": "",
-      "story_id": 18,
-      "is_mane_character": 1,
+      "substory_id": 18,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 48,
       "path": "images/character/nukkied_tree_day.png",
-      "story_id": 19,
-      "is_mane_character": 0,
+      "substory_id": 19,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 49,
       "path": "images/character/nukkied_building.png",
-      "story_id": 19,
-      "is_mane_character": 0,
+      "substory_id": 19,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 50,
       "path": "",
-      "story_id": 20,
-      "is_mane_character": 1,
+      "substory_id": 20,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 51,
       "path": "",
-      "story_id": 20,
-      "is_mane_character": 1,
+      "substory_id": 20,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 52,
       "path": "images/character/nukkied_happy_rabbit.png",
-      "story_id": 20,
-      "is_mane_character": 0,
+      "substory_id": 20,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 53,
       "path": "",
-      "story_id": 20,
-      "is_mane_character": 1,
+      "substory_id": 20,
+      "is_main_character": 1,
       "order": 3
     },
     {
       "id": 54,
       "path": "images/character/nukkied_happy_rabbit.png",
-      "story_id": 20,
-      "is_mane_character": 0,
+      "substory_id": 20,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 55,
       "path": "images/items/nukkied_box.png",
-      "story_id": 20,
-      "is_mane_character": 0,
+      "substory_id": 20,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 56,
       "path": "",
-      "story_id": 20,
-      "is_mane_character": 1,
+      "substory_id": 20,
+      "is_main_character": 1,
       "order": 4
     },
     {
       "id": 57,
       "path": "images/character/nukkied_happy_rabbit.png",
-      "story_id": 20,
-      "is_mane_character": 0,
+      "substory_id": 20,
+      "is_main_character": 0,
       "order": 4
     },
     {
       "id": 58,
       "path": "images/items/nukkied_box.png",
-      "story_id": 20,
-      "is_mane_character": 0,
+      "substory_id": 20,
+      "is_main_character": 0,
       "order": 4
     },
     {
       "id": 59,
       "path": "",
-      "story_id": 20,
-      "is_mane_character": 1,
+      "substory_id": 20,
+      "is_main_character": 1,
       "order": 5
     },
     {
       "id": 60,
       "path": "",
-      "story_id": 21,
-      "is_mane_character": 1,
+      "substory_id": 21,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 61,
       "path": "images/character/nukkied_tree_day.png",
-      "story_id": 22,
-      "is_mane_character": 0,
+      "substory_id": 22,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 62,
       "path": "images/character/nukkied_building.png",
-      "story_id": 22,
-      "is_mane_character": 0,
+      "substory_id": 22,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 63,
       "path": "images/character/nukkied_tree_day.png",
-      "story_id": 22,
-      "is_mane_character": 0,
+      "substory_id": 22,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 64,
       "path": "images/character/nukkied_building.png",
-      "story_id": 22,
-      "is_mane_character": 0,
+      "substory_id": 22,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 65,
       "path": "images/items/nukkied_recorder.png",
-      "story_id": 23,
-      "is_mane_character": 0,
+      "substory_id": 23,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 66,
       "path": "images/character/nukkied_mouse.png",
-      "story_id": 24,
-      "is_mane_character": 0,
+      "substory_id": 24,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 67,
       "path": "images/character/nukkied_father.png",
-      "story_id": 24,
-      "is_mane_character": 0,
+      "substory_id": 24,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 68,
       "path": "images/character/nukkied_girl.png",
-      "story_id": 24,
-      "is_mane_character": 0,
+      "substory_id": 24,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 69,
       "path": "",
-      "story_id": 25,
-      "is_mane_character": 1,
+      "substory_id": 25,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 70,
       "path": "",
-      "story_id": 25,
-      "is_mane_character": 1,
+      "substory_id": 25,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 71,
       "path": "images/character/nukkied_mouse.png",
-      "story_id": 25,
-      "is_mane_character": 0,
+      "substory_id": 25,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 72,
       "path": "",
-      "story_id": 25,
-      "is_mane_character": 1,
+      "substory_id": 25,
+      "is_main_character": 1,
       "order": 3
     },
     {
       "id": 73,
       "path": "images/character/nukkied_father.png",
-      "story_id": 25,
-      "is_mane_character": 0,
+      "substory_id": 25,
+      "is_main_character": 0,
       "order": 4
     },
     {
       "id": 74,
       "path": "images/character/nukkied_girl.png",
-      "story_id": 25,
-      "is_mane_character": 0,
+      "substory_id": 25,
+      "is_main_character": 0,
       "order": 4
     },
     {
       "id": 75,
       "path": "",
-      "story_id": 25,
-      "is_mane_character": 1,
+      "substory_id": 25,
+      "is_main_character": 1,
       "order": 4
     },
     {
       "id": 76,
       "path": "images/items/nukkied_recorder.png",
-      "story_id": 26,
-      "is_mane_character": 0,
+      "substory_id": 26,
+      "is_main_character": 0,
       "order": 3
     },
     {
       "id": 77,
       "path": "images/items/nukkied_recorder.png",
-      "story_id": 26,
-      "is_mane_character": 0,
+      "substory_id": 26,
+      "is_main_character": 0,
       "order": 4
     },
     {
       "id": 78,
       "path": "images/character/nukkied_bear.png",
-      "story_id": 28,
-      "is_mane_character": 0,
+      "substory_id": 28,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 79,
       "path": "images/character/nukkied_bear.png",
-      "story_id": 29,
-      "is_mane_character": 0,
+      "substory_id": 29,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 80,
       "path": "",
-      "story_id": 30,
-      "is_mane_character": 1,
+      "substory_id": 30,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 81,
       "path": "images/character/nukkied_tiger3.png",
-      "story_id": 31,
-      "is_mane_character": 0,
+      "substory_id": 31,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 82,
       "path": "images/character/nukkied_tiger3.png",
-      "story_id": 32,
-      "is_mane_character": 0,
+      "substory_id": 32,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 83,
       "path": "",
-      "story_id": 32,
-      "is_mane_character": 1,
+      "substory_id": 32,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 84,
       "path": "images/character/nukkied_tiger2.png",
-      "story_id": 33,
-      "is_mane_character": 0,
+      "substory_id": 33,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 85,
       "path": "",
-      "story_id": 33,
-      "is_mane_character": 1,
+      "substory_id": 33,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 86,
       "path": "images/character/nukkied_tiger2.png",
-      "story_id": 33,
-      "is_mane_character": 0,
+      "substory_id": 33,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 87,
       "path": "",
-      "story_id": 33,
-      "is_mane_character": 1,
+      "substory_id": 33,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 88,
       "path": "images/character/nukkied_tiger2.png",
-      "story_id": 34,
-      "is_mane_character": 0,
+      "substory_id": 34,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 89,
       "path": "",
-      "story_id": 34,
-      "is_mane_character": 1,
+      "substory_id": 34,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 90,
       "path": "mages/character/nukkied_tiger.png",
-      "story_id": 34,
-      "is_mane_character": 0,
+      "substory_id": 34,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 91,
       "path": "",
-      "story_id": 34,
-      "is_mane_character": 1,
+      "substory_id": 34,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 92,
       "path": "images/character/nukkied_tiger4.png",
-      "story_id": 35,
-      "is_mane_character": 0,
+      "substory_id": 35,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 93,
       "path": "images/character/nukkied_tiger4.png",
-      "story_id": 35,
-      "is_mane_character": 0,
+      "substory_id": 35,
+      "is_main_character": 0,
       "order": 2
     },
     {
       "id": 94,
       "path": "",
-      "story_id": 36,
-      "is_mane_character": 1,
+      "substory_id": 36,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 95,
       "path": "images/character/nukkied_tiger4.png",
-      "story_id": 37,
-      "is_mane_character": 0,
+      "substory_id": 37,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 96,
       "path": "images/character/nukkied_tiger6.png",
-      "story_id": 38,
-      "is_mane_character": 0,
+      "substory_id": 38,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 97,
       "path": "mages/character/nukkied_friends.png",
-      "story_id": 39,
-      "is_mane_character": 0,
+      "substory_id": 39,
+      "is_main_character": 0,
       "order": 1
     },
     {
       "id": 98,
       "path": "",
-      "story_id": 39,
-      "is_mane_character": 1,
+      "substory_id": 39,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 99,
       "path": "",
-      "story_id": 41,
-      "is_mane_character": 1,
+      "substory_id": 41,
+      "is_main_character": 1,
       "order": 1
     },
     {
       "id": 100,
       "path": "",
-      "story_id": 41,
-      "is_mane_character": 1,
+      "substory_id": 41,
+      "is_main_character": 1,
       "order": 2
     },
     {
       "id": 101,
       "path": "",
-      "story_id": 42,
-      "is_mane_character": 1,
+      "substory_id": 42,
+      "is_main_character": 1,
       "order": 1
     }
   ]
