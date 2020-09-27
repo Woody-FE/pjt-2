@@ -43,13 +43,20 @@
 					/>
 				</div>
 			</section>
-			<section v-else class="story-left story-select">
-				<button
-					class="story-select__btn"
-					@click="createSubStory(story.selects[0].substory)"
-				>
-					{{ story.selects[0].select }}
-				</button>
+			<section v-else class="story-left">
+				<div class="story-left-box">
+					<img
+						class="story-left__bg"
+						src="@/assets/images/bg/left.jpg"
+						alt=""
+					/>
+					<button
+						class="story-select__btn"
+						@click="createSubStory(story.selects[0].substory)"
+					>
+						{{ story.selects[0].select }}
+					</button>
+				</div>
 			</section>
 			<StoryItem
 				v-if="!story.question"
@@ -58,13 +65,20 @@
 				:scripts="story.scripts"
 				:subId="story.id"
 			/>
-			<section v-else class="story-right story-select">
-				<button
-					class="story-select__btn"
-					@click="createSubStory(story.selects[1].substory)"
-				>
-					{{ story.selects[1].select }}
-				</button>
+			<section v-else class="story-right">
+				<div class="story-right-box">
+					<img
+						class="story-right__bg"
+						src="@/assets/images/bg/right.jpg"
+						alt=""
+					/>
+					<button
+						class="story-select__btn"
+						@click="createSubStory(story.selects[1].substory)"
+					>
+						{{ story.selects[1].select }}
+					</button>
+				</div>
 			</section>
 		</article>
 		<section class="story-delete__btn">
@@ -382,6 +396,12 @@ export default {
 		justify-content: center;
 		align-items: center;
 		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
+		.story-right-box {
+			position: relative;
+		}
+		.story-right__bg {
+			z-index: 1;
+		}
 	}
 	.story-select {
 		position: relative;
@@ -411,7 +431,7 @@ export default {
 	}
 	.story-select__btn {
 		position: absolute;
-		top: 50%;
+		top: 70%;
 		left: 50%;
 		transform: translate(-50%, 50%);
 		background: black;
