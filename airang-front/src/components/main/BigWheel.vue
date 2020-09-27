@@ -37,8 +37,8 @@ export default {
 	}
 	.car-wrap {
 		position: absolute;
-		top: -15px;
-		left: 1px;
+		top: 20px;
+		left: -5px;
 		width: 250px;
 		height: 250px;
 		.car {
