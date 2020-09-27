@@ -10,7 +10,7 @@
 				/>
 			</section>
 			<section class="story-start">
-				<button @click="startPage" class="story-start-btn">
+				<button @click="startPage" class="btn story-start-btn">
 					시작하기
 				</button>
 			</section>
@@ -278,6 +278,7 @@ export default {
 </script>
 
 <style lang="scss">
+@include common-btn();
 .story-wrap {
 	width: 100%;
 	height: 100vh;
@@ -291,14 +292,21 @@ export default {
 		height: 4rem;
 		transform: translateX(-50%);
 		.story-start-btn {
-			border: none;
-			border-radius: 8px;
 			width: 10rem;
-			height: 4rem;
+			height: 3.5rem;
+			color: rgb(82, 9, 9);
+			font-weight: bold;
 			font-size: 1.5rem;
-			background: black;
-			color: white;
+			border: 1px solid rgba(82, 9, 9, 0.3);
+			box-shadow: 0 6px rgba(82, 9, 9, 0.8);
+			background: rgb(255, 248, 220);
 			cursor: pointer;
+			&:active {
+				background-color: rgb(202, 195, 168);
+				box-shadow: 0 5px rgba(82, 9, 9, 1);
+				border: none;
+				transform: translateY(4px);
+			}
 		}
 	}
 }
@@ -369,17 +377,14 @@ export default {
 	.story-right {
 		width: 50%;
 		height: 100%;
-		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
 	}
 	.story-select {
 		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 	.story-main {
 		width: 100%;
