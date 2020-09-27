@@ -208,13 +208,11 @@ def hat_and_face(input_image_path, user_id):
 
 
         # 3-1-2.tilt
+        face_canvas_tilt = (int(baby_hat.shape[0]), 3)
         if i == 4:
             hat_canvas_tilt = (eyebrow_y + 15, 0)
-            face_canvas_tilt = (int(baby_hat.shape[0]), 3)
-        
         else:
             hat_canvas_tilt = (eyebrow_y, 0)
-            face_canvas_tilt = (int(baby_hat.shape[0]), 3)
 
 
         # 3-2. make canvas
