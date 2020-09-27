@@ -139,7 +139,7 @@ export default {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
+		box-shadow: 3px 20px 15px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
 		.roller {
