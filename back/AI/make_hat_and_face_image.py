@@ -130,8 +130,13 @@ def hat_and_face(input_image_path, user_id):
     fr_landmarks_list = fr.face_landmarks(fr_image)
     fr_chin = fr_landmarks_list[0]['chin']
 
+    fr_left_eyebrow = fr_landmarks_list[0]['left_eyebrow']
+    fr_right_eyebrow = fr_landmarks_list[0]['right_eyebrow']
+
+    eyebrow_y = np.max(np.array(fr_left_eyebrow + fr_left_eyebrow), axis = 0)[1]
+
     np_fr_chin = np.array(fr_chin)
-    fr_chin_bottom = np.max(np_fr_chin, axis=0)[1]
+    fr_chin_bottom = np.max(np_fr_chin)
 
     chin_y = np_fr_chin[:, 1:]
     chin_x = np_fr_chin[np.argmax(chin_y)]
@@ -204,11 +209,11 @@ def hat_and_face(input_image_path, user_id):
 
         # 3-1-2.tilt
         if i == 4:
-            hat_canvas_tilt = (65, 0)
+            hat_canvas_tilt = (eyebrow_y + 15, 0)
             face_canvas_tilt = (int(baby_hat.shape[0]), 3)
         
         else:
-            hat_canvas_tilt = (40, 0)
+            hat_canvas_tilt = (eyebrow_y, 0)
             face_canvas_tilt = (int(baby_hat.shape[0]), 3)
 
 
@@ -242,5 +247,19 @@ def hat_and_face(input_image_path, user_id):
     for i in range(len(result_image_array)):
         cv2.imwrite('./images/my_images/' + str(i) + '_' + str(user_id) + '.png', result_image_array[i])
 
-
     return './images/my_images/'
+
+
+def show_me_hat_and_face(input_image_path, user_id, hat_idx = 0):
+    hat_and_face_folder_path = './images/my_images/'
+    hat_and_face_image_path = hat_and_face_folder_path + str(hat_idx) + '_' + str(user_id) + '.png'
+    hat_and_face_image_name = hat_and_face_image_path[19:]
+
+    if not os.path.isfile(hat_and_face_image_path):
+        print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' dose not exist... :(')
+        hat_and_face(input_image_path, user_id)
+        return hat_and_face_image_path
+
+    else:
+        print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' exist! :)')
+        return hat_and_face_image_path

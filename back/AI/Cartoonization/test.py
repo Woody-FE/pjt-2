@@ -60,7 +60,8 @@ def cartoonize(original_image_name, Nukkied_image):
     if opt.gpu > -1:
         input_image = Variable(input_image, volatile=True).cuda()
     else:
-        input_image = Variable(input_image, volatile=True).float()
+        with torch.no_grad():
+            input_image = Variable(input_image, volatile=False).float()
     # forward
     output_image = model(input_image)
     output_image = output_image[0]
