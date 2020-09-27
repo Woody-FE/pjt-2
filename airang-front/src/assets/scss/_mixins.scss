@@ -1,4 +1,27 @@
 $orange: #fa9d00;
 $lightGreen: #51cf66;
 $green: #00733b;
+$carrotGreen: #2f9e44;
 $deepGray: #495057;
+
+@mixin common-btn() {
+    .btn {
+        display: inline-block;
+        padding: 8px 20px;
+        font-size: 15px;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #2F4661;
+        border: none;
+        border-radius: 30px;
+        box-shadow: 0 5px #999;
+        cursor: pointer;
+        &:active {
+            background-color: #303846;
+            box-shadow: 0 3px #666;
+            transform: translateY(4px);
+        }
+    }
+}
