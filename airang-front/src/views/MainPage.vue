@@ -13,18 +13,14 @@
 				alt="잔디"
 			/>
 			<div class="main-board">
-				<div class="wheel-board">
-					<img
-						src="@/assets/images/bg/wheel_bg.png"
-						class="wheel-bg"
-						alt="관람차"
-					/>
-				</div>
 				<img
 					src="@/assets/images/bg/roller.png"
 					class="roller"
 					alt="롤러코스터"
 				/>
+				<div class="wheel">
+					<BigWheel />
+				</div>
 				<div class="main">
 					<div class="main-img">
 						<img
@@ -80,7 +76,12 @@
 </template>
 
 <script>
-export default {};
+import BigWheel from '@/components/main/BigWheel.vue';
+export default {
+	components: {
+		BigWheel,
+	},
+};
 </script>
 
 <style lang="scss">
@@ -100,27 +101,32 @@ export default {};
 	@media screen and (max-width: 768px) {
 		perspective: 1100px;
 	}
+	.wheel {
+		position: absolute;
+		top: -400px;
+		transform: rotate3d(1, 0, 0, -65deg);
+	}
 	.main-board {
 		width: 60vw;
 		height: 55vh;
 		margin-top: 80px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
-		.wheel-board {
-			position: relative;
-			.wheel-bg {
-				width: 250px;
-				transform-style: flat;
-				transform: translateY(-700px) rotateX(-65deg);
-				position: absolute;
-				top: 0;
-				left: -160px;
-			}
-		}
+		// .wheel-board {
+		// 	position: relative;
+		// 	.wheel-bg {
+		// 		width: 250px;
+		// 		transform-style: flat;
+		// 		transform: translateY(-700px) rotateX(-65deg);
+		// 		position: absolute;
+		// 		top: 0;
+		// 		left: -160px;
+		// 	}
+		// }
 		.roller {
 			width: 650px;
 			position: absolute;
