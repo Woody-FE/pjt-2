@@ -10,7 +10,7 @@
 				/>
 			</section>
 			<section class="story-start">
-				<button @click="startPage" class="story-start-btn">
+				<button @click="startPage" class="btn story-start-btn">
 					시작하기
 				</button>
 			</section>
@@ -43,13 +43,20 @@
 					/>
 				</div>
 			</section>
-			<section v-else class="story-left story-select">
-				<button
-					class="story-select__btn"
-					@click="createSubStory(story.selects[0].substory)"
-				>
-					{{ story.selects[0].select }}
-				</button>
+			<section v-else class="story-left">
+				<div class="story-left-box">
+					<img
+						class="story-left__bg"
+						src="@/assets/images/bg/left.jpg"
+						alt=""
+					/>
+					<button
+						class="story-select__btn"
+						@click="createSubStory(story.selects[0].substory)"
+					>
+						{{ story.selects[0].select }}
+					</button>
+				</div>
 			</section>
 			<StoryItem
 				v-if="!story.question"
@@ -58,13 +65,20 @@
 				:scripts="story.scripts"
 				:subId="story.id"
 			/>
-			<section v-else class="story-right story-select">
-				<button
-					class="story-select__btn"
-					@click="createSubStory(story.selects[1].substory)"
-				>
-					{{ story.selects[1].select }}
-				</button>
+			<section v-else class="story-right">
+				<div class="story-right-box">
+					<img
+						class="story-right__bg"
+						src="@/assets/images/bg/right.jpg"
+						alt=""
+					/>
+					<button
+						class="story-select__btn"
+						@click="createSubStory(story.selects[1].substory)"
+					>
+						{{ story.selects[1].select }}
+					</button>
+				</div>
 			</section>
 		</article>
 		<section class="story-delete__btn">
@@ -278,6 +292,7 @@ export default {
 </script>
 
 <style lang="scss">
+@include common-btn();
 .story-wrap {
 	width: 100%;
 	height: 100vh;
@@ -291,14 +306,21 @@ export default {
 		height: 4rem;
 		transform: translateX(-50%);
 		.story-start-btn {
-			border: none;
-			border-radius: 8px;
 			width: 10rem;
-			height: 4rem;
+			height: 3.5rem;
+			color: rgb(82, 9, 9);
+			font-weight: bold;
 			font-size: 1.5rem;
-			background: black;
-			color: white;
+			border: 1px solid rgba(82, 9, 9, 0.3);
+			box-shadow: 0 6px rgba(82, 9, 9, 0.8);
+			background: rgb(255, 248, 220);
 			cursor: pointer;
+			&:active {
+				background-color: rgb(202, 195, 168);
+				box-shadow: 0 5px rgba(82, 9, 9, 1);
+				border: none;
+				transform: translateY(4px);
+			}
 		}
 	}
 }
@@ -369,17 +391,20 @@ export default {
 	.story-right {
 		width: 50%;
 		height: 100%;
-		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
+		.story-right-box {
+			position: relative;
+		}
+		.story-right__bg {
+			z-index: 1;
+		}
 	}
 	.story-select {
 		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 	.story-main {
 		width: 100%;
@@ -406,7 +431,7 @@ export default {
 	}
 	.story-select__btn {
 		position: absolute;
-		top: 50%;
+		top: 70%;
 		left: 50%;
 		transform: translate(-50%, 50%);
 		background: black;
