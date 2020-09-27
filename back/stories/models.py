@@ -17,6 +17,7 @@ class Substory(models.Model):
 class StoryImage(models.Model):
     path = models.TextField()
     is_main_character = models.BooleanField(default=False)
+    order = models.IntegerField()
     substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='images')
 
 
