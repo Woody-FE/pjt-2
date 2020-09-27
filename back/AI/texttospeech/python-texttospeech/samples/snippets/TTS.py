@@ -48,7 +48,7 @@ def TTS_ssml(ssml_sentence,output):
     # Names of voices can be retrieved with client.list_voices().
     voice = texttospeech.VoiceSelectionParams(
         language_code="ko-KR",
-        name="ko-KR-Wavenet-C",
+        name="ko-KR-Wavenet-D",
         ssml_gender=texttospeech.SsmlVoiceGender.MALE,
     )
 
@@ -69,4 +69,4 @@ def TTS_ssml(ssml_sentence,output):
 
 
 # path = TTS_text('어흥 어흥', 'test_txt.mp3')
-path2 = TTS_ssml('<speak><audio src="https://actions.google.com/sounds/v1/crowds/female_crowd_celebration.ogg" clipEnd="1.3s" /><break time="0.5s"/><prosody pitch="3st"><p><emphasis level="moderate">처음보는 물품이야!</emphasis></p> <p>너는 우리 다과회에 참여할 수 있겠어!!</p></prosody></speak>','./character voice/토끼/script_44.mp3')
+path2 = TTS_ssml('<speak><prosody pitch="8st" volume="loud" rate="105%">혹시, 다람쥐 한마리를 보지 못했나!</prosody></speak>','./character voice/독수리/script_35.mp3')
