@@ -1,6 +1,6 @@
 import os.path
 
-def TTS(sentence,output):
+def TTS_text(sentence,output):
     from google.cloud import texttospeech
 
     # Instantiates a client
@@ -37,5 +37,36 @@ def TTS(sentence,output):
     
     return os.path.abspath(output)
 
-path = TTS('남북경협주 저가매수타이밍입니다. 주주님들 다들 화이팅합시다.', 'fighting.mp3')
-print(path)
+def TTS_ssml(ssml_sentence,output):
+    from google.cloud import texttospeech
+
+    client = texttospeech.TextToSpeechClient()
+
+    input_text = texttospeech.SynthesisInput(ssml=ssml_sentence)
+
+    # Note: the voice can also be specified by name.
+    # Names of voices can be retrieved with client.list_voices().
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="ko-KR",
+        name="ko-KR-Wavenet-D",
+        ssml_gender=texttospeech.SsmlVoiceGender.MALE,
+    )
+
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3
+    )
+
+    response = client.synthesize_speech(
+        input=input_text, voice=voice, audio_config=audio_config
+    )
+
+    # The response's audio_content is binary.
+    with open(output, "wb") as out:
+        out.write(response.audio_content)
+        print('Audio content written to file {}'.format(output))
+
+        return os.path.abspath(output)
+
+
+# path = TTS_text('어흥 어흥', 'test_txt.mp3')
+path2 = TTS_ssml('<speak><prosody pitch="8st" volume="loud" rate="105%">혹시, 다람쥐 한마리를 보지 못했나!</prosody></speak>','./character voice/독수리/script_35.mp3')
