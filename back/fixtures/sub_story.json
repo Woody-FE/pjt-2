@@ -1,182 +1,331 @@
 [
-    {
-      "id": 1,
-      "back_image": "",
-      "next_id": 2,
-      "has_branch": false
-    },
-    {
-      "id": 2,
-      "back_image": "",
-      "next_id": 1,
-      "has_branch": true
-    },
-    {
-      "id": 3,
-      "back_image": "",
-      "next_id": 4,
-      "has_branch": false
-    },
-    {
-      "id": 4,
-      "back_image": "",
-      "next_id": 2,
-      "has_branch": true
-    },
-    {
-      "id": 5,
-      "back_image": "",
-      "next_id": 6,
-      "has_branch": false
-    },
-    {
-      "id": 6,
-      "back_image": "",
-      "next_id": 7,
-      "has_branch": false
-    },
-    {
-      "id": 7,
-      "back_image": "",
-      "next_id": 3,
-      "has_branch": true
-    },
-    {
-      "id": 8,
-      "back_image": "",
-      "next_id": 9,
-      "has_branch": false
-    },
-    {
-      "id": 9,
-      "back_image": "",
-      "next_id": 4,
-      "has_branch": true
-    },
-    {
-      "id": 10,
-      "back_image": "",
-      "next_id": 11,
-      "has_branch": false
-    },
-    {
-      "id": 11,
-      "back_image": "",
-      "next_id": 12,
-      "has_branch": false
-    },
-    {
-      "id": 12,
-      "back_image": "",
-      "next_id": 5,
-      "has_branch": true
-    },
-    {
-      "id": 13,
-      "back_image": "",
-      "next_id": 14,
-      "has_branch": false
-    },
-    {
-      "id": 14,
-      "back_image": "",
-      "next_id": 15,
-      "has_branch": false
-    },
-    {
-      "id": 15,
-      "back_image": "",
-      "next_id": 5,
-      "has_branch": true
-    },
-    {
-      "id": 16,
-      "back_image": "",
-      "next_id": 17,
-      "has_branch": false
-    },
-    {
-      "id": 17,
-      "back_image": "",
-      "next_id": 18,
-      "has_branch": false
-    },
-    {
-      "id": 18,
-      "back_image": "",
-      "next_id": 101,
-      "has_branch": false
-    },
-    {
-      "id": 19,
-      "back_image": "",
-      "next_id": 20,
-      "has_branch": false
-    },
-    {
-      "id": 20,
-      "back_image": "",
-      "next_id": 21,
-      "has_branch": false
-    },
-    {
-      "id": 21,
-      "back_image": "",
-      "next_id": 102,
-      "has_branch": false
-    },
-    {
-      "id": 22,
-      "back_image": "",
-      "next_id": 23,
-      "has_branch": false
-    },
-    {
-      "id": 23,
-      "back_image": "",
-      "next_id": 24,
-      "has_branch": false
-    },
-    {
-      "id": 24,
-      "back_image": "",
-      "next_id": 6,
-      "has_branch": true
-    },
-    {
-      "id": 25,
-      "back_image": "",
-      "next_id": 26,
-      "has_branch": false
-    },
-    {
-      "id": 26,
-      "back_image": "",
-      "next_id": 103,
-      "has_branch": false
-    },
-    {
-      "id": 27,
-      "back_image": "",
-      "next_id": 28,
-      "has_branch": false
-    },
-    {
-      "id": 28,
-      "back_image": "",
-      "next_id": 104,
-      "has_branch": false
-    },
-    {
-      "id": 29,
-      "back_image": "",
-      "next_id": 30,
-      "has_branch": false
-    },
-    {
-      "id": 30,
-      "back_image": "",
-      "next_id": 105,
-      "has_branch": false
-    }
-  ]
+  {
+    "id": 1,
+    "back_image": "/images/background/house1.jpg",
+    "next_id": 2,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 2,
+    "back_image": "/images/background/crossroad.jpg",
+    "next_id": 1,
+    "has_branch": 1,
+    "story_id": 1
+  },
+  {
+    "id": 3,
+    "back_image": "/images/background/changed_fox.jpg",
+    "next_id": 4,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 4,
+    "back_image": "/images/background/mountain_fox_grandmother_baby.jpg",
+    "next_id": 5,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 5,
+    "back_image": "/images/background/house1.jpg",
+    "next_id": 6,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 6,
+    "back_image": "/images/background/fox_girl_baby.jpg",
+    "next_id": 7,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 7,
+    "back_image": "/images/background/house1_baby_hand.jpg",
+    "next_id": 8,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 8,
+    "back_image": "/images/background/mountain_fox.jpg",
+    "next_id": 2,
+    "has_branch": 1,
+    "story_id": 1
+  },
+  {
+    "id": 9,
+    "back_image": "/images/background/rabbit_little.jpg",
+    "next_id": 10,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 10,
+    "back_image": "/images/background/cards.jpg",
+    "next_id": 11,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 11,
+    "back_image": "/images/background/white.jpg",
+    "next_id": 12,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 12,
+    "back_image": "/images/background/baby_rabbit.jpg",
+    "next_id": 3,
+    "has_branch": 1,
+    "story_id": 1
+  },
+  {
+    "id": 13,
+    "back_image": "/images/background/nukkied_sick.png",
+    "next_id": 14,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 14,
+    "back_image": "/images/background/white_baby.jpg",
+    "next_id": 15,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 15,
+    "back_image": "/images/background/house1_baby6.jpg",
+    "next_id": 4,
+    "has_branch": 1,
+    "story_id": 1
+  },
+  {
+    "id": 16,
+    "back_image": "/images/background/mountain_baby.jpg",
+    "next_id": 17,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 17,
+    "back_image": "/images/background/tree_day_baby3.jpg",
+    "next_id": 18,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 18,
+    "back_image": "/images/background/mountain_baby.jpg",
+    "next_id": 19,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 19,
+    "back_image": "/images/background/crossroad.jpg",
+    "next_id": 20,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 20,
+    "back_image": "/images/background/party_norabbit_baby.jpg",
+    "next_id": 21,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 21,
+    "back_image": "/images/background/hole_baby.jpg",
+    "next_id": 22,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 22,
+    "back_image": "/images/background/crossroad.jpg",
+    "next_id": 5,
+    "has_branch": 1,
+    "story_id": 1
+  },
+  {
+    "id": 23,
+    "back_image": "/images/background/party.jpg",
+    "next_id": 24,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 24,
+    "back_image": "/images/background/party_mouses.jpg",
+    "next_id": 25,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 25,
+    "back_image": "/images/background/baby_rrecorder.jpg",
+    "next_id": 43,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 26,
+    "back_image": "/images/background/river_bear.jpg",
+    "next_id": 27,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 27,
+    "back_image": "/images/background/river_bear2.jpg",
+    "next_id": 28,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 28,
+    "back_image": "/images/background/river.jpg",
+    "next_id": 29,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 29,
+    "back_image": "/images/background/mountain.jpg",
+    "next_id": 44,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 30,
+    "back_image": "/images/background/tree_night_baby.jpg",
+    "next_id": 31,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 31,
+    "back_image": "/images/background/night.jpg",
+    "next_id": 32,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 32,
+    "back_image": "/images/background/tree_night_baby_small.jpg",
+    "next_id": 33,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 33,
+    "back_image": "/images/background/tree_night_baby_sit.jpg",
+    "next_id": 6,
+    "has_branch": 1,
+    "story_id": 1
+  },
+  {
+    "id": 34,
+    "back_image": "/images/background/tree_night_baby_guitar.jpg",
+    "next_id": 35,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 35,
+    "back_image": "/images/background/night.jpg",
+    "next_id": 45,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 36,
+    "back_image": "/images/background/tree_night_baby_recorder.jpg",
+    "next_id": 37,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 37,
+    "back_image": "/images/background/night.jpg",
+    "next_id": 38,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 38,
+    "back_image": "/images/background/night.jpg",
+    "next_id": 39,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 39,
+    "back_image": "/images/background/tree_night_baby_recorder.jpg",
+    "next_id": 46,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 40,
+    "back_image": "/images/background/audition2.jpg",
+    "next_id": 41,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 41,
+    "back_image": "/images/background/audition_baby.jpg",
+    "next_id": 42,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 42,
+    "back_image": "/images/background/audition2_baby.jpg",
+    "next_id": 47,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 43,
+    "back_image": "/images/background/end1.jpg",
+    "next_id": -1,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 44,
+    "back_image": "/images/background/end2.jpg",
+    "next_id": -1,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 45,
+    "back_image": "/images/background/end3.jpg",
+    "next_id": -1,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 46,
+    "back_image": "/images/background/end4.jpg",
+    "next_id": -1,
+    "has_branch": 0,
+    "story_id": 1
+  },
+  {
+    "id": 47,
+    "back_image": "/images/background/end5.jpg",
+    "next_id": -1,
+    "has_branch": 0,
+    "story_id": 1
+  }
+]

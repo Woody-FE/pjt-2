@@ -53,12 +53,14 @@ INSTALLED_APPS = [
     # rest_framework - authentication
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'rest_auth',
     'rest_auth.registration',
 
     # project apps
     'accounts.apps.AccountsConfig',
     'stories.apps.StoriesConfig',
+    'tts.apps.TtsConfig',
 
     # documentation
     'drf_yasg',
@@ -80,8 +82,10 @@ CORS_ORIGIN_WHITELIST = [
     'http://j3d105.p.ssafy.io:8001',
     'http://j3d105.p.ssafy.io',
 ]
+
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
+    ALLOWED_HOSTS = ['*']
 
 # drf setting
 REST_FRAMEWORK = {
@@ -89,14 +93,18 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
+}
+
 # authentication setting
-REST_USE_JWT = True
+# REST_USE_JWT = True
 
 AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
@@ -109,10 +117,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
-JWT_AUTH = {
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7)
-}
+# JWT_AUTH = {
+#     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7)
+# }
 
 # drf yasg setting
 SWAGGER_SETTINGS = {
