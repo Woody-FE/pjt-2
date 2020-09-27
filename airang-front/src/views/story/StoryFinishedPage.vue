@@ -211,6 +211,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/test/_hwang.scss';
+@import '@/assets/scss/test/_kim.scss';
+@import '@/assets/scss/test/_hong.scss';
 .story-wrap {
 	width: 100%;
 	height: 100vh;
