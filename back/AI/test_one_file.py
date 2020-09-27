@@ -110,33 +110,23 @@ def hat_and_face(input_image_path, user_id):
 
     Trim_x, Trim_y = (int(chin_start[0]), int(
         chin_end[0])), (int(min_y), int(fr_chin_bottom))
-    Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
-
-    Nukkied_image = cv2.resize(Trimmed_image, (175, 210),
-                            fx=1, fy=1, interpolation=cv2.INTER_AREA)
-
-    Nukkied_image_path = './images/nukkied_images'
-    cv2.imwrite(os.path.join(Nukkied_image_path,
-                            'Nukkied_' + original_image_name + '.png'), Nukkied_image)
+    np_Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
 
 
     # 2-3. Cartoonization 이미지 변환
-    target_image = 'Nukkied_' + original_image_name + '.png'
-    cartooned_image_name = test.cartoonize(Nukkied_image_path, target_image, np_rotated_image)
-    cartooned_image_path = './images/cartooned_images/' + cartooned_image_name
+    Cartooned_image = test.cartoonize(original_image_name, np_Trimmed_image)
 
 
     # 2-3-1. resize
-    cartooned_image = Image.open(cartooned_image_path)
-    cartooned_RGBA_image = cartooned_image.convert('RGBA')
-    cartooned_RGBA_image = cartooned_RGBA_image.resize((175, 210), resample=3,
-                                                    box=None, reducing_gap=None)
-    resized_cartooned_path = './images/cartooned_images/' + 'resized_' + cartooned_image_name
-    cartooned_RGBA_image.save(resized_cartooned_path, 'PNG')
+    resize_size = (175, 210)
+    Resized_cartooned_image = Cartooned_image.resize(resize_size, resample=3, box=None, reducing_gap=None)
+
+    Trimmed_image = Image.fromarray(np_Trimmed_image)
+    Resized_trimmed_image = Trimmed_image.resize(resize_size, resample=3, box=None, reducing_gap=None)
 
 
     # 2-4. re-Nukki
-    fr_image = fr.load_image_file(resized_cartooned_path)
+    fr_image = np.array(Resized_trimmed_image)
     fr_landmarks_list = fr.face_landmarks(fr_image)
     fr_chin = fr_landmarks_list[0]['chin']
 
@@ -155,7 +145,7 @@ def hat_and_face(input_image_path, user_id):
     nukki_coordinate.append(right_end)
 
 
-    image = cv2.imread(resized_cartooned_path, cv2.IMREAD_UNCHANGED)
+    image = np.array(Resized_cartooned_image)
 
     mask = np.zeros(image.shape, dtype=np.uint8)
     roi_corners = np.array([nukki_coordinate], dtype=np.int32)
@@ -165,14 +155,10 @@ def hat_and_face(input_image_path, user_id):
     cv2.fillPoly(mask, roi_corners, ignore_mask_color)
 
     re_Nukkied_image = cv2.bitwise_and(image, mask)
-
-    re_Nukkied_image_path = os.path.join('./images/re_nukkied_images',
-                            're_Nukkied_' + original_image_name + '.png')
-    cv2.imwrite(re_Nukkied_image_path, re_Nukkied_image)
-
+    
 
     # 3. 몸에 합성
-    baby_face = cv2.imread(re_Nukkied_image_path, cv2.IMREAD_UNCHANGED)
+    baby_face = re_Nukkied_image
     baby_body = cv2.imread(
         './images/body_and_hat/white_removed_body.png', cv2.IMREAD_UNCHANGED)
     baby_hat = cv2.imread(

@@ -1,3 +1,5 @@
 import make_image
+import test_one_file
 
-print(make_image.make_image(123))
+input_image_path = "./images/input_images/rotate_right.jpg"
+print(test_one_file.hat_and_face(input_image_path, 1234))
