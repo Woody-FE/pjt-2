@@ -2,6 +2,20 @@
 	<section>
 		<div class="main-wrap">
 			<div class="main-board">
+				<div class="wheel-board">
+					<img
+						src="@/assets/images/bg/wheelBg.png"
+						class="wheel-bg"
+						alt="관람차"
+					/>
+					<img
+						src="@/assets/images/bg/wheel1.png"
+						class="wheel1"
+						alt="관람차"
+					/>
+				</div>
+				<!-- <img src="@/assets/images/bg/wheel.png" class="wheel" alt="관람차" /> -->
+
 				<div class="main">
 					<div class="main-img">
 						<img
@@ -50,6 +64,7 @@
 						</p>
 					</div>
 				</div>
+				<router-link class="start-btn btn" to="/bookshelf">START</router-link>
 			</div>
 		</div>
 	</section>
@@ -60,6 +75,7 @@ export default {};
 </script>
 
 <style lang="scss">
+@include common-btn();
 .main-wrap {
 	width: 100%;
 	height: 100%;
@@ -80,11 +96,78 @@ export default {};
 		height: 55vh;
 		margin-top: 80px;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
+		.wheel-board {
+			position: relative;
+			.wheel1 {
+				width: 120px;
+				position: absolute;
+				top: -800px;
+				left: -100px;
+				animation: reverseRotating 15s linear infinite;
+			}
+			.wheel-bg {
+				width: 250px;
+				transform-style: flat;
+				transform: translateY(-600px) rotateX(-65deg);
+				position: absolute;
+				top: 0;
+				left: -160px;
+			}
+			@keyframes rotating {
+				from {
+					-ms-transform: rotate(0deg);
+					-moz-transform: rotate(0deg);
+					-webkit-transform: rotate(0deg);
+					-o-transform: rotate(0deg);
+					transform-style: preserve-3d;
+					transform: translateY(-400px) rotateX(-65deg) rotate(0deg);
+				}
+				to {
+					-ms-transform: rotate(360deg);
+					-moz-transform: rotate(360deg);
+					-webkit-transform: rotate(360deg);
+					-o-transform: rotate(360deg);
+					transform-style: preserve-3d;
+					transform: translateY(-400px) rotateX(-65deg) rotate(360deg);
+				}
+			}
+			@keyframes reverseRotating {
+				0% {
+					transform: translate3d(-200px, 0, 150px) rotateX(-65deg);
+				}
+				17% {
+					transform: translate3d(-150px, 0, -100px) rotateX(-65deg);
+				}
+				34% {
+					transform: translate3d(-100px, 0, -50px) rotateX(-65deg);
+				}
+				51% {
+					transform: translate3d(10px, 0, 0) rotateX(-65deg);
+				}
+				69% {
+					transform: translate3d(100px, 0, 50px) rotateX(-65deg);
+				}
+				85% {
+					transform: translate3d(150px, 0, 100px) rotateX(-65deg);
+				}
+				100% {
+					transform: translate3d(200px, 0, 150px) rotateX(-65deg);
+				}
+			}
+		}
+		.wheel {
+			width: 250px;
+			position: absolute;
+			top: 0;
+			left: -150px;
+			// animation: rotating 25s linear infinite;
+		}
+
 		.main-img {
 			transform-style: preserve-3d;
 			.arang {
@@ -179,7 +262,7 @@ export default {};
 				.sign {
 					padding: 5px 12px;
 					font-size: 12px;
-					background: #2f9e44;
+					background: #77411d;
 					border-radius: 40px 10px 30px;
 					@media screen and (max-width: 1024px) {
 						padding: 4px 9px;
@@ -192,7 +275,7 @@ export default {};
 				}
 				.stick {
 					padding: 5px 3px;
-					background: #2f9e44;
+					background: #77411d;
 					position: absolute;
 					top: 20px;
 					right: 225px;
@@ -217,6 +300,22 @@ export default {};
 			.sign3 {
 				transform: translate(-60px, -170px) rotateX(-85deg) rotateY(-15deg);
 			}
+		}
+	}
+	.start-btn {
+		position: absolute;
+		bottom: 50px;
+		right: 10px;
+		padding: 20px 30px;
+		font-size: 2rem;
+		background-color: $carrotGreen;
+		box-shadow: 0 10px $green;
+		cursor: pointer;
+		transform: rotateX(-5deg);
+		&:active {
+			background-color: $green;
+			box-shadow: 0 3px $green;
+			transform: translateY(6px);
 		}
 	}
 }

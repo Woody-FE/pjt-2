@@ -63,6 +63,7 @@ export default {
 	},
 	props: {
 		scripts: Array,
+		subId: Number,
 	},
 	data() {
 		return {
@@ -70,7 +71,7 @@ export default {
 		};
 	},
 	created() {
-		// console.log(this.scripts);
+		// console.log(this.subId);
 	},
 };
 </script>
