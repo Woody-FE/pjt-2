@@ -46,7 +46,7 @@
 				v-if="isLogin"
 				class="nav-login btn"
 				href="javascript:;"
-				@click="logoutUser"
+				@click="movedHome"
 				>로그아웃</a
 			>
 		</section>
@@ -83,7 +83,10 @@ export default {
 			this.clearToken();
 			this.$cookies.remove('auth-token');
 			this.$cookies.remove('username');
-			// this.$router.push('/');
+		},
+		movedHome() {
+			this.logoutUser();
+			this.$router.push('/');
 		},
 	},
 	watch: {

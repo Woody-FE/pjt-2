@@ -73,7 +73,7 @@
 						</p>
 					</div>
 				</div>
-				<router-link class="start-btn btn" to="/bookshelf">START</router-link>
+				<span class="start-btn btn" @click="moveBookshelf">START</span>
 			</div>
 		</div>
 	</section>
@@ -81,9 +81,20 @@
 
 <script>
 import BigWheel from '@/components/main/BigWheel.vue';
+import { mapGetters } from 'vuex';
 export default {
 	components: {
 		BigWheel,
+	},
+	methods: {
+		...mapGetters(['getToken']),
+		moveBookshelf() {
+			if (this.$store.state.token) {
+				this.$router.push('/bookshelf');
+			} else {
+				this.$router.push({ name: 'login' });
+			}
+		},
 	},
 };
 </script>
