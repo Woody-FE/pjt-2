@@ -1,507 +1,608 @@
 [
     {
       "id": 1,
-      "tag": "<img class=\"order-2 sub1-1\" :src=`${baseURL}/images/character/nukkied_father2.png`>",
-      "substory_id": 1
+      "path": "images/character/nukkied_father2.png",
+      "story_id": 1,
+      "is_main_character": 0
     },
     {
       "id": 2,
-      "tag": "<img class=\"order-1 sub2-1\" :src=`${baseURL}/images/character/nukkied_fox_laugh.png`>",
-      "substory_id": 2
+      "path": "images/character/nukkied_fox_laugh.png",
+      "story_id": 2,
+      "is_main_character": 0
     },
     {
       "id": 3,
-      "tag": "<img class=\"order-1 sub2-2\" :src=`${baseURL}/images/character/nukkied_rabbit2.png`>",
-      "substory_id": 2
+      "path": "images/character/nukkied_rabbit2.png",
+      "story_id": 2,
+      "is_main_character": 0
     },
     {
       "id": 4,
-      "tag": "<img class=\"order-1 sub5-1\" :src=`${baseURL}/images/character/nukkied_fox_grandmother.png`>",
-      "substory_id": 5
+      "path": "images/character/nukkied_fox_grandmother.png",
+      "story_id": 5,
+      "is_main_character": 0
     },
     {
       "id": 5,
-      "tag": "<img class=\"order-1 sub5-2\" :src=`${baseURL}/images/character/nukkied_girl.png`>",
-      "substory_id": 5
+      "path": "images/character/nukkied_girl.png",
+      "story_id": 5,
+      "is_main_character": 0
     },
     {
       "id": 6,
-      "tag": "<img class=\"order-1 sub6-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 6
+      "path": "",
+      "story_id": 6,
+      "is_main_character": 1
     },
     {
       "id": 7,
-      "tag": "<img class=\"order-2 sub6-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 6
+      "path": "",
+      "story_id": 6,
+      "is_main_character": 1
     },
     {
       "id": 8,
-      "tag": "<img class=\"order-1 sub7-1\" :src=`${baseURL}/images/items/nukkied_wand.png`>",
-      "substory_id": 7
+      "path": "images/items/nukkied_wand.png",
+      "story_id": 7,
+      "is_main_character": 0
     },
     {
       "id": 9,
-      "tag": "<img class=\"order-2 sub7-2\" :src=`${baseURL}/images/character/nukkied_attacked_fox.png`>",
-      "substory_id": 7
+      "path": "images/character/nukkied_attacked_fox.png",
+      "story_id": 7,
+      "is_main_character": 0
     },
     {
       "id": 10,
-      "tag": "<img class=\"order-2 sub7-3\" :src=`${baseURL}/images/items/nukkied_wand.png`>",
-      "substory_id": 7
+      "path": "images/items/nukkied_wand.png",
+      "story_id": 7,
+      "is_main_character": 0
     },
     {
       "id": 11,
-      "tag": "<img class=\"order-2 sub10-1\" :src=`${baseURL}/images/character/nukkied_sick_rabbit.png`>",
-      "substory_id": 10
+      "path": "images/character/nukkied_sick_rabbit.png",
+      "story_id": 10,
+      "is_main_character": 0
     },
     {
       "id": 12,
-      "tag": "<img class=\"order-1 sub11-1\" :src=`${baseURL}/images/character/nukkied_queen.png`>",
-      "substory_id": 11
+      "path": "images/character/nukkied_queen.png",
+      "story_id": 11,
+      "is_main_character": 0
     },
     {
       "id": 13,
-      "tag": "<img class=\"order-1 sub11-2\" :src=`${baseURL}/images/items/nukkied_wand.png`>",
-      "substory_id": 11
+      "path": "images/items/nukkied_wand.png",
+      "story_id": 11,
+      "is_main_character": 0
     },
     {
       "id": 14,
-      "tag": "<img class=\"order-2 sub11-3\" :src=`${baseURL}/images/character/nukkied_queen.png`>",
-      "substory_id": 11
+      "path": "images/character/nukkied_queen.png",
+      "story_id": 11,
+      "is_main_character": 0
     },
     {
       "id": 15,
-      "tag": "<img class=\"order-2 sub11-4\" :src=`${baseURL}/images/items/nukkied_wand.png`>",
-      "substory_id": 11
+      "path": "images/items/nukkied_wand.png",
+      "story_id": 11,
+      "is_main_character": 0
     },
     {
       "id": 16,
-      "tag": "<img class=\"order-3 sub11-5\" :src=`${baseURL}/images/character/nukkied_happy_rabbit.png`>",
-      "substory_id": 11
+      "path": "images/character/nukkied_happy_rabbit.png",
+      "story_id": 11,
+      "is_main_character": 0
     },
     {
       "id": 17,
-      "tag": "<img class=\"order-1 sub12-1\" :src=`${baseURL}/images/character/nukkied_happy_rabbit.png`>",
-      "substory_id": 12
+      "path": "images/character/nukkied_happy_rabbit.png",
+      "story_id": 12,
+      "is_main_character": 0
     },
     {
       "id": 18,
-      "tag": "<img class=\"order-1 sub12-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 12
+      "path": "",
+      "story_id": 12,
+      "is_main_character": 1
     },
     {
       "id": 19,
-      "tag": "<img class=\"order-1 sub14-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 14
+      "path": "",
+      "story_id": 14,
+      "is_main_character": 1
     },
     {
       "id": 20,
-      "tag": "<img class=\"order-1 sub14-2\" :src=`${baseURL}/images/items/nukkied_box3.png`>",
-      "substory_id": 14
+      "path": "images/items/nukkied_box3.png",
+      "story_id": 14,
+      "is_main_character": 0
     },
     {
       "id": 21,
-      "tag": "<img class=\"order-2 sub14-3\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 14
+      "path": "",
+      "story_id": 14,
+      "is_main_character": 1
     },
     {
       "id": 22,
-      "tag": "<img class=\"order-2 sub14-4\" :src=`${baseURL}/images/items/nukkied_box2.png`>",
-      "substory_id": 14
+      "path": "images/items/nukkied_box2.png",
+      "story_id": 14,
+      "is_main_character": 0
     },
     {
       "id": 23,
-      "tag": "<img class=\"order-1 sub15-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 15
+      "path": "",
+      "story_id": 15,
+      "is_main_character": 1
     },
     {
       "id": 24,
-      "tag": "<img class=\"order-1 sub15-2\" :src=`${baseURL}/images/character/nukkied_girl.png`>",
-      "substory_id": 15
+      "path": "images/character/nukkied_girl.png",
+      "story_id": 15,
+      "is_main_character": 0
     },
     {
       "id": 25,
-      "tag": "<img class=\"order-2 sub15-3\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 15
+      "path": "",
+      "story_id": 15,
+      "is_main_character": 1
     },
     {
       "id": 26,
-      "tag": "<img class=\"order-2 sub15-4\" :src=`${baseURL}/images/character/nukkied_girl.png`>",
-      "substory_id": 15
+      "path": "images/character/nukkied_girl.png",
+      "story_id": 15,
+      "is_main_character": 0
     },
     {
       "id": 27,
-      "tag": "<img class=\"order-1 sub16-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 16
+      "path": "",
+      "story_id": 16,
+      "is_main_character": 1
     },
     {
       "id": 28,
-      "tag": "<img class=\"order-2 sub16-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 16
+      "path": "",
+      "story_id": 16,
+      "is_main_character": 1
     },
     {
       "id": 29,
-      "tag": "<img class=\"order-2 sub16-3\" :src=`${baseURL}/images/character/nukkied_squirrel.png`>",
-      "substory_id": 16
+      "path": "images/character/nukkied_squirrel.png",
+      "story_id": 16,
+      "is_main_character": 0
     },
     {
       "id": 30,
-      "tag": "<img class=\"order-3 sub16-4\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 16
+      "path": "",
+      "story_id": 16,
+      "is_main_character": 1
     },
     {
       "id": 31,
-      "tag": "<img class=\"order-3 sub16-5\" :src=`${baseURL}/images/character/nukkied_squirrel3.png`>",
-      "substory_id": 16
+      "path": "images/character/nukkied_squirrel3.png",
+      "story_id": 16,
+      "is_main_character": 0
     },
     {
       "id": 32,
-      "tag": "<img class=\"order-4 sub16-6\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 16
+      "path": "",
+      "story_id": 16,
+      "is_main_character": 1
     },
     {
       "id": 33,
-      "tag": "<img class=\"order-4 sub16-7\" :src=`${baseURL}/images/items/nukkied_box3.png`>",
-      "substory_id": 16
+      "path": "images/items/nukkied_box3.png",
+      "story_id": 16,
+      "is_main_character": 0
     },
     {
       "id": 34,
-      "tag": "<img class=\"order-1 sub17-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 17
+      "path": "",
+      "story_id": 17,
+      "is_main_character": 1
     },
     {
       "id": 35,
-      "tag": "<img class=\"order-1 sub17-2\" :src=`${baseURL}/images/items/nukkied_box.png`>",
-      "substory_id": 17
+      "path": "images/items/nukkied_box.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 36,
-      "tag": "<img class=\"order-2 sub17-3\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 17
+      "path": "",
+      "story_id": 17,
+      "is_main_character": 1
     },
     {
       "id": 37,
-      "tag": "<img class=\"order-2 sub17-4\" :src=`${baseURL}/images/items/nukkied_box.png`>",
-      "substory_id": 17
+      "path": "images/items/nukkied_box.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 38,
-      "tag": "<img class=\"order-2 sub17-5\" :src=`${baseURL}/images/character/nukkied_eagle.png`>",
-      "substory_id": 17
+      "path": "images/character/nukkied_eagle.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 39,
-      "tag": "<img class=\"order-3 sub17-6\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 17
+      "path": "",
+      "story_id": 17,
+      "is_main_character": 1
     },
     {
       "id": 40,
-      "tag": "<img class=\"order-3 sub17-7\" :src=`${baseURL}/images/items/nukkied_box.png`>",
-      "substory_id": 17
+      "path": "images/items/nukkied_box.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 41,
-      "tag": "<img class=\"order-3 sub17-8\" :src=`${baseURL}/images/character/nukkied_eagle.png`>",
-      "substory_id": 17
+      "path": "images/character/nukkied_eagle.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 42,
-      "tag": "<img class=\"order-4 sub17-9\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 17
+      "path": "",
+      "story_id": 17,
+      "is_main_character": 1
     },
     {
       "id": 43,
-      "tag": "<img class=\"order-5 sub17-10\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 17
+      "path": "",
+      "story_id": 17,
+      "is_main_character": 1
     },
     {
       "id": 44,
-      "tag": "<img class=\"order-5 sub17-11\" :src=`${baseURL}/images/character/nukkied_eagle.png`>",
-      "substory_id": 17
+      "path": "images/character/nukkied_eagle.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 45,
-      "tag": "<img class=\"order-6 sub17-12\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 17
+      "path": "",
+      "story_id": 17,
+      "is_main_character": 1
     },
     {
       "id": 46,
-      "tag": "<img class=\"order-6 sub17-13\" :src=`${baseURL}/images/character/nukkied_squirrel2.png`>",
-      "substory_id": 17
+      "path": "images/character/nukkied_squirrel2.png",
+      "story_id": 17,
+      "is_main_character": 0
     },
     {
       "id": 47,
-      "tag": "<img class=\"order-1 sub18-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 18
+      "path": "",
+      "story_id": 18,
+      "is_main_character": 1
     },
     {
       "id": 48,
-      "tag": "<img class=\"order-1 sub19-1\" :src=`${baseURL}/images/character/nukkied_tree_day.png`>",
-      "substory_id": 19
+      "path": "images/character/nukkied_tree_day.png",
+      "story_id": 19,
+      "is_main_character": 0
     },
     {
       "id": 49,
-      "tag": "<img class=\"order-1 sub19-2\" :src=`${baseURL}/images/character/nukkied_building.png`>",
-      "substory_id": 19
+      "path": "images/character/nukkied_building.png",
+      "story_id": 19,
+      "is_main_character": 0
     },
     {
       "id": 50,
-      "tag": "<img class=\"order-1 sub20-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 20
+      "path": "",
+      "story_id": 20,
+      "is_main_character": 1
     },
     {
       "id": 51,
-      "tag": "<img class=\"order-2 sub20-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 20
+      "path": "",
+      "story_id": 20,
+      "is_main_character": 1
     },
     {
       "id": 52,
-      "tag": "<img class=\"order-2 sub20-3\" :src=`${baseURL}/images/character/nukkied_happy_rabbit.png`>",
-      "substory_id": 20
+      "path": "images/character/nukkied_happy_rabbit.png",
+      "story_id": 20,
+      "is_main_character": 0
     },
     {
       "id": 53,
-      "tag": "<img class=\"order-3 sub20-4\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 20
+      "path": "",
+      "story_id": 20,
+      "is_main_character": 1
     },
     {
       "id": 54,
-      "tag": "<img class=\"order-3 sub20-5\" :src=`${baseURL}/images/character/nukkied_happy_rabbit.png`>",
-      "substory_id": 20
+      "path": "images/character/nukkied_happy_rabbit.png",
+      "story_id": 20,
+      "is_main_character": 0
     },
     {
       "id": 55,
-      "tag": "<img class=\"order-3 sub20-6\" :src=`${baseURL}/images/items/nukkied_box.png`>",
-      "substory_id": 20
+      "path": "images/items/nukkied_box.png",
+      "story_id": 20,
+      "is_main_character": 0
     },
     {
       "id": 56,
-      "tag": "<img class=\"order-4 sub20-7\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 20
+      "path": "",
+      "story_id": 20,
+      "is_main_character": 1
     },
     {
       "id": 57,
-      "tag": "<img class=\"order-4 sub20-8\" :src=`${baseURL}/images/character/nukkied_happy_rabbit.png`>",
-      "substory_id": 20
+      "path": "images/character/nukkied_happy_rabbit.png",
+      "story_id": 20,
+      "is_main_character": 0
     },
     {
       "id": 58,
-      "tag": "<img class=\"order-4 sub20-9\" :src=`${baseURL}/images/items/nukkied_box.png`>",
-      "substory_id": 20
+      "path": "images/items/nukkied_box.png",
+      "story_id": 20,
+      "is_main_character": 0
     },
     {
       "id": 59,
-      "tag": "<img class=\"order-5 sub20-10\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 20
+      "path": "",
+      "story_id": 20,
+      "is_main_character": 1
     },
     {
       "id": 60,
-      "tag": "<img class=\"order-1 sub21-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 21
+      "path": "",
+      "story_id": 21,
+      "is_main_character": 1
     },
     {
       "id": 61,
-      "tag": "<img class=\"order-1 sub22-1\" :src=`${baseURL}/images/character/nukkied_tree_day.png`>",
-      "substory_id": 22
+      "path": "images/character/nukkied_tree_day.png",
+      "story_id": 22,
+      "is_main_character": 0
     },
     {
       "id": 62,
-      "tag": "<img class=\"order-1 sub22-2\" :src=`${baseURL}/images/character/nukkied_building.png`>",
-      "substory_id": 22
+      "path": "images/character/nukkied_building.png",
+      "story_id": 22,
+      "is_main_character": 0
     },
     {
       "id": 63,
-      "tag": "<img class=\"order-2 sub22-3\" :src=`${baseURL}/images/character/nukkied_tree_day.png`>",
-      "substory_id": 22
+      "path": "images/character/nukkied_tree_day.png",
+      "story_id": 22,
+      "is_main_character": 0
     },
     {
       "id": 64,
-      "tag": "<img class=\"order-2 sub22-4\" :src=`${baseURL}/images/character/nukkied_building.png`>",
-      "substory_id": 22
+      "path": "images/character/nukkied_building.png",
+      "story_id": 22,
+      "is_main_character": 0
     },
     {
       "id": 65,
-      "tag": "<img class=\"order-2 sub23-1\" :src=`${baseURL}/images/items/nukkied_recorder.png`>",
-      "substory_id": 23
+      "path": "images/items/nukkied_recorder.png",
+      "story_id": 23,
+      "is_main_character": 0
     },
     {
       "id": 66,
-      "tag": "<img class=\"order-1 sub24-1\" :src=`${baseURL}/images/character/nukkied_mouse.png`>",
-      "substory_id": 24
+      "path": "images/character/nukkied_mouse.png",
+      "story_id": 24,
+      "is_main_character": 0
     },
     {
       "id": 67,
-      "tag": "<img class=\"order-2 sub24-2\" :src=`${baseURL}/images/character/nukkied_father.png`>",
-      "substory_id": 24
+      "path": "images/character/nukkied_father.png",
+      "story_id": 24,
+      "is_main_character": 0
     },
     {
       "id": 68,
-      "tag": "<img class=\"order-3 sub24-3\" :src=`${baseURL}/images/character/nukkied_girl.png`>",
-      "substory_id": 24
+      "path": "images/character/nukkied_girl.png",
+      "story_id": 24,
+      "is_main_character": 0
     },
     {
       "id": 69,
-      "tag": "<img class=\"order-1 sub25-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 25
+      "path": "",
+      "story_id": 25,
+      "is_main_character": 1
     },
     {
       "id": 70,
-      "tag": "<img class=\"order-2 sub25-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 25
+      "path": "",
+      "story_id": 25,
+      "is_main_character": 1
     },
     {
       "id": 71,
-      "tag": "<img class=\"order-2 sub25-3\" :src=`${baseURL}/images/character/nukkied_mouse.png`>",
-      "substory_id": 25
+      "path": "images/character/nukkied_mouse.png",
+      "story_id": 25,
+      "is_main_character": 0
     },
     {
       "id": 72,
-      "tag": "<img class=\"order-3 sub25-4\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 25
+      "path": "",
+      "story_id": 25,
+      "is_main_character": 1
     },
     {
       "id": 73,
-      "tag": "<img class=\"order-4 sub25-5\" :src=`${baseURL}/images/character/nukkied_father.png`>",
-      "substory_id": 25
+      "path": "images/character/nukkied_father.png",
+      "story_id": 25,
+      "is_main_character": 0
     },
     {
       "id": 74,
-      "tag": "<img class=\"order-4 sub25-6\" :src=`${baseURL}/images/character/nukkied_girl.png`>",
-      "substory_id": 25
+      "path": "images/character/nukkied_girl.png",
+      "story_id": 25,
+      "is_main_character": 0
     },
     {
       "id": 75,
-      "tag": "<img class=\"order-4 sub25-7\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 25
+      "path": "",
+      "story_id": 25,
+      "is_main_character": 1
     },
     {
       "id": 76,
-      "tag": "<img class=\"order-3 sub26-1\" :src=`${baseURL}/images/items/nukkied_recorder.png`>",
-      "substory_id": 26
+      "path": "images/items/nukkied_recorder.png",
+      "story_id": 26,
+      "is_main_character": 0
     },
     {
       "id": 77,
-      "tag": "<img class=\"order-4 sub26-2\" :src=`${baseURL}/images/items/nukkied_recorder.png`>",
-      "substory_id": 26
+      "path": "images/items/nukkied_recorder.png",
+      "story_id": 26,
+      "is_main_character": 0
     },
     {
       "id": 78,
-      "tag": "<img class=\"order-1 sub28-1\" :src=`${baseURL}/images/character/nukkied_bear.png`>",
-      "substory_id": 28
+      "path": "images/character/nukkied_bear.png",
+      "story_id": 28,
+      "is_main_character": 0
     },
     {
       "id": 79,
-      "tag": "<img class=\"order-1 sub29-1\" :src=`${baseURL}/images/character/nukkied_bear.png`>",
-      "substory_id": 29
+      "path": "images/character/nukkied_bear.png",
+      "story_id": 29,
+      "is_main_character": 0
     },
     {
       "id": 80,
-      "tag": "<img class=\"order-1 sub30-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 30
+      "path": "",
+      "story_id": 30,
+      "is_main_character": 1
     },
     {
       "id": 81,
-      "tag": "<img class=\"order-1 sub31-1\" :src=`${baseURL}/images/character/nukkied_tiger3.png`>",
-      "substory_id": 31
+      "path": "images/character/nukkied_tiger3.png",
+      "story_id": 31,
+      "is_main_character": 0
     },
     {
       "id": 82,
-      "tag": "<img class=\"order-1 sub32-1\" :src=`${baseURL}/images/character/nukkied_tiger3.png`>",
-      "substory_id": 32
+      "path": "images/character/nukkied_tiger3.png",
+      "story_id": 32,
+      "is_main_character": 0
     },
     {
       "id": 83,
-      "tag": "<img class=\"order-1 sub32-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 32
+      "path": "",
+      "story_id": 32,
+      "is_main_character": 1
     },
     {
       "id": 84,
-      "tag": "<img class=\"order-1 sub33-1\" :src=`${baseURL}/images/character/nukkied_tiger2.png`>",
-      "substory_id": 33
+      "path": "images/character/nukkied_tiger2.png",
+      "story_id": 33,
+      "is_main_character": 0
     },
     {
       "id": 85,
-      "tag": "<img class=\"order-1 sub33-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 33
+      "path": "",
+      "story_id": 33,
+      "is_main_character": 1
     },
     {
       "id": 86,
-      "tag": "<img class=\"order-2 sub33-3\" :src=`${baseURL}/images/character/nukkied_tiger2.png`>",
-      "substory_id": 33
+      "path": "images/character/nukkied_tiger2.png",
+      "story_id": 33,
+      "is_main_character": 0
     },
     {
       "id": 87,
-      "tag": "<img class=\"order-2 sub33-4\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 33
+      "path": "",
+      "story_id": 33,
+      "is_main_character": 1
     },
     {
       "id": 88,
-      "tag": "<img class=\"order-1 sub34-1\" :src=`${baseURL}/images/character/nukkied_tiger2.png`>",
-      "substory_id": 34
+      "path": "images/character/nukkied_tiger2.png",
+      "story_id": 34,
+      "is_main_character": 0
     },
     {
       "id": 89,
-      "tag": "<img class=\"order-1 sub34-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 34
+      "path": "",
+      "story_id": 34,
+      "is_main_character": 1
     },
     {
       "id": 90,
-      "tag": "<img class=\"order-2 sub34-3\" :src=`${baseURL}/images/character/nukkied_tiger.png`>",
-      "substory_id": 34
+      "path": "mages/character/nukkied_tiger.png",
+      "story_id": 34,
+      "is_main_character": 0
     },
     {
       "id": 91,
-      "tag": "<img class=\"order-2 sub34-4\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 34
+      "path": "",
+      "story_id": 34,
+      "is_main_character": 1
     },
     {
       "id": 92,
-      "tag": "<img class=\"order-1 sub35-1\" :src=`${baseURL}/images/character/nukkied_tiger4.png`>",
-      "substory_id": 35
+      "path": "images/character/nukkied_tiger4.png",
+      "story_id": 35,
+      "is_main_character": 0
     },
     {
       "id": 93,
-      "tag": "<img class=\"order-2 sub35-2\" :src=`${baseURL}/images/character/nukkied_tiger4.png`>",
-      "substory_id": 35
+      "path": "images/character/nukkied_tiger4.png",
+      "story_id": 35,
+      "is_main_character": 0
     },
     {
       "id": 94,
-      "tag": "<img class=\"order-1 sub36-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 36
+      "path": "",
+      "story_id": 36,
+      "is_main_character": 1
     },
     {
       "id": 95,
-      "tag": "<img class=\"order-1 sub37-1\" :src=`${baseURL}/images/character/nukkied_tiger4.png`>",
-      "substory_id": 37
+      "path": "images/character/nukkied_tiger4.png",
+      "story_id": 37,
+      "is_main_character": 0
     },
     {
       "id": 96,
-      "tag": "<img class=\"order-1 sub38-1\" :src=`${baseURL}/images/character/nukkied_tiger6.png`>",
-      "substory_id": 38
+      "path": "images/character/nukkied_tiger6.png",
+      "story_id": 38,
+      "is_main_character": 0
     },
     {
       "id": 97,
-      "tag": "<img class=\"order-1 sub39-1\" :src=`${baseURL}/images/character/nukkied_friends.png`>",
-      "substory_id": 39
+      "path": "mages/character/nukkied_friends.png",
+      "story_id": 39,
+      "is_main_character": 0
     },
     {
       "id": 98,
-      "tag": "<img class=\"order-1 sub39-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 39
+      "path": "",
+      "story_id": 39,
+      "is_main_character": 1
     },
     {
       "id": 99,
-      "tag": "<img class=\"order-1 sub41-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 41
+      "path": "",
+      "story_id": 41,
+      "is_main_character": 1
     },
     {
       "id": 100,
-      "tag": "<img class=\"order-2 sub41-2\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 41
+      "path": "",
+      "story_id": 41,
+      "is_main_character": 1
     },
     {
       "id": 101,
-      "tag": "<img class=\"order-1 sub42-1\" :src=`${baseURL}/my_image/baby_defalt.png`>",
-      "substory_id": 42
+      "path": "",
+      "story_id": 42,
+      "is_main_character": 1
     }
   ]
