@@ -51,6 +51,9 @@ const routes = [
 	{
 		path: '/bookshelf/:storyId',
 		name: 'storybook',
+		props: route => ({
+			storyId: Number(route.params.storyId),
+		}),
 		component: () => import('@/views/story/StoryBookPage.vue'),
 	},
 	{
