@@ -51,7 +51,7 @@
 						alt=""
 					/>
 					<button
-						class="story-select__btn"
+						class="btn story-select__btn"
 						@click="createSubStory(story.selects[0].substory)"
 					>
 						{{ story.selects[0].select }}
@@ -73,7 +73,7 @@
 						alt=""
 					/>
 					<button
-						class="story-select__btn"
+						class="btn story-select__btn"
 						@click="createSubStory(story.selects[1].substory)"
 					>
 						{{ story.selects[1].select }}
@@ -430,18 +430,28 @@ export default {
 		}
 	}
 	.story-select__btn {
+		width: 300px;
+		height: 50px;
 		position: absolute;
 		top: 70%;
 		left: 50%;
 		transform: translate(-50%, 50%);
-		background: black;
 		color: white;
-		border: none;
-		width: 300px;
-		height: 50px;
 		font-size: 1rem;
-		border-radius: 8px;
+		border: none;
+		font-weight: bold;
+		box-shadow: 0 8px #999;
+		background: #2f4661;
 		cursor: pointer;
+		&:active {
+			position: absolute;
+			top: 70%;
+			left: 50%;
+			transform: translate(-50%, 60%);
+			background-color: #303846;
+			box-shadow: 0 5px#666;
+			border: none;
+		}
 	}
 }
 .story-abled {
