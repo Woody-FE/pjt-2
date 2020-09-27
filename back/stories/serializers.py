@@ -59,15 +59,8 @@ class ScriptSerializer(serializers.ModelSerializer):
         )
 
 
-class StoryImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = StoryImage
-        fields = '__all__'
-
-
 class SubstorySerializer(serializers.ModelSerializer):
     scripts = ScriptSerializer(many=True)
-    images = StoryImageSerializer(many=True)
     class Meta:
         model = Substory
         fields = (
