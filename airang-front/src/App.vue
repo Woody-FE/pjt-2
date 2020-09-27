@@ -41,6 +41,7 @@ export default {
 <style lang="scss">
 @import './assets/css/reset.css';
 @import './assets/css/common.css';
+@import './assets/scss/test/_hwang.scss';
 #app {
 	/* height: 100%; */
 	min-height: 100vh;
