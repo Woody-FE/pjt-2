@@ -251,7 +251,6 @@ export default {
 	right: 3rem;
 	width: 3rem;
 	height: 3rem;
-	/* transform: translateX(-50%); */
 	.story-delete-btn {
 		border: none;
 		border-radius: 50%;
@@ -264,10 +263,6 @@ export default {
 	}
 }
 .story-disabled {
-	/* opacity: 0;
-    position: absolute;
-    top: -100vh;
-    left: -100vw; */
 	animation: fade-out 1s;
 	animation-fill-mode: forwards;
 }
@@ -295,22 +290,6 @@ export default {
 		.story-left__bg {
 			z-index: 1;
 		}
-		/* .story-left__user1 {
-			z-index: 2;
-			position: absolute;
-			width: 50%;
-			bottom: 29%;
-			left: 47%;
-			transform: translateX(-50%);
-		}
-		.story-left__user2 {
-			z-index: 2;
-			position: absolute;
-			width: 50%;
-			bottom: 29%;
-			left: 35%;
-			transform: rotatetranslateX(-50%);
-		} */
 	}
 	.story-right {
 		width: 50%;
