@@ -1,7 +1,23 @@
 <template>
 	<section>
 		<div class="main-wrap">
+			<img src="@/assets/images/bg/grass2.png" class="grass2" alt="잔디" />
+			<img
+				src="@/assets/images/bg/grass_flower1.png"
+				class="grass-flower1"
+				alt="잔디"
+			/>
+			<img
+				src="@/assets/images/bg/grass_flower2.png"
+				class="grass-flower2"
+				alt="잔디"
+			/>
 			<div class="main-board">
+				<img
+					src="@/assets/images/bg/roller.png"
+					class="roller"
+					alt="롤러코스터"
+				/>
 				<div class="wheel">
 					<BigWheel />
 				</div>
@@ -95,11 +111,30 @@ export default {
 		height: 55vh;
 		margin-top: 80px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 		box-shadow: 3px 3px 10px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
+		// .wheel-board {
+		// 	position: relative;
+		// 	.wheel-bg {
+		// 		width: 250px;
+		// 		transform-style: flat;
+		// 		transform: translateY(-700px) rotateX(-65deg);
+		// 		position: absolute;
+		// 		top: 0;
+		// 		left: -160px;
+		// 	}
+		// }
+		.roller {
+			width: 650px;
+			position: absolute;
+			right: -50px;
+			top: 40px;
+			transform-style: preserve-3d;
+			transform: translateY(-450px) rotateX(-65deg);
+		}
 		.main-img {
 			transform-style: preserve-3d;
 			.arang {
@@ -132,7 +167,7 @@ export default {
 				transform: translateY(-50px) rotateX(-85deg);
 			}
 			.arang3 {
-				transform: translateY(-200px) rotateX(-85deg);
+				transform: translateY(-100px) rotateX(-85deg);
 				@media screen and (max-width: 768px) {
 					transform: translate(-30px, -210px) rotateX(-85deg);
 				}
@@ -171,7 +206,7 @@ export default {
 				}
 			}
 			.arang3-shadow {
-				top: 50px;
+				top: 110px;
 				right: 10px;
 				padding: 30px 150px;
 				@media screen and (max-width: 1024px) {
@@ -230,9 +265,27 @@ export default {
 				transform: translateY(0px) rotateX(-70deg);
 			}
 			.sign3 {
-				transform: translate(-60px, -170px) rotateX(-85deg) rotateY(-15deg);
+				transform: translate(-60px, -80px) rotateX(-85deg) rotateY(-15deg);
 			}
 		}
+	}
+	.grass2 {
+		width: 170px;
+		position: absolute;
+		bottom: 100px;
+		left: 50px;
+	}
+	.grass-flower1 {
+		width: 100px;
+		position: absolute;
+		bottom: 100px;
+		left: 160px;
+	}
+	.grass-flower2 {
+		width: 120px;
+		position: absolute;
+		top: 160px;
+		left: 350px;
 	}
 	.start-btn {
 		position: absolute;

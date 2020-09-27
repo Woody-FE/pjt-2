@@ -1,6 +1,6 @@
 <template>
 	<div class="wheel-wrap">
-		<img src="@/assets/images/bg/wheelBg.png" class="wheel-bg" alt="관람차" />
+		<img src="@/assets/images/bg/wheel_bg.png" class="wheel-bg" alt="관람차" />
 		<div class="car-wrap">
 			<img src="@/assets/images/bg/car1.png" class="car car1" alt="관람차" />
 			<img src="@/assets/images/bg/car2.png" class="car car2" alt="관람차" />
