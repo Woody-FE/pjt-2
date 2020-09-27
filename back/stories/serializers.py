@@ -71,8 +71,15 @@ class ScriptSerializer(serializers.ModelSerializer):
         )
 
 
+class StoryImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StoryImage
+        fields = '__all__'
+
+
 class SubstorySerializer(serializers.ModelSerializer):
     scripts = ScriptSerializer(many=True)
+    images = StoryImageSerializer(many=True)
     class Meta:
         model = Substory
         fields = (
@@ -81,6 +88,7 @@ class SubstorySerializer(serializers.ModelSerializer):
             'has_branch',
             'scripts',
             'images',
+            'back_image',
         )
 
 
@@ -132,3 +140,15 @@ class MyCharacterSerializer(serializers.ModelSerializer):
     class Meta(MyCharacterCreateSerializer.Meta):
         depth = 1
         fields = MyCharacterCreateSerializer.Meta.fields + ('id',)
+
+
+class MySubstoryDetailSerializer(serializers.ModelSerializer):
+    substory = SubstorySerializer()
+    class Meta:
+        model = MySubstory
+        fields = (
+            'id',
+            'next_id',
+            'is_end',
+            'substory'
+        )

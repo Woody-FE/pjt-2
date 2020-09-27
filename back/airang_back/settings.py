@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     # project apps
     'accounts.apps.AccountsConfig',
     'stories.apps.StoriesConfig',
+    'tts.apps.TtsConfig',
 
     # documentation
     'drf_yasg',
@@ -100,8 +101,8 @@ REST_FRAMEWORK = {
 
 REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
+    'REGISTER_SERIALIZER': 'apps.users.serializers.RegisterSerializer',
 }
-
 # authentication setting
 # REST_USE_JWT = True
 
