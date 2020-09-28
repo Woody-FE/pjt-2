@@ -140,8 +140,14 @@ def cartoonize_profile(request, user_id):
     
     profile_abs_path = user.child_image.path
     
-    path = show_me_hat_and_face(profile_abs_path, user_id)
-    result = {
-        'path': path.split('back/')[1]
-    }
+    try:
+        path = show_me_hat_and_face(profile_abs_path, user_id)
+        result = {
+            'path': path.split('back/')[1],
+        }
+    except IndexError:
+        result = {
+            'detail': '얼굴이 더 잘나오게 찍어주세요.',
+        }
+
     return Response(result, status=status.HTTP_200_OK)
