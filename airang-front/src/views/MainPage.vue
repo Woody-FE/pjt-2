@@ -120,22 +120,35 @@ export default {
 		transform: rotate3d(1, 0, 0, -65deg);
 	}
 	.grass2 {
-		width: 170px;
+		width: 17%;
 		position: absolute;
 		top: 70%;
 		left: 0%;
+		@media screen and (max-width: 768px) {
+			width: 20%;
+			top: 80%;
+		}
 	}
 	.grass-flower1 {
-		width: 100px;
+		width: 11%;
 		position: absolute;
 		top: 69%;
 		left: 12%;
+		@media screen and (max-width: 768px) {
+			width: 13%;
+			top: 80%;
+		}
 	}
 	.grass-flower2 {
-		width: 120px;
+		width: 12%;
 		position: absolute;
 		top: 3%;
 		left: 20%;
+		@media screen and (max-width: 768px) {
+			width: 13%;
+			top: 10%;
+			left: 25%;
+		}
 	}
 	.wheel {
 		position: absolute;
@@ -154,12 +167,15 @@ export default {
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
 		.roller {
-			width: 650px;
+			width: 70%;
 			position: absolute;
 			right: -50px;
 			top: 40px;
 			transform-style: preserve-3d;
 			transform: translateY(-450px) rotateX(-65deg);
+			@media screen and (max-width: 1024px) {
+				transform: translateY(-250px) rotateX(-65deg);
+			}
 		}
 		.main-img {
 			transform-style: preserve-3d;
