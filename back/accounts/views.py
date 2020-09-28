@@ -142,6 +142,6 @@ def cartoonize_profile(request, user_id):
     
     path = show_me_hat_and_face(profile_abs_path, user_id)
     result = {
-        'path': path
+        'path': path.split('back/')[1]
     }
     return Response(result, status=status.HTTP_200_OK)
