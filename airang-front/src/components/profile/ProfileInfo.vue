@@ -80,7 +80,6 @@ export default {
 				console.log(error);
 			}
 		},
-
 		validateFile(file) {
 			const imageArray = ['image/png', 'image/jpg', 'image/jpeg'];
 			if (imageArray.includes(file.type)) return true;

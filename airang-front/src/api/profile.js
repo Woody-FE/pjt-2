@@ -4,6 +4,10 @@ function getUserProfile(userId) {
 	return auth.get(`accounts/${userId}`);
 }
 
+function convertImage(userId) {
+	return auth.post(`accounts/${userId}/conversion/`);
+}
+
 function patchUserName(userId, userData) {
 	return auth.patch(`accounts/${userId}`, userData);
 }
@@ -26,4 +30,5 @@ export {
 	changePassword,
 	changeImage,
 	resetImage,
+	convertImage,
 };
