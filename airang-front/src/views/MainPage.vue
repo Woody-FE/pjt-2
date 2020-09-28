@@ -99,7 +99,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include common-btn();
 .main-wrap {
 	width: 100%;
