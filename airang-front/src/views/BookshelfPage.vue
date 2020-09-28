@@ -4,14 +4,12 @@
 		<div class="bookshelf">
 			<div class="bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in books">
-					<router-link
-						v-if="book.finished"
-						:to="`/story/${book.story.id}/review/${book.id}/`"
+					<router-link :to="`/bookshelf/${book.id}`"
 						><div
 							class="book books-1"
 							v-bind:style="{
 								backgroundImage: `url('${imgSrc}${filterMedia(
-									book.story.cover_image,
+									book.cover_image,
 								)}')`,
 							}"
 						></div>
@@ -19,14 +17,11 @@
 				</div>
 			</div>
 		</div>
-		<div>
-			<button class="book-add__btn" @click="createBook">책 생성</button>
-		</div>
 	</section>
 </template>
 
 <script>
-import { createMyStory, fetchMyStories } from '@/api/story';
+import { fetchStories } from '@/api/story';
 export default {
 	created() {
 		this.fetchBooks();
@@ -49,7 +44,7 @@ export default {
 	methods: {
 		async fetchBooks() {
 			try {
-				const { data } = await fetchMyStories();
+				const { data } = await fetchStories();
 				this.books = data;
 				console.log(data);
 			} catch (error) {
@@ -61,22 +56,6 @@ export default {
 				return string.replace('/media/', '');
 			}
 			return string;
-		},
-
-		async createBook() {
-			try {
-				if (this.books.length < 4) {
-					const { data } = await createMyStory({
-						story_id: 1,
-						story_name: '세가지 선물',
-					});
-					this.$router.push(`/story/${data.story.id}/${data.id}/`);
-				} else {
-					alert('생성하신 책이 많습니다');
-				}
-			} catch (error) {
-				console.log(error);
-			}
 		},
 	},
 };
