@@ -145,9 +145,12 @@ def cartoonize_profile(request, user_id):
         result = {
             'path': path.split('back/')[1],
         }
+        st = status.HTTP_200_OK
+
     except IndexError:
         result = {
             'detail': '얼굴이 더 잘나오게 찍어주세요.',
         }
+        st = status.HTTP_500_INTERNAL_SERVER_ERROR
 
-    return Response(result, status=status.HTTP_200_OK)
+    return Response(result, status=st)
