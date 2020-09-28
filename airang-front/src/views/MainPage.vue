@@ -196,7 +196,7 @@ export default {
 				transform-style: preserve-3d;
 				transform: translateY(-220px) rotateX(-85deg);
 				animation: upDown 0.5s ease-in;
-				animation-delay: 1.8s;
+				animation-delay: 2.3s;
 				@media screen and (max-width: 1024px) {
 					width: 90px;
 					margin: 0 10px;
@@ -205,22 +205,23 @@ export default {
 					width: 70px;
 					margin: 0 20px;
 					animation: upDown-sm 0.5s ease-in;
-					animation-delay: 1.8s;
+					animation-delay: 2.3s;
 				}
 			}
 			.arang2 {
 				transform: translateY(-50px) rotateX(-85deg);
 				animation: smallBig 1s ease-in;
+				animation-delay: 0.5s;
 			}
 			.arang3 {
 				transform: translateY(-100px) rotateX(-85deg);
 				animation: leftRight 1.5s ease-in-out;
-				animation-delay: 2.3s;
+				animation-delay: 2.8s;
 				animation-fill-mode: forwards;
 				@media screen and (max-width: 768px) {
 					transform: translate(-30px, -210px) rotateX(-85deg);
 					animation: leftRight-sm 1.5s ease-in-out;
-					animation-delay: 2.3s;
+					animation-delay: 2.8s;
 					animation-fill-mode: forwards;
 				}
 			}
