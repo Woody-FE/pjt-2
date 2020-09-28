@@ -188,10 +188,24 @@ def hat_and_face(input_image_path, user_id):
     
     # 3-1. 모자 이미지 파일들 불러오기
     hat_images_path = f'{settings.BASE_DIR}/accounts/image_to_cartoon/images/hat_images'
-    hat_image_files = [f for f in os.listdir(hat_images_path) if os.path.isfile(os.path.join(hat_images_path, f))]
-    hat_images = np.empty(len(hat_image_files), dtype = object)
-    for i in range(len(hat_image_files)):
-        hat_images[i] = cv2.imread(os.path.join(hat_images_path, hat_image_files[i]), cv2.IMREAD_UNCHANGED)
+    # 20200928 서버에 올렸을 때 다른 모자가 불러와져서 하드코딩으로 모자 입력함(임창묵)
+    # hat_image_files = [f for f in os.listdir(hat_images_path) if os.path.isfile(os.path.join(hat_images_path, f))]
+    kindergarden_hat_path = hat_images_path + 'kindergarden_hat.png'
+    magician_hat_path = hat_images_path + 'magician_hat.png'
+    musician_hat_path = hat_images_path + 'musician_hat.png'
+    police_hat_path = hat_images_path + 'police_hat.png'
+    singer_hat_path = hat_images_path + 'singer_hat.png'
+    zookeeper_hat_path = hat_images_path + 'zookeeper_hat.png'
+
+    
+    # hat_images = np.empty(len(hat_image_files), dtype = object)
+    hat_images = np.empty(6, dtype = object)
+    hat_images[0] = cv2.imread(kindergarden_hat_path, cv2.IMREAD_UNCHANGED)
+    hat_images[1] = cv2.imread(magician_hat_path, cv2.IMREAD_UNCHANGED)
+    hat_images[2] = cv2.imread(musician_hat_path, cv2.IMREAD_UNCHANGED)
+    hat_images[3] = cv2.imread(police_hat_path, cv2.IMREAD_UNCHANGED)
+    hat_images[4] = cv2.imread(singer_hat_path, cv2.IMREAD_UNCHANGED)
+    hat_images[5] = cv2.imread(zookeeper_hat_path, cv2.IMREAD_UNCHANGED)
 
 
     # 결과 모아놓을 numpy array
