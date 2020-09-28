@@ -47,7 +47,7 @@
 						:key="image.id"
 						v-for="image in story.images"
 						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/conversion/0.png`"
+						:src="`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png`"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
