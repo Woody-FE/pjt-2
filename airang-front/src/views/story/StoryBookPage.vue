@@ -184,9 +184,14 @@ export default {
 			return string;
 		},
 		async createImage() {
-			const id = this.$store.getters.getId;
-			const { data } = await convertImage(id);
-			this.conversionImage = data.path;
+			try {
+				const id = this.$store.getters.getId;
+				const { data } = await convertImage(id);
+				console.log(data);
+				this.conversionImage = data.path;
+			} catch (error) {
+				console.log(error.response.data.detail);
+			}
 		},
 		async createBook() {
 			try {

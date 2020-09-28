@@ -34,7 +34,7 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && !image.isMainCharacter"
+						v-if="image.order === scriptNumber + 1 && !image.is_main_character"
 						:src="`${imgSrc}${filterMedia(image.path)}`"
 						:class="[
 							`story-left__character`,
@@ -43,24 +43,18 @@
 						]"
 						alt=""
 					/>
-					<!-- <img
+					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.isMainCharacter"
-						src="@/assets/images/user/baby_default.png"
+						v-if="image.order === scriptNumber + 1 && image.is_main_character"
+						:src="`${imgSrc}images/user/${userId}/conversion/0.png`"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
 						alt=""
-					/> -->
-					<!-- <img
-						v-if="story.id === 4"
-						class="story-left__user2"
-						src="@/assets/images/user/baby_default.png"
-						alt=""
-					/> -->
+					/>
 				</div>
 			</section>
 			<StoryFinishItem
@@ -106,6 +100,7 @@ export default {
 			currentItem: -1,
 			scriptNumber: 0,
 			stories: [],
+			userId: null,
 			nextStoryId: null,
 			finish: false,
 			coverImage: null,
@@ -195,6 +190,8 @@ export default {
 		},
 	},
 	mounted() {
+		const id = this.$store.getters.getId;
+		this.userId = id;
 		bus.$on('finished:page-increase', this.currentIncrease);
 		bus.$on('finished:script-increase', this.scriptIncrease);
 		bus.$on('finished:script-reset', this.resetScript);

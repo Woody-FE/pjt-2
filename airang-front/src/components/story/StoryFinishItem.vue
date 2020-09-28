@@ -14,6 +14,12 @@
 				/>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
+				<audio
+					v-if="count + 1 === script.order"
+					class="story-sound"
+					autoplay
+					:src="`${BaseURL}voice/story/${1}/script_${script.id}.mp3`"
+				></audio>
 			</div>
 		</div>
 		<div class="text-btn">
@@ -62,6 +68,11 @@ export default {
 		};
 	},
 	created() {},
+	computed: {
+		BaseURL() {
+			return process.env.VUE_APP_API_URL;
+		},
+	},
 };
 </script>
 
@@ -90,6 +101,12 @@ export default {
 }
 .bb-abled {
 	display: block;
+}
+.story-sound {
+	visibility: hidden;
+	position: absolute;
+	top: -100vh;
+	left: -100wh;
 }
 .portrait-box {
 	display: flex;
