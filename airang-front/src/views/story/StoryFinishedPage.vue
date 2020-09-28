@@ -55,12 +55,11 @@
 						]"
 						alt=""
 					/>
-					<!-- <img
-						class="story-left__user1"
-						v-if="currentItem === 1 "
+					<img
+						class="story-left__character sub4-103"
 						src="@/assets/images/user/baby_default.png"
 						alt=""
-					/> -->
+					/>
 					<!-- <img
 						v-if="story.id === 4"
 						class="story-left__user2"
