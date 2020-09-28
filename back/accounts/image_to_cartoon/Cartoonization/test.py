@@ -8,15 +8,19 @@ from torch.autograd import Variable
 import torchvision.utils as vutils
 from .network.Transformer import Transformer
 
+from django.conf import settings
+
 
 def cartoonize(original_image_name, Nukkied_image):
     parser = argparse.ArgumentParser()
     parser.add_argument('--load_size', default=450)
     parser.add_argument(
-        '--model_path', default='./Cartoonization/pretrained_model')
+        '--model_path', default=f'{settings.BASE_DIR}/accounts/image_to_cartoon/Cartoonization/pretrained_model')
     parser.add_argument('--style', default='Shinkai')
     parser.add_argument('--output_dir', default='./images/cartooned_images')
     parser.add_argument('--gpu', type=int, default=-1)
+    
+    parser.add_argument('runserver', default='runserver')
 
     opt = parser.parse_args()
 
