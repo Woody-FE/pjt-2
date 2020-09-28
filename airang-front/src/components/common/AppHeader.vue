@@ -7,26 +7,46 @@
 			><img src="@/assets/images/logo/white.png" alt=""
 		/></router-link>
 		<section class="nav-btn">
-			<router-link v-if="!isLogin" class="nav-login btn" to="/guide"
+			<router-link
+				v-if="!isLogin"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
+				to="/guide"
 				>가이드</router-link
 			>
-			<router-link v-if="!isLogin" class="nav-login btn" to="/login"
+			<router-link
+				v-if="!isLogin"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
+				to="/login"
 				>로그인</router-link
 			>
-			<router-link v-if="!isLogin" class="nav-login btn" to="/signup"
+			<router-link
+				v-if="!isLogin"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
+				to="/signup"
 				>회원가입</router-link
 			>
-			<router-link v-if="isLogin" class="nav-login btn" to="/bookshelf"
+			<router-link
+				v-if="isLogin"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
+				to="/bookshelf"
 				>책장</router-link
 			>
-			<router-link v-if="isLogin" class="nav-login btn" to="/profile"
+			<router-link
+				v-if="isLogin"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
+				to="/profile"
 				>프로필</router-link
 			>
 			<a
 				v-if="isLogin"
 				class="nav-login btn"
 				href="javascript:;"
-				@click="logoutUser"
+				@click="movedHome"
 				>로그아웃</a
 			>
 		</section>
@@ -63,7 +83,10 @@ export default {
 			this.clearToken();
 			this.$cookies.remove('auth-token');
 			this.$cookies.remove('username');
-			// this.$router.push('/');
+		},
+		movedHome() {
+			this.logoutUser();
+			this.$router.push('/');
 		},
 	},
 	watch: {
@@ -115,6 +138,19 @@ export default {
 	}
 	.nav-login {
 		font-size: 1rem;
+	}
+	.nav-orange {
+		color: $orange;
+		border: 1px solid rgba(250, 157, 0, 0.7);
+		box-shadow: 0 5px rgba(250, 157, 0, 0.8);
+		&:active {
+			background-color: rgba(243, 243, 243, 0.6);
+			box-shadow: 0 3px rgba(158, 83, 33, 0.8);
+			transform: translateY(4px);
+		}
+	}
+	.nav-white {
+		color: #fff;
 	}
 }
 </style>

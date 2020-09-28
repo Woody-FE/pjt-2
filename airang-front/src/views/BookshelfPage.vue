@@ -1,20 +1,22 @@
 <template>
 	<section class="bookshelf-wrap">
 		<h2>아이랑 도서관</h2>
-		<div class="box-out">
-			<div :key="book.id" v-for="book in books">
-				<router-link
-					v-if="book.finished"
-					:to="`/story/${book.story.id}/review/${book.id}/`"
-					><div
-						class="book books-1"
-						v-bind:style="{
-							backgroundImage: `url('${imgSrc}${filterMedia(
-								book.story.cover_image,
-							)}')`,
-						}"
-					></div>
-				</router-link>
+		<div class="bookshelf">
+			<div class="bookshelf-books">
+				<div class="bookshelf-book" :key="book.id" v-for="book in books">
+					<router-link
+						v-if="book.finished"
+						:to="`/story/${book.story.id}/review/${book.id}/`"
+						><div
+							class="book books-1"
+							v-bind:style="{
+								backgroundImage: `url('${imgSrc}${filterMedia(
+									book.story.cover_image,
+								)}')`,
+							}"
+						></div>
+					</router-link>
+				</div>
 			</div>
 		</div>
 		<div>
@@ -82,14 +84,29 @@ export default {
 
 <style lang="scss" scoped>
 .bookshelf-wrap {
-	margin: 0 auto;
-	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	h2 {
-		position: absolute;
-		top: 90px;
 		font-size: 24px;
 		border-left: 2px solid yellow;
 		padding-left: 5px;
+	}
+}
+.bookshelf-books {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+
+	.bookshelf-book {
+		width: 33%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem 0;
 	}
 }
 @include Book();

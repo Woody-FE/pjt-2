@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class="text-btn">
-			<button class="bb-right-btn" @click="afterPage">
+			<button class="btn bb-right-btn" @click="afterPage">
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
 		</div>
@@ -77,6 +77,7 @@ export default {
 </script>
 
 <style lang="scss">
+@include common-btn();
 .text-btn {
 	position: absolute;
 	bottom: 2rem;
@@ -87,14 +88,22 @@ export default {
 }
 
 .bb-right-btn {
-	border: none;
-	border-radius: 50%;
 	width: 4rem;
 	height: 4rem;
-	font-size: 1.5rem;
-	background: black;
-	color: white;
+	font-weight: bold;
+	font-size: 1.5rem !important;
+	color: rgba(82, 9, 9, 1) !important;
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0 6px rgba(82, 9, 9, 0.8);
+	background: rgb(255, 248, 220) !important;
 	cursor: pointer;
+	&:active {
+		background-color: rgb(202, 195, 168);
+		box-shadow: 0 5px rgba(82, 9, 9, 1);
+		border: none;
+		transform: translateY(4px);
+	}
 }
 .bb-disabled {
 	display: none;

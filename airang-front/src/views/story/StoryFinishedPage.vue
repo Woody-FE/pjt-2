@@ -22,50 +22,59 @@
 			class="story-page hidden"
 			:class="[currentItem === index ? 'story-abled' : 'story-disabled']"
 		>
-			<section v-if="!story.question" class="story-left">
+			<section class="story-left">
 				<div class="story-left-box">
 					<img
 						class="story-left__bg"
 						:src="`${imgSrc}${filterMedia(story.back_image)}`"
 						alt=""
 					/>
+					<!-- <div ></div> -->
+					<!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
 					<img
-						class="story-left__user1"
-						v-if="currentItem === 1"
-						src="@/assets/images/user/baby_default.png"
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="image.order === scriptNumber + 1 && !image.isMainCharacter"
+						:src="`${imgSrc}${filterMedia(image.path)}`"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
 						alt=""
 					/>
 					<img
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="image.order === scriptNumber + 1 && image.isMainCharacter"
+						:src="`${imgSrc}${filterMedia(image.path)}`"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
+						alt=""
+					/>
+					<!-- <img
+						class="story-left__user1"
+						v-if="currentItem === 1 "
+						src="@/assets/images/user/baby_default.png"
+						alt=""
+					/> -->
+					<!-- <img
 						v-if="story.id === 4"
 						class="story-left__user2"
 						src="@/assets/images/user/baby_default.png"
 						alt=""
-					/>
+					/> -->
 				</div>
 			</section>
-			<section v-else class="story-left story-select">
-				<button
-					class="story-select__btn"
-					@click="createSubStory(story.selects[0].substory)"
-				>
-					{{ story.selects[0].select }}
-				</button>
-			</section>
 			<StoryFinishItem
-				v-if="!story.question"
 				@page-decrease="currentDecrease"
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 				:subId="story.id"
 			/>
-			<section v-else class="story-right story-select">
-				<button
-					class="story-select__btn"
-					@click="createSubStory(story.selects[1].substory)"
-				>
-					{{ story.selects[1].select }}
-				</button>
-			</section>
 		</article>
 		<section class="story-delete__btn">
 			<button @click="exitStory" class="story-delete-btn">
@@ -91,6 +100,9 @@ export default {
 		imgSrc() {
 			return process.env.VUE_APP_API_URL;
 		},
+		BaseURL() {
+			return process.env.VUE_APP_API_URL;
+		},
 		userSrc() {
 			return '@/assets/images/user/baby_default.png';
 		},
@@ -104,6 +116,7 @@ export default {
 			finish: false,
 			coverImage: null,
 			bookName: null,
+			leftBox: [],
 		};
 	},
 	destroyed() {
@@ -153,6 +166,7 @@ export default {
 							this.myStoryId,
 							this.nextStoryId,
 						);
+						console.log(data);
 						if (data.next_id === null) {
 							this.finish = true;
 						}
@@ -197,6 +211,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/test/_hwang.scss';
+@import '@/assets/scss/test/_kim.scss';
+@import '@/assets/scss/test/_hong.scss';
 .story-wrap {
 	width: 100%;
 	height: 100vh;
@@ -227,7 +244,6 @@ export default {
 	right: 3rem;
 	width: 3rem;
 	height: 3rem;
-	/* transform: translateX(-50%); */
 	.story-delete-btn {
 		border: none;
 		border-radius: 50%;
@@ -240,10 +256,6 @@ export default {
 	}
 }
 .story-disabled {
-	/* opacity: 0;
-    position: absolute;
-    top: -100vh;
-    left: -100vw; */
 	animation: fade-out 1s;
 	animation-fill-mode: forwards;
 }
@@ -255,7 +267,6 @@ export default {
 	flex-wrap: wrap;
 	transition: 1s;
 	.story-left {
-		/* position: relative; */
 		width: 50%;
 		height: 100%;
 		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
@@ -265,24 +276,13 @@ export default {
 		.story-left-box {
 			position: relative;
 		}
+		.story-left__character {
+			z-index: 2;
+			position: absolute;
+			transform: translate(-50%, 50%);
+		}
 		.story-left__bg {
 			z-index: 1;
-		}
-		.story-left__user1 {
-			z-index: 2;
-			position: absolute;
-			width: 50%;
-			bottom: 29%;
-			left: 47%;
-			transform: translateX(-50%);
-		}
-		.story-left__user2 {
-			z-index: 2;
-			position: absolute;
-			width: 50%;
-			bottom: 29%;
-			left: 35%;
-			transform: rotatetranslateX(-50%);
 		}
 	}
 	.story-right {
