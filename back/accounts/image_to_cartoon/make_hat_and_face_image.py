@@ -4,7 +4,9 @@ import math
 import numpy as np
 import face_recognition as fr
 from PIL import Image
-from Cartoonization import test
+from .Cartoonization import test
+
+from django.conf import settings
 
 
 def euclidean_distance(a, b):
@@ -96,7 +98,7 @@ def hat_and_face(input_image_path, user_id):
     nukki_coordinate.extend(fr_chin)
     nukki_coordinate.append(eyelash_right_end)
 
-
+    
     # 2-2. 얼굴 이미지 자르기
     image = np_rotated_image
     mask = np.zeros(image.shape, dtype=np.uint8)
@@ -105,17 +107,18 @@ def hat_and_face(input_image_path, user_id):
     channel_count = image.shape[2]
     ignore_mask_color = (255, ) * channel_count
     cv2.fillPoly(mask, roi_corners, ignore_mask_color)
-
+    
     Nukkied_image = cv2.bitwise_and(image, mask)
 
     Trim_x, Trim_y = (int(chin_start[0]), int(
         chin_end[0])), (int(min_y), int(fr_chin_bottom))
     np_Trimmed_image = Nukkied_image[Trim_y[0]: Trim_y[1], Trim_x[0]: Trim_x[1]]
 
-
+    
+    # test..
     # 2-3. Cartoonization 이미지 변환
     Cartooned_image = test.cartoonize(original_image_name, np_Trimmed_image)
-
+    
 
     # 2-3-1. resize
     resize_size = (175, 210)
@@ -143,7 +146,7 @@ def hat_and_face(input_image_path, user_id):
     chin_start, chin_end = np_fr_chin[0], np_fr_chin[-1]
 
     left_start, right_end = (0, 0), (210, 0)
-
+    
     nukki_coordinate = []
     nukki_coordinate.append(left_start)
     nukki_coordinate.extend(fr_chin)
@@ -154,7 +157,7 @@ def hat_and_face(input_image_path, user_id):
 
     mask = np.zeros(image.shape, dtype=np.uint8)
     roi_corners = np.array([nukki_coordinate], dtype=np.int32)
-
+    
     channel_count = image.shape[2]
     ignore_mask_color = (255, ) * channel_count
     cv2.fillPoly(mask, roi_corners, ignore_mask_color)
@@ -165,7 +168,7 @@ def hat_and_face(input_image_path, user_id):
     re_Nukkied_PIL_RGBA_image = Image.fromarray(re_Nukkied_RGBA_Image)
 
     datas = re_Nukkied_PIL_RGBA_image.getdata()
-
+    
     newData = []
     cutOff = 0
 
@@ -182,9 +185,9 @@ def hat_and_face(input_image_path, user_id):
     baby_face_BGRA = np.array(re_Nukkied_PIL_RGBA_image)
     baby_face = cv2.cvtColor(baby_face_BGRA, cv2.COLOR_BGRA2RGBA)
 
-
+    
     # 3-1. 모자 이미지 파일들 불러오기
-    hat_images_path = './images/hat_images'
+    hat_images_path = f'{settings.BASE_DIR}/accounts/image_to_cartoon/images/hat_images'
     hat_image_files = [f for f in os.listdir(hat_images_path) if os.path.isfile(os.path.join(hat_images_path, f))]
     hat_images = np.empty(len(hat_image_files), dtype = object)
     for i in range(len(hat_image_files)):
@@ -242,22 +245,29 @@ def hat_and_face(input_image_path, user_id):
 
 
     # 4. 결과 출력
-    for i in range(len(result_image_array)):
-        cv2.imwrite('./images/my_images/' + str(i) + '_' + str(user_id) + '.png', result_image_array[i])
+    store_path = f'{settings.BASE_DIR}/images/user/{user_id}/conversion/'
 
-    return './images/my_images/'
+    for i in range(len(result_image_array)):
+        cv2.imwrite(f'{store_path}{i}.png', result_image_array[i])
+
+    return store_path
 
 
 def show_me_hat_and_face(input_image_path, user_id, hat_idx = 0):
-    hat_and_face_folder_path = './images/my_images/'
-    hat_and_face_image_path = hat_and_face_folder_path + str(hat_idx) + '_' + str(user_id) + '.png'
-    hat_and_face_image_name = hat_and_face_image_path[19:]
+    store_path = f'{settings.BASE_DIR}/images/user/{user_id}/conversion/'
+    hat_and_face_folder_path = f'{settings.BASE_DIR}/images/user/{user_id}/conversion/'
+    hat_and_face_image_path = f'{hat_and_face_folder_path}{hat_idx}.png'
+    hat_and_face_image_name = hat_and_face_image_path.split('conversion/')[1]
 
-    if not os.path.isfile(hat_and_face_image_path):
-        print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' dose not exist... :(')
-        hat_and_face(input_image_path, user_id)
-        return hat_and_face_image_path
+    if not os.path.isdir(store_path):
+        os.makedirs(store_path)
 
-    else:
-        print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' exist! :)')
-        return hat_and_face_image_path
+
+    # if not os.path.isfile(hat_and_face_image_path):
+        # print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' dose not exist... :(')
+    hat_and_face(input_image_path, user_id)
+    return hat_and_face_image_path
+
+    # else:
+    #     # print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' exist! :)')
+    #     return hat_and_face_image_path

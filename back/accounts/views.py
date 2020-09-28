@@ -1,15 +1,18 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 
 from drf_yasg.utils import swagger_auto_schema
 
 from .models import Family
+from .image_to_cartoon.make_hat_and_face_image import show_me_hat_and_face
 from .serializers import UserUpdateSerializer, UserDetailSerializer, UserChildImageUpdateSerializer, FamilyCreateSerializer, FamilyDetailSerializer, FamilyBasicSerializer, FamilyUpdateSerializer
 
 
@@ -126,4 +129,19 @@ class UserFamilyDetailView(APIView):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_200_OK)
-        
+
+
+@swagger_auto_schema(methods=['POST'])
+@api_view(['POST'])
+def cartoonize_profile(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    # print(settings.BASE_DIR)
+    # print(user.child_image)
+    
+    profile_abs_path = user.child_image.path
+    
+    path = show_me_hat_and_face(profile_abs_path, user_id)
+    result = {
+        'path': path
+    }
+    return Response(result, status=status.HTTP_200_OK)
