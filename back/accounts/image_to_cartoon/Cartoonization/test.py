@@ -34,10 +34,10 @@ def cartoonize(original_image_name, Nukkied_image):
     model.eval()
 
     if opt.gpu > -1:
-        print('GPU mode')
+        # print('GPU mode')
         model.cuda()
     else:
-        print('CPU mode')
+        # print('CPU mode')
         model.float()
 
     # load image
@@ -75,5 +75,5 @@ def cartoonize(original_image_name, Nukkied_image):
     output_image = output_image.data.cpu().float() * 0.5 + 0.5
     # return result_image
     result_image = transforms.ToPILImage(mode='RGB')(output_image)
-    print('Done!')
+    # print('Done!')
     return result_image

@@ -246,7 +246,7 @@ def hat_and_face(input_image_path, user_id):
 
     # 4. 결과 출력
     store_path = f'{settings.BASE_DIR}/images/user/{user_id}/conversion/'
-    print(store_path)
+
     for i in range(len(result_image_array)):
         cv2.imwrite(f'{store_path}{i}.png', result_image_array[i])
 
@@ -254,15 +254,20 @@ def hat_and_face(input_image_path, user_id):
 
 
 def show_me_hat_and_face(input_image_path, user_id, hat_idx = 0):
+    store_path = f'{settings.BASE_DIR}/images/user/{user_id}/conversion/'
     hat_and_face_folder_path = f'{settings.BASE_DIR}/images/user/{user_id}/conversion/'
     hat_and_face_image_path = f'{hat_and_face_folder_path}{hat_idx}.png'
     hat_and_face_image_name = hat_and_face_image_path.split('conversion/')[1]
 
-    if not os.path.isfile(hat_and_face_image_path):
-        print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' dose not exist... :(')
-        hat_and_face(input_image_path, user_id)
-        return hat_and_face_image_path
+    if not os.path.isdir(store_path):
+        os.makedirs(store_path)
 
-    else:
-        print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' exist! :)')
-        return hat_and_face_image_path
+
+    # if not os.path.isfile(hat_and_face_image_path):
+        # print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' dose not exist... :(')
+    hat_and_face(input_image_path, user_id)
+    return hat_and_face_image_path
+
+    # else:
+    #     # print('FILENAME: ' + '" ' + hat_and_face_image_name + ' "' + ' exist! :)')
+    #     return hat_and_face_image_path
