@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -9,6 +10,8 @@ from drf_yasg.utils import swagger_auto_schema
 
 from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer, MySubstoryCreateSerializer, MyStoryAddRequestSerializer, MySubstoryDetailSerializer
 from .models import *
+
+import shutil, os
 
 
 class APIViewWithAuthentication(APIView):
@@ -64,6 +67,7 @@ class MyStoryDetailView(APIViewWithAuthentication):
     @swagger_auto_schema(request_body=MyStoryAddRequestSerializer)
     def post(self, request, mystory_id):
         mystory = self.get_object(mystory_id)
+        user = request.user
 
         try:
             substory_list = request.data['substory_list']
@@ -116,6 +120,11 @@ class MyStoryDetailView(APIViewWithAuthentication):
                 serializer.save()
             
             before_sub = next_sub
+        
+        # 이미지 옮기기
+        temp_path = f'{settings.BASE_DIR}/images/user/{user.id}/conversion/'
+        dir_path = f'{settings.BASE_DIR}/images/user/{user.id}/mystory/{mystory_id}/'
+        shutil.copytree(temp_path, dir_path)
         return Response(status=status.HTTP_201_CREATED)
 
 
