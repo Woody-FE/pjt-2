@@ -4,6 +4,7 @@
     width: 40%;
     top: 30%;
     left: 75%;
+    animation: smallBig 3s ease-in-out infinite;
 }
 .sub14-21 {}
 
@@ -11,6 +12,7 @@
     width: 40%;
     top: 30%;
     left: 75%;
+    animation: smallBig 1.5s ease-in-out infinite;
 }
 
 .sub15-23 {
@@ -20,6 +22,7 @@
     width: 40%;
     top: 19%;
     left: 25%;
+    animation: leftRight 2.5s ease-in-out infinite;
 }
 .sub15-25 {
 }
@@ -28,71 +31,173 @@
     width: 40%;
     top: 19%;
     left: 25%;
+    animation: upDown 2s ease-in-out infinite;
 }
 
 .sub23-65 {
-    width: 13%;
-    top: 55%;
-    left: 10%;
-    // animation-duration: 2s;
-    // animation-name: shake;
+    width: 15%;
+    top: 53%;
+    left: 18%;
+    animation: smallBig 1s ease-in-out infinite;
 }
-@keyframes shake {
-    from {
-    }
-    to {
-    }
-  }
-
 .sub24-66 {
-    width: 40%;
-    top: 39%;
-    left: 15%;
+    width: 32%;
+    top: 36%;
+    left: 20%;
+    animation: leftRight 1.5s ease-in-out infinite;
 }
 
 .sub24-67 {
-    width: 20%;
-    top: 20%;
-    left: 18%;
+    width: 25%;
+    top: -16%;
+    left: 19%;
+    animation: fatherIn 2s ease-in-out;
+    animation-fill-mode: forwards;
 }
-
+.sub24-68 {
+    width: 31%;
+    top: -7%;
+    left: 24%;
+    animation: girlIn 2s ease-in-out;
+    animation-fill-mode: forwards;
+}
 .sub25-71 {
-    width: 50%;
+    width: 28%;
     top: 7%;
-    left: 33%;
+    left: -26%;
+    animation: mouseIn 3s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
 .sub25-73 {
     width: 20%;
-    top: 1%;
-    left: 18%;
+    top: 7%;
+    left: 22%;
+    animation: leftRight 2.5s ease-in-out infinite;
 }
 .sub25-74 {
-    width: 27%;
-    top: 1%;
-    left: 40%;
+    width: 24%;
+    top: 11%;
+    left: 43%;
+    animation: leftRight 1.5s ease-in-out infinite;
 }
 
 .sub26-76 {
     width: 15%;
     top: 63%;
     left: 74%;
+    animation: smallBig 1s ease-in-out infinite;
 }
 
 .sub26-77 {
     width: 15%;
     top: 66%;
     left: 46%;
+    animation: leftRight 1.5s ease-in-out infinite;
 }
 
 .sub28-78 {
     width: 50%;
     top: 10%;
     left: 54%;
+    animation: smallBig 2s ease-in-out infinite;
 }
 
 .sub29-79 {
-    width: 40%;
-    top: 30%;
-    left: 39%;
+    width: 44%;
+    top: 22%;
+    left: 49%;
+    animation: bearOut 3s ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes smallBig {
+    0% {
+        transform: translate(-50%, 50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, 50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, 50%) scale(1);
+    }
+}
+@keyframes upDown {
+    0% {
+        transform: translate(-50%, 50%);
+    }
+    50% {
+        transform: translate(-50%, 55%);
+    }
+    100% {
+        transform: translate(-50%, 50%);
+    }
+}
+@keyframes leftRight {
+    0% {
+        transform: translate(-50%, 50%) rotate(-5deg); 
+    }
+    50% {
+        transform: translate(-50%, 50%) rotate(5deg);
+    }
+    100% {
+        transform: translate(-50%, 50%) rotate(-5deg);
+    }
+}
+@keyframes mouseIn {
+    0% {
+        width: 28%;
+        top: 7%;
+        left: -26%;
+    }
+    50% {
+        width: 32%;
+        top: 22%;
+        left: 27%;
+    }
+    100% {
+        width: 44%;
+        top: 38%;
+        left: 37%;
+    }
+}
+@keyframes fatherIn {
+    from {
+        width: 25%;
+        top: -16%;
+        left: 19%;
+    }
+    to {
+        width: 31%;
+        top: -12%;
+        left: 11%;
+    }
+}
+@keyframes girlIn {
+    from {
+        width: 31%;
+        top: -7%;
+        left: 24%;
+    }
+    to {
+        width: 44%;
+        top: -7%;
+        left: 29%;
+    }
+}
+@keyframes bearOut {
+    0% {
+        width: 44%;
+        top: 22%;
+        left: 49%;
+    }
+    50% {
+        width: 34%;
+        top: 19%;
+        left: 28%;
+    }
+    100% {
+        width: 12%;
+        top: 23%;
+        left: 49%;
+    }
 }
