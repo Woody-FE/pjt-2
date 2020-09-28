@@ -6,18 +6,6 @@
 					<img v-if="cover" class="mystory-cover__img" :src="coverSrc" alt="" />
 				</div>
 				<div class="mystory-face mystory-inputbox">
-					<section class="mystory-inputbox__item mystory-inputbox__sample">
-						<img
-							class="mystory-sample__img"
-							src="@/assets/images/user/children.jpeg"
-							alt=""
-						/>
-						<div class="mystory-sample__description">
-							<h2 class="mystory-description__title">사용방법</h2>
-							<p>1. 정면을 응시한 사진을 이용해주세요.</p>
-							<p>2. 상반신 사진을 이용해주세요.</p>
-						</div>
-					</section>
 					<section class="mystory-inputbox__item mystory-inputbox__ficture">
 						<img
 							class="mystory-ficture__img"
@@ -25,18 +13,28 @@
 							alt="profileImg"
 						/>
 						<img
-							class="mystory-ficture__img"
-							:src="profileImageSrc"
-							alt="profileImg"
-						/>
-						<img
 							class="mystory-ficture__transimg"
-							:src="profileImageSrc"
+							:src="changeImageSrc"
 							alt="profileImg"
 						/>
 					</section>
 					<section class="mystory-inputbox__item mystory-inputbox__btn">
-						333
+						<button @click="modalPopup">사진 변경</button>
+						<button @click="createImage">이미지 생성</button>
+					</section>
+					<section class="mystory-inputbox__item mystory-inputbox__btn">
+						<div class="mystory-input__box">
+							<label for="bookname">책이름</label>
+							<input
+								id="bookname"
+								class="mystory-input"
+								type="text"
+								v-model="bookName"
+							/>
+						</div>
+						<div class="mystory-input__btn">
+							<button @click="createBook">책 생성</button>
+						</div>
 					</section>
 				</div>
 			</section>
@@ -67,10 +65,13 @@
 </template>
 
 <script>
-import { getUserProfile, changeImage } from '@/api/profile';
+import bus from '@/utils/bus';
+import { getUserProfile, changeImage, convertImage } from '@/api/profile';
 import { createMyStory, fetchMyStories, fetchStory } from '@/api/story';
 export default {
 	created() {
+		const id = this.$store.getters.getId;
+		this.userId = id;
 		this.fetchStoryBook();
 		this.fetchBooks();
 		this.fetchData();
@@ -80,8 +81,11 @@ export default {
 	},
 	data() {
 		return {
+			userId: null,
 			books: [],
 			cover: null,
+			bookName: null,
+			conversionImage: null,
 			userData: {
 				imgPath: null,
 			},
@@ -99,6 +103,11 @@ export default {
 				? `${this.imgSrc}${this.userData.imgPath}`
 				: `${this.imgSrc}media/image/child/noProfile.jpg`;
 		},
+		changeImageSrc() {
+			return this.conversionImage
+				? `${this.imgSrc}${this.conversionImage}`
+				: `${this.imgSrc}media/image/child/noProfile.jpg`;
+		},
 	},
 	watch: {
 		$route() {
@@ -106,12 +115,17 @@ export default {
 		},
 	},
 	mounted() {
+		bus.$on('show:changeImage', this.fetchData);
 		const page = document.querySelectorAll('.mystory-page');
 		setTimeout(function() {
 			page[0].classList.add('flipped');
 		}, 1000);
 	},
 	methods: {
+		modalPopup() {
+			console.log(this.userId);
+			bus.$emit('show:picture', this.userId);
+		},
 		async fetchData() {
 			try {
 				const id = this.$store.getters.getId;
@@ -169,6 +183,11 @@ export default {
 			}
 			return string;
 		},
+		async createImage() {
+			const id = this.$store.getters.getId;
+			const { data } = await convertImage(id);
+			this.conversionImage = data.path;
+		},
 		async createBook() {
 			try {
 				if (this.books.length < 4) {
@@ -199,8 +218,8 @@ export default {
 		right: 0;
 		top: 0;
 		bottom: 0;
-		width: 80vw;
-		height: 90vh;
+		width: 90vw;
+		height: 95vh;
 		transform-style: preserve-3d;
 		margin: auto;
 		.mystory-face:nth-child(2) {
@@ -259,7 +278,6 @@ export default {
 				padding: 1rem;
 				.mystory-inputbox__item {
 					width: 100%;
-					height: 33%;
 				}
 				.mystory-inputbox__sample {
 					display: flex;
@@ -289,34 +307,47 @@ export default {
 				.mystory-inputbox__ficture {
 					display: flex;
 					flex-wrap: wrap;
+					height: 70%;
 					.mystory-ficture__img {
-						width: 30%;
+						width: 45%;
 						height: 100%;
 						/* box-shadow: 0.2rem 0.8rem 1.6rem grey; */
-						/* border: 1px solid black; */
 						border-radius: 16px;
 						margin: 0 auto;
 					}
 					.mystory-ficture__transimg {
-						width: 30%;
+						width: 45%;
 						height: 100%;
 						/* box-shadow: 0.2rem 0.8rem 1.6rem grey; */
 						border-radius: 16px;
 						margin: 0 auto;
 					}
 				}
+				.mystory-inputbox__btn {
+					display: flex;
+					flex-wrap: wrap;
+					height: 15%;
+					.mystory-input__box {
+						width: 70%;
+						height: 100%;
+					}
+					.mystory-input__btn {
+						width: 30%;
+						height: 100%;
+					}
+				}
 			}
 		}
 	}
 }
-@-webkit-keyframes bookBlock {
+/* @-webkit-keyframes bookBlock {
 	from {
 		transform: rotateY(180deg);
 	}
 	to {
 		transform: rotateY(-180deg);
 	}
-}
+} */
 .mystory-cover {
 	width: 100%;
 	display: flex;
