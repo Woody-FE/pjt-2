@@ -2,6 +2,7 @@
     width: 50%;
     top: -6%;
     left: 73%;
+    animation: leftRight 1.5s ease-in-out infinite;
 }
 .sub20-54 {
     width: 50%;
@@ -13,11 +14,13 @@
     top: 53%;
     left: 30;
     left: 27%;
+    animation: smallBig 1.5s ease-in-out infinite;
 }
 .sub20-57 {
     width: 50%;
     top: -6%;
     left: 73%;
+    animation: upDown 1.5s ease-in-out infinite;
 }
 .sub20-58 {
     width: 50%;
@@ -108,4 +111,37 @@
     top: 10%;
     left: 55%;
     transform: translate(-50%, 50%) rotate(5deg) !important;
+}
+@keyframes smallBig {
+    0% {
+        transform: translate(-50%, 50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, 50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, 50%) scale(1);
+    }
+}
+@keyframes upDown {
+    0% {
+        transform: translate(-50%, 50%);
+    }
+    50% {
+        transform: translate(-50%, 55%);
+    }
+    100% {
+        transform: translate(-50%, 50%);
+    }
+}
+@keyframes leftRight {
+    0% {
+        transform: translate(-50%, 50%) rotate(-5deg); 
+    }
+    50% {
+        transform: translate(-50%, 50%) rotate(5deg);
+    }
+    100% {
+        transform: translate(-50%, 50%) rotate(-5deg);
+    }
 }
