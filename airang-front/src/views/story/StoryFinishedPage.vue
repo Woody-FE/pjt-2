@@ -43,23 +43,18 @@
 						]"
 						alt=""
 					/>
-					<img
+					<!-- <img
 						:key="image.id"
 						v-for="image in story.images"
 						v-if="image.order === scriptNumber + 1 && image.isMainCharacter"
-						:src="`${imgSrc}${filterMedia(image.path)}`"
+						src="@/assets/images/user/baby_default.png"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
 						alt=""
-					/>
-					<img
-						class="story-left__character sub4-103"
-						src="@/assets/images/user/baby_default.png"
-						alt=""
-					/>
+					/> -->
 					<!-- <img
 						v-if="story.id === 4"
 						class="story-left__user2"
