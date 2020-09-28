@@ -115,6 +115,9 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	@media screen and (max-width: 768px) {
+		width: 95%;
+	}
 	a {
 		text-decoration: none;
 	}
@@ -138,6 +141,9 @@ export default {
 	}
 	.nav-login {
 		font-size: 1rem;
+		@media screen and (max-width: 768px) {
+			font-size: 0.8rem;
+		}
 	}
 	.nav-orange {
 		color: $orange;

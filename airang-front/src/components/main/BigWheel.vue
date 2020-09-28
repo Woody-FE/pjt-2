@@ -34,6 +34,10 @@ export default {
 	position: relative;
 	.wheel-bg {
 		width: 250px;
+		// 	@media screen and (max-width: 768px) {
+		// 		width: 200px;
+		// 		transform: translate(80px);
+		// 	}
 	}
 	.car-wrap {
 		position: absolute;
@@ -41,6 +45,12 @@ export default {
 		left: -5px;
 		width: 250px;
 		height: 250px;
+		// @media screen and (max-width: 768px) {
+		// 	top: -5px;
+		// 	left: 40px;
+		// 	width: 200px;
+		// 	height: 200px;
+		// }
 		.car {
 			width: 80px;
 			position: absolute;
