@@ -21,6 +21,7 @@ def cartoonize(original_image_name, Nukkied_image):
     parser.add_argument('--gpu', type=int, default=-1)
     
     parser.add_argument('runserver', default='runserver')
+    parser.add_argument('--bind', default='')
 
     opt = parser.parse_args()
 
