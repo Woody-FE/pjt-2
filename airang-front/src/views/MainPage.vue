@@ -120,22 +120,35 @@ export default {
 		transform: rotate3d(1, 0, 0, -65deg);
 	}
 	.grass2 {
-		width: 170px;
+		width: 17%;
 		position: absolute;
 		top: 70%;
 		left: 0%;
+		@media screen and (max-width: 768px) {
+			width: 20%;
+			top: 80%;
+		}
 	}
 	.grass-flower1 {
-		width: 100px;
+		width: 11%;
 		position: absolute;
 		top: 69%;
 		left: 12%;
+		@media screen and (max-width: 768px) {
+			width: 13%;
+			top: 80%;
+		}
 	}
 	.grass-flower2 {
-		width: 120px;
+		width: 12%;
 		position: absolute;
 		top: 3%;
 		left: 20%;
+		@media screen and (max-width: 768px) {
+			width: 13%;
+			top: 10%;
+			left: 25%;
+		}
 	}
 	.wheel {
 		position: absolute;
@@ -154,12 +167,15 @@ export default {
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
 		.roller {
-			width: 650px;
+			width: 70%;
 			position: absolute;
 			right: -50px;
 			top: 40px;
 			transform-style: preserve-3d;
 			transform: translateY(-450px) rotateX(-65deg);
+			@media screen and (max-width: 1024px) {
+				transform: translateY(-250px) rotateX(-65deg);
+			}
 		}
 		.main-img {
 			transform-style: preserve-3d;
@@ -179,6 +195,8 @@ export default {
 				width: 100px;
 				transform-style: preserve-3d;
 				transform: translateY(-220px) rotateX(-85deg);
+				animation: upDown 0.5s ease-in;
+				animation-delay: 1.8s;
 				@media screen and (max-width: 1024px) {
 					width: 90px;
 					margin: 0 10px;
@@ -186,16 +204,24 @@ export default {
 				@media screen and (max-width: 768px) {
 					width: 70px;
 					margin: 0 20px;
-					transform: translateY(-150px) rotateX(-85deg);
+					animation: upDown-sm 0.5s ease-in;
+					animation-delay: 1.8s;
 				}
 			}
 			.arang2 {
 				transform: translateY(-50px) rotateX(-85deg);
+				animation: smallBig 1s ease-in;
 			}
 			.arang3 {
 				transform: translateY(-100px) rotateX(-85deg);
+				animation: leftRight 1.5s ease-in-out;
+				animation-delay: 2.3s;
+				animation-fill-mode: forwards;
 				@media screen and (max-width: 768px) {
 					transform: translate(-30px, -210px) rotateX(-85deg);
+					animation: leftRight-sm 1.5s ease-in-out;
+					animation-delay: 2.3s;
+					animation-fill-mode: forwards;
 				}
 			}
 			.arang-shadow {
@@ -292,6 +318,13 @@ export default {
 			}
 			.sign3 {
 				transform: translate(-60px, -80px) rotateX(-85deg) rotateY(-15deg);
+				@media screen and (max-width: 1024px) {
+					transform: translate(-40px, -100px) rotateX(-85deg) rotateY(-15deg);
+				}
+				@media screen and (max-width: 768px) {
+					font-size: 11px;
+					transform: translate(-40px, -150px) rotateX(-85deg) rotateY(-15deg);
+				}
 			}
 		}
 	}
@@ -310,6 +343,61 @@ export default {
 			background-color: $green;
 			box-shadow: 0 3px $green;
 			transform: translateY(6px);
+		}
+	}
+	@keyframes smallBig {
+		0% {
+			transform: translateY(-50px) rotateX(-85deg) scale(1);
+		}
+		50% {
+			transform: translateY(-50px) rotateX(-85deg) scale(1.1);
+		}
+		100% {
+			transform: translateY(-50px) rotateX(-85deg) scale(1);
+		}
+	}
+	@keyframes upDown {
+		0% {
+			transform: translateY(-220px) translateZ(0px) rotateX(-85deg);
+		}
+		50% {
+			transform: translateY(-220px) translateZ(30px) rotateX(-85deg);
+		}
+		100% {
+			transform: translateY(-220px) translateZ(0px) rotateX(-85deg);
+		}
+	}
+	@keyframes upDown-sm {
+		0% {
+			transform: translateY(-150px) translateZ(0px) rotateX(-85deg);
+		}
+		50% {
+			transform: translateY(-150px) translateZ(30px) rotateX(-85deg);
+		}
+		100% {
+			transform: translateY(-150px) translateZ(0px) rotateX(-85deg);
+		}
+	}
+	@keyframes leftRight {
+		0% {
+			transform: translateY(-100px) rotateX(-85deg) rotateZ(-2deg);
+		}
+		50% {
+			transform: translateY(-100px) rotateX(-85deg) rotateZ(5deg);
+		}
+		100% {
+			transform: translateY(-100px) rotateX(-85deg) rotateZ(3deg);
+		}
+	}
+	@keyframes leftRight-sm {
+		0% {
+			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(-2deg);
+		}
+		50% {
+			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(5deg);
+		}
+		100% {
+			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(3deg);
 		}
 	}
 }
