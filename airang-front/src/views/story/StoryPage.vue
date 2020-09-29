@@ -98,7 +98,7 @@
 			</section>
 		</article>
 		<section class="story-delete__btn">
-			<button @click="deleteStory" class="story-delete-btn">
+			<button @click="$router.push('/bookshelf')" class="story-delete-btn">
 				<i class="icon ion-md-close"></i>
 			</button>
 		</section>
@@ -163,18 +163,12 @@ export default {
 	},
 	methods: {
 		resetScript() {
-			let storySound = document.querySelector('.story-sound');
-			storySound.pause();
 			this.scriptNumber = 0;
 		},
 		currentIncrease() {
-			let storySound = document.querySelector('.story-sound');
-			storySound.pause();
 			this.currentItem += 1;
 		},
 		scriptIncrease() {
-			let storySound = document.querySelector('.story-sound');
-			storySound.pause();
 			this.scriptNumber += 1;
 		},
 		async fetchCover() {

@@ -302,6 +302,7 @@ export default {
 						box-sizing: border-box;
 						padding: 0 1rem;
 						border: none;
+						text-align: center;
 						font-size: 1.5rem;
 						border-bottom: 2px solid rgba(158, 83, 33, 0.4);
 						/* border-radius: 16px; */

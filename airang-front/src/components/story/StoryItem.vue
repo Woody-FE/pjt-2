@@ -17,11 +17,13 @@
 				<audio
 					v-if="count + 1 === script.order && !isInName(script.content)"
 					class="story-sound"
+					autoplay
 					:src="`${BaseURL}voice/story/1/script_${script.id}.mp3`"
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
 					class="story-sound"
+					autoplay
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
 					"
@@ -83,11 +85,7 @@ export default {
 		},
 	},
 	mounted() {
-		// const rightBtn = document.querySelector('.bb-right-btn');
-		// rightBtn.addEventListener('click', function() {
-		// 	let storySound = document.querySelector('.story-sound');
-		// 	storySound.pause();
-		// });
+		console.log(this.userId, this.scripts);
 	},
 };
 </script>
@@ -126,6 +124,12 @@ export default {
 }
 .bb-abled {
 	display: block;
+}
+.story-sound {
+	visibility: hidden;
+	position: absolute;
+	top: -100vh;
+	left: -100wh;
 }
 .portrait-box {
 	display: flex;
