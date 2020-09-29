@@ -46,7 +46,6 @@ export default {
 			try {
 				const { data } = await fetchMyStories();
 				this.books = data;
-				console.log(data);
 			} catch (error) {
 				console.log(error);
 			}
