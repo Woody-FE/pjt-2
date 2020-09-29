@@ -21,7 +21,13 @@ class APIViewWithAuthentication(APIView):
 class MyStoryView(APIViewWithAuthentication):
     
     def get(self, request):
-        mystories = request.user.mystories
+        story_id = request.GET.get('id', 0)
+
+        if story_id == 0:
+            mystories = request.user.mystories
+        else:
+            mystories = request.user.mystories.filter(story_id=story_id)
+
         serializer = MyStorySerializer(instance=mystories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
