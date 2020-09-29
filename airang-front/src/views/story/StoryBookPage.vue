@@ -27,6 +27,7 @@
 					<div class="mystory-bookinfo">
 						<label class="mystory-label" for="bookname">책 이름</label>
 						<input
+							:placeholder="defaultBookname"
 							class="mystory-bookname"
 							id="bookname"
 							type="text"
