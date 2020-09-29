@@ -6,5 +6,5 @@ from . import views
 app_name = 'tts'
 
 urlpatterns = [
-    path('create_voice/', views.create_voice),
+    path('voice/story/<int:story_id>/user/<int:user_id>/', views.create_voice),
 ]
