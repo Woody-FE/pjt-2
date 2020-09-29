@@ -14,6 +14,20 @@
 				/>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
+				<audio
+					v-if="count + 1 === script.order && !isInName(script.content)"
+					class="story-sound"
+					autoplay
+					:src="`${BaseURL}voice/story/1/script_${script.id}.mp3`"
+				></audio>
+				<audio
+					v-if="count + 1 === script.order && isInName(script.content)"
+					class="story-sound"
+					autoplay
+					:src="
+						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
+					"
+				></audio>
 			</div>
 		</div>
 		<div class="text-btn">
@@ -29,15 +43,6 @@ import store from '@/store/index';
 import bus from '@/utils/bus';
 export default {
 	methods: {
-		// beforePage() {
-		// 	if (this.count <= 0) {
-		// 		bus.$emit('page-decrease');
-		// 		bus.$emit('script-reset');
-		// 		return;
-		// 	}
-		// 	this.count--;
-		// 	bus.$emit('script-decrease');
-		// },
 		afterPage() {
 			if (this.count >= this.scripts.length - 1) {
 				bus.$emit('page-increase');
@@ -54,6 +59,9 @@ export default {
 			}
 			return string;
 		},
+		isInName(string) {
+			return string.includes('{child_name}');
+		},
 		filterName(string) {
 			if (string.includes('{child_name}')) {
 				return string.replace('{child_name}', store.getters['getUsername']);
@@ -64,14 +72,20 @@ export default {
 	props: {
 		scripts: Array,
 		subId: Number,
+		userId: Number,
 	},
 	data() {
 		return {
 			count: 0,
 		};
 	},
-	created() {
-		// console.log(this.subId);
+	computed: {
+		BaseURL() {
+			return process.env.VUE_APP_API_URL;
+		},
+	},
+	mounted() {
+		console.log(this.userId, this.scripts);
 	},
 };
 </script>
@@ -110,6 +124,12 @@ export default {
 }
 .bb-abled {
 	display: block;
+}
+.story-sound {
+	visibility: hidden;
+	position: absolute;
+	top: -100vh;
+	left: -100wh;
 }
 .portrait-box {
 	display: flex;

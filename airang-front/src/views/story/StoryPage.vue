@@ -1,6 +1,9 @@
 <template>
 	<section class="story-wrap">
-		<article v-if="currentItem === -1" class="story-page story-current">
+		<article
+			v-if="currentItem === -1"
+			class="story-page story-current story-disabled"
+		>
 			<section class="story-main story-cover">
 				<img
 					class="story-cover__img"
@@ -29,16 +32,29 @@
 						:src="`${imgSrc}${filterMedia(story.back_image)}`"
 						alt=""
 					/>
+					<!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
 					<img
-						class="story-left__user1"
-						v-if="currentItem === 1"
-						src="@/assets/images/user/baby_default.png"
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="image.order === scriptNumber + 1 && !image.is_main_character"
+						:src="`${imgSrc}${filterMedia(image.path)}`"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
 						alt=""
 					/>
 					<img
-						v-if="story.id === 4"
-						class="story-left__user2"
-						src="@/assets/images/user/baby_default.png"
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="image.order === scriptNumber + 1 && image.is_main_character"
+						:src="`${imgSrc}images/user/${userId}/conversion/0.png`"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
 						alt=""
 					/>
 				</div>
@@ -60,10 +76,10 @@
 			</section>
 			<StoryItem
 				v-if="!story.question"
-				@page-decrease="currentDecrease"
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 				:subId="story.id"
+				:userId="userId"
 			/>
 			<section v-else class="story-right">
 				<div class="story-right-box">
@@ -82,7 +98,7 @@
 			</section>
 		</article>
 		<section class="story-delete__btn">
-			<button @click="deleteStory" class="story-delete-btn">
+			<button @click="$router.push('/bookshelf')" class="story-delete-btn">
 				<i class="icon ion-md-close"></i>
 			</button>
 		</section>
@@ -117,7 +133,8 @@ export default {
 	},
 	data() {
 		return {
-			currentItem: -1,
+			userId: null,
+			currentItem: 0,
 			scriptNumber: 0,
 			subNumber: -1,
 			stories: [],
@@ -134,7 +151,7 @@ export default {
 		if (this.finish === false) {
 			this.deleteBook();
 		}
-		this.currentItem = -1;
+		this.currentItem = 0;
 		this.scriptNumber = 0;
 		this.subNumber = -1;
 		this.stories = [];
@@ -150,12 +167,6 @@ export default {
 		},
 		currentIncrease() {
 			this.currentItem += 1;
-		},
-		currentDecrease() {
-			this.currentItem -= 1;
-		},
-		scriptDecrease() {
-			this.scriptNumber -= 1;
 		},
 		scriptIncrease() {
 			this.scriptNumber += 1;
@@ -187,7 +198,7 @@ export default {
 					this.nextStoryId = 0;
 				}
 				this.stories.push(data);
-				if (this.currentItem !== -1) {
+				if (this.currentItem !== 0) {
 					this.currentItem += 1;
 				}
 			} catch (error) {
@@ -266,27 +277,12 @@ export default {
 		this.fetchCover();
 	},
 	mounted() {
+		const id = this.$store.getters.getId;
+		this.userId = parseInt(id);
 		bus.$on('page-increase', this.currentIncrease);
-		// bus.$on('page-decrease', this.currentDecrease);
 		bus.$on('script-increase', this.scriptIncrease);
-		// bus.$on('script-decrease', this.scriptDecrease);
 		bus.$on('script-reset', this.resetScript);
 		bus.$on('next-page', this.updateStory);
-	},
-	watch: {
-		$route() {
-			this.currentItem = -1;
-			this.scriptNumber = 0;
-			this.subNumber = -1;
-			this.stories = [];
-			this.nextStoryId = 0;
-			this.nextBranchId = null;
-			this.hasBranch = null;
-			this.finish = false;
-			this.selectStories = [];
-			this.fetchCover();
-			// this.createSubStory(this.subNumber);
-		},
 	},
 };
 </script>
@@ -358,7 +354,6 @@ export default {
 	flex-wrap: wrap;
 	transition: 1s;
 	.story-left {
-		/* position: relative; */
 		width: 50%;
 		height: 100%;
 		box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
@@ -370,22 +365,12 @@ export default {
 		}
 		.story-left__bg {
 			z-index: 1;
+			width: 100%;
 		}
-		.story-left__user1 {
+		.story-left__character {
 			z-index: 2;
 			position: absolute;
-			width: 50%;
-			bottom: 29%;
-			left: 47%;
-			transform: translateX(-50%);
-		}
-		.story-left__user2 {
-			z-index: 2;
-			position: absolute;
-			width: 50%;
-			bottom: 29%;
-			left: 35%;
-			transform: rotatetranslateX(-50%);
+			transform: translate(-50%, 50%);
 		}
 	}
 	.story-right {
@@ -401,10 +386,8 @@ export default {
 		}
 		.story-right__bg {
 			z-index: 1;
+			width: 100%;
 		}
-	}
-	.story-select {
-		position: relative;
 	}
 	.story-main {
 		width: 100%;
