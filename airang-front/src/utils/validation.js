@@ -8,6 +8,9 @@ function validatePassword(password) {
 
 function validationName(name) {
 	const myName = name;
+	if (!myName) {
+		return false;
+	}
 	const lenName = myName.length;
 	const hangle = /^[가-힣]+$/g;
 	if (lenName < 2 || lenName > 5) return false;

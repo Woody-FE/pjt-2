@@ -109,9 +109,9 @@ export default {
 .nav {
 	position: relative;
 	padding-top: 2rem;
-	height: 100px;
 	width: 80%;
-	margin: 0 auto;
+	height: 100px;
+	margin: 0 10%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -157,6 +157,7 @@ export default {
 	}
 	.nav-white {
 		color: #fff;
+		// border: 1px solid transparent;
 	}
 }
 </style>
