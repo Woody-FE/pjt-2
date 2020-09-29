@@ -63,7 +63,6 @@ export default {
 			try {
 				const id = this.$store.getters.getId;
 				const { data } = await getUserProfile(id);
-				console.log(data);
 				this.userData.name = data.username;
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
@@ -80,7 +79,6 @@ export default {
 				console.log(error);
 			}
 		},
-
 		validateFile(file) {
 			const imageArray = ['image/png', 'image/jpg', 'image/jpeg'];
 			if (imageArray.includes(file.type)) return true;
@@ -177,7 +175,6 @@ export default {
 		margin-top: 2rem;
 		margin-bottom: 1.5rem;
 		border-radius: 50%;
-		border: 1px solid yellow;
 	}
 	.name-box {
 		display: flex;

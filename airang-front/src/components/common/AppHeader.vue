@@ -109,12 +109,15 @@ export default {
 .nav {
 	position: relative;
 	padding-top: 2rem;
-	height: 100px;
 	width: 80%;
-	margin: 0 auto;
+	height: 100px;
+	margin: 0 10%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	@media screen and (max-width: 768px) {
+		width: 95%;
+	}
 	a {
 		text-decoration: none;
 	}
@@ -138,6 +141,9 @@ export default {
 	}
 	.nav-login {
 		font-size: 1rem;
+		@media screen and (max-width: 768px) {
+			font-size: 0.8rem;
+		}
 	}
 	.nav-orange {
 		color: $orange;
@@ -151,6 +157,7 @@ export default {
 	}
 	.nav-white {
 		color: #fff;
+		// border: 1px solid transparent;
 	}
 }
 </style>

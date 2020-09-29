@@ -8,7 +8,7 @@
 			<router-link
 				:key="book.id"
 				v-for="book in books"
-				:to="`/story/${book.id}/${book.story.substory}`"
+				:to="`/story/${book.story.id}/review/${book.id}`"
 				><div
 					class="book books-1"
 					v-bind:style="{

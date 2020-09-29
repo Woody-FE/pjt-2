@@ -4,8 +4,12 @@ function getUserProfile(userId) {
 	return auth.get(`accounts/${userId}`);
 }
 
+function convertImage(userId) {
+	return auth.post(`accounts/${userId}/conversion/`);
+}
+
 function patchUserName(userId, userData) {
-	return auth.patch(`accounts/${userId}`, userData);
+	return auth.patch(`accounts/${userId}/`, userData);
 }
 
 function changePassword(userData) {
@@ -13,11 +17,15 @@ function changePassword(userData) {
 }
 
 function changeImage(userId, userData) {
-	return auth.patch(`accounts/${userId}/child/image`, userData);
+	return auth.patch(`accounts/${userId}/child/image/`, userData);
 }
 
 function resetImage(userId) {
-	return auth.delete(`accounts/${userId}/child/image`);
+	return auth.delete(`accounts/${userId}/child/image/`);
+}
+
+function createVoice(storyId, userId) {
+	return auth.post(`test/voice/story/${storyId}/user/${userId}/`);
 }
 
 export {
@@ -26,4 +34,6 @@ export {
 	changePassword,
 	changeImage,
 	resetImage,
+	convertImage,
+	createVoice,
 };

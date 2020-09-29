@@ -29,12 +29,11 @@
 						:src="`${imgSrc}${filterMedia(story.back_image)}`"
 						alt=""
 					/>
-					<!-- <div ></div> -->
 					<!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && !image.isMainCharacter"
+						v-if="image.order === scriptNumber + 1 && !image.is_main_character"
 						:src="`${imgSrc}${filterMedia(image.path)}`"
 						:class="[
 							`story-left__character`,
@@ -46,8 +45,8 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.isMainCharacter"
-						:src="`${imgSrc}${filterMedia(image.path)}`"
+						v-if="image.order === scriptNumber + 1 && image.is_main_character"
+						:src="`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png`"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
@@ -55,18 +54,6 @@
 						]"
 						alt=""
 					/>
-					<!-- <img
-						class="story-left__user1"
-						v-if="currentItem === 1 "
-						src="@/assets/images/user/baby_default.png"
-						alt=""
-					/> -->
-					<!-- <img
-						v-if="story.id === 4"
-						class="story-left__user2"
-						src="@/assets/images/user/baby_default.png"
-						alt=""
-					/> -->
 				</div>
 			</section>
 			<StoryFinishItem
@@ -74,6 +61,7 @@
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 				:subId="story.id"
+				:userId="userId"
 			/>
 		</article>
 		<section class="story-delete__btn">
@@ -112,6 +100,7 @@ export default {
 			currentItem: -1,
 			scriptNumber: 0,
 			stories: [],
+			userId: null,
 			nextStoryId: null,
 			finish: false,
 			coverImage: null,
@@ -123,6 +112,7 @@ export default {
 		this.currentItem = -1;
 		this.scriptNumber = 0;
 		this.stories = [];
+		this.startStory = null;
 		this.nextStoryId = null;
 		this.finish = false;
 		this.coverImage = null;
@@ -151,7 +141,7 @@ export default {
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
-				this.stories.push(data.mystory.substory);
+				this.startStory = data.mystory.substory;
 			} catch (error) {
 				console.log(error);
 			}
@@ -191,6 +181,8 @@ export default {
 			setTimeout(function() {
 				storyCover[0].classList.add('story-disabled');
 			}, 500);
+			this.stories.push(this.startStory);
+
 			this.currentItem = 0;
 		},
 		nextPage() {
@@ -201,6 +193,8 @@ export default {
 		},
 	},
 	mounted() {
+		const id = this.$store.getters.getId;
+		this.userId = parseInt(id);
 		bus.$on('finished:page-increase', this.currentIncrease);
 		bus.$on('finished:script-increase', this.scriptIncrease);
 		bus.$on('finished:script-reset', this.resetScript);
@@ -283,6 +277,7 @@ export default {
 		}
 		.story-left__bg {
 			z-index: 1;
+			width: 100%;
 		}
 	}
 	.story-right {
