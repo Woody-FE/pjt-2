@@ -29,7 +29,6 @@
 						:src="`${imgSrc}${filterMedia(story.back_image)}`"
 						alt=""
 					/>
-					<!-- <div ></div> -->
 					<!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
 					<img
 						:key="image.id"
@@ -62,6 +61,7 @@
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 				:subId="story.id"
+				:userId="userId"
 			/>
 		</article>
 		<section class="story-delete__btn">
@@ -112,6 +112,7 @@ export default {
 		this.currentItem = -1;
 		this.scriptNumber = 0;
 		this.stories = [];
+		this.startStory = null;
 		this.nextStoryId = null;
 		this.finish = false;
 		this.coverImage = null;
@@ -140,7 +141,7 @@ export default {
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
-				this.stories.push(data.mystory.substory);
+				this.startStory = data.mystory.substory;
 			} catch (error) {
 				console.log(error);
 			}
@@ -180,6 +181,8 @@ export default {
 			setTimeout(function() {
 				storyCover[0].classList.add('story-disabled');
 			}, 500);
+			this.stories.push(this.startStory);
+
 			this.currentItem = 0;
 		},
 		nextPage() {
@@ -191,7 +194,7 @@ export default {
 	},
 	mounted() {
 		const id = this.$store.getters.getId;
-		this.userId = id;
+		this.userId = parseInt(id);
 		bus.$on('finished:page-increase', this.currentIncrease);
 		bus.$on('finished:script-increase', this.scriptIncrease);
 		bus.$on('finished:script-reset', this.resetScript);
@@ -274,6 +277,7 @@ export default {
 		}
 		.story-left__bg {
 			z-index: 1;
+			width: 100%;
 		}
 	}
 	.story-right {

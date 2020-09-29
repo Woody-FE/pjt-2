@@ -25,8 +25,13 @@
 			<section class="mystory-page">
 				<div class="mystory-face mystory-input">
 					<div class="mystory-bookinfo">
-						<label for="bookname">책이름</label>
-						<input id="bookname" type="text" v-model="bookName" />
+						<label class="mystory-label" for="bookname">책 이름</label>
+						<input
+							class="mystory-bookname"
+							id="bookname"
+							type="text"
+							v-model="bookName"
+						/>
 					</div>
 					<section class="mystory-imgbox">
 						<div v-if="loading">로딩</div>
@@ -61,13 +66,7 @@
 </template>
 
 <script>
-import bus from '@/utils/bus';
-import {
-	getUserProfile,
-	changeImage,
-	convertImage,
-	createVoice,
-} from '@/api/profile';
+import { getUserProfile, changeImage, convertImage } from '@/api/profile';
 import { createMyStory, fetchStory } from '@/api/story';
 export default {
 	created() {
@@ -112,10 +111,7 @@ export default {
 		},
 	},
 	mounted() {
-		console.log('마운티드');
 		this.createImage();
-		// this.requestVoice(1);
-		bus.$on('show:changeImage', this.fetchData);
 	},
 	updated() {
 		const cover = document.querySelector('.mystory-cover__img');
@@ -129,10 +125,6 @@ export default {
 		}
 	},
 	methods: {
-		async requestVoice(storyId) {
-			const id = this.$store.getters.getId;
-			await createVoice(storyId, id);
-		},
 		nextPage() {
 			const page = document.querySelectorAll('.mystory-page');
 			page[1].style.zIndex = 3;
@@ -172,7 +164,7 @@ export default {
 					await this.patchImage(changeImage);
 					this.fetchData();
 					this.createImage();
-					alert('사진이 변경 되었어요');
+					// alert('사진이 변경 되었어요');
 				} else {
 					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
 				}
@@ -280,6 +272,7 @@ export default {
 				backface-visibility: hidden;
 			}
 			.mystory-input {
+				position: relative;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -288,20 +281,49 @@ export default {
 				padding: 1rem;
 				.mystory-bookinfo {
 					width: 100%;
-					height: 15%;
+					height: 8%;
+					position: relative;
+					top: 5%;
+					left: 0;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					.mystory-label {
+						position: absolute;
+						top: -25%;
+						left: 20%;
+						background: white;
+						color: #495057;
+						transform: translateX(-50%);
+					}
+					.mystory-bookname {
+						width: 70%;
+						height: 100%;
+						box-sizing: border-box;
+						padding: 0 1rem;
+						border: none;
+						font-size: 1.5rem;
+						border-bottom: 2px solid rgba(158, 83, 33, 0.4);
+						/* border-radius: 16px; */
+					}
 				}
 				.mystory-imgbox {
 					width: 100%;
-					height: 70%;
+					height: 80%;
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
+					/* justify-content: center; */
 					align-items: center;
+					@media (max-width: 768px) {
+						justify-content: center;
+					}
 					.mystory-imgbox__img {
-						width: 80%;
+						max-width: 100%;
 						height: 80%;
-						border-radius: 50%;
-						border: 1px solid black;
+						@media (max-width: 768px) {
+							width: 80%;
+							height: auto;
+						}
 					}
 					.mystory-imgbtn {
 						width: 100%;
@@ -313,7 +335,7 @@ export default {
 				}
 				.mystory-createbtn {
 					width: 100%;
-					height: 15%;
+					height: 20%;
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -342,7 +364,7 @@ export default {
 	}
 	.mystory-imgbth__btn {
 		position: relative;
-		color: black;
+		color: #495057;
 		width: 70%;
 		height: 60%;
 		font-size: 1.5rem;
