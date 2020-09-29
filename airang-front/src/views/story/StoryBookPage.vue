@@ -128,7 +128,7 @@ export default {
 	methods: {
 		nextPage() {
 			const page = document.querySelectorAll('.mystory-page');
-			page[1].style.zIndex = 3;
+			page[1].style.zIndex = 4;
 			setTimeout(function() {
 				page[1].classList.add('flipped');
 			}, 1000);
@@ -245,6 +245,7 @@ export default {
 			position: absolute;
 			left: 50%;
 			top: 0;
+			box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
 			width: 50%;
 			height: 100%;
 			transform-style: preserve-3d;
@@ -252,11 +253,11 @@ export default {
 			border: 1px solid lightgray;
 
 			&:nth-child(1) {
-				z-index: 2;
+				z-index: 3;
 				transform-origin: left;
 			}
 			&:nth-child(2) {
-				z-index: 1;
+				z-index: 2;
 				transform-origin: left;
 			}
 			&.flipped {
@@ -265,6 +266,7 @@ export default {
 			.mystory-face {
 				position: absolute;
 				left: 0;
+				box-shadow: 0 2px 6px 0 rgba(68, 67, 68, 0.4);
 				top: 0;
 				width: 100%;
 				height: 100%;
