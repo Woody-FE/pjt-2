@@ -1,19 +1,19 @@
 <template>
 	<section>
 		<ProfileInfo />
-		<ProfileStory />
+		<ProfileShelf />
 	</section>
 </template>
 
 <script>
 import ProfileInfo from '@/components/profile/ProfileInfo.vue';
-import ProfileStory from '@/components/profile/ProfileStory.vue';
+import ProfileShelf from '@/components/profile/ProfileShelf.vue';
 import { mapGetters } from 'vuex';
 
 export default {
 	components: {
 		ProfileInfo,
-		ProfileStory,
+		ProfileShelf,
 	},
 	computed: {
 		...mapGetters(['isLogined']),

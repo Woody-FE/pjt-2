@@ -2,24 +2,35 @@
 	<section class="profileStory-wrap">
 		<header class="profileStory-header">
 			<span class="profileStory-header__span"></span>
-			<p class="profileStory-header__name">나의 이야기</p>
+			<p class="profileStory-header__name">
+				나의 책들??(여기 뭐로할지 생각 더해봄)
+			</p>
 		</header>
-		<div class="box-out">
-			<router-link
-				:key="book.id"
-				v-for="book in books"
-				:to="`/story/${book.story.id}/review/${book.id}`"
-				><div
-					class="book books-1"
-					v-bind:style="{
-						backgroundImage: `url('${imgSrc}${filterMedia(
-							book.story.cover_image,
-						)}')`,
-					}"
-				></div
-			></router-link>
-		</div>
-		<footer class="profileStory-footer"></footer>
+		<section class="profileShelf-wrap__background">
+			<img
+				src="@/assets/images/bookShelf/bookshelf.png"
+				class="bookshelf-bg"
+				alt="bookshelf"
+			/>
+			<span class="bookshelf-bg2"></span>
+			<span class="bookshelf-bg2 bookshelf-bg3"></span>
+			<img
+				src="@/assets/images/bookShelf/library_arang.png"
+				class="bookshelf-arang"
+				alt="bookshelf-arang"
+			/>
+			<section></section>
+		</section>
+		<section class="profileStory-select"></section>
+		<section class="bookshelf">
+			<div class="bookshelf-books" @click="changeStatus">
+				<img
+					:src="`${baseURL}${filterMedia(book.cover_image)}`"
+					class="book-pace"
+					alt="book-pace"
+				/>
+			</div>
+		</section>
 	</section>
 </template>
 
@@ -27,6 +38,9 @@
 import { fetchMyStories } from '@/api/story';
 
 export default {
+	props: {
+		userName: Number,
+	},
 	created() {
 		this.fetchBooks();
 	},
@@ -36,7 +50,7 @@ export default {
 		};
 	},
 	computed: {
-		imgSrc() {
+		baseURL() {
 			return process.env.VUE_APP_API_URL;
 		},
 	},
@@ -55,6 +69,9 @@ export default {
 				return string.replace('/media/', '');
 			}
 			return string;
+		},
+		changeStatus() {
+			return;
 		},
 	},
 };
@@ -182,5 +199,62 @@ export default {
 }
 .profileStory-footer {
 	margin-bottom: 10rem;
+}
+
+// bookshelf-bg
+.profileShelf-wrap__background {
+	.bookshelf-bg {
+		width: 100%;
+		height: 550px;
+		position: absolute;
+		top: 50px;
+	}
+	.bookshelf-bg2 {
+		width: 80%;
+		height: 50px;
+		position: absolute;
+		top: 180px;
+		left: 50%;
+		border-radius: 30px;
+		border-bottom: 5px solid rgb(99, 58, 23);
+		background: linear-gradient(
+			rgba(99, 58, 23, 0.5) 3%,
+			rgb(194, 113, 41),
+			rgb(226, 136, 57)
+		);
+		transform: translateX(-50%) rotateX(55deg);
+		box-shadow: 0px 10px 5px rgba(99, 58, 23, 0.5);
+	}
+	.bookshelf-bg3 {
+		position: absolute;
+		top: 360px;
+		left: 50%;
+	}
+	.bookshelf-arang {
+		width: 200px;
+		position: absolute;
+		bottom: -550px;
+		right: -50px;
+		animation: leftRight 1.5s ease-in-out infinite;
+	}
+}
+.bookshelf-books {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	.bookshelf-book {
+		width: 33%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem 0;
+		.book-pace {
+			width: 100px;
+			height: 130px;
+			position: absolute;
+			top: 70px;
+		}
+	}
 }
 </style>
