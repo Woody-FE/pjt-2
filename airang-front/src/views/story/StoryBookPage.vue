@@ -1,18 +1,25 @@
 <template>
-	<section class="mystory-wrap">
+	<section v-if="mainLoading">
+		로딩중
+	</section>
+	<section v-else class="mystory-wrap">
 		<div class="mystory-bookcover">
 			<section class="mystory-page">
 				<div class="mystory-face mystory-cover">
 					<img v-if="cover" class="mystory-cover__img" :src="coverSrc" alt="" />
 				</div>
-				<div class="mystory-face mystory-select">
-					<button class="mystory-select__btn btn" @click="nextPage">
-						책 생성
-					</button>
+				<div class="mystory-face">
+					<section class="mystory-select">
+						<img src="mystory-select__bg" alt="" />
+						<button class="mystory-select__btn btn" @click="nextPage">
+							책 생성
+						</button>
+					</section>
 				</div>
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-select">
+					<img src="" alt="" />
 					<button
 						class="mystory-select__btn btn"
 						@click="$router.push('/profile')"
@@ -20,11 +27,25 @@
 						책 보기
 					</button>
 				</div>
-				<div class="mystory-face">설명</div>
+				<div class="mystory-face mystory-description">
+					<div class="mystory-portrait">
+						<div class="portrait-box">
+							<img
+								class="portrait-img"
+								src="@/assets/images/character/arang1.png"
+								alt=""
+							/>
+							<p class="portrait-name">
+								아랑이
+							</p>
+							<p class="portrait-content">재밌는 이야기를 시작하는데...</p>
+						</div>
+					</div>
+				</div>
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-input">
-					<div class="mystory-bookinfo">
+					<div v-if="count === 1" class="mystory-bookinfo">
 						<label class="mystory-label" for="bookname">책 이름</label>
 						<input
 							:placeholder="defaultBookname"
@@ -34,15 +55,14 @@
 							v-model="bookName"
 						/>
 					</div>
-					<section class="mystory-imgbox">
-						<div v-if="loading">로딩</div>
+					<section v-if="loading" class="mystory-imgbox">로딩</section>
+					<section v-else class="mystory-imgbox">
 						<img
-							v-else
 							class="mystory-imgbox__img"
 							:src="changeImageSrc"
 							alt="profileImg"
 						/>
-						<section class="mystory-imgbtn">
+						<section v-if="count === 1" class="mystory-imgbtn">
 							<button type="button" class="mystory-imgbth__btn btn">
 								사진수정<input
 									ref="inputFile"
@@ -73,8 +93,8 @@ export default {
 	created() {
 		const id = this.$store.getters.getId;
 		this.userId = id;
-		this.fetchStoryBook();
 		this.fetchData();
+		this.fetchStoryBook();
 	},
 	props: {
 		storyId: Number,
@@ -82,6 +102,8 @@ export default {
 	data() {
 		return {
 			cnt: 0,
+			count: 0,
+			mainLoading: false,
 			loading: false,
 			userId: null,
 			cover: null,
@@ -112,7 +134,9 @@ export default {
 		},
 	},
 	mounted() {
-		this.createImage();
+		// this.mainLoading = true;
+		// this.createImage();
+		// this.mainLoading = false;
 	},
 	updated() {
 		const cover = document.querySelector('.mystory-cover__img');
@@ -127,8 +151,9 @@ export default {
 	},
 	methods: {
 		nextPage() {
+			this.count += 1;
 			const page = document.querySelectorAll('.mystory-page');
-			page[1].style.zIndex = 4;
+			page[1].style.zIndex = 11;
 			setTimeout(function() {
 				page[1].classList.add('flipped');
 			}, 1000);
@@ -191,17 +216,20 @@ export default {
 		},
 		async createImage() {
 			try {
-				this.loading = true;
+				// this.loading = true;
 				this.cnt += 1;
 				const id = this.$store.getters.getId;
 				const { data } = await convertImage(id);
-				console.log(data);
+				// convertImage(id).then(response => {
+				// 	this.conversionImage = response.data.path;
+				// });
+				// console.log(data);
 				this.conversionImage = data.path;
 			} catch (error) {
 				this.conversionImage = null;
 				console.log(error.response.data.detail);
 			} finally {
-				this.loading = false;
+				// this.loading = false;
 			}
 		},
 		async createBook() {
@@ -219,7 +247,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @include common-btn();
 .mystory-wrap {
 	position: relative;
@@ -253,12 +281,15 @@ export default {
 			border: 1px solid lightgray;
 
 			&:nth-child(1) {
-				z-index: 3;
+				z-index: 10;
 				transform-origin: left;
 			}
 			&:nth-child(2) {
-				z-index: 2;
+				z-index: 9;
 				transform-origin: left;
+			}
+			&:nth-child(3) {
+				z-index: 8;
 			}
 			&.flipped {
 				transform: rotateY(-180deg);
@@ -273,6 +304,12 @@ export default {
 				background: white;
 				color: black;
 				backface-visibility: hidden;
+			}
+			.mystory-description {
+				display: flex;
+				align-items: center;
+				.mystory-description__title {
+				}
 			}
 			.mystory-input {
 				position: relative;
@@ -308,7 +345,6 @@ export default {
 						text-align: center;
 						font-size: 1.5rem;
 						border-bottom: 2px solid rgba(158, 83, 33, 0.4);
-						/* border-radius: 16px; */
 					}
 				}
 				.mystory-imgbox {
@@ -352,14 +388,25 @@ export default {
 				}
 			}
 			.mystory-select {
-				display: flex;
+				position: relative;
+				width: 100%;
+				height: 100%;
+				/* display: flex;
 				justify-content: center;
-				align-items: center;
+				align-items: center; */
+				.mystory-select__bg {
+					width: 100%;
+				}
 				.mystory-select__btn {
+					position: absolute;
+					bottom: 20%;
+					left: 50%;
 					width: 200px;
 					height: 100px;
 					font-size: 2rem;
-					border: none;
+					border-radius: 40%;
+					transform: translate(-50%, 50%);
+					/* border: none; */
 					color: #520909;
 					background: cornsilk;
 				}
@@ -395,4 +442,27 @@ export default {
 	}
 }
 @include Book();
+.mystory-portrait {
+	.portrait-box {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.portrait-img {
+			width: 30%;
+			border-radius: 50%;
+			border: 1px solid black;
+			margin-bottom: 1rem;
+		}
+		.portrait-name {
+			font-size: 1rem;
+			margin-bottom: 3rem;
+		}
+		.portrait-content {
+			text-align: center;
+			line-height: 1.5;
+			font-size: 1.5rem;
+		}
+	}
+}
 </style>
