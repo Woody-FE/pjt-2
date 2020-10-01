@@ -95,6 +95,7 @@ export default {
 		this.userId = id;
 		this.fetchData();
 		this.fetchStoryBook();
+		this.createImage();
 	},
 	props: {
 		storyId: Number,
@@ -143,9 +144,10 @@ export default {
 		if (cover) {
 			cover.addEventListener('load', () => {
 				const page = document.querySelectorAll('.mystory-page');
-				setTimeout(function() {
-					page[0].classList.add('flipped');
-				}, 1000);
+				// setTimeout(function() {
+				page[0].style.transition = 'z-index 0.1s transform 2s';
+				page[0].classList.add('flipped');
+				// }, 500);
 			});
 		}
 	},
@@ -153,10 +155,14 @@ export default {
 		nextPage() {
 			this.count += 1;
 			const page = document.querySelectorAll('.mystory-page');
-			page[1].style.zIndex = 11;
-			setTimeout(function() {
-				page[1].classList.add('flipped');
-			}, 1000);
+			// page[0].style.zIndex = 2;
+			page[1].style.zIndex = 4;
+			// const face = document.querySelectorAll('.mystory-face');
+			// face[3].style.transform = 'rotateY(-180deg)';
+			// setTimeout(function() {
+			page[1].style.transition = 'z-index 0.1s transform 2s';
+			page[1].classList.add('flipped');
+			// }, 500);
 		},
 		async fetchData() {
 			try {
@@ -190,7 +196,6 @@ export default {
 					await this.patchImage(changeImage);
 					this.fetchData();
 					this.createImage();
-					// alert('사진이 변경 되었어요');
 				} else {
 					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
 				}
@@ -263,12 +268,6 @@ export default {
 		height: 95vh;
 		transform-style: preserve-3d;
 		margin: auto;
-		.mystory-face:nth-child(2) {
-			transform: rotateY(180deg);
-		}
-		.mystory-face:nth-child(4) {
-			transform: rotateY(180deg);
-		}
 		.mystory-page {
 			position: absolute;
 			left: 50%;
@@ -277,23 +276,10 @@ export default {
 			width: 50%;
 			height: 100%;
 			transform-style: preserve-3d;
-			transition: 1.5s;
-			border: 1px solid lightgray;
 
-			&:nth-child(1) {
-				z-index: 10;
-				transform-origin: left;
-			}
-			&:nth-child(2) {
-				z-index: 9;
-				transform-origin: left;
-			}
-			&:nth-child(3) {
-				z-index: 8;
-			}
-			&.flipped {
-				transform: rotateY(-180deg);
-			}
+			/* transition: z-index 1.5s transform 1.5s; */
+			transition: 1s;
+			border: 1px solid lightgray;
 			.mystory-face {
 				position: absolute;
 				left: 0;
@@ -304,6 +290,20 @@ export default {
 				background: white;
 				color: black;
 				backface-visibility: hidden;
+			}
+			&:nth-child(1) {
+				z-index: 3;
+				transform-origin: left;
+			}
+			&:nth-child(2) {
+				z-index: 2;
+				transform-origin: left;
+			}
+			&:nth-child(3) {
+				z-index: 1;
+			}
+			&.flipped {
+				transform: rotateY(-180deg);
 			}
 			.mystory-description {
 				display: flex;
@@ -334,7 +334,6 @@ export default {
 						left: 20%;
 						background: white;
 						color: #495057;
-						transform: translateX(-50%);
 					}
 					.mystory-bookname {
 						width: 70%;
@@ -352,7 +351,6 @@ export default {
 					height: 80%;
 					display: flex;
 					flex-direction: column;
-					/* justify-content: center; */
 					align-items: center;
 					@media (max-width: 768px) {
 						justify-content: center;
@@ -391,9 +389,6 @@ export default {
 				position: relative;
 				width: 100%;
 				height: 100%;
-				/* display: flex;
-				justify-content: center;
-				align-items: center; */
 				.mystory-select__bg {
 					width: 100%;
 				}
@@ -406,7 +401,6 @@ export default {
 					font-size: 2rem;
 					border-radius: 40%;
 					transform: translate(-50%, 50%);
-					/* border: none; */
 					color: #520909;
 					background: cornsilk;
 				}
@@ -429,6 +423,12 @@ export default {
 			opacity: 0;
 		}
 	}
+}
+.mystory-face:nth-child(2) {
+	transform: rotateY(180deg);
+}
+.mystory-face:nth-child(4) {
+	transform: rotateY(-180deg);
 }
 .mystory-cover {
 	width: 100%;
