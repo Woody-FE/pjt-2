@@ -221,20 +221,16 @@ export default {
 		},
 		async createImage() {
 			try {
-				// this.loading = true;
+				this.loading = true;
 				this.cnt += 1;
 				const id = this.$store.getters.getId;
 				const { data } = await convertImage(id);
-				// convertImage(id).then(response => {
-				// 	this.conversionImage = response.data.path;
-				// });
-				// console.log(data);
 				this.conversionImage = data.path;
 			} catch (error) {
 				this.conversionImage = null;
 				console.log(error.response.data.detail);
 			} finally {
-				// this.loading = false;
+				this.loading = false;
 			}
 		},
 		async createBook() {
