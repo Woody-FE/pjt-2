@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				<span class="start-btn btn" @click="moveBookshelf">START</span>
-				<span class="roller-btn btn" @click="activeRoller">TEMP</span>
+				<span class="roller-btn btn" @click="activeRoller"></span>
 			</div>
 		</div>
 	</section>
@@ -85,7 +85,7 @@ import { mapGetters } from 'vuex';
 export default {
 	data() {
 		return {
-			rollerCoasterStatus: false,
+			rollerCoasterStatus: true,
 		};
 	},
 	components: {
@@ -161,8 +161,8 @@ export default {
 	}
 	.roller-coaster {
 		position: absolute;
-		top: -500px;
-		right: -660px;
+		top: -300px;
+		right: -90px;
 		transform: rotate3d(1, 0, 0, -65deg);
 	}
 	.wheel {
@@ -348,6 +348,23 @@ export default {
 		&:active {
 			background-color: $green;
 			box-shadow: 0 3px $green;
+			transform: translateY(6px);
+		}
+	}
+	.roller-btn {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		bottom: 50px;
+		right: 200px;
+		border-radius: 50%;
+		background-color: red;
+		box-shadow: 0 5px crimson;
+		cursor: pointer;
+		transform: rotateX(-5deg);
+		&:active {
+			background-color: crimson;
+			box-shadow: 0 3px crimson;
 			transform: translateY(6px);
 		}
 	}
