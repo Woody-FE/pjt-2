@@ -206,7 +206,7 @@ export default {
 		}
 		.login-box {
 			position: relative;
-			width: 100%;
+			width: 60%;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -214,11 +214,11 @@ export default {
 		.login-label {
 			position: absolute;
 			top: -1.3rem;
-			left: 6rem;
+			left: 1rem;
 			color: white;
 		}
 		.login-item {
-			width: 100%;
+			width: 90%;
 			max-width: 368px;
 			height: 2rem;
 			padding: 0.25rem 1rem;
@@ -236,7 +236,7 @@ export default {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 100%;
+			width: 60%;
 			max-width: 400px;
 			height: 2.5rem;
 			border-top-left-radius: 1rem;
