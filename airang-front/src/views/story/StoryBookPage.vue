@@ -11,7 +11,13 @@
 				<div class="mystory-face">
 					<section class="mystory-select">
 						<img src="mystory-select__bg" alt="" />
-						<button class="mystory-select__btn btn" @click="nextPage">
+						<button
+							class="mystory-select__btn btn"
+							@click="
+								nexts();
+								nextPage();
+							"
+						>
 							책 생성
 						</button>
 					</section>
@@ -45,7 +51,7 @@
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-input">
-					<div v-if="count === 1" class="mystory-bookinfo">
+					<div class="mystory-bookinfo">
 						<label class="mystory-label" for="bookname">책 이름</label>
 						<input
 							:placeholder="defaultBookname"
@@ -62,7 +68,7 @@
 							:src="changeImageSrc"
 							alt="profileImg"
 						/>
-						<section v-if="count === 1" class="mystory-imgbtn">
+						<section class="mystory-imgbtn">
 							<button type="button" class="mystory-imgbth__btn btn">
 								사진수정<input
 									ref="inputFile"
@@ -93,9 +99,24 @@ export default {
 	created() {
 		const id = this.$store.getters.getId;
 		this.userId = id;
-		this.fetchData();
-		this.fetchStoryBook();
-		this.createImage();
+		console.log('created', this.userId);
+		// this.mainLoading = true;
+		Promise.all([
+			fetchStory(this.storyId),
+			getUserProfile(this.userId),
+			convertImage(this.userId),
+		])
+			.then(res => {
+				this.cover = res[0].data.cover_image;
+				this.defaultBookname = res[0].data.name;
+				this.userData.imgPath = res[1].data.child_image;
+				this.cnt += 1;
+				this.conversionImage = res[2].data.path;
+				// this.mainLoading = false;
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	},
 	props: {
 		storyId: Number,
@@ -134,40 +155,31 @@ export default {
 				: `${this.imgSrc}media/image/child/noProfile.jpg`;
 		},
 	},
-	mounted() {
-		// this.mainLoading = true;
-		// this.createImage();
-		// this.mainLoading = false;
-	},
 	updated() {
 		const cover = document.querySelector('.mystory-cover__img');
 		if (cover) {
 			cover.addEventListener('load', () => {
 				const page = document.querySelectorAll('.mystory-page');
-				// setTimeout(function() {
-				page[0].style.transition = 'z-index 0.1s transform 2s';
 				page[0].classList.add('flipped');
-				// }, 500);
 			});
 		}
 	},
 	methods: {
+		nexts() {
+			const Btn = document.querySelector('.btn');
+			Btn.style.opacity = 'none';
+			const face = document.querySelectorAll('.mystory-face');
+			face[3].style.trasform = 'rotateY(-180deg)';
+		},
 		nextPage() {
-			this.count += 1;
 			const page = document.querySelectorAll('.mystory-page');
-			// page[0].style.zIndex = 2;
 			page[1].style.zIndex = 4;
-			// const face = document.querySelectorAll('.mystory-face');
-			// face[3].style.transform = 'rotateY(-180deg)';
-			// setTimeout(function() {
-			page[1].style.transition = 'z-index 0.1s transform 2s';
 			page[1].classList.add('flipped');
-			// }, 500);
 		},
 		async fetchData() {
 			try {
-				const id = this.$store.getters.getId;
-				const { data } = await getUserProfile(id);
+				const { data } = await getUserProfile(this.userId);
+				console.log('fetchData', this.userId);
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
 				console.log(error);
@@ -248,7 +260,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include common-btn();
 .mystory-wrap {
 	position: relative;
@@ -272,8 +284,6 @@ export default {
 			width: 50%;
 			height: 100%;
 			transform-style: preserve-3d;
-
-			/* transition: z-index 1.5s transform 1.5s; */
 			transition: 1s;
 			border: 1px solid lightgray;
 			.mystory-face {
@@ -298,9 +308,7 @@ export default {
 			&:nth-child(3) {
 				z-index: 1;
 			}
-			&.flipped {
-				transform: rotateY(-180deg);
-			}
+
 			.mystory-description {
 				display: flex;
 				align-items: center;
@@ -397,6 +405,7 @@ export default {
 					font-size: 2rem;
 					border-radius: 40%;
 					transform: translate(-50%, 50%);
+					backface-visibility: hidden;
 					color: #520909;
 					background: cornsilk;
 				}
@@ -421,9 +430,12 @@ export default {
 	}
 }
 .mystory-face:nth-child(2) {
-	transform: rotateY(180deg);
+	transform: rotateY(-180deg);
 }
 .mystory-face:nth-child(4) {
+	transform: rotateY(0deg);
+}
+.flipped {
 	transform: rotateY(-180deg);
 }
 .mystory-cover {

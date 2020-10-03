@@ -17,11 +17,9 @@
 					class="grass grass-flower2"
 					alt="잔디"
 				/>
-				<img
-					src="@/assets/images/bg/roller.png"
-					class="roller"
-					alt="롤러코스터"
-				/>
+				<div class="roller-coaster">
+					<RollerCoaster :status="rollerCoasterStatus" />
+				</div>
 				<div class="wheel">
 					<BigWheel />
 				</div>
@@ -74,6 +72,7 @@
 					</div>
 				</div>
 				<span class="start-btn btn" @click="moveBookshelf">START</span>
+				<span class="roller-btn btn" @click="activeRoller"></span>
 			</div>
 		</div>
 	</section>
@@ -81,10 +80,17 @@
 
 <script>
 import BigWheel from '@/components/main/BigWheel.vue';
+import RollerCoaster from '@/components/main/RollerCoaster.vue';
 import { mapGetters } from 'vuex';
 export default {
+	data() {
+		return {
+			rollerCoasterStatus: true,
+		};
+	},
 	components: {
 		BigWheel,
+		RollerCoaster,
 	},
 	methods: {
 		...mapGetters(['getToken']),
@@ -94,6 +100,9 @@ export default {
 			} else {
 				this.$router.push({ name: 'login' });
 			}
+		},
+		activeRoller() {
+			this.rollerCoasterStatus = !this.rollerCoasterStatus;
 		},
 	},
 };
@@ -150,6 +159,12 @@ export default {
 			left: 25%;
 		}
 	}
+	.roller-coaster {
+		position: absolute;
+		top: -300px;
+		right: -90px;
+		transform: rotate3d(1, 0, 0, -65deg);
+	}
 	.wheel {
 		position: absolute;
 		top: -500px;
@@ -166,17 +181,7 @@ export default {
 		box-shadow: 3px 20px 15px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
-		.roller {
-			width: 70%;
-			position: absolute;
-			right: -50px;
-			top: 40px;
-			transform-style: preserve-3d;
-			transform: translateY(-450px) rotateX(-65deg);
-			@media screen and (max-width: 1024px) {
-				transform: translateY(-250px) rotateX(-65deg);
-			}
-		}
+
 		.main-img {
 			transform-style: preserve-3d;
 			.arang {
@@ -346,6 +351,23 @@ export default {
 			transform: translateY(6px);
 		}
 	}
+	.roller-btn {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		bottom: 50px;
+		right: 200px;
+		border-radius: 50%;
+		background-color: red;
+		box-shadow: 0 5px crimson;
+		cursor: pointer;
+		transform: rotateX(-5deg);
+		&:active {
+			background-color: crimson;
+			box-shadow: 0 3px crimson;
+			transform: translateY(6px);
+		}
+	}
 	@keyframes smallBig {
 		0% {
 			transform: translateY(-50px) rotateX(-85deg) scale(1);
@@ -399,6 +421,24 @@ export default {
 		}
 		100% {
 			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(3deg);
+		}
+	}
+	@keyframes coasterReady {
+		from {
+			width: 20%;
+			position: absolute;
+			top: -200px;
+			right: -50px;
+			transform-style: none;
+			transform: translateY(-450px) rotateX(-65deg);
+		}
+		to {
+			width: 20%;
+			position: absolute;
+			top: -0px;
+			right: -50px;
+			transform-style: none;
+			// transform: translateY(-450px) rotateX(-65deg);
 		}
 	}
 }
