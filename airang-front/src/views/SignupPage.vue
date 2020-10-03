@@ -42,6 +42,46 @@
 			</div>
 			<button class="signup-btn" type="submit">회원가입</button>
 		</form>
+		<img
+			class="login-arang"
+			src="@/assets/images/login/eating3.gif"
+			alt="arang"
+		/>
+		<img
+			class="login-ground"
+			src="@/assets/images/login/ground.png"
+			alt="ground"
+		/>
+		<img
+			class="login-cloud3"
+			src="@/assets/images/login/cloud3.png"
+			alt="cloud3"
+		/>
+		<img
+			class="login-cloud4"
+			src="@/assets/images/login/cloud4.png"
+			alt="cloud4"
+		/>
+		<img
+			class="login-items login-grass1"
+			src="@/assets/images/login/grass1.png"
+			alt="grass1"
+		/>
+		<img
+			class="login-items login-grass2"
+			src="@/assets/images/login/grass2.png"
+			alt="grass2"
+		/>
+		<img
+			class="login-items login-carrot1"
+			src="@/assets/images/login/carrot1.png"
+			alt="carrot1"
+		/>
+		<img
+			class="login-items login-carrot2"
+			src="@/assets/images/login/carrot2.png"
+			alt="carrot2"
+		/>
 	</section>
 </template>
 
@@ -125,7 +165,7 @@ export default {
 		width: 25px;
 		height: 100px;
 		position: absolute;
-		top: 50px;
+		top: 25px;
 		left: 50%;
 		border-top-left-radius: 1rem;
 		border-top-right-radius: 1rem;
@@ -174,11 +214,11 @@ export default {
 	}
 	.signup-form {
 		position: absolute;
-		top: 100px;
+		top: 70px;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 550px;
-		height: 550px;
+		height: 520px;
 		background: #ff922b;
 		border-top-left-radius: 15%;
 		border-top-right-radius: 15%;
@@ -244,6 +284,51 @@ export default {
 			color: white;
 			background-color: #2f9e44;
 		}
+	}
+	.login-arang {
+		width: 10%;
+		position: absolute;
+		bottom: -505px;
+		right: 6%;
+	}
+	.login-cloud3 {
+		width: 17%;
+		position: absolute;
+		top: 12%;
+		left: 3%;
+	}
+	.login-cloud4 {
+		width: 12%;
+		position: absolute;
+		top: 5%;
+		left: 14%;
+	}
+	.login-ground {
+		width: 100%;
+		height: 130px;
+		position: absolute;
+		bottom: -610px;
+	}
+	.login-items {
+		width: 6%;
+		position: absolute;
+	}
+	.login-grass1 {
+		bottom: -515px;
+		right: 19%;
+	}
+	.login-grass2 {
+		width: 3%;
+		bottom: -520px;
+		right: 18%;
+	}
+	.login-carrot1 {
+		bottom: -580px;
+		left: 15%;
+	}
+	.login-carrot2 {
+		bottom: -550px;
+		left: 11%;
 	}
 }
 </style>
