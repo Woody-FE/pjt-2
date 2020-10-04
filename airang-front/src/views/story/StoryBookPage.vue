@@ -99,24 +99,26 @@ export default {
 	created() {
 		const id = this.$store.getters.getId;
 		this.userId = id;
-		console.log('created', this.userId);
 		// this.mainLoading = true;
-		Promise.all([
-			fetchStory(this.storyId),
-			getUserProfile(this.userId),
-			convertImage(this.userId),
-		])
-			.then(res => {
-				this.cover = res[0].data.cover_image;
-				this.defaultBookname = res[0].data.name;
-				this.userData.imgPath = res[1].data.child_image;
-				this.cnt += 1;
-				this.conversionImage = res[2].data.path;
-				// this.mainLoading = false;
-			})
-			.catch(error => {
-				console.log(error);
-			});
+		// Promise.all([
+		// 	fetchStory(this.storyId),
+		// 	getUserProfile(this.userId),
+		// 	convertImage(this.userId),
+		// ])
+		// 	.then(res => {
+		// 		this.cover = res[0].data.cover_image;
+		// 		this.defaultBookname = res[0].data.name;
+		// 		this.userData.imgPath = res[1].data.child_image;
+		// 		this.cnt += 1;
+		// 		this.conversionImage = res[2].data.path;
+		// 		// this.mainLoading = false;
+		// 	})
+		// 	.catch(error => {
+		// 		console.log(error);
+		// 	});
+		this.fetchStoryBook();
+		this.fetchData();
+		this.createImage();
 	},
 	props: {
 		storyId: Number,
@@ -160,7 +162,9 @@ export default {
 		if (cover) {
 			cover.addEventListener('load', () => {
 				const page = document.querySelectorAll('.mystory-page');
-				page[0].classList.add('flipped');
+				setTimeout(function() {
+					page[0].classList.add('flipped');
+				}, 750);
 			});
 		}
 	},
@@ -179,7 +183,6 @@ export default {
 		async fetchData() {
 			try {
 				const { data } = await getUserProfile(this.userId);
-				console.log('fetchData', this.userId);
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
 				console.log(error);
@@ -218,7 +221,6 @@ export default {
 		async fetchStoryBook() {
 			try {
 				const { data } = await fetchStory(this.storyId);
-				console.log(data);
 				this.cover = data.cover_image;
 				this.defaultBookname = data.name;
 			} catch (error) {
@@ -235,8 +237,7 @@ export default {
 			try {
 				this.loading = true;
 				this.cnt += 1;
-				const id = this.$store.getters.getId;
-				const { data } = await convertImage(id);
+				const { data } = await convertImage(this.userId);
 				this.conversionImage = data.path;
 			} catch (error) {
 				this.conversionImage = null;
