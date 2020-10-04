@@ -55,6 +55,7 @@ export default new Vuex.Store({
 			try {
 				const { data } = await registerUser(userData);
 				dispatch('SETUP_USER', data);
+				return data;
 			} catch (error) {
 				console.log(error.response.data.detail);
 			}

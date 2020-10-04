@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import { createVoice } from '@/api/profile';
 import { mapActions } from 'vuex';
 import { validatePassword, validationName } from '@/utils/validation';
 
@@ -120,8 +121,9 @@ export default {
 					password1: this.password1,
 					password2: this.password2,
 				};
-				await this.SIGNUP(userInfo);
+				const data = await this.SIGNUP(userInfo);
 				this.$router.push('/');
+				createVoice(1, data.user.id).catch(error => console.log(error));
 			} catch (error) {
 				console.log(error);
 			}
