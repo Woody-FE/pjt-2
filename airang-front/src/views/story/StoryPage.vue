@@ -114,7 +114,7 @@ import {
 	fetchStory,
 	deleteMyStories,
 } from '@/api/story';
-import { finishedMyStory } from '@/api/story';
+// import { finishedMyStory } from '@/api/story';
 export default {
 	components: {
 		StoryItem,
@@ -208,8 +208,12 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
-					await finishedMyStory(this.myStoryId, this.selectStories);
-					this.$router.push({ name: 'bookshelf' });
+					bus.$emit('show:finished', {
+						mystory: this.myStoryId,
+						selectStories: this.selectStories,
+					});
+					// await finishedMyStory(this.myStoryId, this.selectStories);
+					// this.$router.push({ name: 'bookshelf' });
 				} else {
 					if (this.nextStoryId) {
 						this.selectStories.push(this.nextStoryId);
