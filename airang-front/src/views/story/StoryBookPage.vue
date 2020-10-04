@@ -1,6 +1,7 @@
 <template>
-	<section v-if="mainLoading">
-		로딩중
+	<section class="mystory-wrap__white" v-if="mainLoading">
+		<img class="mystory-loading" src="@/assets/images/loading.gif" alt="" />
+		<span class="mystory-loading__description">책을 만들고 있어요</span>
 	</section>
 	<section v-else class="mystory-wrap">
 		<div class="mystory-bookcover">
@@ -65,7 +66,16 @@
 							v-model="bookName"
 						/>
 					</div>
-					<section v-if="loading" class="mystory-imgbox">로딩</section>
+					<section v-if="loading" class="mystory-imgbox">
+						<img
+							class="mystory-imgbox__loading"
+							src="@/assets/images/loading.gif"
+							alt=""
+						/>
+						<span class="mystory-imgbox__description">
+							사진을 만들고 있어요
+						</span>
+					</section>
 					<section v-else class="mystory-imgbox">
 						<img
 							class="mystory-imgbox__img"
@@ -208,9 +218,11 @@ export default {
 		},
 		async fetchStoryBook() {
 			try {
+				this.mainLoading = true;
 				const { data } = await fetchStory(this.storyId);
 				this.cover = data.cover_image;
 				this.defaultBookname = data.name;
+				this.mainLoading = false;
 			} catch (error) {
 				console.log(error);
 			}
@@ -251,6 +263,23 @@ export default {
 
 <style lang="scss" scoped>
 @include common-btn();
+.mystory-wrap__white {
+	width: 100%;
+	min-height: 100vh;
+	background: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	.mystory-loading {
+		width: 20%;
+		margin-bottom: 1rem;
+	}
+	.mystory-loading__description {
+		font-size: 2rem;
+	}
+}
 .mystory-wrap {
 	position: relative;
 	width: 100%;
@@ -347,6 +376,14 @@ export default {
 					align-items: center;
 					@media (max-width: 768px) {
 						justify-content: center;
+					}
+					.mystory-imgbox__loading {
+						margin-top: 5rem;
+						width: 180px;
+					}
+					.mystory-imgbox__description {
+						margin-top: 1.5rem;
+						font-size: 1.5rem;
 					}
 					.mystory-imgbox__img {
 						max-width: 100%;
