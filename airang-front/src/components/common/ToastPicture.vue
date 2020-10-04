@@ -1,10 +1,10 @@
 <template>
 	<section class="toast" :class="toastAnimationClass">
-		<img src="" alt="" />
+		<img class="toast-img" src="@/assets/images/bg/selectBg.png" alt="" />
 		<h2 class="toast-title">책을 저장하시겠습니까 ?</h2>
-		<section>
-			<button class="toast-btn-white" @click="closeToast">취소</button>
-			<button class="toast-btn-purple" @click="showToast">저장</button>
+		<section class="toast-btn">
+			<button class="toast-btn-white btn" @click="closeToast">취소</button>
+			<button class="toast-btn-purple btn" @click="showToast">저장</button>
 		</section>
 	</section>
 </template>
@@ -58,6 +58,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@include common-btn();
 .toast {
 	position: fixed;
 	width: 100vw;
@@ -69,7 +70,7 @@ export default {
 	color: black;
 	border-radius: 4px;
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
-	color: white;
+	color: #343a40;
 	top: 50%;
 	left: 50%;
 	display: flex;
@@ -78,40 +79,46 @@ export default {
 	align-items: center;
 	transform: translate(-50%, -50%);
 	.toast-title {
+		z-index: 1;
 		font-size: 3rem;
+	}
+	.toast-img {
+		z-index: 1;
+		position: absolute;
+		width: 700px;
+		height: 400px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 }
 .toast.none {
 	display: none;
 }
+.toast-btn {
+	z-index: 2;
+	margin-top: 3rem;
+}
 .toast-btn-white {
-	border: none;
 	width: 7rem;
-	border-radius: 3px;
 	padding: 0 1rem;
 	font-size: 2rem;
 	font-weight: 700;
 	background: white;
-	color: black;
+	color: $deepGray;
 	height: 4rem;
-	margin-top: 1.5rem;
 	margin-right: 0.5rem;
 	cursor: pointer;
-	z-index: 2;
 }
 .toast-btn-purple {
-	border: none;
-	border-radius: 3px;
 	width: 7rem;
 	padding: 0 1rem;
 	font-size: 2rem;
 	font-weight: 700;
-	background: $orange;
+	background: #204c75;
 	color: white;
 	height: 4rem;
-	margin-top: 1.5rem;
 	margin-left: 0.5rem;
 	cursor: pointer;
-	z-index: 2;
 }
 </style>
