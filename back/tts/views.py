@@ -28,7 +28,7 @@ def create_voice(request, story_id, user_id):
             splitted_string = s.split('{child_name}')
             wanted = splitted_string[1].split()[0].split('.')[0]
 
-            temp = tossi.postfix(user.username, wanted)
+            temp = tossi.postfix(user.child_name, wanted)
 
             result_script = s.replace('{child_name}' + wanted, temp)
             # print(result_script)
