@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		token: cookies.isKey('auth-token') ? cookies.get('auth-token') : null,
-		username: cookies.isKey('child_name') ? cookies.get('child_name') : null,
+		child_name: cookies.isKey('child_name') ? cookies.get('child_name') : null,
 		id: cookies.isKey('id') ? cookies.get('id') : null,
 	},
 	getters: {
@@ -47,6 +47,7 @@ export default new Vuex.Store({
 			try {
 				const { data } = await loginUser(userData);
 				dispatch('SETUP_USER', data);
+				console.log(data);
 			} catch (error) {
 				console.log(error.response.data.detail);
 			}

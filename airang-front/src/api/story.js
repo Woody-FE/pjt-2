@@ -29,7 +29,7 @@ export function fetchSubStory({ mystory_id, substory_id }) {
 }
 export function finishedMyStory(mystoryId, job, storyList) {
 	return stories.post(`/mystories/${mystoryId}/`, {
-		job,
+		job: job,
 		substory_list: storyList,
 	});
 }

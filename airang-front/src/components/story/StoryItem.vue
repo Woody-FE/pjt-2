@@ -8,8 +8,15 @@
 		>
 			<div class="portrait-box">
 				<img
+					v-if="script.character.id === 1"
 					class="portrait-img"
-					src="@/assets/images/character/arang1.png"
+					:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
+					alt=""
+				/>
+				<img
+					v-else
+					class="portrait-img"
+					:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
 					alt=""
 				/>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
@@ -86,9 +93,7 @@ export default {
 		},
 	},
 	mounted() {
-		// axios
-		// 	.post(`${this.BaseURL}test/voice/story/1/narration/`)
-		// 	.then(res => console.log(res));
+		console.log(this.scripts);
 	},
 };
 </script>
@@ -135,14 +140,15 @@ export default {
 	left: -100wh;
 }
 .portrait-box {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	.portrait-img {
 		width: 30%;
-		border-radius: 50%;
-		border: 1px solid black;
+		height: auto;
 		margin-bottom: 1rem;
 	}
 	.portrait-name {
