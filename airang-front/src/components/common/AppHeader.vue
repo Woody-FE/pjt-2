@@ -9,45 +9,44 @@
 		<section class="nav-btn">
 			<router-link
 				v-if="!isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
 				to="/guide"
 				>가이드</router-link
 			>
 			<router-link
 				v-if="!isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
 				to="/login"
 				>로그인</router-link
 			>
 			<router-link
 				v-if="!isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
 				to="/signup"
 				>회원가입</router-link
 			>
 			<router-link
 				v-if="isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
 				to="/bookshelf"
 				>책장</router-link
 			>
 			<router-link
 				v-if="isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
+				:class="[AuthRoute ? 'nav-orange' : 'nav-white']"
 				to="/profile"
 				>프로필</router-link
 			>
 			<a
 				v-if="isLogin"
-				class="nav-login"
-				:class="[AuthRoute ? 'nav-white' : 'nav-orange']"
+				class="nav-login btn"
 				href="javascript:;"
-				@click="logoutUser"
+				@click="movedHome"
 				>로그아웃</a
 			>
 		</section>
@@ -67,7 +66,11 @@ export default {
 			);
 		},
 		StoryRoute() {
-			return this.$route.name === 'story';
+			return (
+				this.$route.name === 'story' ||
+				this.$route.name === 'finishedStory' ||
+				this.$route.name === 'storybook'
+			);
 		},
 		isLogin() {
 			return this.isLogined;
@@ -80,7 +83,10 @@ export default {
 			this.clearToken();
 			this.$cookies.remove('auth-token');
 			this.$cookies.remove('username');
-			// this.$router.push('/');
+		},
+		movedHome() {
+			this.logoutUser();
+			this.$router.push('/');
 		},
 	},
 	watch: {
@@ -99,15 +105,19 @@ export default {
 </script>
 
 <style lang="scss">
+@include common-btn();
 .nav {
 	position: relative;
 	padding-top: 2rem;
-	height: 100px;
 	width: 80%;
-	margin: 0 auto;
+	height: 100px;
+	margin: 0 10%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	@media screen and (max-width: 768px) {
+		width: 95%;
+	}
 	a {
 		text-decoration: none;
 	}
@@ -130,14 +140,24 @@ export default {
 		}
 	}
 	.nav-login {
-		font-size: 1.2rem;
+		font-size: 1rem;
+		@media screen and (max-width: 768px) {
+			font-size: 0.8rem;
+		}
+	}
+	.nav-orange {
+		color: $orange;
+		border: 1px solid rgba(250, 157, 0, 0.7);
+		box-shadow: 0 5px rgba(250, 157, 0, 0.8);
+		&:active {
+			background-color: rgba(243, 243, 243, 0.6);
+			box-shadow: 0 3px rgba(158, 83, 33, 0.8);
+			transform: translateY(4px);
+		}
 	}
 	.nav-white {
-		color: black;
-	}
-
-	.nav-orange {
-		color: white;
+		color: #fff;
+		// border: 1px solid transparent;
 	}
 }
 </style>

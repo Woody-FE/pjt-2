@@ -12,6 +12,7 @@ User = get_user_model()
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=False)
     class Meta:
         model = User
         fields = (
@@ -104,3 +105,27 @@ class CustomTokenSerializer(serializers.ModelSerializer):
             'key',
             'user',
         )
+
+
+class RegisterSerializer(serializers.Serializer):
+
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(write_only=True)
+
+    def validate_email(self, email):
+        return email
+
+    def validate_password(self, password):
+        return password
+
+    def get_cleaned_data(self):
+        return {
+            'password': self.validated_data.get('password', ''),
+            'email': self.validated_data.get('email', '')
+        }
+
+    def save(self, request):
+        user = get_user_model()
+        cleaned_data = self.get_cleaned_data()
+        user.create_user(**cleaned_data)
+        return user

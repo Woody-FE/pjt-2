@@ -1,4 +1,29 @@
 $orange: #fa9d00;
 $lightGreen: #51cf66;
 $green: #00733b;
+$carrotGreen: #2f9e44;
 $deepGray: #495057;
+
+@mixin common-btn() {
+    .btn {
+        font-family: 'TmoneyRoundWindExtraBold';
+        display: inline-block;
+        padding: 8px 20px;
+        font-size: 15px;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: transparent;
+        border: 1px solid rgba(158, 83, 33, .4);
+        border-radius: 30px;
+        box-shadow: 0 5px rgba(158, 83, 33, .5);
+        cursor: pointer;
+        &:active {
+            background-color: rgba(243, 243, 243, 0.3);
+            box-shadow: 0 3px rgba(158, 83, 33, 0.8);
+            border: none;
+            transform: translateY(4px);
+        }
+    }
+}

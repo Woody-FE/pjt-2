@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -7,8 +8,10 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer, MySubstoryCreateSerializer, MyStoryAddRequestSerializer
+from .serializers import MyStorySerializer, StoryDetailSerializer, BranchDetailSerializer, SubstorySerializer, MyStoryCreateRequestSerializer, MyStoryCreateSerializer, MyCharacterSerializer, MyCharacterCreateSerializer, MyCharacterBasicSerializer, MySubstoryCreateSerializer, MyStoryAddRequestSerializer, MySubstoryDetailSerializer
 from .models import *
+
+import shutil, os
 
 
 class APIViewWithAuthentication(APIView):
@@ -18,7 +21,13 @@ class APIViewWithAuthentication(APIView):
 class MyStoryView(APIViewWithAuthentication):
     
     def get(self, request):
-        mystories = request.user.mystories
+        story_id = request.GET.get('id', 0)
+
+        if story_id == 0:
+            mystories = request.user.mystories
+        else:
+            mystories = request.user.mystories.filter(story_id=story_id)
+
         serializer = MyStorySerializer(instance=mystories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -64,6 +73,7 @@ class MyStoryDetailView(APIViewWithAuthentication):
     @swagger_auto_schema(request_body=MyStoryAddRequestSerializer)
     def post(self, request, mystory_id):
         mystory = self.get_object(mystory_id)
+        user = request.user
 
         try:
             substory_list = request.data['substory_list']
@@ -89,6 +99,7 @@ class MyStoryDetailView(APIViewWithAuthentication):
                 'user': mystory.user.id,
                 'story_name': mystory.story_name,
                 'story': mystory.story_id,
+                'finished': True,
             })
         if serializer.is_valid(raise_exception=True):
             serializer.save(mystory=before_sub)
@@ -115,6 +126,11 @@ class MyStoryDetailView(APIViewWithAuthentication):
                 serializer.save()
             
             before_sub = next_sub
+        
+        # 이미지 옮기기
+        temp_path = f'{settings.BASE_DIR}/images/user/{user.id}/conversion/'
+        dir_path = f'{settings.BASE_DIR}/images/user/{user.id}/mystory/{mystory_id}/'
+        shutil.copytree(temp_path, dir_path)
         return Response(status=status.HTTP_201_CREATED)
 
 
@@ -194,5 +210,18 @@ class SubStoryListView(APIViewWithAuthentication):
         story = get_object_or_404(Story, pk=story_id)
         substories = story.substories
         serializer = SubstorySerializer(instance=substories, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class MySubStoryDetailView(APIViewWithAuthentication):
+
+    def get_object(self, mystory_id, mysubstory_id):
+        mystory = get_object_or_404(MyStory, pk=mystory_id)
+        mysubstory = get_object_or_404(MySubstory, pk=mysubstory_id)
+        return mysubstory
+
+    def get(self, request, mystory_id, mysubstory_id):
+        mysubstory = self.get_object(mystory_id, mysubstory_id)
+        serializer = MySubstoryDetailSerializer(instance=mysubstory)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

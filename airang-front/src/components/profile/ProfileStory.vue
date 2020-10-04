@@ -5,15 +5,59 @@
 			<p class="profileStory-header__name">나의 이야기</p>
 		</header>
 		<div class="box-out">
-			<router-link to="/story/1"><div class="book books-1"></div></router-link>
-			<router-link to="/story/2"><div class="book books-2"></div></router-link>
+			<router-link
+				:key="book.id"
+				v-for="book in books"
+				:to="`/story/${book.story.id}/review/${book.id}`"
+				><div
+					class="book books-1"
+					v-bind:style="{
+						backgroundImage: `url('${imgSrc}${filterMedia(
+							book.story.cover_image,
+						)}')`,
+					}"
+				></div
+			></router-link>
 		</div>
 		<footer class="profileStory-footer"></footer>
 	</section>
 </template>
 
 <script>
-export default {};
+import { fetchMyStories } from '@/api/story';
+
+export default {
+	created() {
+		this.fetchBooks();
+	},
+	data() {
+		return {
+			books: [],
+		};
+	},
+	computed: {
+		imgSrc() {
+			return process.env.VUE_APP_API_URL;
+		},
+	},
+
+	methods: {
+		async fetchBooks() {
+			try {
+				const { data } = await fetchMyStories();
+				this.books = data;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		filterMedia(string) {
+			if (string.includes('/media/')) {
+				return string.replace('/media/', '');
+			}
+			return string;
+		},
+	},
+};
 </script>
 
 <style lang="scss">
@@ -43,7 +87,7 @@ export default {};
 	z-index: 10;
 	width: 720px;
 	display: flex;
-	justify-content: space-between;
+	// justify-content: space-between;
 	align-items: center;
 	// position: absolute;
 	// top: 140px;
@@ -52,6 +96,7 @@ export default {};
 .book {
 	width: 180px;
 	height: 255px;
+	margin-right: 30px;
 	background-color: rgb(62, 71, 152);
 	transition: all 0.3s ease-in-out;
 	transform-origin: left center 0px;
@@ -84,7 +129,7 @@ export default {};
 	top: -12px;
 	right: 8px;
 	transition: all 0.25s;
-	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAABhCAYAAABh23lYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHCSURBVHgB7dxPTsJAHMXxN7Xu3UhigobxJHACvQFwAr2BcgO8AZxE7uGiDZiQyEIW7oSOUyKbKgLS8u+9b9JNF818fum0XdWUhy9VEDZBGIdBGD6DsFM3bQYgTnjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNZ2hR/7o+UcmnCIsaNCbLcU/RR8oB1bO/4+17l8ixoGeIBBBVvMXI0ih+L7Df2j8iiqnvgh+AVVUXDOTZvF4tNb2qC7DJ1tNgSDO78tblFQxeE92l+0NSjZDjaoMowqyYl7hDF15JzL+x+YHtxLgFq/ZO2m8LT4wsb90nUjmMD61XaRc7ng5+jBua29ntsecq6oIWyELxqdLe8h/GvPp+h0T28D/FezZ8Ip7pHgZt3X5NoPvH1BZ5sNIUTDL7C+6hBWxxt0gk+00tsOe96qH0zL8GO4pBtMg/YhoLMtG8Ii/EpfY4fSoiFk8UeFzpYdwhz/jiNGZ0uHEBjUEzftohJFZyAsdX8BM0/amLC3spYAAAAASUVORK5CYII=');
+	// background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAABhCAYAAABh23lYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHCSURBVHgB7dxPTsJAHMXxN7Xu3UhigobxJHACvQFwAr2BcgO8AZxE7uGiDZiQyEIW7oSOUyKbKgLS8u+9b9JNF818fum0XdWUhy9VEDZBGIdBGD6DsFM3bQYgTnjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNZ2hR/7o+UcmnCIsaNCbLcU/RR8oB1bO/4+17l8ixoGeIBBBVvMXI0ih+L7Df2j8iiqnvgh+AVVUXDOTZvF4tNb2qC7DJ1tNgSDO78tblFQxeE92l+0NSjZDjaoMowqyYl7hDF15JzL+x+YHtxLgFq/ZO2m8LT4wsb90nUjmMD61XaRc7ng5+jBua29ntsecq6oIWyELxqdLe8h/GvPp+h0T28D/FezZ8Ip7pHgZt3X5NoPvH1BZ5sNIUTDL7C+6hBWxxt0gk+00tsOe96qH0zL8GO4pBtMg/YhoLMtG8Ii/EpfY4fSoiFk8UeFzpYdwhz/jiNGZ0uHEBjUEzftohJFZyAsdX8BM0/amLC3spYAAAAASUVORK5CYII=');
 	background-size: 16px;
 	background-repeat: no-repeat;
 }
@@ -92,12 +137,12 @@ export default {};
 /*------ background-pic ------*/
 
 .books-1 {
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/3433202-d2a1bea8a58cd447.png');
+	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140716_200%2F500farm_1405513399454S2F1z_PNG%2F%25B5%25BF%25C8%25AD%25C3%25A51%25B8%25E9.png&type=sc960_832');
 	background-size: 180px 255px;
 }
 
 .books-2 {
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/3433202-6b51313cfc447314.png');
+	background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140716_200%2F500farm_1405513399454S2F1z_PNG%2F%25B5%25BF%25C8%25AD%25C3%25A51%25B8%25E9.png&type=sc960_832');
 	background-size: 180px 255px;
 }
 

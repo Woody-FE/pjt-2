@@ -15,7 +15,9 @@ class Substory(models.Model):
 
 
 class StoryImage(models.Model):
-    tag = models.TextField()
+    path = models.TextField()
+    is_main_character = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
     substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='images')
 
 
@@ -53,6 +55,7 @@ class MyStory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mystories')
     story_name = models.CharField(max_length=30)
     mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories', null=True, blank=True)
+    finished = models.IntegerField(default=0)
     
 
 class MyCharacter(models.Model):

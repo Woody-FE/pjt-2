@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import StoryPage from '@/views/StoryPage.vue';
+// import StoryPage from '@/views/StoryPage.vue';
 
 Vue.use(VueRouter);
 
@@ -26,18 +26,35 @@ const routes = [
 		component: () => import('@/views/SignupPage.vue'),
 	},
 	{
-		path: '/story/:pk',
+		path: '/story/:storyId/review/:myStoryId',
+		name: 'finishedStory',
+		props: route => ({
+			storyId: Number(route.params.storyId),
+			myStoryId: Number(route.params.myStoryId),
+		}),
+		component: () => import('@/views/story/StoryFinishedPage.vue'),
+	},
+	{
+		path: '/story/:storyId/:myStoryId',
 		name: 'story',
 		props: route => ({
-			pk: Number(route.params.pk),
+			storyId: Number(route.params.storyId),
+			myStoryId: Number(route.params.myStoryId),
 		}),
-		// component: () => import('@/views/StoryPage.vue'),
-		component: StoryPage,
+		component: () => import('@/views/story/StoryPage.vue'),
 	},
 	{
 		path: '/bookshelf',
 		name: 'bookshelf',
 		component: () => import('@/views/BookshelfPage.vue'),
+	},
+	{
+		path: '/bookshelf/:storyId',
+		name: 'storybook',
+		props: route => ({
+			storyId: Number(route.params.storyId),
+		}),
+		component: () => import('@/views/story/StoryBookPage.vue'),
 	},
 	{
 		path: '/profile',
@@ -48,6 +65,14 @@ const routes = [
 		path: '/profile/modifyinfo',
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+	},
+	{
+		path: '*',
+		redirect: '/404',
+	},
+	{
+		path: '/404',
+		component: () => import('@/views/NotFoundPage.vue'),
 	},
 ];
 
