@@ -115,7 +115,6 @@ import {
 	fetchStory,
 	deleteMyStories,
 } from '@/api/story';
-// import { finishedMyStory } from '@/api/story';
 export default {
 	components: {
 		StoryItem,
@@ -146,6 +145,7 @@ export default {
 			selectStories: [],
 			coverImage: null,
 			bookName: null,
+			job: null,
 		};
 	},
 	destroyed() {
@@ -160,7 +160,24 @@ export default {
 		this.nextBranchId = null;
 		this.hasBranch = null;
 		this.finish = false;
+		this.job = null;
+
 		this.selectStories = [];
+	},
+	beforeUpdate() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds) {
+			playingSounds.forEach(playingSound => {
+				playingSound.pause();
+			});
+		}
+	},
+	updated() {
+		// const playingSounds = document.querySelectorAll('.story-sound__playing');
+		// console.log(playingSounds);
+		// if (playingSounds[playingSounds.length - 1]) {
+		// 	playingSounds[playingSounds.length - 1].play();
+		// }
 	},
 	methods: {
 		resetScript() {
@@ -212,9 +229,8 @@ export default {
 					bus.$emit('show:finished', {
 						mystory: this.myStoryId,
 						selectStories: this.selectStories,
+						job: this.job,
 					});
-					// await finishedMyStory(this.myStoryId, this.selectStories);
-					// this.$router.push({ name: 'bookshelf' });
 				} else {
 					if (this.nextStoryId) {
 						this.selectStories.push(this.nextStoryId);
@@ -225,6 +241,25 @@ export default {
 						if (data.next_id === null) {
 							console.log(data);
 							this.finish = true;
+							switch (data.scripts[0].substory) {
+								case 47:
+									this.job = 4;
+									break;
+								case 46:
+									this.job = 5;
+									break;
+								case 45:
+									this.job = 2;
+									break;
+								case 44:
+									this.job = 1;
+									break;
+								case 43:
+									this.job = 3;
+									break;
+								default:
+									this.job = null;
+							}
 						}
 						this.hasBranch = data.has_branch;
 						if (!this.hasBranch) {

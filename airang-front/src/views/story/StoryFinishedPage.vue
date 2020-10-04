@@ -192,6 +192,20 @@ export default {
 			this.$router.push({ name: 'bookshelf' });
 		},
 	},
+	beforeUpdate() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds) {
+			playingSounds.forEach(playingSound => {
+				playingSound.pause();
+			});
+		}
+	},
+	updated() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds[playingSounds.length - 1]) {
+			playingSounds[playingSounds.length - 1].play();
+		}
+	},
 	mounted() {
 		const id = this.$store.getters.getId;
 		this.userId = parseInt(id);
@@ -200,6 +214,10 @@ export default {
 		bus.$on('finished:script-reset', this.resetScript);
 		bus.$on('finished:next-page', this.updateStory);
 		this.createStory(this.myStoryId);
+		const playingSound = document.querySelector('.story-sound__playing');
+		if (playingSound) {
+			playingSound.play();
+		}
 	},
 };
 </script>

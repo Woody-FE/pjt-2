@@ -16,13 +16,13 @@
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
 				<audio
 					v-if="count + 1 === script.order && !isInName(script.content)"
-					class="story-sound"
+					class="story-sound story-sound__playing"
 					autoplay
 					:src="`${BaseURL}voice/story/1/script_${script.id}.mp3`"
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
-					class="story-sound"
+					class="story-sound stroy-sound__playing"
 					autoplay
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
@@ -55,7 +55,7 @@ export default {
 		},
 		filterUsername(string) {
 			if (string.includes('아들')) {
-				return string.replace('아들', store.getters['getUsername']);
+				return string.replace('아들', store.getters['getChildName']);
 			}
 			return string;
 		},
@@ -64,7 +64,7 @@ export default {
 		},
 		filterName(string) {
 			if (string.includes('{child_name}')) {
-				return string.replace('{child_name}', store.getters['getUsername']);
+				return string.replace('{child_name}', store.getters['getChildName']);
 			}
 			return string;
 		},
