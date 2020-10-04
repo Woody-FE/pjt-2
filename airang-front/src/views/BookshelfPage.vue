@@ -175,6 +175,12 @@ export default {
 			width: 16%;
 			position: absolute;
 			bottom: -574%;
+			&:hover {
+				transform: rotate(5deg);
+			}
+			&:active {
+				transform: scale(1.1) rotate(5deg);
+			}
 		}
 		.book-pace2 {
 			left: 42%;
