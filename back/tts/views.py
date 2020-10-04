@@ -9,6 +9,7 @@ from stories.models import Script
 
 from .tts import TTS
 from accounts.models import CustomUser
+from stories.models import Story
 
 import tossi
 
@@ -45,9 +46,9 @@ def create_voice(request, story_id, user_id):
 def create_narration(request, story_id):
     scripts = Script.objects.all()
     story = get_object_or_404(Story, pk=story_id)
-    store_path = f'{settings.BASE_DIR}/voice/story/{story_id}'
+    store_path = f'{settings.BASE_DIR}/voice/story/{story_id}/'
     for script in scripts:
         if script.character.id == 2:
-            file_name = f'{store_path}/script_{script.id}.mp3'
+            file_name = f'{store_path}script_{script.id}.mp3'
             if not os.path.isfile(file_name):
                 TTS(script.content, file_name)
