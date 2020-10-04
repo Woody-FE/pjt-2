@@ -508,7 +508,6 @@ export default {
 	}
 }
 
-@include Book();
 .mystory-portrait {
 	width: 100%;
 	height: 100%;

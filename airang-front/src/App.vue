@@ -8,7 +8,7 @@
 		<AppHeader />
 		<main
 			:class="[
-				StoryRoute || $route.name === 'storybook'
+				StoryRoute || $route.name === 'storybook' || $route.name === 'myteam'
 					? 'container-story'
 					: 'container',
 			]"
