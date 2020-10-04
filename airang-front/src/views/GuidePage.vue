@@ -62,12 +62,15 @@
 			<button class="guide-btn__top" @click="topScroll">TOP</button>
 		</section>
 		<section class="guide-end-box">
-			<button class="guide-end-btn">동화책 주인공이 되어 보실래요?</button>
+			<button class="guide-end-btn" @click="clickEndBtn">
+				동화책 주인공이 되어 보실래요?
+			</button>
 		</section>
 	</section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
 	data() {
 		return {
@@ -76,6 +79,7 @@ export default {
 		};
 	},
 	methods: {
+		...mapGetters(['isLogined']),
 		topScroll() {
 			this.currentItem.classList.remove('visible');
 			setTimeout(() => {
@@ -89,6 +93,13 @@ export default {
 			this.currentItem.classList.add('visible');
 			const downbtn = document.querySelector('.guide-btn__down');
 			downbtn.style.display = 'inline';
+		},
+		clickEndBtn() {
+			if (this.isLogined) {
+				this.$router.push('/login');
+			} else {
+				this.$router.push('/bookshelf');
+			}
 		},
 	},
 	mounted() {
@@ -191,6 +202,7 @@ export default {
 }
 .guide {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
 	position: sticky;
@@ -242,7 +254,7 @@ export default {
 	outline: none;
 }
 .guide-end-box {
-	position: relative;
+	display: relative;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -266,5 +278,6 @@ export default {
 	font-weight: bold;
 	color: white;
 	background-color: #2f9e44;
+	margin-bottom: 3rem;
 }
 </style>
