@@ -103,7 +103,10 @@ export default {
 	height: 4rem;
 	margin-left: -2rem;
 }
-
+.story-portrait {
+	width: 100%;
+	height: 100%;
+}
 .bb-right-btn {
 	width: 4rem;
 	height: 4rem;

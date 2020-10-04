@@ -6,7 +6,7 @@
 			class="bookshelf-bg"
 			alt="bookshelf"
 		/>
-		<!-- <span class="bookshelf-bg2"></span> -->
+		<span class="bookshelf-bg2"></span>
 		<span class="bookshelf-bg2 bookshelf-bg3"></span>
 		<img
 			src="@/assets/images/bookShelf/library_arang.png"
