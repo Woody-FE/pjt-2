@@ -26,13 +26,14 @@ export default {
 		},
 	},
 	methods: {
-		openMethod({ mystory, selectStories, job }) {
+		openMethod({ mystory, job, selectStories }) {
 			this.mystory = mystory;
 			this.selectStories = selectStories;
 			this.job = job;
 			this.open = true;
 		},
 		async showToast() {
+			console.log(this.mystory, this.job, this.selectStories);
 			await finishedMyStory(this.mystory, this.job, this.selectStories);
 			this.open = false;
 			this.$router.push({ name: 'bookshelf' });

@@ -49,12 +49,18 @@
 						:key="image.id"
 						v-for="image in story.images"
 						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/conversion/0.png`"
+						:src="`${imgSrc}images/user/${userId}/conversion/${job}.png`"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
+						alt=""
+					/>
+					<img
+						v-if="job"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="`${imgSrc}images/user/${userId}/conversion/${job}.png`"
 						alt=""
 					/>
 				</div>
@@ -66,7 +72,11 @@
 						src="@/assets/images/bg/left.jpg"
 						alt=""
 					/>
-
+					<img
+						class="story-left__select"
+						:src="`${imgSrc}images/select/${story.id}/left.png`"
+						alt=""
+					/>
 					<button
 						class="btn story-select__btn"
 						@click="createSubStory(story.selects[0].substory)"
@@ -87,6 +97,11 @@
 					<img
 						class="story-right__bg"
 						src="@/assets/images/bg/right.jpg"
+						alt=""
+					/>
+					<img
+						class="story-right__select"
+						:src="`${imgSrc}images/select/${story.id}/right.png`"
 						alt=""
 					/>
 					<button
@@ -145,7 +160,7 @@ export default {
 			selectStories: [],
 			coverImage: null,
 			bookName: null,
-			job: null,
+			job: 0,
 		};
 	},
 	destroyed() {
@@ -258,7 +273,7 @@ export default {
 									this.job = 3;
 									break;
 								default:
-									this.job = null;
+									this.job = 0;
 							}
 						}
 						this.hasBranch = data.has_branch;
@@ -483,6 +498,22 @@ export default {
 	animation: fade-in 1s;
 	animation-fill-mode: forwards;
 	display: flex !important;
+}
+.story-left__select {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	top: 18%;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+.story-right__select {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	top: 18%;
+	left: 50%;
+	transform: translate(-50%, 50%);
 }
 
 .hidden {
