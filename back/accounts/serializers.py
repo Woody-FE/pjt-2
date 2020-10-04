@@ -12,6 +12,7 @@ User = get_user_model()
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=False)
     class Meta:
         model = User
         fields = (
