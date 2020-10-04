@@ -99,26 +99,8 @@ export default {
 	created() {
 		const id = this.$store.getters.getId;
 		this.userId = id;
-		// this.mainLoading = true;
-		// Promise.all([
-		// 	fetchStory(this.storyId),
-		// 	getUserProfile(this.userId),
-		// 	convertImage(this.userId),
-		// ])
-		// 	.then(res => {
-		// 		this.cover = res[0].data.cover_image;
-		// 		this.defaultBookname = res[0].data.name;
-		// 		this.userData.imgPath = res[1].data.child_image;
-		// 		this.cnt += 1;
-		// 		this.conversionImage = res[2].data.path;
-		// 		// this.mainLoading = false;
-		// 	})
-		// 	.catch(error => {
-		// 		console.log(error);
-		// 	});
 		this.fetchStoryBook();
 		this.fetchData();
-		this.createImage();
 	},
 	props: {
 		storyId: Number,
@@ -184,6 +166,9 @@ export default {
 			try {
 				const { data } = await getUserProfile(this.userId);
 				this.userData.imgPath = data.child_image;
+				if (this.userData.imgPath) {
+					this.createImage();
+				}
 			} catch (error) {
 				console.log(error);
 			}
@@ -210,7 +195,6 @@ export default {
 				if (isValidate) {
 					await this.patchImage(changeImage);
 					this.fetchData();
-					this.createImage();
 				} else {
 					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
 				}

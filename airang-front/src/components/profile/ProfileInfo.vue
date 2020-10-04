@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { createVoice } from '@/api/profile';
 import {
 	getUserProfile,
 	changeImage,
@@ -135,6 +136,7 @@ export default {
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
 				alert('이름이 변경되었어요!');
+				createVoice(1, id).catch(error => console.log(error));
 			} catch (error) {
 				console.log(error.response);
 			}
