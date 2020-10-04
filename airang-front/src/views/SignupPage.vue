@@ -165,7 +165,7 @@ export default {
 		width: 25px;
 		height: 100px;
 		position: absolute;
-		top: 25px;
+		top: 50px;
 		left: 50%;
 		border-top-left-radius: 1rem;
 		border-top-right-radius: 1rem;
@@ -214,7 +214,7 @@ export default {
 	}
 	.signup-form {
 		position: absolute;
-		top: 70px;
+		top: 100px;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 500px;
