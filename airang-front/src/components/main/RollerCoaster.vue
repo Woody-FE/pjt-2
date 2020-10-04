@@ -103,7 +103,7 @@ export default {
 			top: 105px;
 			right: 350px;
 			transform: rotate(-29deg);
-			z-index: -1;
+			z-index: 1;
 		}
 		50% {
 			top: 135px;
