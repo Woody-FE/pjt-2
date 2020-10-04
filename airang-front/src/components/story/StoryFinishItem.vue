@@ -99,7 +99,10 @@ export default {
 	height: 4rem;
 	margin-left: -2rem;
 }
-
+.story-portrait {
+	width: 100%;
+	height: 100%;
+}
 .bb-right-btn {
 	border: none;
 	border-radius: 50%;
@@ -123,19 +126,25 @@ export default {
 	left: -100wh;
 }
 .portrait-box {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	.portrait-img {
-		width: 30%;
-		border-radius: 50%;
-		border: 1px solid black;
-		margin-bottom: 1rem;
+	.portrait-img__box {
+		display: flex;
+		width: 150px;
+		height: 230px;
+		justify-content: center;
+		align-items: center;
+		.portrait-img {
+			width: 100%;
+			height: auto;
+		}
 	}
 	.portrait-name {
-		font-size: 1rem;
-		margin-bottom: 3rem;
+		font-size: 1.5rem;
+		margin-bottom: 5rem;
 	}
 	.portrait-content {
 		text-align: center;

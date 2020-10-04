@@ -7,18 +7,20 @@
 			:class="[count === index ? 'bb-abled' : 'bb-disabled']"
 		>
 			<div class="portrait-box">
-				<img
-					v-if="script.character.id === 1"
-					class="portrait-img"
-					:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
-					alt=""
-				/>
-				<img
-					v-else
-					class="portrait-img"
-					:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
-					alt=""
-				/>
+				<div class="portrait-img__box">
+					<img
+						v-if="script.character.id === 1"
+						class="portrait-img"
+						:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
+						alt=""
+					/>
+					<img
+						v-else
+						class="portrait-img"
+						:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
+						alt=""
+					/>
+				</div>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
 				<audio
@@ -147,16 +149,21 @@ export default {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	.portrait-img {
-		width: 30%;
-		height: auto;
-		margin-bottom: 1rem;
+	.portrait-img__box {
+		display: flex;
+		width: 150px;
+		height: 230px;
+		justify-content: center;
+		align-items: center;
+		.portrait-img {
+			width: 100%;
+			height: auto;
+		}
 	}
 	.portrait-name {
-		font-size: 1rem;
-		margin-bottom: 3rem;
+		font-size: 1.5rem;
+		margin-bottom: 6rem;
 	}
 	.portrait-content {
 		text-align: center;
