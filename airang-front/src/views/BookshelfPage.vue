@@ -6,7 +6,7 @@
 			class="bookshelf-bg"
 			alt="bookshelf"
 		/>
-		<span class="bookshelf-bg2"></span>
+		<!-- <span class="bookshelf-bg2"></span> -->
 		<span class="bookshelf-bg2 bookshelf-bg3"></span>
 		<img
 			src="@/assets/images/bookShelf/library_arang.png"
@@ -20,6 +20,16 @@
 						<img
 							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
 							class="book-pace"
+							alt="book-pace"
+						/>
+						<img
+							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							class="book-pace2"
+							alt="book-pace"
+						/>
+						<img
+							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							class="book-pace3"
 							alt="book-pace"
 						/>
 					</router-link>
@@ -81,7 +91,7 @@ export default {
 	perspective: 500px;
 	h2 {
 		font-size: 24px;
-		border-left: 2px solid yellow;
+		border-left: 3px solid rgba(99, 58, 23, 0.5);
 		padding-left: 5px;
 	}
 }
@@ -145,10 +155,24 @@ export default {
 		align-items: center;
 		margin: 1rem 0;
 		.book-pace {
-			width: 100px;
-			height: 130px;
+			width: 200px;
+			height: 260px;
 			position: absolute;
-			top: 70px;
+			top: 120px;
+		}
+		.book-pace2 {
+			width: 200px;
+			height: 260px;
+			position: absolute;
+			top: 120px;
+			left: 465px;
+		}
+		.book-pace3 {
+			width: 200px;
+			height: 260px;
+			position: absolute;
+			top: 120px;
+			left: 740px;
 		}
 	}
 }
