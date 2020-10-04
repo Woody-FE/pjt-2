@@ -2,50 +2,91 @@
 	<section class="profileStory-wrap">
 		<header class="profileStory-header">
 			<span class="profileStory-header__span"></span>
-			<p class="profileStory-header__name">나의 이야기</p>
+			<p class="profileStory-header__name">
+				나의 책장
+			</p>
 		</header>
-		<div class="box-out">
-			<router-link
-				:key="book.id"
-				v-for="book in books"
-				:to="`/story/${book.story.id}/review/${book.id}`"
-				><div
-					class="book books-1"
-					v-bind:style="{
-						backgroundImage: `url('${imgSrc}${filterMedia(
-							book.story.cover_image,
-						)}')`,
-					}"
-				></div
-			></router-link>
+		<section class="profileShelf-wrap__background">
+			<img
+				src="@/assets/images/bookShelf/bookshelf.png"
+				class="bookshelf-bg"
+				alt="bookshelf"
+			/>
+			<span class="bookshelf-bg2"></span>
+			<span class="bookshelf-bg2 bookshelf-bg3"></span>
+			<img
+				src="@/assets/images/bookShelf/library_arang.png"
+				class="bookshelf-arang"
+				alt="bookshelf-arang"
+			/>
+			<section></section>
+		</section>
+		<section class="profileStory-select"></section>
+		<div class="bookshelf">
+			<div class="first-bookshelf-books">
+				<div class="bookshelf-book" :key="book.id" v-for="book in firstBooks">
+					<router-link :to="`/bookshelf/${book.id}`">
+						<img
+							src="@/assets/images/default_book.jpg"
+							class="book-pace"
+							alt="book-pace"
+						/>
+						<span class="book-name">{{ book.story_name }}</span>
+					</router-link>
+				</div>
+			</div>
 		</div>
-		<footer class="profileStory-footer"></footer>
+		<div class="bookshelf">
+			<div class="second-bookshelf-books">
+				<div class="bookshelf-book" :key="book.id" v-for="book in secondBooks">
+					<router-link :to="`/bookshelf/${book.id}`">
+						<img
+							src="@/assets/images/default_book.jpg"
+							class="book-pace"
+							alt="book-pace"
+						/>
+						<span class="book-name">{{ book.story_name }}</span>
+					</router-link>
+				</div>
+			</div>
+		</div>
 	</section>
 </template>
 
 <script>
 import { fetchMyStories } from '@/api/story';
+import { truncateString } from '@/utils/validation';
 
 export default {
-	created() {
-		this.fetchBooks();
+	props: {
+		userName: Number,
 	},
 	data() {
 		return {
-			books: [],
+			firstBooks: [],
+			secondBooks: [],
+			whatBook: 'all',
 		};
 	},
 	computed: {
-		imgSrc() {
+		baseURL() {
 			return process.env.VUE_APP_API_URL;
 		},
 	},
-
 	methods: {
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
-				this.books = data;
+				console.log(data);
+				this.firstBooks = data.slice(0, 3);
+				this.secondBooks = data.slice(3, 6);
+
+				this.firstBooks.forEach(el => {
+					el.story_name = truncateString(el.story_name);
+				});
+				this.secondBooks.forEach(el => {
+					el.story_name = truncateString(el.story_name);
+				});
 			} catch (error) {
 				console.log(error);
 			}
@@ -56,12 +97,20 @@ export default {
 			}
 			return string;
 		},
+		changeStatus() {
+			return;
+		},
+	},
+	created() {
+		this.fetchBooks();
 	},
 };
 </script>
 
 <style lang="scss">
 .profileStory-wrap {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -182,5 +231,97 @@ export default {
 }
 .profileStory-footer {
 	margin-bottom: 10rem;
+}
+
+// bookshelf-bg
+.profileShelf-wrap__background {
+	height: 700px;
+	.bookshelf-bg {
+		width: 100%;
+		height: 650px;
+		position: absolute;
+		top: 50px;
+	}
+	.bookshelf-bg2 {
+		width: 80%;
+		height: 50px;
+		position: absolute;
+		top: 300px;
+		left: 50%;
+		border-radius: 30px;
+		border-bottom: 5px solid rgb(99, 58, 23);
+		background: linear-gradient(
+			rgba(99, 58, 23, 0.5) 3%,
+			rgb(194, 113, 41),
+			rgb(226, 136, 57)
+		);
+		transform: translateX(-50%) rotateX(55deg);
+		box-shadow: 0px 10px 5px rgba(99, 58, 23, 0.5);
+	}
+	.bookshelf-bg3 {
+		position: absolute;
+		top: 600px;
+		left: 50%;
+	}
+	.bookshelf-arang {
+		width: 200px;
+		position: absolute;
+		bottom: 200px;
+		right: -50px;
+		animation: leftRight 1.5s ease-in-out infinite;
+	}
+}
+.first-bookshelf-books {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	.bookshelf-book {
+		width: 26%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem 0;
+		.book-name {
+			position: absolute;
+			font-size: 1.5rem;
+			top: 90px;
+			margin-left: 27px;
+			color: black;
+		}
+		.book-pace {
+			width: 200px;
+			height: 250px;
+			position: absolute;
+			top: 70px;
+		}
+	}
+}
+.second-bookshelf-books {
+	position: absolute;
+	top: 650px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	.bookshelf-book {
+		width: 26%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem 0;
+		.book-name {
+			position: absolute;
+			font-size: 1.5rem;
+			top: -250px;
+			margin-left: 27px;
+			color: black;
+		}
+		.book-pace {
+			width: 200px;
+			height: 240px;
+			position: absolute;
+			top: -270px;
+		}
+	}
 }
 </style>

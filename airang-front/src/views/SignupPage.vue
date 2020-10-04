@@ -12,10 +12,10 @@
 			<div class="signup-box">
 				<label class="signup-label" for="text">아이 이름</label>
 				<input
-					id="username"
+					id="child_name"
 					class="signup-item"
 					type="text"
-					v-model="username"
+					v-model="child_name"
 				/>
 			</div>
 			<div class="signup-box">
@@ -95,7 +95,7 @@ export default {
 			email: '',
 			password1: '',
 			password2: '',
-			username: '',
+			child_name: '',
 		};
 	},
 	methods: {
@@ -115,7 +115,7 @@ export default {
 					return;
 				}
 				const userInfo = {
-					username: this.username,
+					child_name: this.child_name,
 					email: this.email,
 					password1: this.password1,
 					password2: this.password2,
@@ -129,7 +129,7 @@ export default {
 	},
 	computed: {
 		isVaildateName() {
-			const name = this.username;
+			const name = this.child_name;
 			if (name.length === 0) {
 				return false;
 			}

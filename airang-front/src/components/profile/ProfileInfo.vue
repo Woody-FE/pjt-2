@@ -63,7 +63,7 @@ export default {
 			try {
 				const id = this.$store.getters.getId;
 				const { data } = await getUserProfile(id);
-				this.userData.name = data.username;
+				this.userData.name = data.child_name;
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
 				console.log(error);
@@ -130,13 +130,13 @@ export default {
 		async changeName() {
 			try {
 				const content = {
-					username: this.userData.name,
+					child_name: this.userData.name,
 				};
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
 				alert('이름이 변경되었어요!');
 			} catch (error) {
-				console.log(error);
+				console.log(error.response);
 			}
 		},
 	},
