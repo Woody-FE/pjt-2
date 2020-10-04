@@ -4,61 +4,54 @@
 			<figure class="guide visible">
 				<img
 					class="guide-img"
-					src="@/assets/images/character/arang1.png"
-					alt="두번째 가이드 이미지"
+					src="@/assets/images/guide/guide_img_1.png"
+					alt="첫 번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					<p>저는 지금 커피를 갈고있어요</p>
-					<p>오늘은 더우니까</p>
-					<p>아이스 아메리카노를 먹어보겠습니다~</p>
+					<p>회원가입의 아이 이름이 주인공의 이름이 되어요.</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/character/arang2.jpg"
-					alt="첫번째 가이드 이미지"
+					src="@/assets/images/guide/guide_img_2.png"
+					alt="두 번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					<p>운동은 중요해요</p>
-					<p>저는 앱등이라서</p>
-					<p>애플워치를 끼고 운동해요</p>
-					<p>끝나고 맥주나 한잔 해야겠어요</p>
+					<p>주인공이 될 동화를 정해주세요.</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/character/arang3.jpg"
-					alt="첫번째 가이드 이미지"
+					src="@/assets/images/guide/guide_img_3.png"
+					alt="세 번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					<p>제가 갈았던 원두가 별로에요</p>
-					<p>그래서 스타벅스에 왔답니다</p>
-					<p>입장권도 들고왔어요 ㅋㅋ</p>
+					<p>선택한 동화의 간략한 내용을 알려드려요.</p>
+					<p>만들 책의 제목과 얼굴 사진을 입력해주세요!</p>
+					<p>자동으로 얼굴 사진을 그림으로 만들어드려요.</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/character/arang1.png"
-					alt="첫번째 가이드 이미지"
+					src="@/assets/images/guide/guide_img_4.png"
+					alt="네 번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					<p>크~</p>
-					<p>바다를 보면서 한잔!</p>
+					<p>분기점에 따라 이야기가 바뀌어요!</p>
 				</figcaption>
 			</figure>
 			<figure class="guide">
 				<img
 					class="guide-img"
-					s
-					src="@/assets/images/character/arang2.jpg"
-					alt="첫번째 가이드 이미지"
+					src="@/assets/images/guide/guide_img_5.png"
+					alt="다섯 번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
-					<p>똑같은 사진</p>
-					<p>왜있노?</p>
+					<p>선택지들 마다 다른 엔딩이 있어요!</p>
+					<p>여러 번 읽어주셨으면 좋겠어요.</p>
 				</figcaption>
 			</figure>
 		</section>
@@ -67,6 +60,9 @@
 				<i class="icon ion-md-arrow-down"></i>
 			</button>
 			<button class="guide-btn__top" @click="topScroll">TOP</button>
+		</section>
+		<section class="guide-end-box">
+			<button class="guide-end-btn">동화책 주인공이 되어 보실래요?</button>
 		</section>
 	</section>
 </template>
@@ -244,5 +240,31 @@ export default {
 	background: linear-gradient(0deg, #ff922b, #faad08);
 	color: white;
 	outline: none;
+}
+.guide-end-box {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.guide-end-btn {
+	position: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	height: 3.5rem;
+	font-size: 3rem;
+	border-top-left-radius: 1.5rem;
+	border-bottom-left-radius: 1.5rem;
+	border-top-right-radius: 1.5rem;
+	border-bottom-right-radius: 1.5rem;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: bold;
+	color: white;
+	background-color: #2f9e44;
 }
 </style>
