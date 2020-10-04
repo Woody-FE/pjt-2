@@ -55,7 +55,7 @@ class MyStory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mystories')
     story_name = models.CharField(max_length=30)
     mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories', null=True, blank=True)
-    finished = models.BooleanField(default=False)
+    finished = models.IntegerField(default=0)
     
 
 class MyCharacter(models.Model):
