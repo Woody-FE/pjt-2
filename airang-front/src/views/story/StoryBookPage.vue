@@ -36,15 +36,19 @@
 				<div class="mystory-face mystory-description">
 					<div class="mystory-portrait">
 						<div class="portrait-box">
-							<img
-								class="portrait-img"
-								src="@/assets/images/character/arang1.png"
-								alt=""
-							/>
+							<div class="portrait-img__box">
+								<img
+									class="portrait-img"
+									src="@/assets/images/character/arang1.png"
+									alt=""
+								/>
+							</div>
 							<p class="portrait-name">
-								아랑이
+								줄거리
 							</p>
-							<p class="portrait-content">재밌는 이야기를 시작하는데...</p>
+							<p class="portrait-content">
+								아버지가 준 3가지 선물로 일어나는 나만의 신기하고 재밌는 여행
+							</p>
 						</div>
 					</div>
 				</div>
@@ -450,22 +454,32 @@ export default {
 		object-fit: fill;
 	}
 }
+
 @include Book();
 .mystory-portrait {
+	width: 100%;
+	height: 100%;
+	padding: 10%;
 	.portrait-box {
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		.portrait-img {
-			width: 30%;
-			border-radius: 50%;
-			border: 1px solid black;
-			margin-bottom: 1rem;
+		.portrait-img__box {
+			display: flex;
+			width: 200px;
+			height: 300px;
+			justify-content: center;
+			align-items: center;
+			.portrait-img {
+				width: 100%;
+				height: auto;
+			}
 		}
 		.portrait-name {
-			font-size: 1rem;
-			margin-bottom: 3rem;
+			font-size: 1.5rem;
+			margin-bottom: 6rem;
 		}
 		.portrait-content {
 			text-align: center;
