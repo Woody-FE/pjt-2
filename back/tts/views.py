@@ -48,7 +48,7 @@ def create_narration(request, story_id):
     story = get_object_or_404(Story, pk=story_id)
     store_path = f'{settings.BASE_DIR}/voice/story/{story_id}/'
     for script in scripts:
-        if script.character.id == 2:
+        if script.character.id == 2 and '{child_name}' not in script.content:
             content = script.content.replace('<br>', '.')
             file_name = f'{store_path}script_{script.id}.mp3'
             if not os.path.isfile(file_name):
