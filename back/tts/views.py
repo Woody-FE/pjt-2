@@ -38,7 +38,16 @@ def create_voice(request, story_id, user_id):
                 os.makedirs(store_path)
             
             TTS(result_script, f'{store_path}script_{script.id}.mp3')
-            
-            
-    
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def create_narration(request, story_id):
+    scripts = Script.objects.all()
+    story = get_object_or_404(Story, pk=story_id)
+    store_path = f'{settings.BASE_DIR}/voice/story/{story_id}'
+    for script in scripts:
+        if script.character.id == 2:
+            file_name = f'{store_path}/script_{script.id}.mp3'
+            if not os.path.isfile(file_name):
+                TTS(script.content, file_name)
