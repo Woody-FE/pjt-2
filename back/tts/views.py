@@ -49,6 +49,7 @@ def create_narration(request, story_id):
     store_path = f'{settings.BASE_DIR}/voice/story/{story_id}/'
     for script in scripts:
         if script.character.id == 2:
+            content = script.content.replace('<br>', '.')
             file_name = f'{store_path}script_{script.id}.mp3'
             if not os.path.isfile(file_name):
-                TTS(script.content, file_name)
+                TTS(content, file_name)
