@@ -101,7 +101,9 @@ REST_FRAMEWORK = {
 
 REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
-    'REGISTER_SERIALIZER': 'apps.users.serializers.RegisterSerializer',
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
 }
 # authentication setting
 # REST_USE_JWT = True
