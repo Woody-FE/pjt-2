@@ -31,7 +31,7 @@
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
-					class="story-sound stroy-sound__playing"
+					class="story-sound story-sound__playing"
 					autoplay
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
