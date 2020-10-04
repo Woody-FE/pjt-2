@@ -7,11 +7,20 @@
 			:class="[count === index ? 'bb-abled' : 'bb-disabled']"
 		>
 			<div class="portrait-box">
-				<img
-					class="portrait-img"
-					src="@/assets/images/character/arang1.png"
-					alt=""
-				/>
+				<div class="portrait-img__box">
+					<img
+						v-if="script.character.id === 1"
+						class="portrait-img"
+						:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
+						alt=""
+					/>
+					<img
+						v-else
+						class="portrait-img"
+						:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
+						alt=""
+					/>
+				</div>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
 				<audio
@@ -22,7 +31,7 @@
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
-					class="story-sound story-sound__playing"
+					class="story-sound stroy-sound__playing"
 					autoplay
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
@@ -78,6 +87,9 @@ export default {
 		return {
 			count: 0,
 		};
+	},
+	created() {
+		console.log(this.scripts);
 	},
 	computed: {
 		BaseURL() {
@@ -141,7 +153,7 @@ export default {
 	}
 	.portrait-name {
 		font-size: 1.5rem;
-		margin-bottom: 5rem;
+		margin-bottom: 6rem;
 	}
 	.portrait-content {
 		text-align: center;

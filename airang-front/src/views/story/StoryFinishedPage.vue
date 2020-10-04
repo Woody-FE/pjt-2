@@ -52,7 +52,7 @@
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
-						alt=""
+						alt="hero_head"
 					/>
 					<img
 						v-if="job"
