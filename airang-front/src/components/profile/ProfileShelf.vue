@@ -22,12 +22,40 @@
 			<section></section>
 		</section>
 		<section class="profileStory-select"></section>
-		<section class="bookshelf"></section>
+		<div class="bookshelf">
+			<div class="first-bookshelf-books">
+				<div class="bookshelf-book" :key="book.id" v-for="book in firstBooks">
+					<router-link :to="`/bookshelf/${book.id}`">
+						<img
+							src="@/assets/images/default_book.jpg"
+							class="book-pace"
+							alt="book-pace"
+						/>
+						<span class="book-name">{{ book.story_name }}</span>
+					</router-link>
+				</div>
+			</div>
+		</div>
+		<div class="bookshelf">
+			<div class="second-bookshelf-books">
+				<div class="bookshelf-book" :key="book.id" v-for="book in secondBooks">
+					<router-link :to="`/bookshelf/${book.id}`">
+						<img
+							src="@/assets/images/default_book.jpg"
+							class="book-pace"
+							alt="book-pace"
+						/>
+						<span class="book-name">{{ book.story_name }}</span>
+					</router-link>
+				</div>
+			</div>
+		</div>
 	</section>
 </template>
 
 <script>
 import { fetchMyStories } from '@/api/story';
+import { truncateString } from '@/utils/validation';
 
 export default {
 	props: {
@@ -35,7 +63,8 @@ export default {
 	},
 	data() {
 		return {
-			books: [],
+			firstBooks: [],
+			secondBooks: [],
 			whatBook: 'all',
 		};
 	},
@@ -48,7 +77,16 @@ export default {
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
-				this.books = data;
+				console.log(data);
+				this.firstBooks = data.slice(0, 3);
+				this.secondBooks = data.slice(3, 6);
+
+				this.firstBooks.forEach(el => {
+					el.story_name = truncateString(el.story_name);
+				});
+				this.secondBooks.forEach(el => {
+					el.story_name = truncateString(el.story_name);
+				});
 			} catch (error) {
 				console.log(error);
 			}
@@ -71,6 +109,8 @@ export default {
 
 <style lang="scss">
 .profileStory-wrap {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -195,9 +235,10 @@ export default {
 
 // bookshelf-bg
 .profileShelf-wrap__background {
+	height: 700px;
 	.bookshelf-bg {
 		width: 100%;
-		height: 550px;
+		height: 650px;
 		position: absolute;
 		top: 50px;
 	}
@@ -205,7 +246,7 @@ export default {
 		width: 80%;
 		height: 50px;
 		position: absolute;
-		top: 180px;
+		top: 300px;
 		left: 50%;
 		border-radius: 30px;
 		border-bottom: 5px solid rgb(99, 58, 23);
@@ -219,33 +260,67 @@ export default {
 	}
 	.bookshelf-bg3 {
 		position: absolute;
-		top: 360px;
+		top: 600px;
 		left: 50%;
 	}
 	.bookshelf-arang {
 		width: 200px;
 		position: absolute;
-		bottom: -550px;
+		bottom: 200px;
 		right: -50px;
 		animation: leftRight 1.5s ease-in-out infinite;
 	}
 }
-.bookshelf-books {
+.first-bookshelf-books {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	.bookshelf-book {
-		width: 33%;
+		width: 26%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		margin: 1rem 0;
+		.book-name {
+			position: absolute;
+			font-size: 1.5rem;
+			top: 90px;
+			margin-left: 27px;
+			color: black;
+		}
 		.book-pace {
-			width: 100px;
-			height: 130px;
+			width: 200px;
+			height: 250px;
 			position: absolute;
 			top: 70px;
+		}
+	}
+}
+.second-bookshelf-books {
+	position: absolute;
+	top: 650px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	.bookshelf-book {
+		width: 26%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem 0;
+		.book-name {
+			position: absolute;
+			font-size: 1.5rem;
+			top: -250px;
+			margin-left: 27px;
+			color: black;
+		}
+		.book-pace {
+			width: 200px;
+			height: 240px;
+			position: absolute;
+			top: -270px;
 		}
 	}
 }

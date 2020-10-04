@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="profile-wrap">
 		<ProfileInfo />
 		<ProfileShelf />
 	</section>
@@ -25,3 +25,10 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss">
+.profile-wrap {
+	width: 100%;
+	height: 100%;
+}
+</style>

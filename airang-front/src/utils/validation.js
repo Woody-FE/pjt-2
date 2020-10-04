@@ -16,4 +16,13 @@ function validationName(name) {
 	if (lenName < 2 || lenName > 5) return false;
 	return hangle.test(myName);
 }
-export { validatePassword, validationName };
+
+function truncateString(string) {
+	const thisString = string;
+
+	if (thisString.length > 6) {
+		return thisString.substr(0, 6) + '..';
+	}
+	return thisString;
+}
+export { validatePassword, validationName, truncateString };

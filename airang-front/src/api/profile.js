@@ -9,6 +9,7 @@ function convertImage(userId) {
 }
 
 function patchUserName(userId, userData) {
+	console.log(userData);
 	return auth.patch(`accounts/${userId}/`, userData);
 }
 
@@ -39,5 +40,5 @@ export {
 	resetImage,
 	convertImage,
 	createVoice,
-	getMyBooks,
+	// getMyBooks,
 };
