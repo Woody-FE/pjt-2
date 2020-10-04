@@ -3,7 +3,7 @@
 		<header class="profileStory-header">
 			<span class="profileStory-header__span"></span>
 			<p class="profileStory-header__name">
-				나의 책들??(여기 뭐로할지 생각 더해봄)
+				나의 책장
 			</p>
 		</header>
 		<section class="profileShelf-wrap__background">
@@ -22,15 +22,7 @@
 			<section></section>
 		</section>
 		<section class="profileStory-select"></section>
-		<section class="bookshelf">
-			<div class="bookshelf-books" @click="changeStatus">
-				<img
-					:src="`${baseURL}${filterMedia(book.cover_image)}`"
-					class="book-pace"
-					alt="book-pace"
-				/>
-			</div>
-		</section>
+		<section class="bookshelf"></section>
 	</section>
 </template>
 
@@ -41,12 +33,10 @@ export default {
 	props: {
 		userName: Number,
 	},
-	created() {
-		this.fetchBooks();
-	},
 	data() {
 		return {
 			books: [],
+			whatBook: 'all',
 		};
 	},
 	computed: {
@@ -54,7 +44,6 @@ export default {
 			return process.env.VUE_APP_API_URL;
 		},
 	},
-
 	methods: {
 		async fetchBooks() {
 			try {
@@ -73,6 +62,9 @@ export default {
 		changeStatus() {
 			return;
 		},
+	},
+	created() {
+		this.fetchBooks();
 	},
 };
 </script>

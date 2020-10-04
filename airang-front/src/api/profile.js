@@ -28,6 +28,9 @@ function createVoice(storyId, userId) {
 	return auth.post(`test/voice/story/${storyId}/user/${userId}/`);
 }
 
+// function getMyBooks(userId, query) {
+// 	return auth.get(`accounts/${userId}`);
+// }
 export {
 	getUserProfile,
 	patchUserName,
@@ -36,4 +39,5 @@ export {
 	resetImage,
 	convertImage,
 	createVoice,
+	getMyBooks,
 };
