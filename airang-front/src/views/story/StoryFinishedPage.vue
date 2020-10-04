@@ -1,6 +1,6 @@
 <template>
 	<section class="story-wrap">
-		<article v-if="currentItem === -1" class="story-page story-current">
+		<!-- <article v-if="currentItem === -1" class="story-page story-current">
 			<section class="story-main story-cover">
 				<img
 					class="story-cover__img"
@@ -14,7 +14,7 @@
 					시작하기
 				</button>
 			</section>
-		</article>
+		</article> -->
 		<article
 			:data-index="index"
 			:key="index"
@@ -151,6 +151,7 @@ export default {
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
 				this.startStory = data.mystory.substory;
+				this.startPage();
 			} catch (error) {
 				console.log(error);
 			}
@@ -158,7 +159,7 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
-					this.$router.push({ name: 'bookshelf' });
+					this.$router.push({ name: 'profile' });
 				} else {
 					if (this.nextStoryId) {
 						const { data } = await fetchMySubStory(
@@ -202,21 +203,20 @@ export default {
 			return string;
 		},
 		startPage() {
-			const startBtn = document.querySelector('.story-start-btn');
-			startBtn.style.display = 'none';
+			// const startBtn = document.querySelector('.story-start-btn');
+			// startBtn.style.display = 'none';
 			const storyCover = document.querySelectorAll('.story-page');
 			setTimeout(function() {
-				storyCover[0].classList.add('story-disabled');
+				storyCover[0].classList.add('story-abled');
 			}, 500);
 			this.stories.push(this.startStory);
-
 			this.currentItem = 0;
 		},
 		nextPage() {
 			this.currentItem += 1;
 		},
 		exitStory() {
-			this.$router.push({ name: 'bookshelf' });
+			this.$router.push({ name: 'profile' });
 		},
 	},
 	beforeUpdate() {
