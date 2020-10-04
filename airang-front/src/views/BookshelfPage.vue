@@ -24,12 +24,12 @@
 						/>
 						<img
 							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
-							class="book-pace2"
+							class="book-pace book-pace2"
 							alt="book-pace"
 						/>
 						<img
 							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
-							class="book-pace3"
+							class="book-pace book-pace3"
 							alt="book-pace"
 						/>
 					</router-link>
@@ -91,7 +91,7 @@ export default {
 	perspective: 500px;
 	h2 {
 		font-size: 24px;
-		border-left: 3px solid rgba(99, 58, 23, 0.5);
+		border-left: 3px solid rgb(194, 113, 41);
 		padding-left: 5px;
 	}
 }
@@ -118,6 +118,7 @@ export default {
 	box-shadow: 0px 10px 5px rgba(99, 58, 23, 0.5);
 }
 .bookshelf-bg3 {
+	transform: translateX(-50%) rotateX(80deg);
 	position: absolute;
 	top: 360px;
 	left: 50%;
@@ -155,24 +156,15 @@ export default {
 		align-items: center;
 		margin: 1rem 0;
 		.book-pace {
-			width: 200px;
-			height: 260px;
+			width: 16%;
 			position: absolute;
-			top: 120px;
+			bottom: -574%;
 		}
 		.book-pace2 {
-			width: 200px;
-			height: 260px;
-			position: absolute;
-			top: 120px;
-			left: 465px;
+			left: 42%;
 		}
 		.book-pace3 {
-			width: 200px;
-			height: 260px;
-			position: absolute;
-			top: 120px;
-			left: 740px;
+			left: 67%;
 		}
 	}
 }
