@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "select": "수상한 여우를 따라간다",
+    "substory_id": 3,
+    "branch_id": 1
+  },
+  {
+    "id": 2,
+    "select": "급한 토끼를 쫓아간다",
+    "substory_id": 9,
+    "branch_id": 1
+  },
+  {
+    "id": 3,
+    "select": "마을 안 쪽으로 간다",
+    "substory_id": 13,
+    "branch_id": 2
+  },
+  {
+    "id": 4,
+    "select": "여행을 계속한다",
+    "substory_id": 16,
+    "branch_id": 2
+  },
+  {
+    "id": 5,
+    "select": "토끼랑 함께한다",
+    "substory_id": 20,
+    "branch_id": 3
+  },
+  {
+    "id": 6,
+    "select": "여행을 계속한다",
+    "substory_id": 16,
+    "branch_id": 3
+  },
+  {
+    "id": 7,
+    "select": "마을을 좀 더 구경한다",
+    "substory_id": 23,
+    "branch_id": 4
+  },
+  {
+    "id": 8,
+    "select": "강이 보이는쪽으로 간다",
+    "substory_id": 26,
+    "branch_id": 4
+  },
+  {
+    "id": 9,
+    "select": "큰 나무 쪽으로 간다",
+    "substory_id": 30,
+    "branch_id": 5
+  },
+  {
+    "id": 10,
+    "select": "빌딩 쪽으로 간다",
+    "substory_id": 40,
+    "branch_id": 5
+  },
+  {
+    "id": 11,
+    "select": "피리",
+    "substory_id": 34,
+    "branch_id": 6
+  },
+  {
+    "id": 12,
+    "select": "기타",
+    "substory_id": 36,
+    "branch_id": 6
+  }
+]

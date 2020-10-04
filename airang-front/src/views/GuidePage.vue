@@ -4,7 +4,7 @@
 			<figure class="guide visible">
 				<img
 					class="guide-img"
-					src="@/assets/images/01.png"
+					src="@/assets/images/character/arang1.png"
 					alt="두번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -16,7 +16,7 @@
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/02.png"
+					src="@/assets/images/character/arang2.jpg"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -29,7 +29,7 @@
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/03.png"
+					src="@/assets/images/character/arang3.jpg"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -41,7 +41,7 @@
 			<figure class="guide">
 				<img
 					class="guide-img"
-					src="@/assets/images/04.png"
+					src="@/assets/images/character/arang1.png"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -53,7 +53,7 @@
 				<img
 					class="guide-img"
 					s
-					src="@/assets/images/05.png"
+					src="@/assets/images/character/arang2.jpg"
 					alt="첫번째 가이드 이미지"
 				/>
 				<figcaption class="guide-description">
@@ -91,6 +91,8 @@ export default {
 			const guideElems = document.querySelectorAll('.guide');
 			this.currentItem = guideElems[0];
 			this.currentItem.classList.add('visible');
+			const downbtn = document.querySelector('.guide-btn__down');
+			downbtn.style.display = 'inline';
 		},
 	},
 	mounted() {
@@ -103,7 +105,7 @@ export default {
 		this.currentItem = guideElems[0];
 		let ioIndex;
 		//eslint-disable-next-line
-		const io = new IntersectionObserver((entries, observer) => {
+        const io = new IntersectionObserver((entries, observer) => {
 			ioIndex = entries[0].target.dataset.index * 1;
 		});
 		for (let i = 0; i < guideElems.length; i++) {
@@ -123,9 +125,14 @@ export default {
 				document.querySelector('body').scrollHeight <=
 				this.windowTop + window.innerHeight
 			) {
+				downbtn.style.display = 'none';
 				return;
 			}
+			downbtn.style.display = 'inline';
 			for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
+				if (i === guideElems.length - 1) {
+					break;
+				}
 				guide = guideElems[i];
 				if (!guide) continue;
 				boundingRect = guide.getBoundingClientRect();
@@ -146,7 +153,6 @@ export default {
 			}
 			let guide;
 			let boundingRect;
-
 			if (delta < 0) {
 				for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
 					guide = guideElems[i];
@@ -171,6 +177,7 @@ export default {
 						this.currentItem.classList.add('visible');
 					}
 				}
+				downbtn.style.display = 'inline';
 			}
 		});
 	},

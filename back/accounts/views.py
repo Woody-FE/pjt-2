@@ -1,15 +1,18 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 
 from drf_yasg.utils import swagger_auto_schema
 
 from .models import Family
+from .image_to_cartoon.make_hat_and_face_image import show_me_hat_and_face
 from .serializers import UserUpdateSerializer, UserDetailSerializer, UserChildImageUpdateSerializer, FamilyCreateSerializer, FamilyDetailSerializer, FamilyBasicSerializer, FamilyUpdateSerializer
 
 
@@ -48,13 +51,21 @@ class UserImageUpdateView(APIView):
     permission_classes = (IsAuthenticated,)
     parser_classes = (FormParser, MultiPartParser, )
 
+    def get_object(self, user_id):
+        return get_object_or_404(User, pk=user_id)
+
     @swagger_auto_schema(request_body=UserChildImageUpdateSerializer)
     def patch(self, request, user_id):
-        user = get_object_or_404(User, pk=user_id)
+        user = self.get_object(user_id)
         serializer = UserChildImageUpdateSerializer(instance=user, data=request.FILES)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(UserDetailSerializer(instance=user).data ,status=status.HTTP_200_OK)
+    
+    def delete(self, request, user_id):
+        user = self.get_object(user_id)
+        user.child_image.delete(save=True)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserFamilyView(APIView):
@@ -77,7 +88,7 @@ class UserFamilyView(APIView):
         serializer = FamilyCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user)
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserFamilyDetailView(APIView):
@@ -118,4 +129,28 @@ class UserFamilyDetailView(APIView):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_200_OK)
-        
+
+
+@swagger_auto_schema(methods=['POST'])
+@api_view(['POST'])
+def cartoonize_profile(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    # print(settings.BASE_DIR)
+    # print(user.child_image)
+    
+    profile_abs_path = user.child_image.path
+    
+    try:
+        path = show_me_hat_and_face(profile_abs_path, user_id)
+        result = {
+            'path': path.split('back/')[1],
+        }
+        st = status.HTTP_200_OK
+
+    except IndexError:
+        result = {
+            'detail': '얼굴이 더 잘나오게 찍어주세요.',
+        }
+        st = status.HTTP_500_INTERNAL_SERVER_ERROR
+
+    return Response(result, status=st)

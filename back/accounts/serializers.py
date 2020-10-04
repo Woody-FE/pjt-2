@@ -2,6 +2,9 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
+from rest_auth.models import TokenModel
+from rest_auth.utils import import_callable
+
 from .models import Family
 
 
@@ -34,6 +37,7 @@ class FamilyDetailSerializer(serializers.ModelSerializer):
 
 
 class UserDetailSerializer(UserUpdateSerializer):
+    username = serializers.CharField(required=False)
     class Meta:
         model = User
         depth = 1
@@ -88,5 +92,39 @@ class FamilyUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'name',
             'image',
-            'gender'
+            'gender',
         )
+
+
+class CustomTokenSerializer(serializers.ModelSerializer):
+    user = UserDetailSerializer()
+    class Meta:
+        model = TokenModel
+        fields = (
+            'key',
+            'user',
+        )
+
+
+class RegisterSerializer(serializers.Serializer):
+
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(write_only=True)
+
+    def validate_email(self, email):
+        return email
+
+    def validate_password(self, password):
+        return password
+
+    def get_cleaned_data(self):
+        return {
+            'password': self.validated_data.get('password', ''),
+            'email': self.validated_data.get('email', '')
+        }
+
+    def save(self, request):
+        user = get_user_model()
+        cleaned_data = self.get_cleaned_data()
+        user.create_user(**cleaned_data)
+        return user
