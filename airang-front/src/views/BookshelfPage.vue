@@ -6,8 +6,13 @@
 			class="bookshelf-bg"
 			alt="bookshelf"
 		/>
-		<span class="bookshelf-bg2"></span>
+		<!-- <span class="bookshelf-bg2"></span> -->
 		<span class="bookshelf-bg2 bookshelf-bg3"></span>
+		<img
+			src="@/assets/images/bookShelf/shelf.png"
+			class="bookshelf-shelf"
+			alt="bookshelf-shelf"
+		/>
 		<img
 			src="@/assets/images/bookShelf/library_arang.png"
 			class="bookshelf-arang"
@@ -122,6 +127,17 @@ export default {
 	position: absolute;
 	top: 360px;
 	left: 50%;
+}
+.bookshelf-shelf {
+	width: 28%;
+	position: absolute;
+	bottom: -500px;
+	right: 210px;
+	@media screen and (max-width: 768px) {
+		width: 33%;
+		bottom: -490px;
+		right: 180px;
+	}
 }
 .bookshelf-arang {
 	width: 200px;
