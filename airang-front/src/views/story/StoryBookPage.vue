@@ -1,18 +1,31 @@
 <template>
-	<section class="mystory-wrap">
+	<section v-if="mainLoading">
+		로딩중
+	</section>
+	<section v-else class="mystory-wrap">
 		<div class="mystory-bookcover">
 			<section class="mystory-page">
 				<div class="mystory-face mystory-cover">
 					<img v-if="cover" class="mystory-cover__img" :src="coverSrc" alt="" />
 				</div>
-				<div class="mystory-face mystory-select">
-					<button class="mystory-select__btn btn" @click="nextPage">
-						책 생성
-					</button>
+				<div class="mystory-face">
+					<section class="mystory-select">
+						<img src="mystory-select__bg" alt="" />
+						<button
+							class="mystory-select__btn btn"
+							@click="
+								nexts();
+								nextPage();
+							"
+						>
+							책 생성
+						</button>
+					</section>
 				</div>
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-select">
+					<img src="" alt="" />
 					<button
 						class="mystory-select__btn btn"
 						@click="$router.push('/profile')"
@@ -20,7 +33,21 @@
 						책 보기
 					</button>
 				</div>
-				<div class="mystory-face">설명</div>
+				<div class="mystory-face mystory-description">
+					<div class="mystory-portrait">
+						<div class="portrait-box">
+							<img
+								class="portrait-img"
+								src="@/assets/images/character/arang1.png"
+								alt=""
+							/>
+							<p class="portrait-name">
+								아랑이
+							</p>
+							<p class="portrait-content">재밌는 이야기를 시작하는데...</p>
+						</div>
+					</div>
+				</div>
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-input">
@@ -34,10 +61,9 @@
 							v-model="bookName"
 						/>
 					</div>
-					<section class="mystory-imgbox">
-						<div v-if="loading">로딩</div>
+					<section v-if="loading" class="mystory-imgbox">로딩</section>
+					<section v-else class="mystory-imgbox">
 						<img
-							v-else
 							class="mystory-imgbox__img"
 							:src="changeImageSrc"
 							alt="profileImg"
@@ -73,8 +99,24 @@ export default {
 	created() {
 		const id = this.$store.getters.getId;
 		this.userId = id;
-		this.fetchStoryBook();
-		this.fetchData();
+		console.log('created', this.userId);
+		// this.mainLoading = true;
+		Promise.all([
+			fetchStory(this.storyId),
+			getUserProfile(this.userId),
+			convertImage(this.userId),
+		])
+			.then(res => {
+				this.cover = res[0].data.cover_image;
+				this.defaultBookname = res[0].data.name;
+				this.userData.imgPath = res[1].data.child_image;
+				this.cnt += 1;
+				this.conversionImage = res[2].data.path;
+				// this.mainLoading = false;
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	},
 	props: {
 		storyId: Number,
@@ -82,6 +124,8 @@ export default {
 	data() {
 		return {
 			cnt: 0,
+			count: 0,
+			mainLoading: false,
 			loading: false,
 			userId: null,
 			cover: null,
@@ -111,32 +155,31 @@ export default {
 				: `${this.imgSrc}media/image/child/noProfile.jpg`;
 		},
 	},
-	mounted() {
-		this.createImage();
-	},
 	updated() {
 		const cover = document.querySelector('.mystory-cover__img');
 		if (cover) {
 			cover.addEventListener('load', () => {
 				const page = document.querySelectorAll('.mystory-page');
-				setTimeout(function() {
-					page[0].classList.add('flipped');
-				}, 1000);
+				page[0].classList.add('flipped');
 			});
 		}
 	},
 	methods: {
+		nexts() {
+			const Btn = document.querySelector('.btn');
+			Btn.style.opacity = 'none';
+			const face = document.querySelectorAll('.mystory-face');
+			face[3].style.trasform = 'rotateY(-180deg)';
+		},
 		nextPage() {
 			const page = document.querySelectorAll('.mystory-page');
 			page[1].style.zIndex = 4;
-			setTimeout(function() {
-				page[1].classList.add('flipped');
-			}, 1000);
+			page[1].classList.add('flipped');
 		},
 		async fetchData() {
 			try {
-				const id = this.$store.getters.getId;
-				const { data } = await getUserProfile(id);
+				const { data } = await getUserProfile(this.userId);
+				console.log('fetchData', this.userId);
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
 				console.log(error);
@@ -165,7 +208,6 @@ export default {
 					await this.patchImage(changeImage);
 					this.fetchData();
 					this.createImage();
-					// alert('사진이 변경 되었어요');
 				} else {
 					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
 				}
@@ -195,7 +237,6 @@ export default {
 				this.cnt += 1;
 				const id = this.$store.getters.getId;
 				const { data } = await convertImage(id);
-				console.log(data);
 				this.conversionImage = data.path;
 			} catch (error) {
 				this.conversionImage = null;
@@ -235,12 +276,6 @@ export default {
 		height: 95vh;
 		transform-style: preserve-3d;
 		margin: auto;
-		.mystory-face:nth-child(2) {
-			transform: rotateY(180deg);
-		}
-		.mystory-face:nth-child(4) {
-			transform: rotateY(180deg);
-		}
 		.mystory-page {
 			position: absolute;
 			left: 50%;
@@ -249,20 +284,8 @@ export default {
 			width: 50%;
 			height: 100%;
 			transform-style: preserve-3d;
-			transition: 1.5s;
+			transition: 1s;
 			border: 1px solid lightgray;
-
-			&:nth-child(1) {
-				z-index: 3;
-				transform-origin: left;
-			}
-			&:nth-child(2) {
-				z-index: 2;
-				transform-origin: left;
-			}
-			&.flipped {
-				transform: rotateY(-180deg);
-			}
 			.mystory-face {
 				position: absolute;
 				left: 0;
@@ -273,6 +296,24 @@ export default {
 				background: white;
 				color: black;
 				backface-visibility: hidden;
+			}
+			&:nth-child(1) {
+				z-index: 3;
+				transform-origin: left;
+			}
+			&:nth-child(2) {
+				z-index: 2;
+				transform-origin: left;
+			}
+			&:nth-child(3) {
+				z-index: 1;
+			}
+
+			.mystory-description {
+				display: flex;
+				align-items: center;
+				.mystory-description__title {
+				}
 			}
 			.mystory-input {
 				position: relative;
@@ -297,7 +338,6 @@ export default {
 						left: 20%;
 						background: white;
 						color: #495057;
-						transform: translateX(-50%);
 					}
 					.mystory-bookname {
 						width: 70%;
@@ -308,7 +348,6 @@ export default {
 						text-align: center;
 						font-size: 1.5rem;
 						border-bottom: 2px solid rgba(158, 83, 33, 0.4);
-						/* border-radius: 16px; */
 					}
 				}
 				.mystory-imgbox {
@@ -316,7 +355,6 @@ export default {
 					height: 80%;
 					display: flex;
 					flex-direction: column;
-					/* justify-content: center; */
 					align-items: center;
 					@media (max-width: 768px) {
 						justify-content: center;
@@ -352,14 +390,22 @@ export default {
 				}
 			}
 			.mystory-select {
-				display: flex;
-				justify-content: center;
-				align-items: center;
+				position: relative;
+				width: 100%;
+				height: 100%;
+				.mystory-select__bg {
+					width: 100%;
+				}
 				.mystory-select__btn {
+					position: absolute;
+					bottom: 20%;
+					left: 50%;
 					width: 200px;
 					height: 100px;
 					font-size: 2rem;
-					border: none;
+					border-radius: 40%;
+					transform: translate(-50%, 50%);
+					backface-visibility: hidden;
 					color: #520909;
 					background: cornsilk;
 				}
@@ -383,6 +429,15 @@ export default {
 		}
 	}
 }
+.mystory-face:nth-child(2) {
+	transform: rotateY(-180deg);
+}
+.mystory-face:nth-child(4) {
+	transform: rotateY(0deg);
+}
+.flipped {
+	transform: rotateY(-180deg);
+}
 .mystory-cover {
 	width: 100%;
 	display: flex;
@@ -395,4 +450,27 @@ export default {
 	}
 }
 @include Book();
+.mystory-portrait {
+	.portrait-box {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.portrait-img {
+			width: 30%;
+			border-radius: 50%;
+			border: 1px solid black;
+			margin-bottom: 1rem;
+		}
+		.portrait-name {
+			font-size: 1rem;
+			margin-bottom: 3rem;
+		}
+		.portrait-content {
+			text-align: center;
+			line-height: 1.5;
+			font-size: 1.5rem;
+		}
+	}
+}
 </style>
