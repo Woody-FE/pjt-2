@@ -77,12 +77,12 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations(['clearUsername', 'clearToken']),
+		...mapMutations(['clearChildName', 'clearToken']),
 		logoutUser() {
-			this.clearUsername();
+			this.clearChildName();
 			this.clearToken();
 			this.$cookies.remove('auth-token');
-			this.$cookies.remove('username');
+			this.$cookies.remove('child_name');
 		},
 		movedHome() {
 			this.logoutUser();

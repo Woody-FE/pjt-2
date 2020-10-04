@@ -17,12 +17,22 @@
 				<audio
 					v-if="count + 1 === script.order && !isInName(script.content)"
 					class="story-sound"
+					:class="[
+						count + 1 === script.order && !isInName(script.content)
+							? 'story-sound__playing'
+							: '',
+					]"
 					autoplay
 					:src="`${BaseURL}voice/story/1/script_${script.id}.mp3`"
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
 					class="story-sound"
+					:class="[
+						count + 1 === script.order && isInName(script.content)
+							? 'story-sound__playing'
+							: '',
+					]"
 					autoplay
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
@@ -31,7 +41,13 @@
 			</div>
 		</div>
 		<div class="text-btn">
-			<button class="btn bb-right-btn" @click="afterPage">
+			<button
+				class="btn bb-right-btn"
+				@click="
+					stopAudio();
+					afterPage();
+				"
+			>
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
 		</div>
@@ -43,6 +59,13 @@ import store from '@/store/index';
 import bus from '@/utils/bus';
 export default {
 	methods: {
+		stopAudio() {
+			const playingSound = document.querySelector('.story-sound__playing');
+			console.log(playingSound);
+			if (playingSound) {
+				playingSound.pause();
+			}
+		},
 		afterPage() {
 			if (this.count >= this.scripts.length - 1) {
 				bus.$emit('page-increase');

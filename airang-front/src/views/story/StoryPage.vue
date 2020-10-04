@@ -66,6 +66,7 @@
 						src="@/assets/images/bg/left.jpg"
 						alt=""
 					/>
+
 					<button
 						class="btn story-select__btn"
 						@click="createSubStory(story.selects[0].substory)"
