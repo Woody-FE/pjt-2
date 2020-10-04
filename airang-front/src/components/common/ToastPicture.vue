@@ -17,6 +17,7 @@ export default {
 			message: '',
 			mystory: null,
 			selectStories: null,
+			job: null,
 		};
 	},
 	computed: {
@@ -25,13 +26,14 @@ export default {
 		},
 	},
 	methods: {
-		openMethod({ mystory, selectStories }) {
+		openMethod({ mystory, selectStories, job }) {
 			this.mystory = mystory;
 			this.selectStories = selectStories;
+			this.job = job;
 			this.open = true;
 		},
 		async showToast() {
-			await finishedMyStory(this.mystory, this.selectStories);
+			await finishedMyStory(this.mystory, this.job, this.selectStories);
 			this.open = false;
 			this.$router.push({ name: 'bookshelf' });
 		},

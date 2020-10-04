@@ -16,38 +16,22 @@
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
 				<audio
 					v-if="count + 1 === script.order && !isInName(script.content)"
-					class="story-sound"
-					:class="[
-						count + 1 === script.order && !isInName(script.content)
-							? 'story-sound__playing'
-							: '',
-					]"
-					autoplay
+					class="story-sound story-sound__playing"
 					:src="`${BaseURL}voice/story/1/script_${script.id}.mp3`"
+					autoplay
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
-					class="story-sound"
-					:class="[
-						count + 1 === script.order && isInName(script.content)
-							? 'story-sound__playing'
-							: '',
-					]"
-					autoplay
+					class="story-sound story-sound__playing"
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
 					"
+					autoplay
 				></audio>
 			</div>
 		</div>
 		<div class="text-btn">
-			<button
-				class="btn bb-right-btn"
-				@click="
-					stopAudio();
-					afterPage();
-				"
-			>
+			<button class="btn bb-right-btn" @click="afterPage()">
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
 		</div>
@@ -55,17 +39,11 @@
 </template>
 
 <script>
+// import axios from 'axios';
 import store from '@/store/index';
 import bus from '@/utils/bus';
 export default {
 	methods: {
-		stopAudio() {
-			const playingSound = document.querySelector('.story-sound__playing');
-			console.log(playingSound);
-			if (playingSound) {
-				playingSound.pause();
-			}
-		},
 		afterPage() {
 			if (this.count >= this.scripts.length - 1) {
 				bus.$emit('page-increase');
@@ -78,7 +56,7 @@ export default {
 		},
 		filterUsername(string) {
 			if (string.includes('아들')) {
-				return string.replace('아들', store.getters['getUsername']);
+				return string.replace('아들', store.getters['getChildName']);
 			}
 			return string;
 		},
@@ -87,7 +65,7 @@ export default {
 		},
 		filterName(string) {
 			if (string.includes('{child_name}')) {
-				return string.replace('{child_name}', store.getters['getUsername']);
+				return string.replace('{child_name}', store.getters['getChildName']);
 			}
 			return string;
 		},
@@ -108,7 +86,9 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.userId, this.scripts);
+		// axios
+		// 	.post(`${this.BaseURL}test/voice/story/1/narration/`)
+		// 	.then(res => console.log(res));
 	},
 };
 </script>
