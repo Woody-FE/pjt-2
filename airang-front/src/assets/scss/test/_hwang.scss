@@ -327,10 +327,14 @@
   animation: leftRight 1s ease-in-out infinite;
 }
 .sub22-110 {
-
+  width: 35%;
+  left: 48%;
+  top: 19%;
 }
 .sub22-111 {
-  
+  width: 35%;
+  left: 48%;
+  top: 19%;
 }
 .sub25-69 {
   width: 35%;
@@ -443,6 +447,36 @@
   top: 2%;
   left: 19%;
   animation: leftRight101 3s ease-in-out infinite;
+}
+.job-1 {
+  width: 35%;
+  top: 9%;
+  left: 50%;
+  animation: smallBig 3s ease-in-out infinite;
+}
+.job-2 {
+  width: 35%;
+  top: -1%;
+  left: 50%;
+}
+.job-3 {
+  width: 35%;
+  top: 8%;
+  left: 50%;
+  animation: smallBig 3s ease-in-out infinite;
+}
+.job-4 {
+  width: 40%;
+  top: 0%;
+  left: 37%;
+  animation: smallBig 3s ease-in-out infinite;
+}
+.job-5 {
+  width: 30%;
+  top: 13%;
+  left: 47%;
+  transform: translate(-50%, 50%) rotate(-15deg) !important;
+  animation: smallBig 3s ease-in-out infinite;
 }
 @keyframes smallBig {
   0% {

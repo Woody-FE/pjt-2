@@ -52,6 +52,14 @@
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
+						alt="hero_head"
+					/>
+					<img
+						v-if="job"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="
+							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/${job}.png`
+						"
 						alt=""
 					/>
 				</div>
@@ -106,6 +114,7 @@ export default {
 			coverImage: null,
 			bookName: null,
 			leftBox: [],
+			job: 0,
 		};
 	},
 	destroyed() {
@@ -117,6 +126,7 @@ export default {
 		this.finish = false;
 		this.coverImage = null;
 		this.bookName = null;
+		this.job = 0;
 	},
 	methods: {
 		resetScript() {
@@ -137,7 +147,6 @@ export default {
 		async createStory(mystoryId) {
 			try {
 				const { data } = await fetchMyStory(mystoryId);
-				console.log(data);
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
@@ -156,8 +165,26 @@ export default {
 							this.myStoryId,
 							this.nextStoryId,
 						);
-						console.log(data);
 						if (data.next_id === null) {
+							switch (data.substory.id) {
+								case 47:
+									this.job = 4;
+									break;
+								case 46:
+									this.job = 5;
+									break;
+								case 45:
+									this.job = 2;
+									break;
+								case 44:
+									this.job = 1;
+									break;
+								case 43:
+									this.job = 3;
+									break;
+								default:
+									this.job = 0;
+							}
 							this.finish = true;
 						}
 						this.nextStoryId = data.next_id;
@@ -191,6 +218,14 @@ export default {
 		exitStory() {
 			this.$router.push({ name: 'bookshelf' });
 		},
+	},
+	beforeUpdate() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds) {
+			playingSounds.forEach(playingSound => {
+				playingSound.pause();
+			});
+		}
 	},
 	mounted() {
 		const id = this.$store.getters.getId;

@@ -1,33 +1,24 @@
 <template>
 	<section class="toast" :class="toastAnimationClass">
-		<section class="toast-img">
-			<img
-				class="toast-img__box"
-				src="@/assets/images/user/children.jpeg"
-				alt=""
-			/>
-			<div class="toast-img__description">
-				<h2 class="toast-description__title">사용방법</h2>
-				<p>1. 정면을 응시한 사진을 이용해주세요.</p>
-				<p>2. 상반신 사진을 이용해주세요.</p>
-			</div>
-		</section>
-		<input ref="imageFile" type="file" />
-		<section>
-			<button class="toast-btn-white" @click="open = false">취소</button>
-			<button class="toast-btn-purple" @click="showToast">변경</button>
+		<img class="toast-img" src="@/assets/images/bg/selectBg.png" alt="" />
+		<h2 class="toast-title">책을 저장하시겠습니까 ?</h2>
+		<section class="toast-btn">
+			<button class="toast-btn-white btn" @click="closeToast">취소</button>
+			<button class="toast-btn-purple btn" @click="showToast">저장</button>
 		</section>
 	</section>
 </template>
 <script>
 import bus from '@/utils/bus.js';
-import { changeImage } from '@/api/profile';
+import { finishedMyStory } from '@/api/story';
 export default {
 	data() {
 		return {
 			open: false,
 			message: '',
-			userId: null,
+			mystory: null,
+			selectStories: null,
+			job: null,
 		};
 	},
 	computed: {
@@ -36,24 +27,28 @@ export default {
 		},
 	},
 	methods: {
-		openMethod(userId) {
-			this.userId = userId;
+		openMethod({ mystory, job, selectStories }) {
+			this.mystory = mystory;
+			this.selectStories = selectStories;
+			this.job = job;
 			this.open = true;
 		},
 		async showToast() {
-			const change = this.$refs.imageFile.files[0];
-			const formdata = new FormData();
-			formdata.append('child_image', change);
-			await changeImage(this.userId, formdata);
+			console.log(this.mystory, this.job, this.selectStories);
+			await finishedMyStory(this.mystory, this.job, this.selectStories);
 			this.open = false;
-			bus.$emit('show:changeImage');
+			this.$router.push({ name: 'bookshelf' });
+		},
+		closeToast() {
+			this.open = false;
+			this.$router.push({ name: 'bookshelf' });
 		},
 	},
 	created() {
-		bus.$on('show:picture', this.openMethod);
+		bus.$on('show:finished', this.openMethod);
 	},
 	beforeDestroy() {
-		bus.$off('show:picture', this.openMethod);
+		bus.$off('show:finished', this.openMethod);
 	},
 	watch: {
 		$route() {
@@ -63,17 +58,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@include common-btn();
 .toast {
 	position: fixed;
-	width: 600px;
-	@media screen and (max-width: 640px) {
+	width: 100vw;
+	/* @media screen and (max-width: 640px) {
 		width: 500px;
-	}
-	height: 600px;
-	background-color: #22252e;
+	} */
+	height: 100vh;
+	background: white;
+	color: black;
 	border-radius: 4px;
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
-	color: white;
+	color: #343a40;
 	top: 50%;
 	left: 50%;
 	display: flex;
@@ -81,58 +78,47 @@ export default {
 	justify-content: center;
 	align-items: center;
 	transform: translate(-50%, -50%);
+	.toast-title {
+		z-index: 1;
+		font-size: 3rem;
+	}
 	.toast-img {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 50%;
-		.toast-img__box {
-			width: 35%;
-			height: 100%;
-			box-sizing: border-box;
-			padding: 1rem;
-		}
-		.toast-img__description {
-			width: 65%;
-			height: 100%;
-			color: white;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			box-sizing: border-box;
-			padding-left: 1rem;
-			.mystory-description__title {
-				text-align: center;
-				margin-bottom: 1rem;
-			}
-		}
+		z-index: 1;
+		position: absolute;
+		width: 700px;
+		height: 400px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 }
 .toast.none {
 	display: none;
 }
+.toast-btn {
+	z-index: 2;
+	margin-top: 3rem;
+}
 .toast-btn-white {
-	border: none;
-	border-radius: 3px;
+	width: 7rem;
 	padding: 0 1rem;
-	font-size: 1rem;
+	font-size: 2rem;
 	font-weight: 700;
 	background: white;
-	color: black;
-	height: 2rem;
-	margin-top: 1.5rem;
+	color: $deepGray;
+	height: 4rem;
 	margin-right: 0.5rem;
+	cursor: pointer;
 }
 .toast-btn-purple {
-	border: none;
-	border-radius: 3px;
+	width: 7rem;
 	padding: 0 1rem;
-	font-size: 1rem;
+	font-size: 2rem;
 	font-weight: 700;
+	background: #204c75;
 	color: white;
-	height: 2rem;
-	margin-top: 1.5rem;
+	height: 4rem;
 	margin-left: 0.5rem;
+	cursor: pointer;
 }
 </style>

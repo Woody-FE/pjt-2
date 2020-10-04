@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { createVoice } from '@/api/profile';
 import {
 	getUserProfile,
 	changeImage,
@@ -47,6 +48,7 @@ import {
 	patchUserName,
 } from '@/api/profile';
 import { validationName } from '@/utils/validation';
+import { mapMutations } from 'vuex';
 
 export default {
 	data() {
@@ -59,11 +61,12 @@ export default {
 		};
 	},
 	methods: {
+		...mapMutations(['setChildName']),
 		async fetchData() {
 			try {
 				const id = this.$store.getters.getId;
 				const { data } = await getUserProfile(id);
-				this.userData.name = data.username;
+				this.userData.name = data.child_name;
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
 				console.log(error);
@@ -130,13 +133,15 @@ export default {
 		async changeName() {
 			try {
 				const content = {
-					username: this.userData.name,
+					child_name: this.userData.name,
 				};
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
 				alert('이름이 변경되었어요!');
+				this.setChildName(this.userData.name);
+				createVoice(1, id).catch(error => console.log(error));
 			} catch (error) {
-				console.log(error);
+				console.log(error.response);
 			}
 		},
 	},
