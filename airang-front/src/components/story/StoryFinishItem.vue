@@ -22,7 +22,7 @@
 				></audio>
 				<audio
 					v-if="count + 1 === script.order && isInName(script.content)"
-					class="story-sound stroy-sound__playing"
+					class="story-sound story-sound__playing"
 					autoplay
 					:src="
 						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="text-btn">
-			<button class="bb-right-btn" @click="afterPage">
+			<button class="bb-right-btn" @click="afterPage()">
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
 		</div>
@@ -78,9 +78,6 @@ export default {
 		return {
 			count: 0,
 		};
-	},
-	created() {
-		console.log(this.scripts);
 	},
 	computed: {
 		BaseURL() {
