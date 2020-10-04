@@ -66,6 +66,7 @@
 						src="@/assets/images/bg/left.jpg"
 						alt=""
 					/>
+
 					<button
 						class="btn story-select__btn"
 						@click="createSubStory(story.selects[0].substory)"
@@ -114,7 +115,7 @@ import {
 	fetchStory,
 	deleteMyStories,
 } from '@/api/story';
-import { finishedMyStory } from '@/api/story';
+// import { finishedMyStory } from '@/api/story';
 export default {
 	components: {
 		StoryItem,
@@ -208,8 +209,12 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
-					await finishedMyStory(this.myStoryId, this.selectStories);
-					this.$router.push({ name: 'bookshelf' });
+					bus.$emit('show:finished', {
+						mystory: this.myStoryId,
+						selectStories: this.selectStories,
+					});
+					// await finishedMyStory(this.myStoryId, this.selectStories);
+					// this.$router.push({ name: 'bookshelf' });
 				} else {
 					if (this.nextStoryId) {
 						this.selectStories.push(this.nextStoryId);

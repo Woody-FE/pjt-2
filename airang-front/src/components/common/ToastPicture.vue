@@ -1,33 +1,22 @@
 <template>
 	<section class="toast" :class="toastAnimationClass">
-		<section class="toast-img">
-			<img
-				class="toast-img__box"
-				src="@/assets/images/user/children.jpeg"
-				alt=""
-			/>
-			<div class="toast-img__description">
-				<h2 class="toast-description__title">사용방법</h2>
-				<p>1. 정면을 응시한 사진을 이용해주세요.</p>
-				<p>2. 상반신 사진을 이용해주세요.</p>
-			</div>
-		</section>
-		<input ref="imageFile" type="file" />
+		<h2>책을 저장하시겠습니까 ?</h2>
 		<section>
-			<button class="toast-btn-white" @click="open = false">취소</button>
-			<button class="toast-btn-purple" @click="showToast">변경</button>
+			<button class="toast-btn-white" @click="closeToast">취소</button>
+			<button class="toast-btn-purple" @click="showToast">저장</button>
 		</section>
 	</section>
 </template>
 <script>
 import bus from '@/utils/bus.js';
-import { changeImage } from '@/api/profile';
+import { finishedMyStory } from '@/api/story';
 export default {
 	data() {
 		return {
 			open: false,
 			message: '',
-			userId: null,
+			mystory: null,
+			selectStories: null,
 		};
 	},
 	computed: {
@@ -36,24 +25,26 @@ export default {
 		},
 	},
 	methods: {
-		openMethod(userId) {
-			this.userId = userId;
+		openMethod({ mystory, selectStories }) {
+			this.mystory = mystory;
+			this.selectStories = selectStories;
 			this.open = true;
 		},
 		async showToast() {
-			const change = this.$refs.imageFile.files[0];
-			const formdata = new FormData();
-			formdata.append('child_image', change);
-			await changeImage(this.userId, formdata);
+			await finishedMyStory(this.mystory, this.selectStories);
 			this.open = false;
-			bus.$emit('show:changeImage');
+			this.$router.push({ name: 'bookshelf' });
+		},
+		closeToast() {
+			this.open = false;
+			this.$router.push({ name: 'bookshelf' });
 		},
 	},
 	created() {
-		bus.$on('show:picture', this.openMethod);
+		bus.$on('show:finished', this.openMethod);
 	},
 	beforeDestroy() {
-		bus.$off('show:picture', this.openMethod);
+		bus.$off('show:finished', this.openMethod);
 	},
 	watch: {
 		$route() {
@@ -65,11 +56,13 @@ export default {
 <style lang="scss" scoped>
 .toast {
 	position: fixed;
-	width: 600px;
+	/* width: 600px; */
+	width: 100vw;
 	@media screen and (max-width: 640px) {
 		width: 500px;
 	}
-	height: 600px;
+	/* height: 600px; */
+	height: 100vh;
 	background-color: #22252e;
 	border-radius: 4px;
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
