@@ -11,7 +11,17 @@
 				</div>
 				<div class="mystory-face">
 					<section class="mystory-select">
-						<img src="mystory-select__bg" alt="" />
+						<img
+							class="mystory-select__bg"
+							src="@/assets/images/bg/selectBg.png"
+							alt=""
+						/>
+						<img
+							class="mystory-select__leftimg"
+							src="@/assets/images/character/selectArang.png"
+							alt=""
+						/>
+
 						<button
 							class="mystory-select__btn btn"
 							@click="
@@ -26,7 +36,16 @@
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-select">
-					<img src="" alt="" />
+					<img
+						class="mystory-select__bg"
+						src="@/assets/images/bg/selectBg2.png"
+						alt=""
+					/>
+					<img
+						class="mystory-select__rightimg"
+						src="@/assets/images/character/selectArang2.png"
+						alt=""
+					/>
 					<button
 						class="mystory-select__btn btn"
 						@click="$router.push('/profile')"
@@ -330,8 +349,6 @@ export default {
 			.mystory-description {
 				display: flex;
 				align-items: center;
-				.mystory-description__title {
-				}
 			}
 			.mystory-input {
 				position: relative;
@@ -421,6 +438,21 @@ export default {
 				height: 100%;
 				.mystory-select__bg {
 					width: 100%;
+					height: 100%;
+				}
+				.mystory-select__leftimg {
+					position: absolute;
+					width: 40%;
+					top: 40%;
+					left: 52.5%;
+					transform: translate(-50%, -50%);
+				}
+				.mystory-select__rightimg {
+					position: absolute;
+					width: 30%;
+					top: 40%;
+					left: 50%;
+					transform: translate(-50%, -50%);
 				}
 				.mystory-select__btn {
 					position: absolute;
