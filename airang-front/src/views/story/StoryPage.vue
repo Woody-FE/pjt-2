@@ -187,13 +187,7 @@ export default {
 			});
 		}
 	},
-	updated() {
-		// const playingSounds = document.querySelectorAll('.story-sound__playing');
-		// console.log(playingSounds);
-		// if (playingSounds[playingSounds.length - 1]) {
-		// 	playingSounds[playingSounds.length - 1].play();
-		// }
-	},
+	updated() {},
 	methods: {
 		resetScript() {
 			this.scriptNumber = 0;

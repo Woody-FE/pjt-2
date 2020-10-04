@@ -46,7 +46,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import store from '@/store/index';
 import bus from '@/utils/bus';
 export default {

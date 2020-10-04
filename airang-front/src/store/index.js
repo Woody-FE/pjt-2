@@ -47,7 +47,6 @@ export default new Vuex.Store({
 			try {
 				const { data } = await loginUser(userData);
 				dispatch('SETUP_USER', data);
-				console.log(data);
 			} catch (error) {
 				console.log(error.response.data.detail);
 			}
