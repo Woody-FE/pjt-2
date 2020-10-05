@@ -100,11 +100,10 @@ class MyStoryDetailView(APIViewWithAuthentication):
                 'story_name': mystory.story_name,
                 'story': mystory.story_id,
                 'finished': request.data['job'],
+                'is_default': request.data['is_default'],
             })
         if serializer.is_valid(raise_exception=True):
             serializer.save(mystory=before_sub)
-
-        
 
         for idx, mystory_idx in enumerate(substory_list):
             data = {
