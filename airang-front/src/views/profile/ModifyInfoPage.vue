@@ -94,7 +94,7 @@ export default {
 				const id = this.$store.getters.getId;
 				const { data } = await getUserProfile(id);
 				this.userData.email = data.email;
-				this.userData.username = data.username;
+				this.userData.child_name = data.child_name;
 			} catch (error) {
 				console.log(error);
 			}

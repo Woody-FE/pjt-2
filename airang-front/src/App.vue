@@ -15,13 +15,17 @@
 		>
 			<router-view />
 		</main>
+		<ToastPicture />
 	</div>
 </template>
 <script>
 import AppHeader from '@/components/common/AppHeader.vue';
+import ToastPicture from '@/components/common/ToastPicture.vue';
+
 export default {
 	components: {
 		AppHeader,
+		ToastPicture,
 	},
 	computed: {
 		AuthRoute() {
@@ -41,7 +45,6 @@ export default {
 <style lang="scss">
 @import './assets/css/reset.css';
 @import './assets/css/common.css';
-@import './assets/scss/test/_hwang.scss';
 #app {
 	/* height: 100%; */
 	min-height: 100vh;

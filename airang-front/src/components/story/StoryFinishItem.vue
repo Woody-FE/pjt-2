@@ -7,17 +7,40 @@
 			:class="[count === index ? 'bb-abled' : 'bb-disabled']"
 		>
 			<div class="portrait-box">
-				<img
-					class="portrait-img"
-					src="@/assets/images/character/arang1.png"
-					alt=""
-				/>
+				<div class="portrait-img__box">
+					<img
+						v-if="script.character.id === 1"
+						class="portrait-img"
+						:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
+						alt=""
+					/>
+					<img
+						v-else
+						class="portrait-img"
+						:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
+						alt=""
+					/>
+				</div>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
+				<audio
+					v-if="count + 1 === script.order && !isInName(script.content)"
+					class="story-sound story-sound__playing"
+					autoplay
+					:src="`${BaseURL}voice/story/1/script_${script.id}.mp3`"
+				></audio>
+				<audio
+					v-if="count + 1 === script.order && isInName(script.content)"
+					class="story-sound story-sound__playing"
+					autoplay
+					:src="
+						`${BaseURL}voice/story/1/user/${userId}/script_${script.id}.mp3`
+					"
+				></audio>
 			</div>
 		</div>
 		<div class="text-btn">
-			<button class="bb-right-btn" @click="afterPage">
+			<button class="bb-right-btn" @click="afterPage()">
 				<i class="icon ion-md-arrow-round-forward"></i>
 			</button>
 		</div>
@@ -41,13 +64,16 @@ export default {
 		},
 		filterUsername(string) {
 			if (string.includes('아들')) {
-				return string.replace('아들', store.getters['getUsername']);
+				return string.replace('아들', store.getters['getChildName']);
 			}
 			return string;
 		},
+		isInName(string) {
+			return string.includes('{child_name}');
+		},
 		filterName(string) {
 			if (string.includes('{child_name}')) {
-				return string.replace('{child_name}', store.getters['getUsername']);
+				return string.replace('{child_name}', store.getters['getChildName']);
 			}
 			return string;
 		},
@@ -55,13 +81,21 @@ export default {
 	props: {
 		scripts: Array,
 		subId: Number,
+		userId: Number,
 	},
 	data() {
 		return {
 			count: 0,
 		};
 	},
-	created() {},
+	created() {
+		console.log(this.scripts);
+	},
+	computed: {
+		BaseURL() {
+			return process.env.VUE_APP_API_URL;
+		},
+	},
 };
 </script>
 
@@ -74,7 +108,10 @@ export default {
 	height: 4rem;
 	margin-left: -2rem;
 }
-
+.story-portrait {
+	width: 100%;
+	height: 100%;
+}
 .bb-right-btn {
 	border: none;
 	border-radius: 50%;
@@ -91,20 +128,32 @@ export default {
 .bb-abled {
 	display: block;
 }
+.story-sound {
+	visibility: hidden;
+	position: absolute;
+	top: -100vh;
+	left: -100wh;
+}
 .portrait-box {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	.portrait-img {
-		width: 30%;
-		border-radius: 50%;
-		border: 1px solid black;
-		margin-bottom: 1rem;
+	.portrait-img__box {
+		display: flex;
+		width: 150px;
+		height: 230px;
+		justify-content: center;
+		align-items: center;
+		.portrait-img {
+			width: 100%;
+			height: auto;
+		}
 	}
 	.portrait-name {
-		font-size: 1rem;
-		margin-bottom: 3rem;
+		font-size: 1.5rem;
+		margin-bottom: 6rem;
 	}
 	.portrait-content {
 		text-align: center;

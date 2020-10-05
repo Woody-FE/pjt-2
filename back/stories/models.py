@@ -55,7 +55,7 @@ class MyStory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mystories')
     story_name = models.CharField(max_length=30)
     mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories', null=True, blank=True)
-    finished = models.BooleanField(default=False)
+    finished = models.IntegerField(default=0)
     
 
 class MyCharacter(models.Model):
@@ -69,6 +69,7 @@ class Script(models.Model):
     order = models.IntegerField()
     content = models.TextField()
     substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='scripts')
+    has_name = models.BooleanField(default=False)
 
 
 class Select(models.Model):

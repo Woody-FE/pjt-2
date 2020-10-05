@@ -15,7 +15,7 @@ class MyStoryCreateRequestSerializer(serializers.Serializer):
 
 
 class MyStoryCreateSerializer(serializers.ModelSerializer):
-    finished = serializers.BooleanField(required=False)
+    finished = serializers.IntegerField(required=False)
     class Meta:
         model = MyStory
         fields = (
@@ -56,6 +56,7 @@ class ScriptSerializer(serializers.ModelSerializer):
             'order',
             'content',
             'substory',
+            'has_name',
         )
 
 

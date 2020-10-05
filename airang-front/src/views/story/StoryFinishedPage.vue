@@ -29,12 +29,11 @@
 						:src="`${imgSrc}${filterMedia(story.back_image)}`"
 						alt=""
 					/>
-					<!-- <div ></div> -->
 					<!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && !image.isMainCharacter"
+						v-if="image.order === scriptNumber + 1 && !image.is_main_character"
 						:src="`${imgSrc}${filterMedia(image.path)}`"
 						:class="[
 							`story-left__character`,
@@ -46,27 +45,23 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.isMainCharacter"
-						:src="`${imgSrc}${filterMedia(image.path)}`"
+						v-if="image.order === scriptNumber + 1 && image.is_main_character"
+						:src="`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png`"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
+						alt="hero_head"
+					/>
+					<img
+						v-if="job"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="
+							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/${job}.png`
+						"
 						alt=""
 					/>
-					<!-- <img
-						class="story-left__user1"
-						v-if="currentItem === 1 "
-						src="@/assets/images/user/baby_default.png"
-						alt=""
-					/> -->
-					<!-- <img
-						v-if="story.id === 4"
-						class="story-left__user2"
-						src="@/assets/images/user/baby_default.png"
-						alt=""
-					/> -->
 				</div>
 			</section>
 			<StoryFinishItem
@@ -74,6 +69,7 @@
 				@page-increase="currentIncrease"
 				:scripts="story.scripts"
 				:subId="story.id"
+				:userId="userId"
 			/>
 		</article>
 		<section class="story-delete__btn">
@@ -112,21 +108,25 @@ export default {
 			currentItem: -1,
 			scriptNumber: 0,
 			stories: [],
+			userId: null,
 			nextStoryId: null,
 			finish: false,
 			coverImage: null,
 			bookName: null,
 			leftBox: [],
+			job: 0,
 		};
 	},
 	destroyed() {
 		this.currentItem = -1;
 		this.scriptNumber = 0;
 		this.stories = [];
+		this.startStory = null;
 		this.nextStoryId = null;
 		this.finish = false;
 		this.coverImage = null;
 		this.bookName = null;
+		this.job = 0;
 	},
 	methods: {
 		resetScript() {
@@ -147,11 +147,10 @@ export default {
 		async createStory(mystoryId) {
 			try {
 				const { data } = await fetchMyStory(mystoryId);
-				console.log(data);
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
-				this.stories.push(data.mystory.substory);
+				this.startStory = data.mystory.substory;
 			} catch (error) {
 				console.log(error);
 			}
@@ -166,8 +165,26 @@ export default {
 							this.myStoryId,
 							this.nextStoryId,
 						);
-						console.log(data);
 						if (data.next_id === null) {
+							switch (data.substory.id) {
+								case 47:
+									this.job = 4;
+									break;
+								case 46:
+									this.job = 5;
+									break;
+								case 45:
+									this.job = 2;
+									break;
+								case 44:
+									this.job = 1;
+									break;
+								case 43:
+									this.job = 3;
+									break;
+								default:
+									this.job = 0;
+							}
 							this.finish = true;
 						}
 						this.nextStoryId = data.next_id;
@@ -191,6 +208,8 @@ export default {
 			setTimeout(function() {
 				storyCover[0].classList.add('story-disabled');
 			}, 500);
+			this.stories.push(this.startStory);
+
 			this.currentItem = 0;
 		},
 		nextPage() {
@@ -200,7 +219,17 @@ export default {
 			this.$router.push({ name: 'bookshelf' });
 		},
 	},
+	beforeUpdate() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds) {
+			playingSounds.forEach(playingSound => {
+				playingSound.pause();
+			});
+		}
+	},
 	mounted() {
+		const id = this.$store.getters.getId;
+		this.userId = parseInt(id);
 		bus.$on('finished:page-increase', this.currentIncrease);
 		bus.$on('finished:script-increase', this.scriptIncrease);
 		bus.$on('finished:script-reset', this.resetScript);
@@ -283,6 +312,7 @@ export default {
 		}
 		.story-left__bg {
 			z-index: 1;
+			width: 100%;
 		}
 	}
 	.story-right {

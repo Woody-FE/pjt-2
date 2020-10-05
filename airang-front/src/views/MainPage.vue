@@ -17,11 +17,9 @@
 					class="grass grass-flower2"
 					alt="잔디"
 				/>
-				<img
-					src="@/assets/images/bg/roller.png"
-					class="roller"
-					alt="롤러코스터"
-				/>
+				<div class="roller-coaster">
+					<RollerCoaster :status="rollerCoasterStatus" />
+				</div>
 				<div class="wheel">
 					<BigWheel />
 				</div>
@@ -74,6 +72,7 @@
 					</div>
 				</div>
 				<span class="start-btn btn" @click="moveBookshelf">START</span>
+				<span class="roller-btn btn" @click="activeRoller"></span>
 			</div>
 		</div>
 	</section>
@@ -81,10 +80,17 @@
 
 <script>
 import BigWheel from '@/components/main/BigWheel.vue';
+import RollerCoaster from '@/components/main/RollerCoaster.vue';
 import { mapGetters } from 'vuex';
 export default {
+	data() {
+		return {
+			rollerCoasterStatus: true,
+		};
+	},
 	components: {
 		BigWheel,
+		RollerCoaster,
 	},
 	methods: {
 		...mapGetters(['getToken']),
@@ -95,11 +101,14 @@ export default {
 				this.$router.push({ name: 'login' });
 			}
 		},
+		activeRoller() {
+			this.rollerCoasterStatus = !this.rollerCoasterStatus;
+		},
 	},
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include common-btn();
 .main-wrap {
 	width: 100%;
@@ -120,22 +129,41 @@ export default {
 		transform: rotate3d(1, 0, 0, -65deg);
 	}
 	.grass2 {
-		width: 170px;
+		width: 17%;
 		position: absolute;
 		top: 70%;
 		left: 0%;
+		@media screen and (max-width: 768px) {
+			width: 20%;
+			top: 80%;
+		}
 	}
 	.grass-flower1 {
-		width: 100px;
+		width: 11%;
 		position: absolute;
 		top: 69%;
 		left: 12%;
+		@media screen and (max-width: 768px) {
+			width: 13%;
+			top: 80%;
+		}
 	}
 	.grass-flower2 {
-		width: 120px;
+		width: 12%;
 		position: absolute;
 		top: 3%;
 		left: 20%;
+		@media screen and (max-width: 768px) {
+			width: 13%;
+			top: 10%;
+			left: 25%;
+		}
+	}
+	.roller-coaster {
+		position: absolute;
+		top: -300px;
+		right: -90px;
+		transform: rotate3d(1, 0, 0, -65deg);
 	}
 	.wheel {
 		position: absolute;
@@ -153,14 +181,7 @@ export default {
 		box-shadow: 3px 20px 15px rgba(27, 27, 27, 0.3);
 		transform-style: preserve-3d;
 		transform: rotateX(65deg);
-		.roller {
-			width: 650px;
-			position: absolute;
-			right: -50px;
-			top: 40px;
-			transform-style: preserve-3d;
-			transform: translateY(-450px) rotateX(-65deg);
-		}
+
 		.main-img {
 			transform-style: preserve-3d;
 			.arang {
@@ -179,6 +200,8 @@ export default {
 				width: 100px;
 				transform-style: preserve-3d;
 				transform: translateY(-220px) rotateX(-85deg);
+				animation: upDown 0.5s ease-in;
+				animation-delay: 2.3s;
 				@media screen and (max-width: 1024px) {
 					width: 90px;
 					margin: 0 10px;
@@ -186,16 +209,25 @@ export default {
 				@media screen and (max-width: 768px) {
 					width: 70px;
 					margin: 0 20px;
-					transform: translateY(-150px) rotateX(-85deg);
+					animation: upDown-sm 0.5s ease-in;
+					animation-delay: 2.3s;
 				}
 			}
 			.arang2 {
 				transform: translateY(-50px) rotateX(-85deg);
+				animation: smallBig 1s ease-in;
+				animation-delay: 0.5s;
 			}
 			.arang3 {
 				transform: translateY(-100px) rotateX(-85deg);
+				animation: leftRight 1.5s ease-in-out;
+				animation-delay: 2.8s;
+				animation-fill-mode: forwards;
 				@media screen and (max-width: 768px) {
 					transform: translate(-30px, -210px) rotateX(-85deg);
+					animation: leftRight-sm 1.5s ease-in-out;
+					animation-delay: 2.8s;
+					animation-fill-mode: forwards;
 				}
 			}
 			.arang-shadow {
@@ -292,6 +324,13 @@ export default {
 			}
 			.sign3 {
 				transform: translate(-60px, -80px) rotateX(-85deg) rotateY(-15deg);
+				@media screen and (max-width: 1024px) {
+					transform: translate(-40px, -100px) rotateX(-85deg) rotateY(-15deg);
+				}
+				@media screen and (max-width: 768px) {
+					font-size: 11px;
+					transform: translate(-40px, -150px) rotateX(-85deg) rotateY(-15deg);
+				}
 			}
 		}
 	}
@@ -310,6 +349,96 @@ export default {
 			background-color: $green;
 			box-shadow: 0 3px $green;
 			transform: translateY(6px);
+		}
+	}
+	.roller-btn {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		bottom: 50px;
+		right: 200px;
+		border-radius: 50%;
+		background-color: red;
+		box-shadow: 0 5px crimson;
+		cursor: pointer;
+		transform: rotateX(-5deg);
+		&:active {
+			background-color: crimson;
+			box-shadow: 0 3px crimson;
+			transform: translateY(6px);
+		}
+	}
+	@keyframes smallBig {
+		0% {
+			transform: translateY(-50px) rotateX(-85deg) scale(1);
+		}
+		50% {
+			transform: translateY(-50px) rotateX(-85deg) scale(1.1);
+		}
+		100% {
+			transform: translateY(-50px) rotateX(-85deg) scale(1);
+		}
+	}
+	@keyframes upDown {
+		0% {
+			transform: translateY(-220px) translateZ(0px) rotateX(-85deg);
+		}
+		50% {
+			transform: translateY(-220px) translateZ(30px) rotateX(-85deg);
+		}
+		100% {
+			transform: translateY(-220px) translateZ(0px) rotateX(-85deg);
+		}
+	}
+	@keyframes upDown-sm {
+		0% {
+			transform: translateY(-150px) translateZ(0px) rotateX(-85deg);
+		}
+		50% {
+			transform: translateY(-150px) translateZ(30px) rotateX(-85deg);
+		}
+		100% {
+			transform: translateY(-150px) translateZ(0px) rotateX(-85deg);
+		}
+	}
+	@keyframes leftRight {
+		0% {
+			transform: translateY(-100px) rotateX(-85deg) rotateZ(-2deg);
+		}
+		50% {
+			transform: translateY(-100px) rotateX(-85deg) rotateZ(5deg);
+		}
+		100% {
+			transform: translateY(-100px) rotateX(-85deg) rotateZ(3deg);
+		}
+	}
+	@keyframes leftRight-sm {
+		0% {
+			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(-2deg);
+		}
+		50% {
+			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(5deg);
+		}
+		100% {
+			transform: translate(-30px, -210px) rotateX(-85deg) rotateZ(3deg);
+		}
+	}
+	@keyframes coasterReady {
+		from {
+			width: 20%;
+			position: absolute;
+			top: -200px;
+			right: -50px;
+			transform-style: none;
+			transform: translateY(-450px) rotateX(-65deg);
+		}
+		to {
+			width: 20%;
+			position: absolute;
+			top: -0px;
+			right: -50px;
+			transform-style: none;
+			// transform: translateY(-450px) rotateX(-65deg);
 		}
 	}
 }

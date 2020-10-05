@@ -1,32 +1,51 @@
 <template>
 	<section class="bookshelf-wrap">
 		<h2>아이랑 도서관</h2>
+		<img
+			src="@/assets/images/bookShelf/bookshelf.png"
+			class="bookshelf-bg"
+			alt="bookshelf"
+		/>
+		<!-- <span class="bookshelf-bg2"></span> -->
+		<span class="bookshelf-bg2 bookshelf-bg3"></span>
+		<img
+			src="@/assets/images/bookShelf/shelf.png"
+			class="bookshelf-shelf"
+			alt="bookshelf-shelf"
+		/>
+		<img
+			src="@/assets/images/bookShelf/library_arang.png"
+			class="bookshelf-arang"
+			alt="bookshelf-arang"
+		/>
 		<div class="bookshelf">
 			<div class="bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in books">
-					<router-link
-						v-if="book.finished"
-						:to="`/story/${book.story.id}/review/${book.id}/`"
-						><div
-							class="book books-1"
-							v-bind:style="{
-								backgroundImage: `url('${imgSrc}${filterMedia(
-									book.story.cover_image,
-								)}')`,
-							}"
-						></div>
+					<router-link :to="`/bookshelf/${book.id}`">
+						<img
+							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							class="book-pace"
+							alt="book-pace"
+						/>
+						<img
+							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							class="book-pace book-pace2"
+							alt="book-pace"
+						/>
+						<img
+							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							class="book-pace book-pace3"
+							alt="book-pace"
+						/>
 					</router-link>
 				</div>
 			</div>
-		</div>
-		<div>
-			<button class="book-add__btn" @click="createBook">책 생성</button>
 		</div>
 	</section>
 </template>
 
 <script>
-import { createMyStory, fetchMyStories } from '@/api/story';
+import { fetchStories } from '@/api/story';
 export default {
 	created() {
 		this.fetchBooks();
@@ -49,7 +68,7 @@ export default {
 	methods: {
 		async fetchBooks() {
 			try {
-				const { data } = await fetchMyStories();
+				const { data } = await fetchStories();
 				this.books = data;
 				console.log(data);
 			} catch (error) {
@@ -62,22 +81,6 @@ export default {
 			}
 			return string;
 		},
-
-		async createBook() {
-			try {
-				if (this.books.length < 4) {
-					const { data } = await createMyStory({
-						story_id: 1,
-						story_name: '세가지 선물',
-					});
-					this.$router.push(`/story/${data.story.id}/${data.id}/`);
-				} else {
-					alert('생성하신 책이 많습니다');
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		},
 	},
 };
 </script>
@@ -89,10 +92,72 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	position: relative;
+	perspective: 500px;
 	h2 {
 		font-size: 24px;
-		border-left: 2px solid yellow;
+		border-left: 3px solid rgb(194, 113, 41);
 		padding-left: 5px;
+	}
+}
+.bookshelf-bg {
+	width: 100%;
+	height: 550px;
+	position: absolute;
+	top: 50px;
+}
+.bookshelf-bg2 {
+	width: 80%;
+	height: 50px;
+	position: absolute;
+	top: 180px;
+	left: 50%;
+	border-radius: 30px;
+	border-bottom: 5px solid rgb(99, 58, 23);
+	background: linear-gradient(
+		rgba(99, 58, 23, 0.5) 3%,
+		rgb(194, 113, 41),
+		rgb(226, 136, 57)
+	);
+	transform: translateX(-50%) rotateX(55deg);
+	box-shadow: 0px 10px 5px rgba(99, 58, 23, 0.5);
+}
+.bookshelf-bg3 {
+	transform: translateX(-50%) rotateX(80deg);
+	position: absolute;
+	top: 360px;
+	left: 50%;
+}
+.bookshelf-shelf {
+	width: 28%;
+	position: absolute;
+	bottom: -500px;
+	right: 210px;
+	@media screen and (max-width: 768px) {
+		width: 33%;
+		bottom: -490px;
+		right: 180px;
+	}
+}
+.bookshelf-arang {
+	width: 200px;
+	position: absolute;
+	bottom: -550px;
+	right: -50px;
+	animation: leftRight 1.5s ease-in-out infinite;
+}
+@keyframes leftRight {
+	0% {
+		transform: rotate(-2deg);
+	}
+	30% {
+		transform: rotate(5deg);
+	}
+	60% {
+		transform: rotate(3deg);
+	}
+	100% {
+		transform: rotate(-2deg);
 	}
 }
 .bookshelf-books {
@@ -100,13 +165,29 @@ export default {
 	height: 100%;
 	display: flex;
 	flex-wrap: wrap;
-
 	.bookshelf-book {
 		width: 33%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		margin: 1rem 0;
+		.book-pace {
+			width: 16%;
+			position: absolute;
+			bottom: -574%;
+			&:hover {
+				transform: rotate(5deg);
+			}
+			&:active {
+				transform: scale(1.1) rotate(5deg);
+			}
+		}
+		.book-pace2 {
+			left: 42%;
+		}
+		.book-pace3 {
+			left: 67%;
+		}
 	}
 }
 @include Book();
