@@ -69,7 +69,8 @@ export default {
 			return (
 				this.$route.name === 'story' ||
 				this.$route.name === 'finishedStory' ||
-				this.$route.name === 'storybook'
+				this.$route.name === 'storybook' ||
+				this.$route.name === 'myteam'
 			);
 		},
 		isLogin() {
