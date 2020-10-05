@@ -56,6 +56,7 @@ class ScriptSerializer(serializers.ModelSerializer):
             'order',
             'content',
             'substory',
+            'has_name',
         )
 
 
