@@ -138,13 +138,13 @@ export default {
 				]);
 			} catch (error) {
 				if (error.response.data.email !== undefined) {
-					bus.$emit('show:toast', '중복된 이메일 입니다!');
+					bus.$emit('show:warning', '중복된 이메일 입니다!');
 				} else {
 					const msg = error.response.data.password1;
-					console.log(error.response);
-					const msgLength = msg.length;
-					const myMsg = msg.splice(2, msgLength - 2);
-					bus.$emit('show:toast', myMsg);
+					// console.log(error.response);
+					// const msgLength = msg.length;
+					// const myMsg = msg.slice(2, msgLength - 2);
+					bus.$emit('show:warning', msg[0]);
 				}
 			}
 		},

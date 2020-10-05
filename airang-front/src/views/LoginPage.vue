@@ -97,7 +97,7 @@ export default {
 					this.$router.push('/');
 				}
 			} catch (error) {
-				bus.$emit('show:toast', '이메일, 비밀번호를 확인해주세요!');
+				bus.$emit('show:warning', '이메일, 비밀번호를 확인해주세요!');
 			}
 		},
 	},
