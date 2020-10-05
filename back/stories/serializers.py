@@ -145,6 +145,7 @@ class MyStorySerializer(serializers.ModelSerializer):
             'mystory',
             'mycharacters',
             'finished',
+            'is_default',
         )
 
 
