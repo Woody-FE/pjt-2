@@ -56,6 +56,7 @@ class MyStory(models.Model):
     story_name = models.CharField(max_length=30)
     mystory = models.ForeignKey(MySubstory, on_delete=models.CASCADE, related_name='substories', null=True, blank=True)
     finished = models.IntegerField(default=0)
+    is_default = models.BooleanField(default=False)
     
 
 class MyCharacter(models.Model):
