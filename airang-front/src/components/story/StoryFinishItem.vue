@@ -9,7 +9,7 @@
 			<div class="portrait-box">
 				<div class="portrait-img__box">
 					<img
-						v-if="script.character.id === 1"
+						v-if="script.character.id === 1 && !is_default"
 						class="portrait-img"
 						:src="
 							`${BaseURL}images/user/${userId}/conversion/0.png?count=${new Date()}`
@@ -17,7 +17,15 @@
 						alt=""
 					/>
 					<img
-						v-else
+						v-if="script.character.id === 1 && is_default"
+						class="portrait-img"
+						:src="
+							`${BaseURL}images/character/nukkied_default2.png?count=${new Date()}`
+						"
+						alt=""
+					/>
+					<img
+						v-if="script.character.id !== 1"
 						class="portrait-img"
 						:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
 						alt=""
@@ -84,6 +92,7 @@ export default {
 		scripts: Array,
 		subId: Number,
 		userId: Number,
+		is_default: Boolean,
 	},
 	data() {
 		return {

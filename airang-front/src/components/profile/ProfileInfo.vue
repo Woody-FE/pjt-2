@@ -148,10 +148,6 @@ export default {
 					createVoice(1, id, 2, 3),
 					createVoice(1, id, 3, 3),
 				]);
-				// createVoice(1, id, 1, 3);
-				// await createVoice(1, id, 1, 3);
-				// await createVoice(1, id, 1, 3);
-				// await createVoice(1, id);
 				console.log('끝', new Date());
 			} catch (error) {
 				console.log(error.response);
