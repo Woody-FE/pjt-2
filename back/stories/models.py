@@ -69,6 +69,7 @@ class Script(models.Model):
     order = models.IntegerField()
     content = models.TextField()
     substory = models.ForeignKey(Substory, on_delete=models.CASCADE, related_name='scripts')
+    has_name = models.BooleanField(default=False)
 
 
 class Select(models.Model):
