@@ -142,7 +142,15 @@ export default {
 				bus.$emit('show:toast', '이름이 변경되었어요');
 				// this.setChildName(content.child_name);
 				this.$store.commit('setChildName', content.child_name);
-				await createVoice(1, id);
+				await Promise.all([
+					createVoice(1, id, 1, 3),
+					createVoice(1, id, 2, 3),
+					createVoice(1, id, 3, 3),
+				]);
+				// createVoice(1, id, 1, 3);
+				// await createVoice(1, id, 1, 3);
+				// await createVoice(1, id, 1, 3);
+				// await createVoice(1, id);
 				console.log('끝', new Date());
 			} catch (error) {
 				console.log(error.response);
