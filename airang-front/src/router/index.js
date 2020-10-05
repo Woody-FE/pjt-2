@@ -23,6 +23,7 @@ const routes = [
 	{
 		path: '/login',
 		name: 'login',
+		props: route => ({ guide: route.query.guide }),
 		component: () => import('@/views/LoginPage.vue'),
 	},
 	{

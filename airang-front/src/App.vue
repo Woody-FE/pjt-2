@@ -15,17 +15,20 @@
 		>
 			<router-view />
 		</main>
-		<ToastPicture />
+		<ToastFinished />
+		<ToastPopup />
 	</div>
 </template>
 <script>
 import AppHeader from '@/components/common/AppHeader.vue';
-import ToastPicture from '@/components/common/ToastPicture.vue';
+import ToastFinished from '@/components/common/ToastFinished.vue';
+import ToastPopup from '@/components/common/ToastPopup.vue';
 
 export default {
 	components: {
 		AppHeader,
-		ToastPicture,
+		ToastFinished,
+		ToastPopup,
 	},
 	computed: {
 		AuthRoute() {
