@@ -145,7 +145,13 @@
 			</section>
 		</article>
 		<section class="story-delete__btn">
-			<button @click="$router.push('/bookshelf')" class="story-delete-btn">
+			<button
+				@click="
+					deleteBook();
+					$router.push('/bookshelf');
+				"
+				class="story-delete-btn"
+			>
 				<i class="icon ion-md-close"></i>
 			</button>
 		</section>

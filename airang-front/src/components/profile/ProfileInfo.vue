@@ -97,7 +97,10 @@ export default {
 					this.fetchData();
 					bus.$emit('show:toast', '프로필이 변경 되었어요');
 				} else {
-					bus.$emit('show:toast', '.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
+					bus.$emit(
+						'show:warning',
+						'.jpg, .jpeg, .png형태의 파일을 넣어주세요!',
+					);
 				}
 			} catch (error) {
 				console.log(error);
@@ -124,7 +127,7 @@ export default {
 					this.changeStatus();
 					this.changeName();
 				} else {
-					bus.$emit('show:toast', '이름은 공백제외 2~5자 한글만 가능합니다.');
+					bus.$emit('show:warning', '이름은 공백제외 2~5자 한글만 가능합니다.');
 				}
 			}
 		},
