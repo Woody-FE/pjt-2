@@ -39,7 +39,7 @@
 		<div class="bookshelf">
 			<div class="second-bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in secondBooks">
-					<router-link :to="`/bookshelf/${book.id}`">
+					<router-link :to="`/story/${book.story.id}/review/${book.id}`">
 						<img
 							src="@/assets/images/default_book.jpg"
 							class="book-pace"

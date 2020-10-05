@@ -44,6 +44,7 @@ const routes = [
 		path: '/story/:storyId/:myStoryId',
 		name: 'story',
 		props: route => ({
+			default: route.query.default,
 			storyId: Number(route.params.storyId),
 			myStoryId: Number(route.params.myStoryId),
 		}),
