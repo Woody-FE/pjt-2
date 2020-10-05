@@ -23,6 +23,7 @@ class MyStoryCreateSerializer(serializers.ModelSerializer):
             'story',
             'user',
             'finished',
+            'is_default',
         )
 
 
