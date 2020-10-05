@@ -98,7 +98,7 @@
 					<section v-else class="mystory-imgbox">
 						<img
 							class="mystory-imgbox__img"
-							:src="changeImageSrc"
+							:src="`${changeImageSrc}${new Date()}`"
 							alt="profileImg"
 						/>
 						<section class="mystory-imgbtn">
@@ -169,7 +169,7 @@ export default {
 		},
 		changeImageSrc() {
 			return this.conversionImage
-				? `${this.imgSrc}${this.conversionImage}?count=${this.cnt}`
+				? `${this.imgSrc}${this.conversionImage}?count=`
 				: `${this.imgSrc}media/image/child/noProfile.jpg`;
 		},
 	},
