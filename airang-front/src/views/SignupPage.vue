@@ -40,7 +40,9 @@
 					v-model="password2"
 				/>
 			</div>
-			<button class="signup-btn" type="submit">회원가입</button>
+			<button :disabled="test" class="signup-btn" type="submit">
+				회원가입
+			</button>
 		</form>
 		<img
 			class="signup-arang"
@@ -131,11 +133,24 @@ export default {
 				this.$router.push('/');
 				await createVoice(1, data.user.id);
 			} catch (error) {
-				console.log(error.response.data);
+				if (error.response.data.email !== undefined) {
+					bus.$emit('show:toast', '중복된 이메일 입니다!');
+				} else {
+					const msg = error.response.data.password1;
+					console.log(error.response);
+					const msgLength = msg.length;
+					const myMsg = msg.splice(2, msgLength - 2);
+					bus.$emit('show:toast', myMsg);
+				}
 			}
 		},
 	},
 	computed: {
+		test() {
+			return (
+				!this.email || !this.password1 || !this.password2 || !this.child_name
+			);
+		},
 		isVaildateName() {
 			const name = this.child_name;
 			if (name.length === 0) {
@@ -291,6 +306,10 @@ export default {
 			font-weight: bold;
 			color: white;
 			background-color: #2f9e44;
+			&:disabled {
+				cursor: default;
+				opacity: 0.7;
+			}
 		}
 	}
 	.signup-arang {
