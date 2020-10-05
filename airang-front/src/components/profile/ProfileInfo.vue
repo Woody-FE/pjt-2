@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus';
 import { createVoice } from '@/api/profile';
 import {
 	getUserProfile,
@@ -48,7 +49,7 @@ import {
 	patchUserName,
 } from '@/api/profile';
 import { validationName } from '@/utils/validation';
-import { mapMutations } from 'vuex';
+// import { mapMutations } from 'vuex';
 
 export default {
 	data() {
@@ -61,7 +62,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations(['setChildName']),
+		// ...mapMutations(['setChildName']),
 		async fetchData() {
 			try {
 				const id = this.$store.getters.getId;
@@ -94,9 +95,9 @@ export default {
 				if (isValidate) {
 					await this.patchImage(changeImage);
 					this.fetchData();
-					alert('프로필이 변경 되었어요');
+					bus.$emit('show:toast', '프로필이 변경 되었어요');
 				} else {
-					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
+					bus.$emit('show:toast', '.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
 				}
 			} catch (error) {
 				console.log(error);
@@ -107,7 +108,7 @@ export default {
 				const id = this.$store.getters.getId;
 				await resetImage(id);
 				this.fetchData();
-				alert('프로필이 초기화 되었어요');
+				bus.$emit('show:toast', '프로필이 초기화 되었어요');
 			} catch (error) {
 				console.log(error);
 			}
@@ -123,7 +124,7 @@ export default {
 					this.changeStatus();
 					this.changeName();
 				} else {
-					alert('※ 이름은 공백제외 2~5자 한글입니다.');
+					bus.$emit('show:toast', '이름은 공백제외 2~5자 한글만 가능합니다.');
 				}
 			}
 		},
@@ -132,14 +133,17 @@ export default {
 		},
 		async changeName() {
 			try {
+				console.log('시작', new Date());
 				const content = {
 					child_name: this.userData.name,
 				};
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
-				alert('이름이 변경되었어요!');
-				this.setChildName(this.userData.name);
-				createVoice(1, id).catch(error => console.log(error));
+				bus.$emit('show:toast', '이름이 변경되었어요');
+				// this.setChildName(content.child_name);
+				this.$store.commit('setChildName', content.child_name);
+				await createVoice(1, id);
+				console.log('끝', new Date());
 			} catch (error) {
 				console.log(error.response);
 			}

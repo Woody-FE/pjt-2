@@ -86,8 +86,10 @@
 </template>
 
 <script>
+import bus from '@/utils/bus';
 import { createVoice } from '@/api/profile';
 import { mapActions } from 'vuex';
+import { registerUser } from '@/api/auth';
 import { validatePassword, validationName } from '@/utils/validation';
 
 export default {
@@ -104,16 +106,25 @@ export default {
 		async submitForm() {
 			try {
 				if (!this.isVaildateName) {
-					alert('※ 이름은 공백제외 2~5자 한글입니다.');
-					return;
+					// alert('※ 이름은 공백제외 2~5자 한글입니다.');
+					bus.$emit('show:toast', '이름은 공백제외 2~5자 한글입니다');
+
+					// return;
 				}
 				if (!this.isValidatePassword1) {
-					alert('※ 비밀번호는 공백제외 8자 이상 15자 이하입니다.');
-					return;
+					// alert('※ 비밀번호는 공백제외 8자 이상 15자 이하입니다.');
+					bus.$emit(
+						'show:toast',
+						'비밀번호는 공백제외 8자 이상 15자 이하입니다',
+					);
+
+					// return;
 				}
 				if (!this.isEqualPassword) {
-					alert('※ 비밀번호를 한번 더 확인해주세요!');
-					return;
+					// alert('※ 비밀번호를 한번 더 확인해주세요!');
+					bus.$emit('show:toast', '비밀번호를 한번 더 확인해주세요');
+
+					// return;
 				}
 				const userInfo = {
 					child_name: this.child_name,
@@ -121,11 +132,12 @@ export default {
 					password1: this.password1,
 					password2: this.password2,
 				};
-				const data = await this.SIGNUP(userInfo);
+				const { data } = await registerUser(userInfo);
+				this.$store.dispatch('SETUP_USER', data);
 				this.$router.push('/');
-				createVoice(1, data.user.id).catch(error => console.log(error));
+				await createVoice(1, data.user.id);
 			} catch (error) {
-				console.log(error);
+				console.log(error.response.data);
 			}
 		},
 	},

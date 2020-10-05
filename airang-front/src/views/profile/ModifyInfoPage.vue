@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus';
 import { getUserProfile, changePassword } from '@/api/profile';
 import { validatePassword } from '@/utils/validation';
 
@@ -104,7 +105,8 @@ export default {
 				const content = this.userPassword;
 				await changePassword(content);
 				this.$router.push('/profile/');
-				alert('비밀번호가 수정 되었어요!');
+				// alert('비밀번호가 수정 되었어요!');
+				bus.$emit('show:toast', '비밀번호가 수정 되었어요');
 			} catch (error) {
 				console.log(error);
 			}

@@ -72,6 +72,8 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { loginUser } from '@/api/auth';
+
 export default {
 	data() {
 		return {
@@ -84,8 +86,13 @@ export default {
 		async submitForm() {
 			try {
 				const userInfo = { email: this.email, password: this.password };
-				await this.LOGIN(userInfo);
-				this.$router.push('/');
+				const { data } = await loginUser(userInfo);
+				this.$store.dispatch('SETUP_USER', data);
+				if (this.$route.query.guide) {
+					this.$router.push('/bookshelf');
+				} else {
+					this.$router.push('/');
+				}
 			} catch (error) {
 				console.log(error);
 			}

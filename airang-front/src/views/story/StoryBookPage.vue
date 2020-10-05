@@ -126,6 +126,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus';
 import { getUserProfile, changeImage, convertImage } from '@/api/profile';
 import { createMyStory, fetchStory } from '@/api/story';
 export default {
@@ -229,7 +230,8 @@ export default {
 					await this.patchImage(changeImage);
 					this.fetchData();
 				} else {
-					alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
+					// alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
+					bus.$emit('show:toast', '.jpg, .jpeg, .png형태의 파일을 넣어주세요');
 				}
 			} catch (error) {
 				console.log(error);
