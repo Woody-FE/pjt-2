@@ -11,7 +11,9 @@
 					<img
 						v-if="script.character.id === 1"
 						class="portrait-img"
-						:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
+						:src="
+							`${BaseURL}images/user/${userId}/conversion/0.png?count=${new Date()}`
+						"
 						alt=""
 					/>
 					<img
