@@ -44,7 +44,7 @@ export default {
 	position: fixed;
 	width: 400px;
 	height: 56px;
-	background-color: #74c0fc;
+	background-color: #28a745;
 	border-radius: 3px;
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
 	color: white;
