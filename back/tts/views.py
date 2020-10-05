@@ -29,7 +29,7 @@ def create_voice(request, story_id, user_id):
     denominator = int(request.GET.get('denominator', None))
     numerator = int(request.GET.get('numerator', None))
 
-    if denominator is None or numerator is None:
+    if denominator is not None and numerator is not None:
         length = scripts.count()
         div = length // denominator
         start = (numerator - 1) * div
