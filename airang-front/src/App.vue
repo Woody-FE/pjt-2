@@ -17,18 +17,24 @@
 		</main>
 		<ToastFinished />
 		<ToastPopup />
+		<ToastDelete />
+		<ToastWarning />
 	</div>
 </template>
 <script>
 import AppHeader from '@/components/common/AppHeader.vue';
 import ToastFinished from '@/components/common/ToastFinished.vue';
 import ToastPopup from '@/components/common/ToastPopup.vue';
+import ToastDelete from '@/components/common/ToastDelete.vue';
+import ToastWarning from '@/components/common/ToastWarning.vue';
 
 export default {
 	components: {
 		AppHeader,
 		ToastFinished,
 		ToastPopup,
+		ToastDelete,
+		ToastWarning,
 	},
 	computed: {
 		AuthRoute() {

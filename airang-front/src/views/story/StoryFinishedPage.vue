@@ -66,9 +66,7 @@
 					<img
 						v-if="job && is_default"
 						:class="[`story-left__character`, `job-${job}`]"
-						:src="
-							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/${job}.png`
-						"
+						:src="`${imgSrc}images/character/${job}.png`"
 						alt=""
 					/>
 					<img
