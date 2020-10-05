@@ -108,18 +108,18 @@ export default {
 		async submitForm() {
 			try {
 				if (!this.isVaildateName) {
-					bus.$emit('show:toast', '이름은 공백제외 2~5자 한글입니다');
+					bus.$emit('show:warning', '이름은 공백제외 2~5자 한글입니다');
 					return;
 				}
 				if (!this.isValidatePassword1) {
 					bus.$emit(
-						'show:toast',
+						'show:warning',
 						'비밀번호는 공백제외 8자 이상 15자 이하입니다',
 					);
 					return;
 				}
 				if (!this.isEqualPassword) {
-					bus.$emit('show:toast', '비밀번호를 한번 더 확인해주세요');
+					bus.$emit('show:warning', '비밀번호를 한번 더 확인해주세요');
 					return;
 				}
 				const userInfo = {

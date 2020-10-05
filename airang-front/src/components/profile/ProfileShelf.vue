@@ -23,22 +23,18 @@
 		<div class="bookshelf">
 			<div class="first-bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in firstBooks">
-					<router-link :to="`/story/${book.story.id}/review/${book.id}`">
-						<figure class="book-items">
-							<ProfileBook :book="book"></ProfileBook>
-						</figure>
-					</router-link>
+					<figure class="book-items">
+						<ProfileBook :book="book"></ProfileBook>
+					</figure>
 				</div>
 			</div>
 		</div>
 		<div class="bookshelf">
 			<div class="second-bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in secondBooks">
-					<router-link :to="`/story/${book.story.id}/review/${book.id}`">
-						<figure class="book-items">
-							<ProfileBook :book="book"></ProfileBook>
-						</figure>
-					</router-link>
+					<figure class="book-items">
+						<ProfileBook :book="book"></ProfileBook>
+					</figure>
 				</div>
 			</div>
 		</div>
@@ -46,6 +42,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus';
 import { fetchMyStories } from '@/api/story';
 import { truncateString } from '@/utils/validation';
 import ProfileBook from '@/components/profile/ProfileBook.vue';
@@ -72,7 +69,6 @@ export default {
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
-				console.log(data);
 				this.firstBooks = data.slice(0, 3);
 				this.secondBooks = data.slice(3, 6);
 				console.log(data);
@@ -97,6 +93,7 @@ export default {
 		},
 	},
 	created() {
+		bus.$on('clearDelete', this.fetchBooks);
 		this.fetchBooks();
 	},
 };
