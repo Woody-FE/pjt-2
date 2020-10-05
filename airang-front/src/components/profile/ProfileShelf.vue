@@ -1,7 +1,6 @@
 <template>
 	<section class="profileStory-wrap">
 		<header class="profileStory-header">
-			<span class="profileStory-header__span"></span>
 			<p class="profileStory-header__name">
 				나의 책장
 			</p>
@@ -19,7 +18,6 @@
 				class="bookshelf-arang"
 				alt="bookshelf-arang"
 			/>
-			<section></section>
 		</section>
 		<section class="profileStory-select"></section>
 		<div class="bookshelf">
@@ -112,18 +110,20 @@ export default {
 	flex-direction: column;
 	position: relative;
 	.profileStory-header {
-		margin-bottom: 1.5rem;
+		margin-bottom: 1rem;
 		display: flex;
 		align-content: content;
-		.profileStory-header__span {
-			display: inline-block;
-			width: 3px;
-			height: 2rem;
-			background: yellow;
-			margin-right: 5px;
-		}
+		border-left: 3px solid #c27129;
+		padding-left: 5px;
+		// .profileStory-header__span {
+		// 	display: inline-block;
+		// 	width: 3px;
+		// 	height: 1.5rem;
+		// 	background: yellow;
+		// 	margin-right: 5px;
+		// }
 		.profileStory-header__name {
-			font-size: 2rem;
+			font-size: 1.5rem;
 		}
 	}
 }
@@ -166,8 +166,8 @@ export default {
 	.bookshelf-arang {
 		width: 200px;
 		position: absolute;
-		bottom: 200px;
-		right: -50px;
+		bottom: 100px;
+		right: -150px;
 		animation: leftRight 1.5s ease-in-out infinite;
 		z-index: 9999;
 	}
