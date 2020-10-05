@@ -82,9 +82,7 @@
 					<img
 						v-if="job && defaultImage"
 						:class="[`story-left__character`, `job-${job}`]"
-						:src="
-							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
-						"
+						:src="`${imgSrc}images/character/${job}.png`"
 						alt=""
 					/>
 					<img
