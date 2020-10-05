@@ -129,7 +129,11 @@ export default {
 				const { data } = await registerUser(userInfo);
 				this.$store.dispatch('SETUP_USER', data);
 				this.$router.push('/');
-				await createVoice(1, data.user.id);
+				await Promise.all([
+					createVoice(1, data.user.id, 1, 3),
+					createVoice(1, data.user.id, 2, 3),
+					createVoice(1, data.user.id, 3, 3),
+				]);
 			} catch (error) {
 				console.log(error.response.data);
 			}

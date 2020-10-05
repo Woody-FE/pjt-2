@@ -30,9 +30,6 @@ function createVoice(storyId, userId, numerator, denominator) {
 		`test/voice/story/${storyId}/user/${userId}/?numerator=${numerator}&denominator=${denominator}`,
 	);
 }
-// function createVoice(storyId, userId) {
-// 	return auth.post(`test/voice/story/${storyId}/user/${userId}/`);
-// }
 
 // function getMyBooks(userId, query) {
 // 	return auth.get(`accounts/${userId}`);
