@@ -22,6 +22,8 @@ def cartoonize(original_image_name, Nukkied_image):
     
     parser.add_argument('runserver', default='runserver')
     parser.add_argument('--bind', default='')
+    parser.add_argument('-w', default='')
+    parser.add_argument('--threads', default='')
 
     opt = parser.parse_args()
 
