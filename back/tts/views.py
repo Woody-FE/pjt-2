@@ -24,7 +24,7 @@ User = settings.AUTH_USER_MODEL
 @swagger_auto_schema(methods=['post'], query_serializer=TTSQuerySerializer)
 @api_view(['POST'])
 def create_voice(request, story_id, user_id):
-    scripts = Script.objects.filter(has_name=False)
+    scripts = Script.objects.filter(has_name=True)
     user = get_object_or_404(CustomUser, pk=user_id)
     denominator = int(request.GET.get('denominator', None))
     numerator = int(request.GET.get('numerator', None))
