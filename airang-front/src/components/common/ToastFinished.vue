@@ -27,15 +27,27 @@ export default {
 		},
 	},
 	methods: {
-		openMethod({ mystory, job, selectStories }) {
+		openMethod({ mystory, job, selectStories, defaultImage }) {
 			this.mystory = mystory;
 			this.selectStories = selectStories;
 			this.job = job;
+			this.defaultImage = defaultImage;
 			this.open = true;
 		},
 		async showToast() {
-			console.log(this.mystory, this.job, this.selectStories);
-			await finishedMyStory(this.mystory, this.job, this.selectStories);
+			await finishedMyStory(
+				this.mystory,
+				this.job,
+				this.selectStories,
+				this.defaultImage,
+			);
+			console.log(
+				'저장',
+				this.mystory,
+				this.job,
+				this.selectStories,
+				this.defaultImage,
+			);
 			this.open = false;
 			this.$router.push({ name: 'bookshelf' });
 		},

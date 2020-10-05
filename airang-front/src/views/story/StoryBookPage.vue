@@ -102,7 +102,7 @@
 							alt="profileImg"
 						/>
 						<section class="mystory-imgbtn">
-							<button type="button" class="mystory-imgbth__btn btn">
+							<button type="button" class="mystory-imgbtn__btn btn">
 								사진수정<input
 									ref="inputFile"
 									id=""
@@ -111,6 +111,13 @@
 									@change="onChangeFile"
 									class="fake-btn"
 								/>
+							</button>
+							<button
+								@click="defaultImage"
+								type="button"
+								class="mystory-imgbtn__btn btn"
+							>
+								기본사진
 							</button>
 						</section>
 					</section>
@@ -141,6 +148,7 @@ export default {
 	},
 	data() {
 		return {
+			myFicture: false,
 			cnt: 0,
 			count: 0,
 			mainLoading: false,
@@ -169,8 +177,8 @@ export default {
 		},
 		changeImageSrc() {
 			return this.conversionImage
-				? `${this.imgSrc}${this.conversionImage}?count=`
-				: `${this.imgSrc}media/image/child/noProfile.jpg`;
+				? `${this.imgSrc}${this.conversionImage}?count=${new Date()}`
+				: `${this.imgSrc}images/character/nukkied_default2.png?`;
 		},
 	},
 	updated() {
@@ -260,6 +268,7 @@ export default {
 				this.cnt += 1;
 				const { data } = await convertImage(this.userId);
 				this.conversionImage = data.path;
+				this.myFicture = true;
 			} catch (error) {
 				this.conversionImage = null;
 				console.log(error.response.data.detail);
@@ -273,10 +282,18 @@ export default {
 					story_id: this.storyId,
 					story_name: this.bookName ? this.bookName : this.defaultBookname,
 				});
-				this.$router.push(`/story/${data.story.id}/${data.id}/`);
+				if (this.myFicture) {
+					this.$router.push(`/story/${data.story.id}/${data.id}`);
+				} else {
+					this.$router.push(`/story/${data.story.id}/${data.id}?default=true`);
+				}
 			} catch (error) {
 				console.log(error);
 			}
+		},
+		defaultImage() {
+			this.myFicture = false;
+			this.conversionImage = false;
 		},
 	},
 };
@@ -472,10 +489,10 @@ export default {
 			}
 		}
 	}
-	.mystory-imgbth__btn {
+	.mystory-imgbtn__btn {
 		position: relative;
 		color: #495057;
-		width: 70%;
+		width: 35%;
 		height: 60%;
 		font-size: 1.5rem;
 		.fake-btn {
