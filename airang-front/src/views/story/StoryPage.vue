@@ -49,7 +49,9 @@
 						:key="image.id"
 						v-for="image in story.images"
 						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/conversion/${job}.png`"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
@@ -60,7 +62,9 @@
 					<img
 						v-if="job"
 						:class="[`story-left__character`, `job-${job}`]"
-						:src="`${imgSrc}images/user/${userId}/conversion/${job}.png`"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
 						alt=""
 					/>
 				</div>
