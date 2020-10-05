@@ -28,7 +28,7 @@
 							alt="book-pace"
 						/>
 						<img
-							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							src="@/assets/images/bookShelf/otherBook.jpg"
 							class="book-pace book-pace2"
 							alt="book-pace"
 						/>
