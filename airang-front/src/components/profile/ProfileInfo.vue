@@ -8,6 +8,7 @@
 				type="text"
 				class="profileInfo-name__change"
 				v-model="userData.name"
+				@keydown.enter="clickChangeBtn"
 			/>
 			<i @click="clickChangeBtn" class="icon ion-md-create change-btn">
 				<div class="fake-background"></div>
