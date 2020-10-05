@@ -32,6 +32,8 @@
 							class="book-pace book-pace2"
 							alt="book-pace"
 						/>
+					</router-link>
+					<router-link to="/myteam">
 						<img
 							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
 							class="book-pace book-pace3"
@@ -190,7 +192,6 @@ export default {
 		}
 	}
 }
-@include Book();
 .book-add__btn {
 	width: 60px;
 	height: 35px;

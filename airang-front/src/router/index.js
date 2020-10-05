@@ -11,6 +11,11 @@ const routes = [
 		component: () => import('@/views/MainPage.vue'),
 	},
 	{
+		path: '/myteam',
+		name: 'myteam',
+		component: () => import('@/views/MyTeamPage.vue'),
+	},
+	{
 		path: '/guide',
 		name: 'guide',
 		component: () => import('@/views/GuidePage.vue'),
@@ -18,6 +23,7 @@ const routes = [
 	{
 		path: '/login',
 		name: 'login',
+		props: route => ({ guide: route.query.guide }),
 		component: () => import('@/views/LoginPage.vue'),
 	},
 	{
@@ -38,6 +44,7 @@ const routes = [
 		path: '/story/:storyId/:myStoryId',
 		name: 'story',
 		props: route => ({
+			default: route.query.default,
 			storyId: Number(route.params.storyId),
 			myStoryId: Number(route.params.myStoryId),
 		}),

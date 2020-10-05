@@ -9,13 +9,23 @@
 			<div class="portrait-box">
 				<div class="portrait-img__box">
 					<img
-						v-if="script.character.id === 1"
+						v-if="script.character.id === 1 && !is_default"
 						class="portrait-img"
-						:src="`${BaseURL}images/user/${userId}/conversion/0.png`"
+						:src="
+							`${BaseURL}images/user/${userId}/conversion/0.png?count=${new Date()}`
+						"
 						alt=""
 					/>
 					<img
-						v-else
+						v-if="script.character.id === 1 && is_default"
+						class="portrait-img"
+						:src="
+							`${BaseURL}images/character/nukkied_default2.png?count=${new Date()}`
+						"
+						alt=""
+					/>
+					<img
+						v-if="script.character.id !== 1"
 						class="portrait-img"
 						:src="`${BaseURL}images/thumbnails/${script.character.id}.png`"
 						alt=""
@@ -82,6 +92,7 @@ export default {
 		scripts: Array,
 		subId: Number,
 		userId: Number,
+		is_default: Boolean,
 	},
 	data() {
 		return {
@@ -140,11 +151,11 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	.portrait-img__box {
 		display: flex;
 		width: 150px;
 		height: 230px;
-		justify-content: center;
 		align-items: center;
 		.portrait-img {
 			width: 100%;
@@ -153,12 +164,15 @@ export default {
 	}
 	.portrait-name {
 		font-size: 1.5rem;
-		margin-bottom: 6rem;
+		margin-bottom: 10%;
 	}
 	.portrait-content {
 		text-align: center;
 		line-height: 1.5;
 		font-size: 1.5rem;
+		margin-bottom: 30%;
+		padding-left: 8%;
+		padding-right: 8%;
 	}
 }
 </style>
