@@ -41,13 +41,7 @@ export default {
 				this.selectStories,
 				this.defaultImage,
 			);
-			console.log(
-				'저장',
-				this.mystory,
-				this.job,
-				this.selectStories,
-				this.defaultImage,
-			);
+
 			this.open = false;
 			this.$router.push({ name: 'bookshelf' });
 		},

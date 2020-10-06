@@ -71,7 +71,6 @@ export default {
 				const { data } = await fetchMyStories();
 				this.firstBooks = data.slice(0, 3);
 				this.secondBooks = data.slice(3, 6);
-				console.log(data);
 				this.firstBooks.forEach(el => {
 					el.story_name = truncateString(el.story_name);
 				});

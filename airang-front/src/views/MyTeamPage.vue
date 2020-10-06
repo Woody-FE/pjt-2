@@ -22,7 +22,6 @@
 <script>
 export default {
 	mounted() {
-		console.log('업뎃');
 		const cover = document.querySelector('.mystory-cover__img');
 		if (cover) {
 			cover.addEventListener('load', () => {
