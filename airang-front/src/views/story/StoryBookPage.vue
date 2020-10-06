@@ -56,19 +56,31 @@
 				<div class="mystory-face mystory-description">
 					<div class="mystory-portrait">
 						<div class="portrait-box">
-							<div class="portrait-img__box">
-								<img
-									class="portrait-img"
-									src="@/assets/images/character/arang1.png"
-									alt=""
-								/>
-							</div>
-							<p class="portrait-name">
+							<img
+								class="left-img"
+								src="@/assets/images/bg/house1.jpg"
+								alt=""
+							/>
+							<img
+								src="@/assets/images/character/nukkied_eating.png"
+								alt=""
+								class="left-arang"
+							/>
+							<img
+								src="@/assets/images/bg/selectBg.png"
+								alt=""
+								class="left-pink"
+							/>
+							<p class="left-say">
+								여행을 가기 전 아버지가 <br />
+								나에게 세 가지 선물을 줬어,<br />
+								이 선물들과 함께 <br />
+								내가 되고 싶은 모습을 찾을거야!
+							</p>
+							<!-- <p class="portrait-name">
 								줄거리
-							</p>
-							<p class="portrait-content">
-								아버지가 준 3가지 선물로 일어나는 나만의 신기하고 재밌는 여행
-							</p>
+							</p> -->
+							<p class="portrait-content"></p>
 						</div>
 					</div>
 				</div>
@@ -535,11 +547,45 @@ export default {
 	height: 100%;
 	padding: 10%;
 	.portrait-box {
+		position: relative;
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		.left-img {
+			height: 100%;
+			width: 100%;
+		}
+		.left-arang {
+			position: absolute;
+			top: 45%;
+			left: 85%;
+			width: 20%;
+			height: 30%;
+			transform: translate(-50%, 50%);
+		}
+		.left-pink {
+			position: absolute;
+			width: 70%;
+			height: 25%;
+			top: 65%;
+			left: 0%;
+		}
+		.left-say {
+			font-family: 'KOMACON';
+			position: absolute;
+			top: 69%;
+			left: 6%;
+			line-height: 1.5;
+			font-size: 1.2rem;
+			@media screen and (max-width: 1024px) {
+				font-size: 0.9rem;
+			}
+			@media screen and (max-width: 768px) {
+				font-size: 0.7rem;
+			}
+		}
 		.portrait-img__box {
 			display: flex;
 			width: 200px;

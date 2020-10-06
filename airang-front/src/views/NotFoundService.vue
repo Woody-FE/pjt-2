@@ -1,14 +1,14 @@
 <template>
 	<section class="notFound-wrap">
 		<div class="notFound-field2">
-			<p class="str-1">서비스 준비중입니다.</p>
-			<p class="str-2">빠른 시일 내에 준비하여 찾아뵙겠습니다.</p>
+			<p class="str-1">책 준비중이에요!</p>
+			<p class="str-2">다음에 들러주세요~</p>
 			<button class="notFound-btn" @click="goBack">돌아가기</button>
 		</div>
 		<div class="notFound-field1">
 			<img
 				class="notFound-img"
-				src="@/assets/images/loading.gif"
+				src="@/assets/images/loading2.gif"
 				alt="nukkied-girl"
 			/>
 		</div>
@@ -29,6 +29,8 @@ export default {
 .notFound-wrap {
 	display: flex;
 	margin-top: 5rem;
+	padding-right: 15%;
+	padding-left: 15%;
 	.notFound-field1 {
 		width: 50%;
 		display: flex;
