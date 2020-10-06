@@ -141,9 +141,7 @@ export default {
 					bus.$emit('show:warning', '중복된 이메일 입니다!');
 				} else {
 					const msg = error.response.data.password1;
-					// console.log(error.response);
-					// const msgLength = msg.length;
-					// const myMsg = msg.slice(2, msgLength - 2);
+
 					bus.$emit('show:warning', msg[0]);
 				}
 			}
