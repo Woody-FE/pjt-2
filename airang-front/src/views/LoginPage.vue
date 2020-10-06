@@ -264,10 +264,10 @@ export default {
 			font-size: 1rem;
 			font-weight: bold;
 			color: white;
-			background-color: #2f9e44;
+			background-color: rgba(47, 158, 68, 1);
 			&:disabled {
 				cursor: default;
-				opacity: 0.7;
+				background-color: rgb(105, 114, 107);
 			}
 		}
 	}
