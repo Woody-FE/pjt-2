@@ -13,7 +13,7 @@
 			</figure>
 			<figure class="guide">
 				<figcaption class="guide-description">
-					<p>주인공이 될 동화를 정해주세요.</p>
+					<p>만들고 싶은 동화를 골라주세요 :)</p>
 				</figcaption>
 				<img
 					class="guide-img"
@@ -23,9 +23,8 @@
 			</figure>
 			<figure class="guide">
 				<figcaption class="guide-description">
-					<p>선택한 동화의 간략한 내용을 알려드려요.</p>
-					<p>만들 책의 제목과 얼굴 사진을 입력해주세요!</p>
-					<p>자동으로 얼굴 사진을 그림으로 만들어드려요.</p>
+					<p>나만의 제목을 정해주세요</p>
+					<p>내 얼굴을 동화에 맞게 바꿔줍니다!</p>
 				</figcaption>
 				<img
 					class="guide-img"
@@ -46,7 +45,7 @@
 			<figure class="guide">
 				<figcaption class="guide-description">
 					<p>선택지들 마다 다른 엔딩이 있어요!</p>
-					<p>여러 번 읽어주셨으면 좋겠어요.</p>
+					<p>궁금하지 않나요?</p>
 				</figcaption>
 				<img
 					class="guide-img guide-last-img"
@@ -219,13 +218,14 @@ export default {
 }
 .guide-description {
 	margin-bottom: 5%;
+	font-family: 'KOMACON';
 }
 .guide-img {
 	max-width: 50%;
 	height: auto;
 }
 .guide-first-img {
-	width: 30%;
+	width: 50%;
 }
 .guide-last-img {
 	width: 40%;
