@@ -50,7 +50,6 @@ import {
 	patchUserName,
 } from '@/api/profile';
 import { validationName } from '@/utils/validation';
-// import { mapMutations } from 'vuex';
 
 export default {
 	data() {
@@ -63,7 +62,6 @@ export default {
 		};
 	},
 	methods: {
-		// ...mapMutations(['setChildName']),
 		async fetchData() {
 			try {
 				const id = this.$store.getters.getId;
@@ -81,7 +79,7 @@ export default {
 				formdata.append('child_image', img);
 				await changeImage(id, formdata);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:toast', '이미지를 못 불러왔어요ㅠ');
 			}
 		},
 		validateFile(file) {
@@ -95,7 +93,7 @@ export default {
 				const isValidate = await this.validateFile(changeImage);
 				if (isValidate) {
 					await this.patchImage(changeImage);
-					this.fetchData();
+					await this.fetchData();
 					bus.$emit('show:toast', '프로필이 변경 되었어요');
 				} else {
 					bus.$emit(
@@ -137,21 +135,18 @@ export default {
 		},
 		async changeName() {
 			try {
-				console.log('시작', new Date());
 				const content = {
 					child_name: this.userData.name,
 				};
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
 				bus.$emit('show:toast', '이름이 변경되었어요');
-				// this.setChildName(content.child_name);
 				this.$store.commit('setChildName', content.child_name);
 				await Promise.all([
 					createVoice(1, id, 1, 3),
 					createVoice(1, id, 2, 3),
 					createVoice(1, id, 3, 3),
 				]);
-				console.log('끝', new Date());
 			} catch (error) {
 				console.log(error.response);
 			}
