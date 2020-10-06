@@ -37,7 +37,7 @@
 					</router-link>
 					<router-link to="/myteam">
 						<img
-							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							src="@/assets/images/bookShelf/friendsBook.jpg"
 							class="book-pace book-pace3"
 							alt="book-pace"
 						/>

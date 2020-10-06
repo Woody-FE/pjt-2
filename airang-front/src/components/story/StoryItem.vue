@@ -108,9 +108,6 @@ export default {
 			return process.env.VUE_APP_API_URL;
 		},
 	},
-	mounted() {
-		console.log(this.scripts);
-	},
 };
 </script>
 
