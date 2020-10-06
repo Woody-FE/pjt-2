@@ -74,6 +74,11 @@ const routes = [
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
 	},
 	{
+		path: '/notservice',
+		name: 'notservice',
+		component: () => import('@/views/NotFoundService.vue'),
+	},
+	{
 		path: '*',
 		redirect: '/404',
 	},
