@@ -38,6 +38,7 @@
 				</div>
 			</div>
 		</div>
+		<footer class="temp-footer"></footer>
 	</section>
 </template>
 
@@ -221,5 +222,8 @@ export default {
 			}
 		}
 	}
+}
+.temp-footer {
+	height: 100px;
 }
 </style>

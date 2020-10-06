@@ -310,7 +310,7 @@ export default {
 			background-color: #2f9e44;
 			&:disabled {
 				cursor: default;
-				opacity: 0.7;
+				background-color: rgb(105, 114, 107);
 			}
 		}
 	}
