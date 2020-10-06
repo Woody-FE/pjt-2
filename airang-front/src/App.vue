@@ -81,7 +81,7 @@ main,
 }
 @media screen and (min-width: 768px) {
 	main {
-		display: initial;
+		display: block;
 	}
 	.nav {
 		display: flex;
