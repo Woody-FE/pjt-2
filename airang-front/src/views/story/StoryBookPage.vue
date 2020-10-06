@@ -554,7 +554,7 @@ export default {
 		align-items: center;
 		box-sizing: border-box;
 		.left-img {
-			height: 100%;
+			height: 80%;
 			width: 100%;
 		}
 		.left-arang {
