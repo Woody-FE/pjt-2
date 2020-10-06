@@ -238,7 +238,6 @@ export default {
 					await this.patchImage(changeImage);
 					this.fetchData();
 				} else {
-					// alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
 					bus.$emit(
 						'show:warning',
 						'.jpg, .jpeg, .png형태의 파일을 넣어주세요',
@@ -274,7 +273,7 @@ export default {
 				this.myFicture = true;
 			} catch (error) {
 				this.conversionImage = null;
-				console.log(error.response.data.detail);
+				bus.$emit('show:warning', error.response.data.detail);
 			} finally {
 				this.loading = false;
 			}
