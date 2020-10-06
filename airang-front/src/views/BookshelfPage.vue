@@ -27,6 +27,8 @@
 							class="book-pace"
 							alt="book-pace"
 						/>
+					</router-link>
+					<router-link :to="`/notservice`">
 						<img
 							src="@/assets/images/bookShelf/otherBook.jpg"
 							class="book-pace book-pace2"
