@@ -552,6 +552,7 @@ export default {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		box-sizing: border-box;
 		.left-img {
 			height: 100%;
 			width: 100%;
