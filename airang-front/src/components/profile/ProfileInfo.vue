@@ -141,7 +141,7 @@ export default {
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
 				bus.$emit('show:toast', '이름이 변경되었어요');
-				this.$store.commit('setChildName', content.child_name);
+				this.$store.commit('setChildName', this.userData.name);
 				await Promise.all([
 					createVoice(1, id, 1, 3),
 					createVoice(1, id, 2, 3),
