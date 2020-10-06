@@ -82,9 +82,7 @@
 					<img
 						v-if="job && defaultImage"
 						:class="[`story-left__character`, `job-${job}`]"
-						:src="
-							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
-						"
+						:src="`${imgSrc}images/character/${job}.png`"
 						alt=""
 					/>
 					<img
@@ -147,7 +145,13 @@
 			</section>
 		</article>
 		<section class="story-delete__btn">
-			<button @click="$router.push('/bookshelf')" class="story-delete-btn">
+			<button
+				@click="
+					deleteBook();
+					$router.push('/bookshelf');
+				"
+				class="story-delete-btn"
+			>
 				<i class="icon ion-md-close"></i>
 			</button>
 		</section>

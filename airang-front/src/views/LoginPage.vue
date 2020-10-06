@@ -25,7 +25,9 @@
 					v-model="password"
 				/>
 			</div>
-			<button class="login-btn" type="submit">로그인</button>
+			<button class="login-btn" type="submit" :disabled="disabledBtn">
+				로그인
+			</button>
 		</form>
 		<img
 			class="login-arang"
@@ -73,6 +75,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { loginUser } from '@/api/auth';
+import bus from '@/utils/bus';
 
 export default {
 	data() {
@@ -94,8 +97,13 @@ export default {
 					this.$router.push('/');
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이메일, 비밀번호를 확인해주세요!');
 			}
+		},
+	},
+	computed: {
+		disabledBtn() {
+			return !this.email || !this.password;
 		},
 	},
 };
@@ -257,6 +265,10 @@ export default {
 			font-weight: bold;
 			color: white;
 			background-color: #2f9e44;
+			&:disabled {
+				cursor: default;
+				opacity: 0.7;
+			}
 		}
 	}
 	.login-arang {

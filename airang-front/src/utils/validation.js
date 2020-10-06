@@ -25,4 +25,5 @@ function truncateString(string) {
 	}
 	return thisString;
 }
+
 export { validatePassword, validationName, truncateString };

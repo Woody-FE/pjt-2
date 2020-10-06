@@ -251,7 +251,10 @@ export default {
 					this.fetchData();
 				} else {
 					// alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
-					bus.$emit('show:toast', '.jpg, .jpeg, .png형태의 파일을 넣어주세요');
+					bus.$emit(
+						'show:warning',
+						'.jpg, .jpeg, .png형태의 파일을 넣어주세요',
+					);
 				}
 			} catch (error) {
 				console.log(error);
