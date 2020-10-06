@@ -185,7 +185,7 @@ export default {
 			width: 14%;
 			height: 200px;
 			position: absolute;
-			bottom: 53%;
+			bottom: 58%;
 			@media screen and (max-width: 1024px) {
 				height: 180px;
 			}
