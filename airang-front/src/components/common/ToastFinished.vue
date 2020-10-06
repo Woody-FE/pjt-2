@@ -43,7 +43,7 @@ export default {
 			);
 
 			this.open = false;
-			this.$router.push({ name: 'bookshelf' });
+			this.$router.push({ name: 'profile' });
 		},
 		closeToast() {
 			this.open = false;
