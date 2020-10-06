@@ -14,6 +14,8 @@ export default {};
 
 <style lang="scss">
 .footer-wrap {
+	position: sticky;
+	bottom: 0;
 	height: 100px;
 	display: grid;
 	place-items: center;
