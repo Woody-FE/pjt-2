@@ -573,13 +573,14 @@ export default {
 			left: 0%;
 		}
 		.left-say {
+			font-family: 'KOMACON';
 			position: absolute;
-			top: 70%;
+			top: 69%;
 			left: 6%;
 			line-height: 1.5;
 			font-size: 1.2rem;
 			@media screen and (max-width: 1024px) {
-				font-size: 1rem;
+				font-size: 0.9rem;
 			}
 			@media screen and (max-width: 768px) {
 				font-size: 0.7rem;

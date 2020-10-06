@@ -49,9 +49,10 @@ export default {
 		width: 100%;
 		position: absolute;
 		font-size: 1.2rem;
-		bottom: 84%;
+		bottom: 80%;
 		color: black;
-		margin-left: 13%;
+		margin-left: 19%;
+		font-family: 'KOMACON';
 		@media screen and (max-width: 1024px) {
 			font-size: 0.9rem;
 		}
