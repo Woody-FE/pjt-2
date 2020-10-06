@@ -115,9 +115,12 @@ export default {
 	margin: 0 10%;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	@media screen and (max-width: 768px) {
 		width: 95%;
+	}
+	@media screen and (min-width: 992px) {
+		justify-content: space-around;
 	}
 	a {
 		text-decoration: none;

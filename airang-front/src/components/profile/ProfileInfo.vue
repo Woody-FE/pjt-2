@@ -79,7 +79,7 @@ export default {
 				formdata.append('child_image', img);
 				await changeImage(id, formdata);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:toast', '이미지를 못 불러왔어요ㅠ');
 			}
 		},
 		validateFile(file) {

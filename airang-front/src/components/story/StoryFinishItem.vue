@@ -102,9 +102,6 @@ export default {
 			count: 0,
 		};
 	},
-	created() {
-		console.log(this.scripts);
-	},
 	computed: {
 		BaseURL() {
 			return process.env.VUE_APP_API_URL;
