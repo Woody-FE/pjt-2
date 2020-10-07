@@ -239,7 +239,6 @@ export default {
 			try {
 				const temp = this.$route.params.myStoryId;
 				const { data } = await fetchMyStory(temp);
-				console.log(myId, otherId);
 				const myId = parseInt(this.$store.getters.getId);
 				const otherId = parseInt(data.user.id);
 				if (myId !== otherId) {
