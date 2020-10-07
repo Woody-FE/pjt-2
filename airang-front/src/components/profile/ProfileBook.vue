@@ -26,10 +26,10 @@ export default {
 		...mapGetters(['getId']),
 		enddingRoot() {
 			const baseURL = process.env.VUE_APP_API_URL;
+			const enddingNum = this.book.finished;
 			if (this.book.is_default) {
-				return `${baseURL}images/character/nukkied_default2.png`;
+				return `${baseURL}images/character/${enddingNum}.png`;
 			} else {
-				const enddingNum = this.book.finished;
 				const storyId = this.book.id;
 				const userId = this.getId;
 				return `${baseURL}images/user/${userId}/mystory/${storyId}/${enddingNum}.png`;
