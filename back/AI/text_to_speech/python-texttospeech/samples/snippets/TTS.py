@@ -69,4 +69,4 @@ def TTS_ssml(ssml_sentence,output):
 
 
 # path = TTS_text('어흥 어흥', 'test_txt.mp3')
-path2 = TTS_ssml('<speak><audio src="https://storage.googleapis.com/my-bgm-file/Slide_Whistle.mp3" clipEnd="3s" /></speak>','./character_voice/아들/script_46.mp3')
+path2 = TTS_ssml('<speak><audio src="https://storage.googleapis.com/my-bgm-file/%EC%9D%B8%EC%83%9D%EA%B7%B9%EC%9E%A5.mp3" /></speak>','./character_voice/인생극장.mp3')

@@ -12,10 +12,10 @@
 			<div class="signup-box">
 				<label class="signup-label" for="text">아이 이름</label>
 				<input
-					id="username"
+					id="child_name"
 					class="signup-item"
 					type="text"
-					v-model="username"
+					v-model="child_name"
 				/>
 			</div>
 			<div class="signup-box">
@@ -40,13 +40,58 @@
 					v-model="password2"
 				/>
 			</div>
-			<button class="signup-btn" type="submit">회원가입</button>
+			<button :disabled="test" class="signup-btn" type="submit">
+				회원가입
+			</button>
 		</form>
+		<img
+			class="signup-arang"
+			src="@/assets/images/signup/eating3.gif"
+			alt="arang"
+		/>
+		<img
+			class="signup-ground"
+			src="@/assets/images/signup/ground.png"
+			alt="ground"
+		/>
+		<img
+			class="signup-cloud3"
+			src="@/assets/images/signup/cloud3.png"
+			alt="cloud3"
+		/>
+		<img
+			class="signup-cloud4"
+			src="@/assets/images/signup/cloud4.png"
+			alt="cloud4"
+		/>
+		<img
+			class="signup-items signup-grass1"
+			src="@/assets/images/signup/grass1.png"
+			alt="grass1"
+		/>
+		<img
+			class="signup-items signup-grass2"
+			src="@/assets/images/signup/grass2.png"
+			alt="grass2"
+		/>
+		<img
+			class="signup-items signup-carrot1"
+			src="@/assets/images/signup/carrot1.png"
+			alt="carrot1"
+		/>
+		<img
+			class="signup-items signup-carrot2"
+			src="@/assets/images/signup/carrot2.png"
+			alt="carrot2"
+		/>
 	</section>
 </template>
 
 <script>
+import bus from '@/utils/bus';
+import { createVoice } from '@/api/profile';
 import { mapActions } from 'vuex';
+import { registerUser } from '@/api/auth';
 import { validatePassword, validationName } from '@/utils/validation';
 
 export default {
@@ -55,7 +100,7 @@ export default {
 			email: '',
 			password1: '',
 			password2: '',
-			username: '',
+			child_name: '',
 		};
 	},
 	methods: {
@@ -63,33 +108,53 @@ export default {
 		async submitForm() {
 			try {
 				if (!this.isVaildateName) {
-					alert('※ 이름은 공백제외 2~5자 한글입니다.');
+					bus.$emit('show:warning', '이름은 공백제외 2~5자 한글입니다');
 					return;
 				}
 				if (!this.isValidatePassword1) {
-					alert('※ 비밀번호는 공백제외 8자 이상 15자 이하입니다.');
+					bus.$emit(
+						'show:warning',
+						'비밀번호는 공백제외 8자 이상 15자 이하입니다',
+					);
 					return;
 				}
 				if (!this.isEqualPassword) {
-					alert('※ 비밀번호를 한번 더 확인해주세요!');
+					bus.$emit('show:warning', '비밀번호를 한번 더 확인해주세요');
 					return;
 				}
 				const userInfo = {
-					username: this.username,
+					child_name: this.child_name,
 					email: this.email,
 					password1: this.password1,
 					password2: this.password2,
 				};
-				await this.SIGNUP(userInfo);
+				const { data } = await registerUser(userInfo);
+				this.$store.dispatch('SETUP_USER', data);
 				this.$router.push('/');
+				await Promise.all([
+					createVoice(1, data.user.id, 1, 3),
+					createVoice(1, data.user.id, 2, 3),
+					createVoice(1, data.user.id, 3, 3),
+				]);
 			} catch (error) {
-				console.log(error);
+				if (error.response.data.email !== undefined) {
+					bus.$emit('show:warning', '중복된 이메일 입니다!');
+				} else {
+					const msg = error.response.data.password1;
+
+					bus.$emit('show:warning', msg[0]);
+				}
 			}
 		},
 	},
 	computed: {
+		test() {
+			return (
+				!this.email || !this.password1 || !this.password2 || !this.child_name
+			);
+		},
 		isVaildateName() {
-			const name = this.username;
+			const name = this.child_name;
 			if (name.length === 0) {
 				return false;
 			}
@@ -177,8 +242,8 @@ export default {
 		top: 100px;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 550px;
-		height: 550px;
+		width: 500px;
+		height: 470px;
 		background: #ff922b;
 		border-top-left-radius: 15%;
 		border-top-right-radius: 15%;
@@ -191,26 +256,26 @@ export default {
 		z-index: 2;
 		.signup-logo {
 			position: absolute;
-			top: 5%;
-			left: 60%;
+			top: 3%;
+			left: 65%;
 			z-index: 999;
-			width: 150px;
+			width: 110px;
 		}
 		.signup-box {
 			position: relative;
-			width: 100%;
+			width: 60%;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 		}
 		.signup-label {
 			position: absolute;
-			top: -24px;
-			left: 5rem;
+			top: -1.3rem;
+			left: 1rem;
 			color: white;
 		}
 		.signup-item {
-			width: 100%;
+			width: 90%;
 			max-width: 368px;
 			height: 2rem;
 			padding: 0.25rem 1rem;
@@ -228,7 +293,7 @@ export default {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 100%;
+			width: 60%;
 			max-width: 400px;
 			height: 2.5rem;
 			padding: 1rem;
@@ -243,7 +308,56 @@ export default {
 			font-weight: bold;
 			color: white;
 			background-color: #2f9e44;
+			&:disabled {
+				cursor: default;
+				background-color: rgb(105, 114, 107);
+			}
 		}
+	}
+	.signup-arang {
+		width: 10%;
+		position: absolute;
+		bottom: -505px;
+		right: 6%;
+	}
+	.signup-cloud3 {
+		width: 17%;
+		position: absolute;
+		top: 12%;
+		left: 3%;
+	}
+	.signup-cloud4 {
+		width: 12%;
+		position: absolute;
+		top: 5%;
+		left: 14%;
+	}
+	.signup-ground {
+		width: 100%;
+		height: 130px;
+		position: absolute;
+		bottom: -610px;
+	}
+	.signup-items {
+		width: 6%;
+		position: absolute;
+	}
+	.signup-grass1 {
+		bottom: -515px;
+		right: 19%;
+	}
+	.signup-grass2 {
+		width: 3%;
+		bottom: -520px;
+		right: 18%;
+	}
+	.signup-carrot1 {
+		bottom: -580px;
+		left: 15%;
+	}
+	.signup-carrot2 {
+		bottom: -550px;
+		left: 11%;
 	}
 }
 </style>

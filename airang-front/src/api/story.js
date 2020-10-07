@@ -27,8 +27,12 @@ export function createMyStory({ story_id, story_name }) {
 export function fetchSubStory({ mystory_id, substory_id }) {
 	return stories.get(`/mystories/${mystory_id}/substories/${substory_id}/`);
 }
-export function finishedMyStory(mystoryId, storyList) {
-	return stories.post(`/mystories/${mystoryId}/`, { substory_list: storyList });
+export function finishedMyStory(mystoryId, job, storyList, is_default) {
+	return stories.post(`/mystories/${mystoryId}/`, {
+		job: job,
+		substory_list: storyList,
+		is_default: is_default,
+	});
 }
 export function fetchMySubStory(mystoryId, mysubstoryId) {
 	return stories.get(`/mystories/${mystoryId}/mysubstories/${mysubstoryId}/`);

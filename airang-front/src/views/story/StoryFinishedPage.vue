@@ -1,20 +1,5 @@
 <template>
 	<section class="story-wrap">
-		<article v-if="currentItem === -1" class="story-page story-current">
-			<section class="story-main story-cover">
-				<img
-					class="story-cover__img"
-					v-if="this.coverImage"
-					:src="`${imgSrc}${filterMedia(this.coverImage)}`"
-					:alt="`${this.bookName}`"
-				/>
-			</section>
-			<section class="story-start">
-				<button @click="startPage" class="story-start-btn">
-					시작하기
-				</button>
-			</section>
-		</article>
 		<article
 			:data-index="index"
 			:key="index"
@@ -45,13 +30,51 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png`"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								!is_default
+						"
+						:src="
+							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png?count=${new Date()}`
+						"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
+						alt="hero_head"
+					/>
+					<img
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								is_default
+						"
+						:src="
+							`${imgSrc}images/character/nukkied_default2.png?count=${new Date()}`
+						"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
+						alt="hero_head"
+					/>
+					<img
+						v-if="job && is_default"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="`${imgSrc}images/character/${job}.png`"
+						alt=""
+					/>
+					<img
+						v-if="job && !is_default"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="
+							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/${job}.png`
+						"
 						alt=""
 					/>
 				</div>
@@ -62,6 +85,7 @@
 				:scripts="story.scripts"
 				:subId="story.id"
 				:userId="userId"
+				:is_default="is_default"
 			/>
 		</article>
 		<section class="story-delete__btn">
@@ -106,6 +130,9 @@ export default {
 			coverImage: null,
 			bookName: null,
 			leftBox: [],
+			job: 0,
+			is_default: null,
+			myBook: null,
 		};
 	},
 	destroyed() {
@@ -117,6 +144,7 @@ export default {
 		this.finish = false;
 		this.coverImage = null;
 		this.bookName = null;
+		this.job = 0;
 	},
 	methods: {
 		resetScript() {
@@ -137,27 +165,46 @@ export default {
 		async createStory(mystoryId) {
 			try {
 				const { data } = await fetchMyStory(mystoryId);
-				console.log(data);
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
 				this.startStory = data.mystory.substory;
+				this.is_default = data.is_default;
+				this.startPage();
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책 생성에 실패했어요 :(');
 			}
 		},
 		async updateStory() {
 			try {
 				if (this.finish) {
-					this.$router.push({ name: 'bookshelf' });
+					this.$router.push({ name: 'profile' });
 				} else {
 					if (this.nextStoryId) {
 						const { data } = await fetchMySubStory(
 							this.myStoryId,
 							this.nextStoryId,
 						);
-						console.log(data);
 						if (data.next_id === null) {
+							switch (data.substory.id) {
+								case 47:
+									this.job = 4;
+									break;
+								case 46:
+									this.job = 5;
+									break;
+								case 45:
+									this.job = 2;
+									break;
+								case 44:
+									this.job = 1;
+									break;
+								case 43:
+									this.job = 3;
+									break;
+								default:
+									this.job = 0;
+							}
 							this.finish = true;
 						}
 						this.nextStoryId = data.next_id;
@@ -165,7 +212,7 @@ export default {
 					}
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -175,31 +222,61 @@ export default {
 			return string;
 		},
 		startPage() {
-			const startBtn = document.querySelector('.story-start-btn');
-			startBtn.style.display = 'none';
 			const storyCover = document.querySelectorAll('.story-page');
 			setTimeout(function() {
-				storyCover[0].classList.add('story-disabled');
+				storyCover[0].classList.add('story-abled');
 			}, 500);
 			this.stories.push(this.startStory);
-
 			this.currentItem = 0;
 		},
 		nextPage() {
 			this.currentItem += 1;
 		},
 		exitStory() {
-			this.$router.push({ name: 'bookshelf' });
+			this.$router.push({ name: 'profile' });
+		},
+		async isMyBook() {
+			try {
+				const temp = this.$route.params.myStoryId;
+				const { data } = await fetchMyStory(temp);
+				console.log(myId, otherId);
+				const myId = parseInt(this.$store.getters.getId);
+				const otherId = parseInt(data.user.id);
+				if (myId !== otherId) {
+					this.myBook = false;
+					const userName = data.user.child_name;
+					this.$router.push('/');
+					bus.$emit('show:toast', `${userName}책이 아닌거 같아요 :(`);
+				}
+				this.myBook = true;
+			} catch (error) {
+				this.myBook = false;
+				this.$router.push('/');
+				bus.$emit('show:toast', '잘못된 경로에요 :(');
+			}
 		},
 	},
-	mounted() {
-		const id = this.$store.getters.getId;
-		this.userId = parseInt(id);
-		bus.$on('finished:page-increase', this.currentIncrease);
-		bus.$on('finished:script-increase', this.scriptIncrease);
-		bus.$on('finished:script-reset', this.resetScript);
-		bus.$on('finished:next-page', this.updateStory);
-		this.createStory(this.myStoryId);
+	created() {},
+	beforeUpdate() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds) {
+			playingSounds.forEach(playingSound => {
+				playingSound.pause();
+			});
+		}
+	},
+
+	async mounted() {
+		await this.isMyBook();
+		if (this.myBook) {
+			const id = this.$store.getters.getId;
+			this.userId = parseInt(id);
+			bus.$on('finished:page-increase', this.currentIncrease);
+			bus.$on('finished:script-increase', this.scriptIncrease);
+			bus.$on('finished:script-reset', this.resetScript);
+			bus.$on('finished:next-page', this.updateStory);
+			this.createStory(this.myStoryId);
+		}
 	},
 };
 </script>

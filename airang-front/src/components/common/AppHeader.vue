@@ -69,7 +69,8 @@ export default {
 			return (
 				this.$route.name === 'story' ||
 				this.$route.name === 'finishedStory' ||
-				this.$route.name === 'storybook'
+				this.$route.name === 'storybook' ||
+				this.$route.name === 'myteam'
 			);
 		},
 		isLogin() {
@@ -77,12 +78,12 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations(['clearUsername', 'clearToken']),
+		...mapMutations(['clearChildName', 'clearToken']),
 		logoutUser() {
-			this.clearUsername();
+			this.clearChildName();
 			this.clearToken();
 			this.$cookies.remove('auth-token');
-			this.$cookies.remove('username');
+			this.$cookies.remove('child_name');
 		},
 		movedHome() {
 			this.logoutUser();
@@ -114,9 +115,12 @@ export default {
 	margin: 0 10%;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	@media screen and (max-width: 768px) {
 		width: 95%;
+	}
+	@media screen and (min-width: 992px) {
+		justify-content: space-around;
 	}
 	a {
 		text-decoration: none;

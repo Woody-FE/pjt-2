@@ -48,13 +48,49 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/conversion/0.png`"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								!defaultImage
+						"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
 							`sub${story.id}-${image.id}`,
 						]"
+						alt=""
+					/>
+					<img
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								defaultImage
+						"
+						:src="`${imgSrc}images/character/nukkied_default2.png`"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
+						alt=""
+					/>
+					<img
+						v-if="job && defaultImage"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="`${imgSrc}images/character/${job}.png`"
+						alt=""
+					/>
+					<img
+						v-if="job && !defaultImage"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
 						alt=""
 					/>
 				</div>
@@ -64,6 +100,11 @@
 					<img
 						class="story-left__bg"
 						src="@/assets/images/bg/left.jpg"
+						alt=""
+					/>
+					<img
+						class="story-left__select"
+						:src="`${imgSrc}images/select/${story.id}/left.png`"
 						alt=""
 					/>
 					<button
@@ -80,12 +121,18 @@
 				:scripts="story.scripts"
 				:subId="story.id"
 				:userId="userId"
+				:defaultImage="defaultImage"
 			/>
 			<section v-else class="story-right">
 				<div class="story-right-box">
 					<img
 						class="story-right__bg"
 						src="@/assets/images/bg/right.jpg"
+						alt=""
+					/>
+					<img
+						class="story-right__select"
+						:src="`${imgSrc}images/select/${story.id}/right.png`"
 						alt=""
 					/>
 					<button
@@ -113,8 +160,8 @@ import {
 	fetchBranch,
 	fetchStory,
 	deleteMyStories,
+	fetchMyStory,
 } from '@/api/story';
-import { finishedMyStory } from '@/api/story';
 export default {
 	components: {
 		StoryItem,
@@ -145,11 +192,17 @@ export default {
 			selectStories: [],
 			coverImage: null,
 			bookName: null,
+			job: 0,
+			defaultImage: null,
+			myBook: null,
 		};
 	},
 	destroyed() {
-		if (this.finish === false) {
-			this.deleteBook();
+		console.log(this.myBook);
+		if (this.myBook) {
+			if (this.finish === false) {
+				this.deleteBook();
+			}
 		}
 		this.currentItem = 0;
 		this.scriptNumber = 0;
@@ -159,8 +212,19 @@ export default {
 		this.nextBranchId = null;
 		this.hasBranch = null;
 		this.finish = false;
+		this.job = 0;
+		this.defaultImage = null;
 		this.selectStories = [];
 	},
+	beforeUpdate() {
+		const playingSounds = document.querySelectorAll('.story-sound__playing');
+		if (playingSounds) {
+			playingSounds.forEach(playingSound => {
+				playingSound.pause();
+			});
+		}
+	},
+	updated() {},
 	methods: {
 		resetScript() {
 			this.scriptNumber = 0;
@@ -179,7 +243,7 @@ export default {
 				this.subNumber = data.substory;
 				this.createSubStory(this.subNumber);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 불러오는데 실패했어요 :(');
 			}
 		},
 		async createSubStory(num) {
@@ -202,14 +266,20 @@ export default {
 					this.currentItem += 1;
 				}
 			} catch (error) {
-				console.log(error);
+				if (this.myBook) {
+					bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
+				}
 			}
 		},
 		async updateStory() {
 			try {
 				if (this.finish) {
-					await finishedMyStory(this.myStoryId, this.selectStories);
-					this.$router.push({ name: 'bookshelf' });
+					bus.$emit('show:finished', {
+						mystory: this.myStoryId,
+						selectStories: this.selectStories,
+						job: this.job,
+						defaultImage: Boolean(this.$route.query.default),
+					});
 				} else {
 					if (this.nextStoryId) {
 						this.selectStories.push(this.nextStoryId);
@@ -218,8 +288,26 @@ export default {
 							substory_id: this.nextStoryId,
 						});
 						if (data.next_id === null) {
-							console.log(data);
 							this.finish = true;
+							switch (data.scripts[0].substory) {
+								case 47:
+									this.job = 4;
+									break;
+								case 46:
+									this.job = 5;
+									break;
+								case 45:
+									this.job = 2;
+									break;
+								case 44:
+									this.job = 1;
+									break;
+								case 43:
+									this.job = 3;
+									break;
+								default:
+									this.job = 0;
+							}
 						}
 						this.hasBranch = data.has_branch;
 						if (!this.hasBranch) {
@@ -236,7 +324,7 @@ export default {
 					}
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -262,19 +350,41 @@ export default {
 				await deleteMyStories(this.myStoryId);
 				this.$router.push({ name: 'bookshelf' });
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 삭제하는데 실패했어요 :(');
 			}
 		},
 		async deleteBook() {
 			try {
 				await deleteMyStories(this.myStoryId);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 삭제하는데 실패했어요 :(');
+			}
+		},
+		async isMyBook() {
+			try {
+				const temp = this.$route.params.myStoryId;
+				console.log(temp);
+				const { data } = await fetchMyStory(temp);
+				const myId = parseInt(this.$store.getters.getId);
+				const otherId = parseInt(data.user.id);
+				if (myId !== otherId) {
+					this.myBook = false;
+					const userName = data.user.child_name;
+					this.$router.push('/');
+					bus.$emit('show:toast', `${userName}책이 아닌거 같아요 :(`);
+				}
+				this.myBook = true;
+			} catch (error) {
+				this.myBook = false;
+				this.$router.push('/');
+				bus.$emit('show:toast', '잘못된 경로에요 :(');
 			}
 		},
 	},
 	created() {
+		this.defaultImage = Boolean(this.$route.query.default);
 		this.fetchCover();
+		this.isMyBook();
 	},
 	mounted() {
 		const id = this.$store.getters.getId;
@@ -443,6 +553,22 @@ export default {
 	animation: fade-in 1s;
 	animation-fill-mode: forwards;
 	display: flex !important;
+}
+.story-left__select {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	top: 18%;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+.story-right__select {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	top: 18%;
+	left: 50%;
+	transform: translate(-50%, 50%);
 }
 
 .hidden {

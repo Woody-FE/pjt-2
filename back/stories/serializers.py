@@ -23,6 +23,7 @@ class MyStoryCreateSerializer(serializers.ModelSerializer):
             'story',
             'user',
             'finished',
+            'is_default',
         )
 
 
@@ -56,6 +57,7 @@ class ScriptSerializer(serializers.ModelSerializer):
             'order',
             'content',
             'substory',
+            'has_name',
         )
 
 
@@ -137,12 +139,14 @@ class MyStorySerializer(serializers.ModelSerializer):
         depth = 1
         fields = (
             'id',
+            'user',
             'created',
             'story',
             'story_name',
             'mystory',
             'mycharacters',
             'finished',
+            'is_default',
         )
 
 

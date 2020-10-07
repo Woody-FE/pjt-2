@@ -8,31 +8,36 @@
 		<AppHeader />
 		<main
 			:class="[
-				StoryRoute || $route.name === 'storybook'
+				StoryRoute || $route.name === 'storybook' || $route.name === 'myteam'
 					? 'container-story'
 					: 'container',
 			]"
 		>
 			<router-view />
 		</main>
-		<ToastPicture />
-		<button
-			style="position: absolute; top: 10px; left: 10px;"
-			@click="requestVoice(1)"
-		>
-			목소리생성
-		</button>
+		<ToastFinished />
+		<ToastPopup />
+		<ToastDelete />
+		<ToastWarning />
+		<Mobile />
 	</div>
 </template>
 <script>
 import AppHeader from '@/components/common/AppHeader.vue';
-import ToastPicture from '@/components/common/ToastPicture.vue';
-import { createVoice } from '@/api/profile';
+import ToastFinished from '@/components/common/ToastFinished.vue';
+import ToastPopup from '@/components/common/ToastPopup.vue';
+import ToastDelete from '@/components/common/ToastDelete.vue';
+import ToastWarning from '@/components/common/ToastWarning.vue';
+import Mobile from '@/components/common/Mobile.vue';
 
 export default {
 	components: {
 		AppHeader,
-		ToastPicture,
+		ToastFinished,
+		ToastPopup,
+		ToastDelete,
+		ToastWarning,
+		Mobile,
 	},
 	computed: {
 		AuthRoute() {
@@ -45,17 +50,6 @@ export default {
 		},
 		GuideRoute() {
 			return this.$route.name === 'guide';
-		},
-	},
-	methods: {
-		async requestVoice(storyId) {
-			try {
-				const id = this.$store.getters.getId;
-				const { data } = await createVoice(storyId, id);
-				console.log(data);
-			} catch (error) {
-				console.log(error);
-			}
 		},
 	},
 };
@@ -77,9 +71,20 @@ export default {
 	color: black;
 	height: 100%;
 }
-
 .container-story {
 	width: 100%;
 	min-height: 100vh;
+}
+main,
+.nav {
+	display: none;
+}
+@media screen and (min-width: 768px) {
+	main {
+		display: block;
+	}
+	.nav {
+		display: flex;
+	}
 }
 </style>

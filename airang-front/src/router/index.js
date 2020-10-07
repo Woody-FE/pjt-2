@@ -1,14 +1,26 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import StoryPage from '@/views/StoryPage.vue';
+import store from '../store/index';
 
 Vue.use(VueRouter);
+
+const notRequireAuth = (to, from, next) => {
+	if (store.getters.getToken === null) {
+		return next();
+	}
+	next('/');
+};
 
 const routes = [
 	{
 		path: '/',
 		name: 'main',
 		component: () => import('@/views/MainPage.vue'),
+	},
+	{
+		path: '/myteam',
+		name: 'myteam',
+		component: () => import('@/views/MyTeamPage.vue'),
 	},
 	{
 		path: '/guide',
@@ -18,7 +30,9 @@ const routes = [
 	{
 		path: '/login',
 		name: 'login',
+		props: route => ({ guide: route.query.guide }),
 		component: () => import('@/views/LoginPage.vue'),
+		beforeEnter: notRequireAuth,
 	},
 	{
 		path: '/signup',
@@ -38,6 +52,7 @@ const routes = [
 		path: '/story/:storyId/:myStoryId',
 		name: 'story',
 		props: route => ({
+			default: route.query.default,
 			storyId: Number(route.params.storyId),
 			myStoryId: Number(route.params.myStoryId),
 		}),
@@ -65,6 +80,11 @@ const routes = [
 		path: '/profile/modifyinfo',
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+	},
+	{
+		path: '/notservice',
+		name: 'notservice',
+		component: () => import('@/views/NotFoundService.vue'),
 	},
 	{
 		path: '*',

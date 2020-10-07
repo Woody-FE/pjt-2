@@ -1,19 +1,19 @@
 <template>
-	<section>
+	<section class="profile-wrap">
 		<ProfileInfo />
-		<ProfileStory />
+		<ProfileShelf />
 	</section>
 </template>
 
 <script>
 import ProfileInfo from '@/components/profile/ProfileInfo.vue';
-import ProfileStory from '@/components/profile/ProfileStory.vue';
+import ProfileShelf from '@/components/profile/ProfileShelf.vue';
 import { mapGetters } from 'vuex';
 
 export default {
 	components: {
 		ProfileInfo,
-		ProfileStory,
+		ProfileShelf,
 	},
 	computed: {
 		...mapGetters(['isLogined']),
@@ -25,3 +25,10 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss">
+.profile-wrap {
+	width: 100%;
+	height: 100%;
+}
+</style>

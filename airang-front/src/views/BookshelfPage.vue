@@ -6,8 +6,13 @@
 			class="bookshelf-bg"
 			alt="bookshelf"
 		/>
-		<span class="bookshelf-bg2"></span>
+		<!-- <span class="bookshelf-bg2"></span> -->
 		<span class="bookshelf-bg2 bookshelf-bg3"></span>
+		<img
+			src="@/assets/images/bookShelf/shelf.png"
+			class="bookshelf-shelf"
+			alt="bookshelf-shelf"
+		/>
 		<img
 			src="@/assets/images/bookShelf/library_arang.png"
 			class="bookshelf-arang"
@@ -23,6 +28,20 @@
 							alt="book-pace"
 						/>
 					</router-link>
+					<router-link :to="`/notservice`">
+						<img
+							src="@/assets/images/bookShelf/otherBook.jpg"
+							class="book-pace book-pace2"
+							alt="book-pace"
+						/>
+					</router-link>
+					<router-link to="/myteam">
+						<img
+							src="@/assets/images/bookShelf/friendsBook.jpg"
+							class="book-pace book-pace3"
+							alt="book-pace"
+						/>
+					</router-link>
 				</div>
 			</div>
 		</div>
@@ -31,6 +50,8 @@
 
 <script>
 import { fetchStories } from '@/api/story';
+import bus from '@/utils/bus';
+
 export default {
 	created() {
 		this.fetchBooks();
@@ -55,9 +76,8 @@ export default {
 			try {
 				const { data } = await fetchStories();
 				this.books = data;
-				console.log(data);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 가져오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -81,7 +101,7 @@ export default {
 	perspective: 500px;
 	h2 {
 		font-size: 24px;
-		border-left: 2px solid yellow;
+		border-left: 3px solid rgb(194, 113, 41);
 		padding-left: 5px;
 	}
 }
@@ -108,9 +128,21 @@ export default {
 	box-shadow: 0px 10px 5px rgba(99, 58, 23, 0.5);
 }
 .bookshelf-bg3 {
+	transform: translateX(-50%) rotateX(80deg);
 	position: absolute;
 	top: 360px;
 	left: 50%;
+}
+.bookshelf-shelf {
+	width: 28%;
+	position: absolute;
+	bottom: -500px;
+	right: 210px;
+	@media screen and (max-width: 768px) {
+		width: 33%;
+		bottom: -490px;
+		right: 180px;
+	}
 }
 .bookshelf-arang {
 	width: 200px;
@@ -145,14 +177,24 @@ export default {
 		align-items: center;
 		margin: 1rem 0;
 		.book-pace {
-			width: 100px;
-			height: 130px;
+			width: 16%;
 			position: absolute;
-			top: 70px;
+			bottom: -574%;
+			&:hover {
+				transform: rotate(5deg);
+			}
+			&:active {
+				transform: scale(1.1) rotate(5deg);
+			}
+		}
+		.book-pace2 {
+			left: 42%;
+		}
+		.book-pace3 {
+			left: 67%;
 		}
 	}
 }
-@include Book();
 .book-add__btn {
 	width: 60px;
 	height: 35px;
