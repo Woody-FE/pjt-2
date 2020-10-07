@@ -69,7 +69,7 @@ export default {
 				this.userData.name = data.child_name;
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '프로필을 가져오는데 실패했어요 :(');
 			}
 		},
 		async patchImage(img) {
@@ -79,7 +79,7 @@ export default {
 				formdata.append('child_image', img);
 				await changeImage(id, formdata);
 			} catch (error) {
-				bus.$emit('show:toast', '이미지를 못 불러왔어요ㅠ');
+				bus.$emit('show:warning', '이미지를 가져오는데 실패했어요 :(');
 			}
 		},
 		validateFile(file) {
@@ -102,7 +102,7 @@ export default {
 					);
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 가져오는데 실패했어요 :(');
 			}
 		},
 		async resetProfile() {
@@ -112,7 +112,7 @@ export default {
 				this.fetchData();
 				bus.$emit('show:toast', '프로필이 초기화 되었어요');
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '프로필을 초기화 하는데 실패했어요 :(');
 			}
 		},
 		clickChangeBtn() {
@@ -148,7 +148,7 @@ export default {
 					createVoice(1, id, 3, 3),
 				]);
 			} catch (error) {
-				console.log(error.response);
+				bus.$emit('show:warning', '이름을 변경하는데 실패했어요 :(');
 			}
 		},
 	},

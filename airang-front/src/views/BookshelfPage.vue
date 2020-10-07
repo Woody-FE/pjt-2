@@ -50,6 +50,8 @@
 
 <script>
 import { fetchStories } from '@/api/story';
+import bus from '@/utils/bus';
+
 export default {
 	created() {
 		this.fetchBooks();
@@ -75,7 +77,7 @@ export default {
 				const { data } = await fetchStories();
 				this.books = data;
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 가져오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
