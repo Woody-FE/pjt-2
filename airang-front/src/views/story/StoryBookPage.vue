@@ -36,22 +36,32 @@
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-select">
-					<img
-						class="mystory-select__bg"
-						src="@/assets/images/bg/selectBg2.png"
-						alt=""
-					/>
-					<img
-						class="mystory-select__rightimg"
-						src="@/assets/images/character/selectArang2.png"
-						alt=""
-					/>
-					<button
-						class="mystory-select__btn btn"
-						@click="$router.push('/profile')"
-					>
-						책 보기
-					</button>
+					<div class="mystory-button-wrapper">
+						<section class="story-delete__btn">
+							<button
+								@click="$router.push('/bookshelf')"
+								class="story-delete-btn"
+							>
+								<i class="icon ion-md-close"></i>
+							</button>
+						</section>
+						<img
+							class="mystory-select__bg"
+							src="@/assets/images/bg/selectBg2.png"
+							alt=""
+						/>
+						<img
+							class="mystory-select__rightimg"
+							src="@/assets/images/character/selectArang2.png"
+							alt=""
+						/>
+						<button
+							class="mystory-select__btn btn"
+							@click="$router.push('/profile')"
+						>
+							책 보기
+						</button>
+					</div>
 				</div>
 				<div class="mystory-face mystory-description">
 					<div class="mystory-portrait">
@@ -87,6 +97,14 @@
 			</section>
 			<section class="mystory-page">
 				<div class="mystory-face mystory-input">
+					<section class="story-delete__btn">
+						<button
+							@click="$router.push('/bookshelf')"
+							class="story-delete-btn"
+						>
+							<i class="icon ion-md-close"></i>
+						</button>
+					</section>
 					<div class="mystory-bookinfo">
 						<label class="mystory-label" for="bookname">책 이름</label>
 						<input
@@ -332,10 +350,30 @@ export default {
 		font-size: 2rem;
 	}
 }
+.story-delete__btn {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 4%;
+	right: 3%;
+	width: 3rem;
+	height: 3rem;
+	/* transform: translateX(-50%); */
+	.story-delete-btn {
+		border: none;
+		border-radius: 50%;
+		width: 3rem;
+		height: 3rem;
+		font-size: 1.5rem;
+		background: white;
+		color: black;
+		cursor: pointer;
+	}
+}
 .mystory-wrap {
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
+
 	.mystory-bookcover {
 		position: absolute;
 		left: 0;
@@ -366,6 +404,9 @@ export default {
 				background: white;
 				color: black;
 				backface-visibility: hidden;
+				.mystory-button-wrapper {
+					position: relative;
+				}
 			}
 			&:nth-child(1) {
 				z-index: 3;
@@ -534,6 +575,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	.mystory-cover__img {
 		width: 100%;
 		height: 100%;
