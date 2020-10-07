@@ -21,7 +21,6 @@
 							src="@/assets/images/character/selectArang.png"
 							alt=""
 						/>
-
 						<button
 							class="mystory-select__btn btn"
 							@click="
@@ -295,8 +294,6 @@ export default {
 				if (string === null) {
 					return false;
 				}
-				console.log(string);
-				console.log(string.length);
 				if (string.length >= 7) {
 					bus.$emit('show:warning', '제목은 공백포함 7자미만! :(');
 					return true;
@@ -318,7 +315,6 @@ export default {
 					this.$router.push(`/story/${data.story.id}/${data.id}?default=true`);
 				}
 			} catch (error) {
-				console.log(error);
 				bus.$emit('show:warning', '책 생성에 실패했어요 :(');
 			}
 		},
@@ -564,7 +560,7 @@ export default {
 .mystory-portrait {
 	width: 100%;
 	height: 100%;
-	padding: 10%;
+	padding-left: 10%;
 	.portrait-box {
 		position: relative;
 		width: 100%;
