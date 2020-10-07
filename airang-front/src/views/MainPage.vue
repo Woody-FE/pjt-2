@@ -334,7 +334,6 @@ export default {
 			}
 		}
 	}
-
 	.start-btn {
 		position: absolute;
 		bottom: 50px;
