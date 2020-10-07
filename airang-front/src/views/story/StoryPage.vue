@@ -198,7 +198,6 @@ export default {
 		};
 	},
 	destroyed() {
-		console.log(this.myBook);
 		if (this.myBook) {
 			if (this.finish === false) {
 				this.deleteBook();
@@ -363,7 +362,6 @@ export default {
 		async isMyBook() {
 			try {
 				const temp = this.$route.params.myStoryId;
-				console.log(temp);
 				const { data } = await fetchMyStory(temp);
 				const myId = parseInt(this.$store.getters.getId);
 				const otherId = parseInt(data.user.id);
