@@ -266,7 +266,9 @@ export default {
 					this.currentItem += 1;
 				}
 			} catch (error) {
-				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
+				if (this.myBook) {
+					bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
+				}
 			}
 		},
 		async updateStory() {
@@ -361,6 +363,7 @@ export default {
 		async isMyBook() {
 			try {
 				const temp = this.$route.params.myStoryId;
+				console.log(temp);
 				const { data } = await fetchMyStory(temp);
 				const myId = parseInt(this.$store.getters.getId);
 				const otherId = parseInt(data.user.id);
