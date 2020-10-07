@@ -419,6 +419,8 @@ export default {
 				backface-visibility: hidden;
 				.mystory-button-wrapper {
 					position: relative;
+					width: 100%;
+					height: 100%;
 				}
 			}
 			&:nth-child(1) {
