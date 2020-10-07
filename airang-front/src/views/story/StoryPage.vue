@@ -48,8 +48,14 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/conversion/${job}.png`"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								!defaultImage
+						"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
@@ -58,9 +64,35 @@
 						alt=""
 					/>
 					<img
-						v-if="job"
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								defaultImage
+						"
+						:src="`${imgSrc}images/character/nukkied_default2.png`"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
+						alt=""
+					/>
+					<img
+						v-if="job && defaultImage"
 						:class="[`story-left__character`, `job-${job}`]"
-						:src="`${imgSrc}images/user/${userId}/conversion/${job}.png`"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
+						alt=""
+					/>
+					<img
+						v-if="job && !defaultImage"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="
+							`${imgSrc}images/user/${userId}/conversion/${job}.png?count=${new Date()}`
+						"
 						alt=""
 					/>
 				</div>
@@ -91,6 +123,7 @@
 				:scripts="story.scripts"
 				:subId="story.id"
 				:userId="userId"
+				:defaultImage="defaultImage"
 			/>
 			<section v-else class="story-right">
 				<div class="story-right-box">
@@ -161,6 +194,7 @@ export default {
 			coverImage: null,
 			bookName: null,
 			job: 0,
+			defaultImage: null,
 		};
 	},
 	destroyed() {
@@ -175,8 +209,8 @@ export default {
 		this.nextBranchId = null;
 		this.hasBranch = null;
 		this.finish = false;
-		this.job = null;
-
+		this.job = 0;
+		this.defaultImage = null;
 		this.selectStories = [];
 	},
 	beforeUpdate() {
@@ -239,6 +273,7 @@ export default {
 						mystory: this.myStoryId,
 						selectStories: this.selectStories,
 						job: this.job,
+						defaultImage: Boolean(this.$route.query.default),
 					});
 				} else {
 					if (this.nextStoryId) {
@@ -323,6 +358,7 @@ export default {
 		},
 	},
 	created() {
+		this.defaultImage = Boolean(this.$route.query.default);
 		this.fetchCover();
 	},
 	mounted() {

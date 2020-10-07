@@ -1,20 +1,5 @@
 <template>
 	<section class="story-wrap">
-		<article v-if="currentItem === -1" class="story-page story-current">
-			<section class="story-main story-cover">
-				<img
-					class="story-cover__img"
-					v-if="this.coverImage"
-					:src="`${imgSrc}${filterMedia(this.coverImage)}`"
-					:alt="`${this.bookName}`"
-				/>
-			</section>
-			<section class="story-start">
-				<button @click="startPage" class="story-start-btn">
-					시작하기
-				</button>
-			</section>
-		</article>
 		<article
 			:data-index="index"
 			:key="index"
@@ -45,8 +30,14 @@
 					<img
 						:key="image.id"
 						v-for="image in story.images"
-						v-if="image.order === scriptNumber + 1 && image.is_main_character"
-						:src="`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png`"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								!is_default
+						"
+						:src="
+							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/0.png?count=${new Date()}`
+						"
 						:class="[
 							`story-left__character`,
 							`order${image.order}`,
@@ -55,7 +46,33 @@
 						alt="hero_head"
 					/>
 					<img
-						v-if="job"
+						:key="image.id"
+						v-for="image in story.images"
+						v-if="
+							image.order === scriptNumber + 1 &&
+								image.is_main_character &&
+								is_default
+						"
+						:src="
+							`${imgSrc}images/character/nukkied_default2.png?count=${new Date()}`
+						"
+						:class="[
+							`story-left__character`,
+							`order${image.order}`,
+							`sub${story.id}-${image.id}`,
+						]"
+						alt="hero_head"
+					/>
+					<img
+						v-if="job && is_default"
+						:class="[`story-left__character`, `job-${job}`]"
+						:src="
+							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/${job}.png`
+						"
+						alt=""
+					/>
+					<img
+						v-if="job && !is_default"
 						:class="[`story-left__character`, `job-${job}`]"
 						:src="
 							`${imgSrc}images/user/${userId}/mystory/${myStoryId}/${job}.png`
@@ -70,6 +87,7 @@
 				:scripts="story.scripts"
 				:subId="story.id"
 				:userId="userId"
+				:is_default="is_default"
 			/>
 		</article>
 		<section class="story-delete__btn">
@@ -115,6 +133,7 @@ export default {
 			bookName: null,
 			leftBox: [],
 			job: 0,
+			is_default: null,
 		};
 	},
 	destroyed() {
@@ -147,10 +166,13 @@ export default {
 		async createStory(mystoryId) {
 			try {
 				const { data } = await fetchMyStory(mystoryId);
+				console.log(data);
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
 				this.startStory = data.mystory.substory;
+				this.is_default = data.is_default;
+				this.startPage();
 			} catch (error) {
 				console.log(error);
 			}
@@ -158,7 +180,7 @@ export default {
 		async updateStory() {
 			try {
 				if (this.finish) {
-					this.$router.push({ name: 'bookshelf' });
+					this.$router.push({ name: 'profile' });
 				} else {
 					if (this.nextStoryId) {
 						const { data } = await fetchMySubStory(
@@ -202,21 +224,20 @@ export default {
 			return string;
 		},
 		startPage() {
-			const startBtn = document.querySelector('.story-start-btn');
-			startBtn.style.display = 'none';
+			// const startBtn = document.querySelector('.story-start-btn');
+			// startBtn.style.display = 'none';
 			const storyCover = document.querySelectorAll('.story-page');
 			setTimeout(function() {
-				storyCover[0].classList.add('story-disabled');
+				storyCover[0].classList.add('story-abled');
 			}, 500);
 			this.stories.push(this.startStory);
-
 			this.currentItem = 0;
 		},
 		nextPage() {
 			this.currentItem += 1;
 		},
 		exitStory() {
-			this.$router.push({ name: 'bookshelf' });
+			this.$router.push({ name: 'profile' });
 		},
 	},
 	beforeUpdate() {

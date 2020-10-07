@@ -96,7 +96,7 @@ export default {
 		},
 		clickEndBtn() {
 			if (this.isLogined) {
-				this.$router.push('/login');
+				this.$router.push('/login?guide=true');
 			} else {
 				this.$router.push('/bookshelf');
 			}
