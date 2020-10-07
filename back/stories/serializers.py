@@ -137,6 +137,7 @@ class MyStorySerializer(serializers.ModelSerializer):
         depth = 1
         fields = (
             'id',
+            'user',
             'created',
             'story',
             'story_name',
