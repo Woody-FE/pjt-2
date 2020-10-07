@@ -10,7 +10,12 @@ const notRequireAuth = (to, from, next) => {
 	}
 	next('/');
 };
-
+const requireAuth = (to, from, next) => {
+	if (store.getters.getToken !== null) {
+		return next();
+	}
+	next('/login');
+};
 const routes = [
 	{
 		path: '/',
@@ -21,6 +26,7 @@ const routes = [
 		path: '/myteam',
 		name: 'myteam',
 		component: () => import('@/views/MyTeamPage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/guide',
@@ -38,6 +44,7 @@ const routes = [
 		path: '/signup',
 		name: 'signup',
 		component: () => import('@/views/SignupPage.vue'),
+		beforeEnter: notRequireAuth,
 	},
 	{
 		path: '/story/:storyId/review/:myStoryId',
@@ -47,6 +54,7 @@ const routes = [
 			myStoryId: Number(route.params.myStoryId),
 		}),
 		component: () => import('@/views/story/StoryFinishedPage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/story/:storyId/:myStoryId',
@@ -57,11 +65,13 @@ const routes = [
 			myStoryId: Number(route.params.myStoryId),
 		}),
 		component: () => import('@/views/story/StoryPage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/bookshelf',
 		name: 'bookshelf',
 		component: () => import('@/views/BookshelfPage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/bookshelf/:storyId',
@@ -70,16 +80,19 @@ const routes = [
 			storyId: Number(route.params.storyId),
 		}),
 		component: () => import('@/views/story/StoryBookPage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/profile',
 		name: 'profile',
 		component: () => import('@/views/profile/ProfilePage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/profile/modifyinfo',
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+		beforeEnter: requireAuth,
 	},
 	{
 		path: '/notservice',
