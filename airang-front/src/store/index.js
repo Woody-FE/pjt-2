@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import cookies from 'vue-cookies';
 import { loginUser, registerUser } from '@/api/auth';
+import bus from '@/utils/bus';
 
 Vue.use(Vuex);
 
@@ -48,7 +49,7 @@ export default new Vuex.Store({
 				const { data } = await loginUser(userData);
 				dispatch('SETUP_USER', data);
 			} catch (error) {
-				console.log(error.response.data.detail);
+				bus.$emit('show:warning', '로그인에 실패했어요 :(');
 			}
 		},
 		async SIGNUP({ dispatch }, userData) {
@@ -56,7 +57,7 @@ export default new Vuex.Store({
 				const { data } = await registerUser(userData);
 				dispatch('SETUP_USER', data);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '회원가입에 실패했어요 :(');
 			}
 		},
 	},

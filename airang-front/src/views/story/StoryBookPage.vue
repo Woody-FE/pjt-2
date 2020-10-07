@@ -224,7 +224,7 @@ export default {
 					this.createImage();
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		async patchImage(img) {
@@ -234,7 +234,7 @@ export default {
 				formdata.append('child_image', img);
 				await changeImage(id, formdata);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 불러오는데 실패했어요 :(');
 			}
 		},
 		validateFile(file) {
@@ -256,7 +256,7 @@ export default {
 					);
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '다른파일을 부탁드릴께요 :(');
 			}
 		},
 		async fetchStoryBook() {
@@ -267,7 +267,7 @@ export default {
 				this.defaultBookname = data.name;
 				this.mainLoading = false;
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -291,7 +291,23 @@ export default {
 			}
 		},
 		async createBook() {
+			const isOver7 = string => {
+				if (string === null) {
+					return false;
+				}
+				console.log(string);
+				console.log(string.length);
+				if (string.length >= 7) {
+					bus.$emit('show:warning', '제목은 공백포함 7자미만! :(');
+					return true;
+				}
+				return false;
+			};
 			try {
+				const over7 = await isOver7(this.bookName);
+				if (over7) {
+					return;
+				}
 				const { data } = await createMyStory({
 					story_id: this.storyId,
 					story_name: this.bookName ? this.bookName : this.defaultBookname,
@@ -303,6 +319,7 @@ export default {
 				}
 			} catch (error) {
 				console.log(error);
+				bus.$emit('show:warning', '책 생성에 실패했어요 :(');
 			}
 		},
 		defaultImage() {
@@ -509,6 +526,9 @@ export default {
 		width: 35%;
 		height: 60%;
 		font-size: 1.5rem;
+		@media screen and (max-width: 1024px) {
+			font-size: 1.1rem;
+		}
 		.fake-btn {
 			cursor: pointer;
 			position: absolute;

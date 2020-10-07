@@ -183,6 +183,9 @@ export default {
 		margin-bottom: 30%;
 		padding-left: 8%;
 		padding-right: 8%;
+		@media screen and (max-width: 768px) {
+			font-size: 1.1rem;
+		}
 	}
 }
 .repeat-content {

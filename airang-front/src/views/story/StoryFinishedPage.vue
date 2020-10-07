@@ -132,6 +132,7 @@ export default {
 			leftBox: [],
 			job: 0,
 			is_default: null,
+			myBook: null,
 		};
 	},
 	destroyed() {
@@ -164,7 +165,6 @@ export default {
 		async createStory(mystoryId) {
 			try {
 				const { data } = await fetchMyStory(mystoryId);
-				console.log(data);
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
@@ -172,7 +172,7 @@ export default {
 				this.is_default = data.is_default;
 				this.startPage();
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책 생성에 실패했어요 :(');
 			}
 		},
 		async updateStory() {
@@ -212,7 +212,7 @@ export default {
 					}
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -222,8 +222,6 @@ export default {
 			return string;
 		},
 		startPage() {
-			// const startBtn = document.querySelector('.story-start-btn');
-			// startBtn.style.display = 'none';
 			const storyCover = document.querySelectorAll('.story-page');
 			setTimeout(function() {
 				storyCover[0].classList.add('story-abled');
@@ -237,7 +235,28 @@ export default {
 		exitStory() {
 			this.$router.push({ name: 'profile' });
 		},
+		async isMyBook() {
+			try {
+				const temp = this.$route.params.myStoryId;
+				const { data } = await fetchMyStory(temp);
+				console.log(myId, otherId);
+				const myId = parseInt(this.$store.getters.getId);
+				const otherId = parseInt(data.user.id);
+				if (myId !== otherId) {
+					this.myBook = false;
+					const userName = data.user.child_name;
+					this.$router.push('/');
+					bus.$emit('show:toast', `${userName}책이 아닌거 같아요 :(`);
+				}
+				this.myBook = true;
+			} catch (error) {
+				this.myBook = false;
+				this.$router.push('/');
+				bus.$emit('show:toast', '잘못된 경로에요 :(');
+			}
+		},
 	},
+	created() {},
 	beforeUpdate() {
 		const playingSounds = document.querySelectorAll('.story-sound__playing');
 		if (playingSounds) {
@@ -246,14 +265,18 @@ export default {
 			});
 		}
 	},
-	mounted() {
-		const id = this.$store.getters.getId;
-		this.userId = parseInt(id);
-		bus.$on('finished:page-increase', this.currentIncrease);
-		bus.$on('finished:script-increase', this.scriptIncrease);
-		bus.$on('finished:script-reset', this.resetScript);
-		bus.$on('finished:next-page', this.updateStory);
-		this.createStory(this.myStoryId);
+
+	async mounted() {
+		await this.isMyBook();
+		if (this.myBook) {
+			const id = this.$store.getters.getId;
+			this.userId = parseInt(id);
+			bus.$on('finished:page-increase', this.currentIncrease);
+			bus.$on('finished:script-increase', this.scriptIncrease);
+			bus.$on('finished:script-reset', this.resetScript);
+			bus.$on('finished:next-page', this.updateStory);
+			this.createStory(this.myStoryId);
+		}
 	},
 };
 </script>

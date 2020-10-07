@@ -97,7 +97,7 @@ export default {
 				this.userData.email = data.email;
 				this.userData.child_name = data.child_name;
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		async patchData() {
@@ -108,7 +108,7 @@ export default {
 				// alert('비밀번호가 수정 되었어요!');
 				bus.$emit('show:toast', '비밀번호가 수정 되었어요');
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '비밀번호 수정에 실패했어요 :(');
 			}
 		},
 	},
