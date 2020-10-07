@@ -17,18 +17,27 @@
 		</main>
 		<ToastFinished />
 		<ToastPopup />
+		<ToastDelete />
+		<ToastWarning />
+		<Mobile />
 	</div>
 </template>
 <script>
 import AppHeader from '@/components/common/AppHeader.vue';
 import ToastFinished from '@/components/common/ToastFinished.vue';
 import ToastPopup from '@/components/common/ToastPopup.vue';
+import ToastDelete from '@/components/common/ToastDelete.vue';
+import ToastWarning from '@/components/common/ToastWarning.vue';
+import Mobile from '@/components/common/Mobile.vue';
 
 export default {
 	components: {
 		AppHeader,
 		ToastFinished,
 		ToastPopup,
+		ToastDelete,
+		ToastWarning,
+		Mobile,
 	},
 	computed: {
 		AuthRoute() {
@@ -62,9 +71,20 @@ export default {
 	color: black;
 	height: 100%;
 }
-
 .container-story {
 	width: 100%;
 	min-height: 100vh;
+}
+main,
+.nav {
+	display: none;
+}
+@media screen and (min-width: 768px) {
+	main {
+		display: block;
+	}
+	.nav {
+		display: flex;
+	}
 }
 </style>

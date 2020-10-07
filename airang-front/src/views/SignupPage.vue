@@ -40,7 +40,9 @@
 					v-model="password2"
 				/>
 			</div>
-			<button class="signup-btn" type="submit">회원가입</button>
+			<button :disabled="test" class="signup-btn" type="submit">
+				회원가입
+			</button>
 		</form>
 		<img
 			class="signup-arang"
@@ -106,18 +108,18 @@ export default {
 		async submitForm() {
 			try {
 				if (!this.isVaildateName) {
-					bus.$emit('show:toast', '이름은 공백제외 2~5자 한글입니다');
+					bus.$emit('show:warning', '이름은 공백제외 2~5자 한글입니다');
 					return;
 				}
 				if (!this.isValidatePassword1) {
 					bus.$emit(
-						'show:toast',
+						'show:warning',
 						'비밀번호는 공백제외 8자 이상 15자 이하입니다',
 					);
 					return;
 				}
 				if (!this.isEqualPassword) {
-					bus.$emit('show:toast', '비밀번호를 한번 더 확인해주세요');
+					bus.$emit('show:warning', '비밀번호를 한번 더 확인해주세요');
 					return;
 				}
 				const userInfo = {
@@ -135,11 +137,22 @@ export default {
 					createVoice(1, data.user.id, 3, 3),
 				]);
 			} catch (error) {
-				console.log(error.response.data);
+				if (error.response.data.email !== undefined) {
+					bus.$emit('show:warning', '중복된 이메일 입니다!');
+				} else {
+					const msg = error.response.data.password1;
+
+					bus.$emit('show:warning', msg[0]);
+				}
 			}
 		},
 	},
 	computed: {
+		test() {
+			return (
+				!this.email || !this.password1 || !this.password2 || !this.child_name
+			);
+		},
 		isVaildateName() {
 			const name = this.child_name;
 			if (name.length === 0) {
@@ -295,6 +308,10 @@ export default {
 			font-weight: bold;
 			color: white;
 			background-color: #2f9e44;
+			&:disabled {
+				cursor: default;
+				background-color: rgb(105, 114, 107);
+			}
 		}
 	}
 	.signup-arang {

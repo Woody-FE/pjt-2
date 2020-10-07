@@ -23,29 +23,27 @@
 		<div class="bookshelf">
 			<div class="first-bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in firstBooks">
-					<router-link :to="`/story/${book.story.id}/review/${book.id}`">
-						<figure class="book-items">
-							<ProfileBook :book="book"></ProfileBook>
-						</figure>
-					</router-link>
+					<figure class="book-items">
+						<ProfileBook :book="book"></ProfileBook>
+					</figure>
 				</div>
 			</div>
 		</div>
 		<div class="bookshelf">
 			<div class="second-bookshelf-books">
 				<div class="bookshelf-book" :key="book.id" v-for="book in secondBooks">
-					<router-link :to="`/story/${book.story.id}/review/${book.id}`">
-						<figure class="book-items">
-							<ProfileBook :book="book"></ProfileBook>
-						</figure>
-					</router-link>
+					<figure class="book-items">
+						<ProfileBook :book="book"></ProfileBook>
+					</figure>
 				</div>
 			</div>
 		</div>
+		<footer class="temp-footer"></footer>
 	</section>
 </template>
 
 <script>
+import bus from '@/utils/bus';
 import { fetchMyStories } from '@/api/story';
 import { truncateString } from '@/utils/validation';
 import ProfileBook from '@/components/profile/ProfileBook.vue';
@@ -72,10 +70,9 @@ export default {
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
-				console.log(data);
-				this.firstBooks = data.slice(0, 3);
-				this.secondBooks = data.slice(3, 6);
-				console.log(data);
+				const reverse_data = data.reverse();
+				this.firstBooks = reverse_data.slice(0, 3);
+				this.secondBooks = reverse_data.slice(3, 6);
 				this.firstBooks.forEach(el => {
 					el.story_name = truncateString(el.story_name);
 				});
@@ -83,7 +80,7 @@ export default {
 					el.story_name = truncateString(el.story_name);
 				});
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 가져오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -97,6 +94,7 @@ export default {
 		},
 	},
 	created() {
+		bus.$on('clearDelete', this.fetchBooks);
 		this.fetchBooks();
 	},
 };
@@ -179,7 +177,7 @@ export default {
 	flex-wrap: wrap;
 	padding-left: 7%;
 	.bookshelf-book {
-		width: 24%;
+		width: 28%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -188,7 +186,7 @@ export default {
 			width: 14%;
 			height: 200px;
 			position: absolute;
-			bottom: 53%;
+			bottom: 60%;
 			@media screen and (max-width: 1024px) {
 				height: 180px;
 			}
@@ -206,7 +204,7 @@ export default {
 	flex-wrap: wrap;
 	padding-left: 7%;
 	.bookshelf-book {
-		width: 24%;
+		width: 28%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -216,7 +214,7 @@ export default {
 			width: 14%;
 			height: 200px;
 			position: absolute;
-			bottom: 18%;
+			bottom: 27%;
 			@media screen and (max-width: 1024px) {
 				height: 180px;
 			}
@@ -225,5 +223,8 @@ export default {
 			}
 		}
 	}
+}
+.temp-footer {
+	height: 100px;
 }
 </style>

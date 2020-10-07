@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				<span class="start-btn btn" @click="moveBookshelf">START</span>
-				<span class="roller-btn btn" @click="activeRoller"></span>
+				<span class="roller-btn btn" @click="activeRoller">GO</span>
 			</div>
 		</div>
 	</section>
@@ -353,8 +353,6 @@ export default {
 	}
 	.roller-btn {
 		position: absolute;
-		width: 10px;
-		height: 10px;
 		bottom: 50px;
 		right: 200px;
 		border-radius: 50%;

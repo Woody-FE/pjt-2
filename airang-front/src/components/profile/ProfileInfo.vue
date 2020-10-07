@@ -8,6 +8,7 @@
 				type="text"
 				class="profileInfo-name__change"
 				v-model="userData.name"
+				@keydown.enter="clickChangeBtn"
 			/>
 			<i @click="clickChangeBtn" class="icon ion-md-create change-btn">
 				<div class="fake-background"></div>
@@ -49,7 +50,6 @@ import {
 	patchUserName,
 } from '@/api/profile';
 import { validationName } from '@/utils/validation';
-// import { mapMutations } from 'vuex';
 
 export default {
 	data() {
@@ -62,7 +62,6 @@ export default {
 		};
 	},
 	methods: {
-		// ...mapMutations(['setChildName']),
 		async fetchData() {
 			try {
 				const id = this.$store.getters.getId;
@@ -70,7 +69,7 @@ export default {
 				this.userData.name = data.child_name;
 				this.userData.imgPath = data.child_image;
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '프로필을 가져오는데 실패했어요 :(');
 			}
 		},
 		async patchImage(img) {
@@ -80,7 +79,7 @@ export default {
 				formdata.append('child_image', img);
 				await changeImage(id, formdata);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 가져오는데 실패했어요 :(');
 			}
 		},
 		validateFile(file) {
@@ -94,13 +93,16 @@ export default {
 				const isValidate = await this.validateFile(changeImage);
 				if (isValidate) {
 					await this.patchImage(changeImage);
-					this.fetchData();
+					await this.fetchData();
 					bus.$emit('show:toast', '프로필이 변경 되었어요');
 				} else {
-					bus.$emit('show:toast', '.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
+					bus.$emit(
+						'show:warning',
+						'.jpg, .jpeg, .png형태의 파일을 넣어주세요!',
+					);
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 가져오는데 실패했어요 :(');
 			}
 		},
 		async resetProfile() {
@@ -110,7 +112,7 @@ export default {
 				this.fetchData();
 				bus.$emit('show:toast', '프로필이 초기화 되었어요');
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '프로필을 초기화 하는데 실패했어요 :(');
 			}
 		},
 		clickChangeBtn() {
@@ -124,7 +126,7 @@ export default {
 					this.changeStatus();
 					this.changeName();
 				} else {
-					bus.$emit('show:toast', '이름은 공백제외 2~5자 한글만 가능합니다.');
+					bus.$emit('show:warning', '이름은 공백제외 2~5자 한글만 가능합니다.');
 				}
 			}
 		},
@@ -133,23 +135,20 @@ export default {
 		},
 		async changeName() {
 			try {
-				console.log('시작', new Date());
 				const content = {
 					child_name: this.userData.name,
 				};
 				const id = this.$store.getters.getId;
 				await patchUserName(id, content);
 				bus.$emit('show:toast', '이름이 변경되었어요');
-				// this.setChildName(content.child_name);
-				this.$store.commit('setChildName', content.child_name);
+				this.$store.commit('setChildName', this.userData.name);
 				await Promise.all([
 					createVoice(1, id, 1, 3),
 					createVoice(1, id, 2, 3),
 					createVoice(1, id, 3, 3),
 				]);
-				console.log('끝', new Date());
 			} catch (error) {
-				console.log(error.response);
+				bus.$emit('show:warning', '이름을 변경하는데 실패했어요 :(');
 			}
 		},
 	},

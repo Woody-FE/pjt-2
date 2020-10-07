@@ -32,7 +32,11 @@
 					/>
 				</div>
 				<p class="portrait-name">{{ filterUsername(script.character.name) }}</p>
+				<p v-if="script.character.id === 1" class="repeat-content">
+					너의 목소리를 들려줘!
+				</p>
 				<p class="portrait-content" v-html="filterName(script.content)"></p>
+
 				<audio
 					v-if="count + 1 === script.order && !isInName(script.content)"
 					class="story-sound story-sound__playing"
@@ -104,9 +108,6 @@ export default {
 			return process.env.VUE_APP_API_URL;
 		},
 	},
-	mounted() {
-		console.log(this.scripts);
-	},
 };
 </script>
 
@@ -160,11 +161,11 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	.portrait-img__box {
 		display: flex;
 		width: 150px;
 		height: 230px;
-		justify-content: center;
 		align-items: center;
 		.portrait-img {
 			width: 100%;
@@ -179,6 +180,33 @@ export default {
 		text-align: center;
 		line-height: 1.5;
 		font-size: 1.5rem;
+		margin-bottom: 30%;
+		padding-left: 8%;
+		padding-right: 8%;
+		@media screen and (max-width: 768px) {
+			font-size: 1.1rem;
+		}
+	}
+}
+.repeat-content {
+	width: 100%;
+	height: 8%;
+	text-align: center;
+	align-content: center;
+	color: #00488c;
+	opacity: 0.3;
+	font-size: 1.2rem;
+	animation: inOut 3s ease-in-out infinite;
+}
+@keyframes inOut {
+	0% {
+		font-size: 1.2rem;
+	}
+	50% {
+		font-size: 2.1rem;
+	}
+	100% {
+		font-size: 1.2rem;
 	}
 }
 </style>

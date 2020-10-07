@@ -1,8 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import StoryPage from '@/views/StoryPage.vue';
+import store from '../store/index';
 
 Vue.use(VueRouter);
+
+const notRequireAuth = (to, from, next) => {
+	if (store.getters.getToken === null) {
+		return next();
+	}
+	next('/');
+};
 
 const routes = [
 	{
@@ -25,6 +32,7 @@ const routes = [
 		name: 'login',
 		props: route => ({ guide: route.query.guide }),
 		component: () => import('@/views/LoginPage.vue'),
+		beforeEnter: notRequireAuth,
 	},
 	{
 		path: '/signup',
@@ -72,6 +80,11 @@ const routes = [
 		path: '/profile/modifyinfo',
 		name: 'modifyinfo',
 		component: () => import('@/views/profile/ModifyInfoPage.vue'),
+	},
+	{
+		path: '/notservice',
+		name: 'notservice',
+		component: () => import('@/views/NotFoundService.vue'),
 	},
 	{
 		path: '*',

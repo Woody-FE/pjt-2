@@ -27,15 +27,17 @@
 							class="book-pace"
 							alt="book-pace"
 						/>
+					</router-link>
+					<router-link :to="`/notservice`">
 						<img
-							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							src="@/assets/images/bookShelf/otherBook.jpg"
 							class="book-pace book-pace2"
 							alt="book-pace"
 						/>
 					</router-link>
 					<router-link to="/myteam">
 						<img
-							:src="`${imgSrc}${filterMedia(book.cover_image)}`"
+							src="@/assets/images/bookShelf/friendsBook.jpg"
 							class="book-pace book-pace3"
 							alt="book-pace"
 						/>
@@ -48,6 +50,8 @@
 
 <script>
 import { fetchStories } from '@/api/story';
+import bus from '@/utils/bus';
+
 export default {
 	created() {
 		this.fetchBooks();
@@ -72,9 +76,8 @@ export default {
 			try {
 				const { data } = await fetchStories();
 				this.books = data;
-				console.log(data);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 가져오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {

@@ -56,19 +56,31 @@
 				<div class="mystory-face mystory-description">
 					<div class="mystory-portrait">
 						<div class="portrait-box">
-							<div class="portrait-img__box">
-								<img
-									class="portrait-img"
-									src="@/assets/images/character/arang1.png"
-									alt=""
-								/>
-							</div>
-							<p class="portrait-name">
+							<img
+								class="left-img"
+								src="@/assets/images/bg/house1.jpg"
+								alt=""
+							/>
+							<img
+								src="@/assets/images/character/nukkied_eating.png"
+								alt=""
+								class="left-arang"
+							/>
+							<img
+								src="@/assets/images/bg/selectBg.png"
+								alt=""
+								class="left-pink"
+							/>
+							<p class="left-say">
+								여행을 가기 전 아버지가 <br />
+								나에게 세 가지 선물을 줬어,<br />
+								이 선물들과 함께 <br />
+								내가 되고 싶은 모습을 찾을거야!
+							</p>
+							<!-- <p class="portrait-name">
 								줄거리
-							</p>
-							<p class="portrait-content">
-								아버지가 준 3가지 선물로 일어나는 나만의 신기하고 재밌는 여행
-							</p>
+							</p> -->
+							<p class="portrait-content"></p>
 						</div>
 					</div>
 				</div>
@@ -212,7 +224,7 @@ export default {
 					this.createImage();
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		async patchImage(img) {
@@ -222,7 +234,7 @@ export default {
 				formdata.append('child_image', img);
 				await changeImage(id, formdata);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 불러오는데 실패했어요 :(');
 			}
 		},
 		validateFile(file) {
@@ -238,11 +250,13 @@ export default {
 					await this.patchImage(changeImage);
 					this.fetchData();
 				} else {
-					// alert('.jpg, .jpeg, .png형태의 파일을 넣어주세요!');
-					bus.$emit('show:toast', '.jpg, .jpeg, .png형태의 파일을 넣어주세요');
+					bus.$emit(
+						'show:warning',
+						'.jpg, .jpeg, .png형태의 파일을 넣어주세요',
+					);
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '다른파일을 부탁드릴께요 :(');
 			}
 		},
 		async fetchStoryBook() {
@@ -253,7 +267,7 @@ export default {
 				this.defaultBookname = data.name;
 				this.mainLoading = false;
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -271,13 +285,29 @@ export default {
 				this.myFicture = true;
 			} catch (error) {
 				this.conversionImage = null;
-				console.log(error.response.data.detail);
+				bus.$emit('show:warning', error.response.data.detail);
 			} finally {
 				this.loading = false;
 			}
 		},
 		async createBook() {
+			const isOver7 = string => {
+				if (string === null) {
+					return false;
+				}
+				console.log(string);
+				console.log(string.length);
+				if (string.length >= 7) {
+					bus.$emit('show:warning', '제목은 공백포함 7자미만! :(');
+					return true;
+				}
+				return false;
+			};
 			try {
+				const over7 = await isOver7(this.bookName);
+				if (over7) {
+					return;
+				}
 				const { data } = await createMyStory({
 					story_id: this.storyId,
 					story_name: this.bookName ? this.bookName : this.defaultBookname,
@@ -289,6 +319,7 @@ export default {
 				}
 			} catch (error) {
 				console.log(error);
+				bus.$emit('show:warning', '책 생성에 실패했어요 :(');
 			}
 		},
 		defaultImage() {
@@ -495,6 +526,9 @@ export default {
 		width: 35%;
 		height: 60%;
 		font-size: 1.5rem;
+		@media screen and (max-width: 1024px) {
+			font-size: 1.1rem;
+		}
 		.fake-btn {
 			cursor: pointer;
 			position: absolute;
@@ -532,11 +566,46 @@ export default {
 	height: 100%;
 	padding: 10%;
 	.portrait-box {
+		position: relative;
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		box-sizing: border-box;
+		.left-img {
+			height: 80%;
+			width: 100%;
+		}
+		.left-arang {
+			position: absolute;
+			top: 45%;
+			left: 85%;
+			width: 20%;
+			height: 30%;
+			transform: translate(-50%, 50%);
+		}
+		.left-pink {
+			position: absolute;
+			width: 70%;
+			height: 25%;
+			top: 65%;
+			left: 0%;
+		}
+		.left-say {
+			font-family: 'KOMACON';
+			position: absolute;
+			top: 69%;
+			left: 6%;
+			line-height: 1.5;
+			font-size: 1.2rem;
+			@media screen and (max-width: 1024px) {
+				font-size: 0.9rem;
+			}
+			@media screen and (max-width: 768px) {
+				font-size: 0.7rem;
+			}
+		}
 		.portrait-img__box {
 			display: flex;
 			width: 200px;
