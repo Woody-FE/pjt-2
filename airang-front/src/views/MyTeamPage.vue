@@ -69,6 +69,14 @@
 			<section class="mystory-page">
 				<div class="mystory-face">
 					<div class="member-box">
+						<section class="story-delete__btn">
+							<button
+								@click="$router.push('/bookshelf')"
+								class="story-delete-btn"
+							>
+								<i class="icon ion-md-close"></i>
+							</button>
+						</section>
 						<img
 							class="member-img__bg"
 							src="@/assets/images/bg/bg_jae.png"
@@ -181,6 +189,26 @@ export default {
 					display: flex;
 					align-items: center;
 					position: relative;
+					.story-delete__btn {
+						z-index: 6;
+						backface-visibility: hidden;
+						position: absolute;
+						top: 4%;
+						right: 3%;
+						width: 3rem;
+						height: 3rem;
+						/* transform: translateX(-50%); */
+						.story-delete-btn {
+							border: none;
+							border-radius: 50%;
+							width: 3rem;
+							height: 3rem;
+							font-size: 1.5rem;
+							background: white;
+							color: black;
+							cursor: pointer;
+						}
+					}
 					.member-img {
 						height: 80%;
 						margin-right: 10%;
