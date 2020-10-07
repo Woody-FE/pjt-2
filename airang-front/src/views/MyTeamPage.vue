@@ -59,7 +59,7 @@
 						<div class="member-content">
 							<p>임창묵(6)</p>
 							<p>AI & Presenter<br />& UCC director</p>
-							<p style="font-size:1.1rem !important">
+							<p class="changmuk-say">
 								역시 AIrang이야 성능확실하구만
 							</p>
 						</div>
@@ -214,6 +214,9 @@ export default {
 						margin-right: 10%;
 						margin-left: 10%;
 						z-index: 5;
+						@media screen and (max-width: 768px) {
+							height: 50%;
+						}
 					}
 					.member-img__bg {
 						position: absolute;
@@ -232,13 +235,16 @@ export default {
 						justify-content: flex-end;
 						z-index: 5;
 						margin-bottom: 30px;
+						@media screen and (max-width: 768px) {
+							margin-bottom: 110px;
+						}
 						p {
 							font-size: 1.3rem;
 							font-family: 'KOMACON';
 							color: rgb(105, 105, 105);
 							@media screen and (max-width: 1024px) {
 								font-size: 1rem;
-								margin-bottom: 10px;
+								margin-bottom: 20px;
 							}
 						}
 					}
@@ -270,6 +276,12 @@ export default {
 		width: 100%;
 		height: 100%;
 		object-fit: fill;
+	}
+}
+.changmuk-say {
+	font-size: 1.1rem !important;
+	@media screen and (max-width: 1024px) {
+		font-size: 0.8rem !important;
 	}
 }
 </style>

@@ -20,6 +20,7 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		setChildName(state, child_name) {
+			cookies.set('child_name', child_name);
 			state.child_name = child_name;
 		},
 		setToken(state, token) {

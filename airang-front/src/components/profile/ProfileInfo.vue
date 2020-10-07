@@ -50,7 +50,6 @@ import {
 	patchUserName,
 } from '@/api/profile';
 import { validationName } from '@/utils/validation';
-
 export default {
 	data() {
 		return {
