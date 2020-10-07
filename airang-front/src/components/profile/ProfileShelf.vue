@@ -70,8 +70,9 @@ export default {
 		async fetchBooks() {
 			try {
 				const { data } = await fetchMyStories();
-				this.firstBooks = data.slice(0, 3);
-				this.secondBooks = data.slice(3, 6);
+				const reverse_data = data.reverse();
+				this.firstBooks = reverse_data.slice(0, 3);
+				this.secondBooks = reverse_data.slice(3, 6);
 				this.firstBooks.forEach(el => {
 					el.story_name = truncateString(el.story_name);
 				});
@@ -79,7 +80,7 @@ export default {
 					el.story_name = truncateString(el.story_name);
 				});
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 가져오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -176,7 +177,7 @@ export default {
 	flex-wrap: wrap;
 	padding-left: 7%;
 	.bookshelf-book {
-		width: 24%;
+		width: 28%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -185,7 +186,7 @@ export default {
 			width: 14%;
 			height: 200px;
 			position: absolute;
-			bottom: 58%;
+			bottom: 60%;
 			@media screen and (max-width: 1024px) {
 				height: 180px;
 			}
@@ -203,7 +204,7 @@ export default {
 	flex-wrap: wrap;
 	padding-left: 7%;
 	.bookshelf-book {
-		width: 24%;
+		width: 28%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -213,7 +214,7 @@ export default {
 			width: 14%;
 			height: 200px;
 			position: absolute;
-			bottom: 18%;
+			bottom: 27%;
 			@media screen and (max-width: 1024px) {
 				height: 180px;
 			}

@@ -145,13 +145,7 @@
 			</section>
 		</article>
 		<section class="story-delete__btn">
-			<button
-				@click="
-					deleteBook();
-					$router.push('/bookshelf');
-				"
-				class="story-delete-btn"
-			>
+			<button @click="$router.push('/bookshelf')" class="story-delete-btn">
 				<i class="icon ion-md-close"></i>
 			</button>
 		</section>
@@ -166,6 +160,7 @@ import {
 	fetchBranch,
 	fetchStory,
 	deleteMyStories,
+	fetchMyStory,
 } from '@/api/story';
 export default {
 	components: {
@@ -199,11 +194,15 @@ export default {
 			bookName: null,
 			job: 0,
 			defaultImage: null,
+			myBook: null,
 		};
 	},
 	destroyed() {
-		if (this.finish === false) {
-			this.deleteBook();
+		console.log(this.myBook);
+		if (this.myBook) {
+			if (this.finish === false) {
+				this.deleteBook();
+			}
 		}
 		this.currentItem = 0;
 		this.scriptNumber = 0;
@@ -244,7 +243,7 @@ export default {
 				this.subNumber = data.substory;
 				this.createSubStory(this.subNumber);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 불러오는데 실패했어요 :(');
 			}
 		},
 		async createSubStory(num) {
@@ -267,7 +266,7 @@ export default {
 					this.currentItem += 1;
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		async updateStory() {
@@ -287,7 +286,6 @@ export default {
 							substory_id: this.nextStoryId,
 						});
 						if (data.next_id === null) {
-							console.log(data);
 							this.finish = true;
 							switch (data.scripts[0].substory) {
 								case 47:
@@ -324,7 +322,7 @@ export default {
 					}
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '이미지를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -350,20 +348,40 @@ export default {
 				await deleteMyStories(this.myStoryId);
 				this.$router.push({ name: 'bookshelf' });
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 삭제하는데 실패했어요 :(');
 			}
 		},
 		async deleteBook() {
 			try {
 				await deleteMyStories(this.myStoryId);
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책을 삭제하는데 실패했어요 :(');
+			}
+		},
+		async isMyBook() {
+			try {
+				const temp = this.$route.params.myStoryId;
+				const { data } = await fetchMyStory(temp);
+				const myId = parseInt(this.$store.getters.getId);
+				const otherId = parseInt(data.user.id);
+				if (myId !== otherId) {
+					this.myBook = false;
+					const userName = data.user.child_name;
+					this.$router.push('/');
+					bus.$emit('show:toast', `${userName}책이 아닌거 같아요 :(`);
+				}
+				this.myBook = true;
+			} catch (error) {
+				this.myBook = false;
+				this.$router.push('/');
+				bus.$emit('show:toast', '잘못된 경로에요 :(');
 			}
 		},
 	},
 	created() {
 		this.defaultImage = Boolean(this.$route.query.default);
 		this.fetchCover();
+		this.isMyBook();
 	},
 	mounted() {
 		const id = this.$store.getters.getId;

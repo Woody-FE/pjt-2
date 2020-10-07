@@ -53,7 +53,7 @@ export default {
 		width: 100%;
 		position: absolute;
 		font-size: 1.2rem;
-		bottom: 80%;
+		bottom: 82%;
 		color: black;
 		margin-left: 19%;
 		font-family: 'KOMACON';

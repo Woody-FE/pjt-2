@@ -164,7 +164,6 @@ export default {
 		async createStory(mystoryId) {
 			try {
 				const { data } = await fetchMyStory(mystoryId);
-				console.log(data);
 				this.coverImage = data.story.cover_image;
 				this.bookName = data.story.name;
 				this.nextStoryId = data.mystory.next_id;
@@ -172,7 +171,7 @@ export default {
 				this.is_default = data.is_default;
 				this.startPage();
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '책 생성에 실패했어요 :(');
 			}
 		},
 		async updateStory() {
@@ -212,7 +211,7 @@ export default {
 					}
 				}
 			} catch (error) {
-				console.log(error);
+				bus.$emit('show:warning', '정보를 불러오는데 실패했어요 :(');
 			}
 		},
 		filterMedia(string) {
@@ -237,6 +236,25 @@ export default {
 		exitStory() {
 			this.$router.push({ name: 'profile' });
 		},
+		async isMyBook() {
+			try {
+				const temp = this.$route.params.myStoryId;
+				const { data } = await fetchMyStory(temp);
+				const myId = parseInt(this.$store.getters.getId);
+				const otherId = parseInt(data.user.id);
+				if (myId !== otherId) {
+					const userName = data.user.child_name;
+					this.$router.push('/');
+					bus.$emit('show:toast', `${userName}책이 아닌거 같아요 :(`);
+				}
+			} catch (error) {
+				this.$router.push('/');
+				bus.$emit('show:toast', '잘못된 경로에요 :(');
+			}
+		},
+	},
+	created() {
+		this.isMyBook();
 	},
 	beforeUpdate() {
 		const playingSounds = document.querySelectorAll('.story-sound__playing');
@@ -246,6 +264,7 @@ export default {
 			});
 		}
 	},
+
 	mounted() {
 		const id = this.$store.getters.getId;
 		this.userId = parseInt(id);
