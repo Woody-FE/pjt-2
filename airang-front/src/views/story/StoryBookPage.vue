@@ -366,7 +366,7 @@ export default {
 .story-delete__btn {
 	backface-visibility: hidden;
 	position: absolute;
-	top: 4%;
+	top: 2%;
 	right: 3%;
 	width: 3rem;
 	height: 3rem;
