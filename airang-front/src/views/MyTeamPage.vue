@@ -224,19 +224,18 @@ export default {
 						left: 0;
 						width: 80%;
 						height: 70%;
-						padding: 10%;
+						margin: 10%;
 						z-index: 4;
 					}
 					.member-content {
 						height: 100%;
-						line-height: 1.5;
 						display: flex;
 						flex-direction: column;
-						justify-content: flex-end;
+						justify-content: center;
 						z-index: 5;
-						margin-bottom: 30px;
+						margin-top: 50px;
 						@media screen and (max-width: 768px) {
-							margin-bottom: 110px;
+							margin-top: 0;
 						}
 						p {
 							font-size: 1.3rem;
