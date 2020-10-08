@@ -10,9 +10,9 @@
 				v-model="userData.name"
 				@keydown.enter="clickChangeBtn"
 			/>
-			<i @click="clickChangeBtn" class="icon ion-md-create change-btn">
+			<!-- <i @click="clickChangeBtn" class="icon ion-md-create change-btn">
 				<div class="fake-background"></div>
-			</i>
+			</i> -->
 		</div>
 		<div class="msg-box">
 			<p v-if="!isVaildateName" class="hidden-msg1 msg">
