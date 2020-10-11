@@ -40,7 +40,7 @@
 
 - AI
 
-  ![Python 3.6](http://img.shields.io/badge/-Python_3.6-3776AB?logo=python&logoColor=white) ![PyTorch](http://img.shields.io/badge/-PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![Numpy](http://img.shields.io/badge/-Numpy-013243?logo=numpy&logoColor=white) ![Google Cloud](http://img.shields.io/badge/-Google_Cloud-4285F4?logo=google cloud&logoColor=white)
+  ![Python 3.6](http://img.shields.io/badge/-Python_3.6-3776AB?logo=python&logoColor=white) ![PyTorch](http://img.shields.io/badge/-PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![Numpy](http://img.shields.io/badge/-Numpy-013243?logo=numpy&logoColor=white) ![Google Cloud](http://img.shields.io/badge/-Google_Cloud-4285F4?logo=google_cloud&logoColor=white)
 
 
 
