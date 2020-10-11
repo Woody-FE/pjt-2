@@ -54,7 +54,7 @@
 
 ## UCC
 
-작성 예정
+<iframe width="560" height="500" src="https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
