@@ -54,10 +54,7 @@
 
 ## UCC
 
-<video controls width="250">
-    <source src="https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/preview" type="video/mp4">
-    Your browser doesn't support embedded videos.
-</video>
+<iframe src="https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/preview" width="540"></iframe>
 
 
 
