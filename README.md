@@ -36,7 +36,7 @@
 
 - 프론트엔드
 
-  ![HTML5](http://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white) ![CSS3](http://img.shields.io/badge/-CSS3-1572B6?logo=css3) ![Vue.js 2.6](http://img.shields.io/badge/-Vue.js 2.6-black?logo=vue.js)
+  ![HTML5](http://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white) ![Sass](http://img.shields.io/badge/-Sass-CC6699?logo=sass&logoColor=white) ![Javascript](http://img.shields.io/badge/-JavaScript-black?logo=javascript)  ![Vue.js 2.6](http://img.shields.io/badge/-Vue.js 2.6-black?logo=vue.js)
 
 - AI
 
