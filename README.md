@@ -1,4 +1,5 @@
 ![airang](./airang-front/src/assets/images/logo/orange.png)
+<img src="./airang-front/src/assets/images/logo/orange.png" style="width: 100%;">
 
 # 아이랑
 
