@@ -36,11 +36,11 @@
 
 - 프론트엔드
 
-  ![HTML5](http://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white) ![Sass](http://img.shields.io/badge/-Sass-CC6699?logo=sass&logoColor=white) ![Javascript](http://img.shields.io/badge/-JavaScript-black?logo=javascript)  ![Vue.js 2.6](http://img.shields.io/badge/-Vue.js 2.6-black?logo=vue.js)
+  ![HTML5](http://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white) ![Sass](http://img.shields.io/badge/-Sass-CC6699?logo=sass&logoColor=white) ![Javascript](http://img.shields.io/badge/-JavaScript-black?logo=javascript)  ![Vue.js 2.6](http://img.shields.io/badge/-Vue.js_2.6-black?logo=vue.js)
 
 - AI
 
-  ![Python 3.6](http://img.shields.io/badge/-Python_3.6-3776AB?logo=python&logoColor=white) ![PyTorch](http://img.shields.io/badge/-PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![Numpy](http://img.shields.io/badge/-Numpy-013243?logo=numpy&logoColor=white) ![Google Cloud](http://img.shields.io/badge/-Google Cloud-4285F4?logo=google cloud&logoColor=white)
+  ![Python 3.6](http://img.shields.io/badge/-Python_3.6-3776AB?logo=python&logoColor=white) ![PyTorch](http://img.shields.io/badge/-PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![Numpy](http://img.shields.io/badge/-Numpy-013243?logo=numpy&logoColor=white) ![Google Cloud](http://img.shields.io/badge/-Google_Cloud-4285F4?logo=google cloud&logoColor=white)
 
 
 
