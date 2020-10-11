@@ -46,7 +46,7 @@
 
 ## 브라우저 지원
 
-아래 브라우저를 지원합니다,.
+아래 브라우저를 지원합니다.
 
 <figure style="width: 96px;"><img style="width: 100%;" src="https://img.icons8.com/fluent/96/000000/chrome.png"/><figcaption style="width: 100%; text-align: center;"><strong></strong>Chrome</figcaption></figure>
 
@@ -54,7 +54,10 @@
 
 ## UCC
 
-<iframe width="560" height="500" src="https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video controls width="250">
+    <source src="https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/preview" type="video/mp4">
+    Your browser doesn't support embedded videos.
+</video>
 
 
 
