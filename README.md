@@ -32,7 +32,7 @@
 
 - 백엔드
 
-   ![Python3.6](http://img.shields.io/badge/-Python 3.6-3776AB?logo=python&logoColor=white) ![Django 2.2](http://img.shields.io/badge/-Django 2.2-092E20?logo=django) ![Nginx](http://img.shields.io/badge/-Nginx-269536?logo=nginx&logoColor=white) ![MySQL](http://img.shields.io/badge/-MySQL-4479a1?logo=mysql&logoColor=white)
+   ![Python 3.6](http://img.shields.io/badge/-Python_3.6-3776AB?logo=python&logoColor=white) ![Django 2.2](http://img.shields.io/badge/-Django_2.2-092E20?logo=django) ![Nginx](http://img.shields.io/badge/-Nginx-269536?logo=nginx&logoColor=white) ![MySQL](http://img.shields.io/badge/-MySQL-4479a1?logo=mysql&logoColor=white)
 
 - 프론트엔드
 
@@ -40,7 +40,7 @@
 
 - AI
 
-  ![Python 3.6](http://img.shields.io/badge/-Python 3.6-3776AB?logo=python&logoColor=white) ![PyTorch](http://img.shields.io/badge/-PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![Numpy](http://img.shields.io/badge/-Numpy-013243?logo=numpy&logoColor=white) ![Google Cloud](http://img.shields.io/badge/-Google Cloud-4285F4?logo=google cloud&logoColor=white)
+  ![Python 3.6](http://img.shields.io/badge/-Python_3.6-3776AB?logo=python&logoColor=white) ![PyTorch](http://img.shields.io/badge/-PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![Numpy](http://img.shields.io/badge/-Numpy-013243?logo=numpy&logoColor=white) ![Google Cloud](http://img.shields.io/badge/-Google Cloud-4285F4?logo=google cloud&logoColor=white)
 
 
 
