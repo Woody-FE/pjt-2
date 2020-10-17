@@ -1,90 +1,90 @@
 [
-  {
-    "id": 1,
-    "name": "아들",
-    "thumbnail": "",
-    "family_ablity": 1,
-    "gender": "M",
-    "story_id": 1
-  },
-  {
-    "id": 2,
-    "name": "나레이션",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "F",
-    "story_id": 1
-  },
-  {
-    "id": 3,
-    "name": "아버지",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "M",
-    "story_id": 1
-  },
-  {
-    "id": 4,
-    "name": "사람들",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "N",
-    "story_id": 1
-  },
-  {
-    "id": 5,
-    "name": "토끼",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "M",
-    "story_id": 1
-  },
-  {
-    "id": 6,
-    "name": "신부",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "F",
-    "story_id": 1
-  },
-  {
-    "id": 7,
-    "name": "다람쥐",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "F",
-    "story_id": 1
-  },
-  {
-    "id": 8,
-    "name": "곰",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "M",
-    "story_id": 1
-  },
-  {
-    "id": 9,
-    "name": "동물들",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "N",
-    "story_id": 1
-  },
-  {
-    "id": 10,
-    "name": "프로듀서",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "F",
-    "story_id": 1
-  },
-  {
-    "id": 11,
-    "name": "독수리",
-    "thumbnail": "",
-    "family_ablity": 0,
-    "gender": "M",
-    "story_id": 1
-  }
+	{
+		"id" : 1,
+		"name" : "아들",
+		"thumbnail" : null,
+		"family_ability" : 1,
+		"gender" : "M",
+		"story_id" : 1
+	},
+	{
+		"id" : 2,
+		"name" : "나레이션",
+		"thumbnail" : "images/thumbnails/2.jpg",
+		"family_ability" : 0,
+		"gender" : "F",
+		"story_id" : 1
+	},
+	{
+		"id" : 3,
+		"name" : "아버지",
+		"thumbnail" : "images/thumbnails/3.jpg",
+		"family_ability" : 0,
+		"gender" : "M",
+		"story_id" : 1
+	},
+	{
+		"id" : 4,
+		"name" : "사람들",
+		"thumbnail" : "images/thumbnails/4.jpg",
+		"family_ability" : 0,
+		"gender" : "N",
+		"story_id" : 1
+	},
+	{
+		"id" : 5,
+		"name" : "토끼",
+		"thumbnail" : "images/thumbnails/5.jpg",
+		"family_ability" : 0,
+		"gender" : "M",
+		"story_id" : 1
+	},
+	{
+		"id" : 6,
+		"name" : "신부",
+		"thumbnail" : "images/thumbnails/6.jpg",
+		"family_ability" : 0,
+		"gender" : "F",
+		"story_id" : 1
+	},
+	{
+		"id" : 7,
+		"name" : "다람쥐",
+		"thumbnail" : "images/thumbnails/7.jpg",
+		"family_ability" : 0,
+		"gender" : "F",
+		"story_id" : 1
+	},
+	{
+		"id" : 8,
+		"name" : "곰",
+		"thumbnail" : "images/thumbnails/8.jpg",
+		"family_ability" : 0,
+		"gender" : "M",
+		"story_id" : 1
+	},
+	{
+		"id" : 9,
+		"name" : "동물들",
+		"thumbnail" : "images/thumbnails/9.jpg",
+		"family_ability" : 0,
+		"gender" : "N",
+		"story_id" : 1
+	},
+	{
+		"id" : 10,
+		"name" : "프로듀서",
+		"thumbnail" : "images/thumbnails/10.jpg",
+		"family_ability" : 0,
+		"gender" : "F",
+		"story_id" : 1
+	},
+	{
+		"id" : 11,
+		"name" : "독수리",
+		"thumbnail" : "images/thumbnails/11.jpg",
+		"family_ability" : 0,
+		"gender" : "M",
+		"story_id" : 1
+	}
 ]
