@@ -54,8 +54,6 @@
 
 ## UCC
 
-<iframe src="https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/preview" width="540" height="400" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 [링크](https://drive.google.com/file/d/16mAh6jhGMqC-oJiJP2iFVVT2NuXdN7zF/view?usp=sharing)
 
 
